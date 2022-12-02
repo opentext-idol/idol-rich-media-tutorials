@@ -6,7 +6,7 @@ An introduction to Media Server's neural network based Object Class Recognition,
 - What paths do shoppers take around my store?
 - Which images in my archive that contain cats and not dogs?
 
-For more details on *Object Class Recognition*, see the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Guides/html/index.html#Operations/Analyze/ObjectLocalization.htm).
+For more details on *Object Class Recognition*, see the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/Content/Operations/Analyze/ObjectLocalization.htm).
 
 ## PART I - Use an out-of-the-box recognizer
 

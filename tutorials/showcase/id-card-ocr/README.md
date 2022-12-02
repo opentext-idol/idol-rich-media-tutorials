@@ -2,7 +2,7 @@
 
 Media Server includes an Optical Character Recognition (OCR) analysis engine, which can be configured to read specific scripts in images and video, such as Japanese characters or Arabic numerals.
 
-For a detailed introduction to Optical Character Recognition, see the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Guides/html/index.html#Operations/Analyze/OCR_overview.htm).
+For a detailed introduction to Optical Character Recognition, see the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/Content/Operations/Analyze/OCR_overview.htm).
 
 In this tutorial we will:
 
@@ -170,7 +170,7 @@ Being able to recognize particular documents provides the following advantages:
 
 We can train Object Recognition to recognize a document by providing an "anchor image", *i.e.* a part of the document that will look the same for any instance of that document, such as a title bar or logo mark.
 
-> See the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Guides/html/index.html#Training/Object_ImageGuide.htm) for advice on selecting good images for training. 
+> See the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/Content/Training/Object_ImageGuide.htm) for advice on selecting good images for training. 
 
 To create one, open your favorite image editing software and crop out a section and save it as a new image file, *e.g*:
 

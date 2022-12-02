@@ -98,7 +98,7 @@ Extract the training pack `.zip` then, to load the surveillance recognizer, open
 
     ![rename-pretrained-recognizer](./figs/rename-pretrained-recognizer.png)
 
-> You have imported six classes: bicycle, bus, car, motorcycle, person and truck.  Each one contains metadata fields defining the expected real-world object dimensions.  These scales turn all detected objects into "standard candles", enabling the camera perspective to be estimated.  Read about conversion to real-world coordinates [here](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Guides/html/index.html#Advanced/Perspective.htm).
+> You have imported six classes: bicycle, bus, car, motorcycle, person and truck.  Each one contains metadata fields defining the expected real-world object dimensions.  These scales turn all detected objects into "standard candles", enabling the camera perspective to be estimated.  Read about conversion to real-world coordinates [here](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/Content/Advanced/Perspective.htm).
 
 ## Process configuration
 

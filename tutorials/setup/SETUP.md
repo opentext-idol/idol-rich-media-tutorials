@@ -107,5 +107,5 @@ Next start up IDOL Media Server in the same way and verify it is also running at
 The admin guides for all components can be accessed from these links:
 
 - [IDOL documentation home page](https://www.microfocus.com/documentation/idol/)
-- [License Server administration guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/LicenseServer_12.13_Documentation/Help/index.html)
-- [Media Server administration guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Guides/html/index.html)
+- [License Server administration guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/LicenseServer_12.13_Documentation/Help/Content/_FT_SideNav_Startup.htm)
+- [Media Server administration guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/Content/_FT_SideNav_Startup.htm)

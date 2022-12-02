@@ -6,7 +6,7 @@ Media Server includes an *Image Classification* analysis engine, which can be tr
 - Was this photo taken in a city or in the desert?
 - Does this CCTV camera show a crowded or an empty train platform?
 
-For more details on *Image Classification*, see the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Guides/html/index.html#Operations/Analyze/ImageClass.htm).
+For more details on *Image Classification*, see the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/Content/Operations/Analyze/ImageClass.htm).
 
 > NOTE: *Image Classification* results tell you about the contents of the whole image (or a defined region of the image) and is not to be confused with *Object Class Recognition*, which is covered in our [surveillance analytics](../surveillance/README.md) lesson and is used to detect and follow the location of objects of a particular class, *e.g.* individual people or buses.
 

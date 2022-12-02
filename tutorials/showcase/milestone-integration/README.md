@@ -2,7 +2,7 @@
 
 Media Server offers integration with popular third party Video Management System (VMS) products from Milestone and Genetec. Media Server includes dedicated ingest engines to process live streaming video from Milestone's "XProtect" and Genetec's "Security Center". Both of these products offer methods to receive events from external systems, so Media Server also includes dedicated Milestone and Genetec output engines to send events back to these products.  In this way, IDOL Media Server can be positioned as an analytics plug-in for existing Milestone and Genetec customers.
 
-> For customers who do not already have a VMS, it should be noted that Media Server's own [Rolling Buffer](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Guides/html/index.html#Operations/Encode/RollingBuffer_Introduction.htm) capability allows it to function as a VMS: recording live video from direct camera connection and facilitating playback, via HLS streaming, of that recorded video.
+> For customers who do not already have a VMS, it should be noted that Media Server's own [Rolling Buffer](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/Content/Operations/Encode/RollingBuffer_Introduction.htm) capability allows it to function as a VMS: recording live video from direct camera connection and facilitating playback, via HLS streaming, of that recorded video.
 
 In this tutorial we will focus on Milestone XProtect Corporate as an example external VMS.  We will:
 
