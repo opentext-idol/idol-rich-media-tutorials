@@ -28,6 +28,6 @@ The tutorials start [here](tutorials/README.md)!
 
 ## License
 
-Copyright (c) 2022 Micro Focus International plc.
+(c) Copyright 2023 Micro Focus International plc.
 
-Licensed under the MIT License (the "License"); you may not use this project except in compliance with the License.
+Licensed under the MIT License (the "License"); you may not use this project except in compliance with the [License](./LICENSE.md).
