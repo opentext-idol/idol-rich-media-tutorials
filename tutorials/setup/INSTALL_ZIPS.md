@@ -3,14 +3,12 @@
 Use a script to install IDOL Media Server from the component `.zip` files.
 
 ---
-<!-- TOC -->
 
 - [Download IDOL components](#download-idol-components)
 - [Install](#install)
   - [Windows](#windows)
   - [Ubuntu](#ubuntu)
 
-<!-- /TOC -->
 ---
 
 ## Download IDOL components
@@ -22,8 +20,8 @@ Download software from the [Software Licensing and Downloads](https://sld.microf
     ![get-software](./figs/get-software.png)
 
 1. From the list of available files, select and download the following (depending on your operating system):
-   -  `LicenseServer_12.13.0_WINDOWS_X86_64.zip` or `LicenseServer_12.13.0_LINUX_X86_64.zip`, and
-   -  `MediaServer_12.13.0_WINDOWS_X86_64.zip` or `MediaServer_12.13.0_LINUX_X86_64.zip`.
+   -  `LicenseServer_23.2.0_WINDOWS_X86_64.zip` or `LicenseServer_23.2.0_LINUX_X86_64.zip`, and
+   -  `MediaServer_23.2.0_WINDOWS_X86_64.zip` or `MediaServer_23.2.0_LINUX_X86_64.zip`.
 
     ![get-idol-zips](./figs/get-idol-zips.png)
 

@@ -1,7 +1,6 @@
 # Rich media tips
 
 ---
-<!-- TOC -->
 
 - [Useful third-party software](#useful-third-party-software)
 - [Collecting sample media](#collecting-sample-media)
@@ -10,6 +9,7 @@
   - [CCTV camera streams](#cctv-camera-streams)
   - [Academic datasets](#academic-datasets)
 - [Working with video sources](#working-with-video-sources)
+  - [Devices](#devices)
   - [Video files](#video-files)
     - [Examine the metadata of a video file](#examine-the-metadata-of-a-video-file)
     - [Extract still images from a video file](#extract-still-images-from-a-video-file)
@@ -25,10 +25,10 @@
     - [Loop a video file to produce a continuous RTSP stream](#loop-a-video-file-to-produce-a-continuous-rtsp-stream)
   - [YouTube](#youtube)
     - [Download a video from YouTube](#download-a-video-from-youtube)
+    - [Play a live YouTube channel](#play-a-live-youtube-channel)
     - [Record video/audio from a live YouTube channel](#record-videoaudio-from-a-live-youtube-channel)
 - [Next steps](#next-steps)
 
-<!-- /TOC -->
 ---
 
 ## Useful third-party software
@@ -38,7 +38,7 @@
 - A video editor, *e.g.* [ffmpeg](https://ffmpeg.org/download.html)
 - A screen recorder, *e.g.* with the [Xbox Game Bar](https://support.xbox.com/en-GB/help/friends-social-activity/share-socialize/record-game-clips-game-bar-windows-10) included with Windows 10, or [ffmpeg](https://ffmpeg.org/download.html)
 - A scripting language, *e.g.* [node.js](https://nodejs.org/), [python](https://www.python.org/downloads/)
-- A better terminal for Windows, *e.g.* [GitBash](https://gitforwindows.org/) (even better with [Cmder](http://cmder.net/))
+- A better terminal for Windows, *e.g.* [GitBash](https://gitforwindows.org/) (even better with [Cmder](https://cmder.app/) or [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701))
 
 ## Collecting sample media
 
@@ -64,10 +64,11 @@ Language | Broadcaster | Resolution | Link
 --- | --- | --- | ---
 Arabic | Al Jazeera | 960x540 | http://live-hls-web-aja.getaj.net/AJA/03.m3u8
 English | Al Jazeera | 960x540 | http://live-hls-web-aje.getaj.net/AJE/03.m3u8
-Italian | Rai News 24 | 768x432 | http://rainews1-live.akamaized.net/hls/live/598326/rainews1/rainews1/rainews_1200/chunklist.m3u8
+English | CBS News | 640x360 | http://cbsn-us.cbsnstream.cbsnews.com/out/v1/55a8648e8f134e82a470f83d562deeca/master_11.m3u8
 German | DW | 720x400 | http://dwamdstream106.akamaized.net/hls/live/2017965/dwstream106/stream04/streamPlaylist.m3u8
+Spanish | RTVE 24h | 1024x576 | http://rtvelivestream-clnx.rtve.es/rtvesec/24h/24h_main_576.m3u8
 
-These streams can be directly ingested by Media Server using the the multi-purpose [Video](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine, as we do in the Speech to Text [tutorial](../showcase/speech-transcription/PART_I.md#process-a-news-channel-stream).
+These streams can be directly ingested by Media Server using the the multi-purpose [Video](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine, as we do in the Speech to Text [tutorial](../showcase/speech-transcription/PART_I.md#process-a-news-channel-stream).
 
 #### Live YouTube channels
 
@@ -106,12 +107,12 @@ Pelco | `rtsp://<IP>/stream1`
 
 As with the Bosch connection example above, some cameras also expose configuration parameters in the URL.Most cameras will need to be configured via an embedded web configuration UI, similar to what you have on your internet router at home.  This UI will be accessible at `http://IP:80/`, where `IP` is again the IP address (or hostname) of the camera.
 
-Media Server can connect directly to these RTSP streams if you configure the multi-purpose [Video](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  Media Server also includes the following additional ingest engines to support alternative stream types:
+Media Server can connect directly to these RTSP streams if you configure the multi-purpose [Video](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  Media Server also includes the following additional ingest engines to support alternative stream types:
 
-- [MJPEG](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/Ingest/MJPEG/_MJPEG.htm): for cameras supporting motion Jpeg streaming
-- [MxPEG](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/Ingest/MXPEG/_MXPEG.htm): for [Mobotix](https://www.mobotix.com/en/mxpeg) cameras
-- [Genetec](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/Ingest/Genetec/_Genetec.htm): to connect to any camera already integrated into the Genetec Security Center Video Management System (VMS)
-- [Milestone](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm): to connect to any camera already integrated into the Milestone XProtect VMS
+- [MJPEG](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Ingest/MJPEG/_MJPEG.htm): for cameras supporting motion Jpeg streaming
+- [MxPEG](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Ingest/MXPEG/_MXPEG.htm): for [Mobotix](https://www.mobotix.com/en/mxpeg) cameras
+- [Genetec](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Ingest/Genetec/_Genetec.htm): to connect to any camera already integrated into the Genetec Security Center Video Management System (VMS)
+- [Milestone](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm): to connect to any camera already integrated into the Milestone XProtect VMS
 
 ### Academic datasets
 
@@ -141,6 +142,10 @@ Media Server can connect directly to these RTSP streams if you configure the mul
 The two main tools to keep handy are ffmpeg and VLC player.  They have overlapping capabilities, so in the following example tips we will use a mix of both to give you a small flavour of what each is capable of.
 
 The following examples are grouped by source type: video files, video steams and YouTube:
+
+### Devices
+
+Many devices, such as webcams and HDMI-to-USB dongles, can be used as video sources for Media Server thanks to DirectShow on Windows or Video4Linux on Linux.  For tips on connecting to such devices, see the [webcam setup page](../../tutorials/setup/WEBCAM.md).
 
 ### Video files
 

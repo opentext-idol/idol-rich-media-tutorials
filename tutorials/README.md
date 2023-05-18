@@ -77,5 +77,6 @@ When IDOL Media Server is used in OEM, communication requires the ACI API.  See 
 ### Links
 
 - Full administration guides are available for all IDOL products [here](https://www.microfocus.com/documentation/idol/).
-- Read more tips on working with IDOL products in [IDOL Expert](https://www.microfocus.com/documentation/idol/IDOL_12_13/IDOLServer_12.13_Documentation/Guides/html/expert/Content/IDOLExpert_Welcome.htm).
+- Read more tips on working with IDOL products in [IDOL Expert](https://www.microfocus.com/documentation/idol/IDOL_23_2/IDOLServer_23.2_Documentation/Guides/html/expert/Content/IDOLExpert_Welcome.htm).
+- For details of the latest changes to Media Server, please see the [Release Notes](https://www.microfocus.com/documentation/idol/IDOL_23_2/IDOLReleaseNotes_23.2_Documentation/idol/Content/Servers/MediaServer.htm).
 - To learn more about IDOL Media Server and other IDOL products, visit [microfocus.com/idol](https://www.microfocus.com/en-us/products/information-data-analytics-idol/overview).

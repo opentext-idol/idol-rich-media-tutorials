@@ -7,13 +7,13 @@ pushd %~dp0
 
 set COMPONENTS=( LicenseServer, MediaServer )
 
-set VERSION=12.13.0
-set INSTALL_BASE=C:\MicroFocus
+set VERSION=23.2.0
+set INSTALL_BASE=C:\OpenText
 
 set SOURCE_DIR=%HOMEPATH%\Downloads
 set LICENSE_KEY=licensekey.dat
 
-set SERVICE_PREFIX=MicroFocus-
+set SERVICE_PREFIX=OpenText-
 set INSTALL_DIR=%INSTALL_BASE%\IDOLServer-%VERSION%
 
 rd /s /q %INSTALL_DIR%

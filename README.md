@@ -1,6 +1,8 @@
 # IDOL Rich Media Tutorials
 
-A set of guides to get you doing great things with IDOL Media Server 12.13!
+A set of guides to get you doing great things with IDOL Media Server 23.2!
+
+For details of the latest changes to Media Server, please see the [Release Notes](https://www.microfocus.com/documentation/idol/IDOL_23_2/IDOLReleaseNotes_23.2_Documentation/idol/Content/Servers/MediaServer.htm).
 
 ## Target audience
 
@@ -18,7 +20,7 @@ Get a local copy of this tutorial to give you all the configuration files and sa
 
 ![github-download](./tutorials/setup/figs/github-download.png)
 
-In the following tutorials, we will assume these materials are stored under `C:\MicroFocus`.
+In the following tutorials, we will assume these materials are stored under `C:\OpenText`.
 
 You can stay on GitHub to follow the steps in this and further linked README files in your browser or, if you prefer to work with the downloaded files, see [these steps](./tutorials/appendix/Markdown_reader.md) for some convenient offline reading options.
 
@@ -28,6 +30,6 @@ The tutorials start [here](tutorials/README.md)!
 
 ## License
 
-(c) Copyright 2023 Micro Focus International plc.
+(c) Copyright 2014-2023 OpenText or one of its affiliates.
 
 Licensed under the MIT License (the "License"); you may not use this project except in compliance with the [License](./LICENSE.md).

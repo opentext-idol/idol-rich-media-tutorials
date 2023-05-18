@@ -6,7 +6,7 @@ Media Server includes an *Image Classification* analysis engine, which can be tr
 - Was this photo taken in a city or in the desert?
 - Does this CCTV camera show a crowded or an empty train platform?
 
-For more details on *Image Classification*, see the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/Content/Operations/Analyze/ImageClass.htm).
+For more details on *Image Classification*, see the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/Operations/Analyze/ImageClass.htm).
 
 > NOTE: *Image Classification* results tell you about the contents of the whole image (or a defined region of the image) and is not to be confused with *Object Class Recognition*, which is covered in our [surveillance analytics](../surveillance/README.md) lesson and is used to detect and follow the location of objects of a particular class, *e.g.* individual people or buses.
 
@@ -15,10 +15,9 @@ In this tutorial we will use the Media Server GUI to:
 1. import pre-trained classes to enable classification of common types,
 1. build and run a process configuration to label a random image from Flickr.
 
-This guide assumes you have already completed the [introductory tutorial](../../README.md#introduction).
+This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../README.md#introduction).
 
 ---
-<!-- TOC -->
 
 - [Setup](#setup)
   - [Configure Media Server](#configure-media-server)
@@ -32,7 +31,6 @@ This guide assumes you have already completed the [introductory tutorial](../../
 - [Running our analysis](#running-our-analysis)
 - [Next steps](#next-steps)
 
-<!-- /TOC -->
 ---
 
 ## Setup
@@ -64,9 +62,9 @@ VisualChannels=1
 
 ## Training Image Classifiers
 
-Micro Focus provides a set of pre-defined training packs for Media Server, including image classifiers. Media Server also allows you to train your own classifiers by uploading and labelling your own images.
+OpenText provides a set of pre-defined training packs for Media Server, including image classifiers. Media Server also allows you to train your own classifiers by uploading and labelling your own images.
 
-That training can be performed through Media Server's web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Actions/Training/_ImageClassification.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
+That training can be performed through Media Server's web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Actions/Training/_ImageClassification.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
 
 ### Import pre-defined classifiers
 
@@ -76,7 +74,7 @@ Pre-trained *Image Classification* packages are distributed separately from the 
 
     ![get-software](../../setup/figs/get-software.png)
 
-1. From the list of available files, select and download `MediaServerPretrainedModels_12.13.0_COMMON.zip`.
+1. From the list of available files, select and download `MediaServerPretrainedModels_23.2.0_COMMON.zip`.
 
     ![get-pretrained-zip](../../setup/figs/get-pretrained-zip.png)
 
@@ -119,7 +117,7 @@ To analyze an image file, include the following engines:
 
     ![config-classifier](./figs/config-classifier.png)
 
-    > For full details on this and other available options for *Image Classification*, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/Analysis/ImageClass/_ImageClassification.htm).
+    > For full details on this and other available options for *Image Classification*, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Analysis/ImageClass/_ImageClassification.htm).
 
 1. Let's output the results to disk.  Add the "XML"-type output engine to do that:
 

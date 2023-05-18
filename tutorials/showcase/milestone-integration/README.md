@@ -2,7 +2,7 @@
 
 Media Server offers integration with popular third party Video Management System (VMS) products from Milestone and Genetec. Media Server includes dedicated ingest engines to process live streaming video from Milestone's "XProtect" and Genetec's "Security Center". Both of these products offer methods to receive events from external systems, so Media Server also includes dedicated Milestone and Genetec output engines to send events back to these products.  In this way, IDOL Media Server can be positioned as an analytics plug-in for existing Milestone and Genetec customers.
 
-> For customers who do not already have a VMS, it should be noted that Media Server's own [Rolling Buffer](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/Content/Operations/Encode/RollingBuffer_Introduction.htm) capability allows it to function as a VMS: recording live video from direct camera connection and facilitating playback, via HLS streaming, of that recorded video.
+> For customers who do not already have a VMS, it should be noted that Media Server's own [Rolling Buffer](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/Operations/Encode/RollingBuffer_Introduction.htm) capability allows it to function as a VMS: recording live video from direct camera connection and facilitating playback, via HLS streaming, of that recorded video.
 
 In this tutorial we will focus on Milestone XProtect Corporate as an example external VMS.  We will:
 
@@ -11,10 +11,9 @@ In this tutorial we will focus on Milestone XProtect Corporate as an example ext
 1. run a Media Server process action to analyze video streamed from Milestone to create events that we will send back to Milestone, and
 1. show how these events are visualized in Milestone XProtect Smart Client.
 
-This guide assumes you have already completed the [Introductory](../../README.md#introduction) tutorial.
+This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [Introductory](../../README.md#introduction) tutorial.
 
 ---
-<!-- TOC -->
 
 - [Milestone setup](#milestone-setup)
   - [Install DirectShow driver](#install-directshow-driver)
@@ -36,7 +35,6 @@ This guide assumes you have already completed the [Introductory](../../README.md
 - [View alerts in the Milestone Smart Client](#view-alerts-in-the-milestone-smart-client)
 - [Next steps](#next-steps)
 
-<!-- /TOC -->
 ---
 
 ## Milestone setup
@@ -137,7 +135,7 @@ We can make use of the Media Server user interface [/a=gui](http://localhost:140
 1. Go to the *Ingest Test* page.
 1. Select from the option dropdowns to ingest a "Stream" using "Milestone" and "NTLM" authentication:
         
-    > Media Server's Milestone ingest engine, described in full [here](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm), offers multiple authentication options to support different versions of Milestone XProtect.  The "Corporate" version requires "NTLM" authentication.
+    > Media Server's Milestone ingest engine, described in full [here](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm), offers multiple authentication options to support different versions of Milestone XProtect.  The "Corporate" version requires "NTLM" authentication.
 
 1. The process action source for Milestone streams is the stream id, or `guid`.  Find it by running the following `curl` command:
     ```sh
@@ -211,13 +209,13 @@ To obtain the Milestone SDK,
 
     ```
     cd "C:/Program Files/Milestone/MIPSDK/Bin"
-    CopyMediaCpp.bat "C:/MicroFocus/MediaServer_12.13.0_WINDOWS_X86_64/libs/Milestone"
+    CopyMediaCpp.bat "C:/OpenText/MediaServer_23.2.0_WINDOWS_X86_64/libs/Milestone"
     ```
     > NOTE: 25 files should be copied.
 
 No additional session config parameters are required to enable this option.  On Windows, Media Server will simply check for the existence of these Milestone libraries and quietly fall back to the cross-platform option if they do not exist.
 
-The Milestone libraries offer some tuning options, which are exposed in Media Server's [Milestone Ingest Engine](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm).  These are:
+The Milestone libraries offer some tuning options, which are exposed in Media Server's [Milestone Ingest Engine](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm).  These are:
 
 Parameter | Default | Function
 --- | --- | ---
@@ -311,7 +309,7 @@ SavePostXML = true
 XMLOutputPath = output/milestone/%session.token%/%segment.type%_%%segment.sequence%.xml
 ```
 
-> See the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/OutputEngines/Milestone/_Milestone.htm) for full details the Milestone output engine. 
+> See the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/OutputEngines/Milestone/_Milestone.htm) for full details the Milestone output engine. 
 
 The complete configuration is included here as `MilestoneANPR.cfg`.
 
@@ -384,7 +382,7 @@ That's all!  We're ready to go.
 Paste the following parameters into [`test-action`](http://localhost:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials), entering your camera's GUID as the source:
 
 ```url
-action=process&source=<CAMERA_GUID>&configPath=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/milestone-integration/MilestoneANPR.cfg
+action=process&source=<CAMERA_GUID>&configPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/milestone-integration/MilestoneANPR.cfg
 ```
 
 On that page, click `Test Action` to start processing.

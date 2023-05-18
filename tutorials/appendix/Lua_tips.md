@@ -1,7 +1,6 @@
 # Lua scripting tips
 
 ---
-<!-- TOC -->
 
 - [Introduction](#introduction)
 - [Logging](#logging)
@@ -10,7 +9,6 @@
   - [Output Lua records](#output-lua-records)
 - [Next steps](#next-steps)
 
-<!-- /TOC -->
 ---
 
 ## Introduction
@@ -27,7 +25,7 @@ In Media Server we use Lua to apply custom logic.  This provides an enormous fle
 
 Media Server includes many example Lua scripts, which you can see under `configurations/lua`.  
 
-To support writing your own Lua scripts, Media Server also provides helper functions.  See the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Lua/LuaFunctions.htm) for more details.
+To support writing your own Lua scripts, Media Server also provides helper functions.  See the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Lua/LuaFunctions.htm) for more details.
 
 ## Logging
 
@@ -35,7 +33,7 @@ When developing your own Lua scripts, it is obviously very useful to be able to 
 
 ```lua
 function pred(record)
-  local oopangle = record.FaceData.outofplaneanglex
+  local oopangle = record.FaceData.outOfPlaneAngleX
   log("Out of plane angle x: " .. oopangle)
   ...
 end
@@ -60,7 +58,7 @@ LogTypeCSVs=lua
 It is also very useful to have a reference of the record data structure so that you know, which values are available and how to access them, *e.g.*
 
 ```lua
-local oopangle = record.FaceData.outofplaneanglex
+local oopangle = record.FaceData.outOfPlaneAngleX
 ```
 
 ### Example records
@@ -99,9 +97,9 @@ http://localhost:14000/action=getExampleRecord&engineType=FaceDetect&Track=Resul
       angle = -10.6418,
       b = 31.6337,
     },
-    outofplaneangley = 0,
-    percentageinimage = 100,
-    outofplaneanglex = 0,
+    outOfPlaneAngleY = 0,
+    percentageInImage = 100,
+    outOfPlaneAngleX = 0,
   },
   FaceResult = {
     face = {
@@ -120,9 +118,9 @@ http://localhost:14000/action=getExampleRecord&engineType=FaceDetect&Track=Resul
         angle = -10.6418,
         b = 31.6337,
       },
-      outofplaneangley = 0,
-      percentageinimage = 100,
-      outofplaneanglex = 0,
+      outOfPlaneAngleY = 0,
+      percentageInImage = 100,
+      outOfPlaneAngleX = 0,
     },
     id = {
         uuid = '4d69390f-a8c4-4c5d-a0b0-705a3f98aa9b',
@@ -166,7 +164,7 @@ local width = record.FaceRecognitionResultAndImage.face.region.width
 
 ### Output Lua records
 
-Media Server provides a [Lua output engine](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/OutputEngines/Lua/_Lua.htm), which produces a Lua representation of each record that it receives, and writes it to a file on disk. You can use the output to help you to write and troubleshoot Lua scripts.
+Media Server provides a [Lua output engine](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/OutputEngines/Lua/_Lua.htm), which produces a Lua representation of each record that it receives, and writes it to a file on disk. You can use the output to help you to write and troubleshoot Lua scripts.
 
 An example configuration file based on our first process session from [PART I](../introduction/PART_I.md#run-face-detection) of the introductory tutorial:
 

@@ -8,10 +8,9 @@ In this tutorial we will:
 1. record video clips from a live stream
 1. use XSL transforms to re-format Media Server output to create subtitles
 
-This guide assumes you have already completed the [introductory tutorial](../../README.md#introduction).
+This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../README.md#introduction).
 
 ---
-<!-- TOC -->
 
 - [Setup](#setup)
   - [Third-party software](#third-party-software)
@@ -26,7 +25,6 @@ This guide assumes you have already completed the [introductory tutorial](../../
   - [Convert XML with Python](#convert-xml-with-python)
 - [PART II - Custom Language Model](#part-ii---custom-language-model)
 
-<!-- /TOC -->
 ---
 
 ## Setup
@@ -66,13 +64,13 @@ Speech transcription language packs are distributed separately from the main Med
 
 ![get-software](../../setup/figs/get-software.png)
 
-For this tutorial we will use the British English pack.  From the list of available files, select and download `ENUK-12.13.0.zip`:
+For this tutorial we will use the British English pack.  From the list of available files, select and download `ENUK-23.2.0.zip`:
 
 ![get-lang-pack-zip](./figs/get-lang-pack-zip.png)
 
 Unzip the contents into Media Server's static data directory, to give you, *e.g.* `staticdata/speechtotext/ENUK`, containing files like `ver-ENUK-*`
 
-> This language pack is targeted to high quality "broadband" audio.  An additional language pack is available for telephony.  Many other languages and dialects are supported.  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/Content/Appendixes/SpeechLanguages.htm) for details.
+> This language pack is targeted to high quality "broadband" audio.  An additional language pack is available for telephony.  Many other languages and dialects are supported.  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/Appendixes/SpeechLanguages.htm) for details.
 
 You can manually load the ENUK language pack with the action <http://127.0.0.1:14000/action=LoadSpeechLanguageResource&LanguagePack=ENUK>.
 
@@ -103,7 +101,7 @@ LanguagePack = ENUK
 SpeedBias = Live
 ```
 
-More options are available for the *SpeechToText* analysis engine.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm) for details.
+More options are available for the *SpeechToText* analysis engine.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm) for details.
 
 To view the results in a simple and standalone way, we will record the stream to video files and format the speech transcription output to generate subtitles for those clips.
 
@@ -136,7 +134,7 @@ Next we need to generate the subtitles.  This requires two steps:
     And that's just really sad.
     ```
 
-    > [Wayne's World (1992) Quotes - IMDB](http://www.imdb.com/title/tt0105793/quotes)
+    > [Wayne's World (1992) Quotes - IMDB](https://www.imdb.com/title/tt0105793/quotes)
 
 To achieve all this, we need to add the following to our process configuration:
 
@@ -155,7 +153,7 @@ XMLOutputPath = output/speechToText1/%session.token%/clip_%segment.sequence%.srt
 XslTemplate = toSRT.xsl
 ```
 
-We use using the *Bounded* output mode to bundle together all the text segments with the relevant video clip.  Please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/Content/Operations/Outputs/IndexingModes_BoundedEvent.htm), for details.
+We use using the *Bounded* output mode to bundle together all the text segments with the relevant video clip.  Please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/Operations/Outputs/IndexingModes_BoundedEvent.htm), for details.
 
 ## Process a news channel stream
 
@@ -168,7 +166,7 @@ http://live-hls-web-aje.getaj.net/AJE/03.m3u8
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
 ```url
-action=process&source=http://live-hls-web-aje.getaj.net/AJE/03.m3u8&configPath=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/speechToText1.cfg
+action=process&source=http://live-hls-web-aje.getaj.net/AJE/03.m3u8&configPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/speechToText1.cfg
 ```
 
 Click the `Test Action` button to start processing.  The video clip and srt are produced every 30 seconds based on the `SegmentDuration` parameter.
@@ -196,7 +194,7 @@ http://live-hls-web-aje.getaj.net/AJE/03.m3u8
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
 ```url
-action=process&source=http://live-hls-web-aje.getaj.net/AJE/03.m3u8&configPath=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/speechToText1a.cfg
+action=process&source=http://live-hls-web-aje.getaj.net/AJE/03.m3u8&configPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/speechToText1a.cfg
 ```
 
 Click the `Test Action` button to start processing.  The video clips and `.xml` result files are produced every 30 seconds based on the `SegmentDuration` parameter.
@@ -212,8 +210,8 @@ Stop processing by clicking the `Stop Session` button in the GUI or with the [`s
 Next, we will use the included python script `xml2srt.py` to convert one of the output `.xml` files, ready for playback in VLC.  To do so, *e.g.* on Windows, run the following commands:
 
 ```sh
-cd C:\MicroFocus\idol-rich-media-tutorials\tutorials\showcase\speech-transcription
-python xml2srt.py "C:\MicroFocus\IDOLServer-12.13.0\MediaServer\output\speechToText1a\clip_1.xml"
+cd C:\OpenText\idol-rich-media-tutorials\tutorials\showcase\speech-transcription
+python xml2srt.py "C:\OpenText\IDOLServer-23.2.0\MediaServer\output\speechToText1a\clip_1.xml"
 ```
 
 This will produce a new file `clip_1.srt` in the same directory as the original `.xml` file.  As before, you can now open the video `clip_1.mp4` in VLC player to view the time-aligned subtitles.

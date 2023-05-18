@@ -5,10 +5,9 @@ In this tutorial we will:
 1. use the Media Server GUI to import pre-trained classes to enable classification of common types,
 1. build and run a process configuration to detected objects in a random image from Flickr.
 
-This guide assumes you have already completed the [introductory tutorial](../../README.md#introduction).
+This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../README.md#introduction).
 
 ---
-<!-- TOC -->
 
 - [Setup](#setup)
   - [Configure Media Server](#configure-media-server)
@@ -23,7 +22,6 @@ This guide assumes you have already completed the [introductory tutorial](../../
 - [Results](#results)
 - [PART II - Build a custom classifier](#part-ii---build-a-custom-classifier)
 
-<!-- /TOC -->
 ---
 
 ## Setup
@@ -55,9 +53,9 @@ VisualChannels=1
 
 ## Training Object Class Recognizers
 
-Micro Focus provides a set of pre-defined training packs for Media Server, including object class recognizers. Media Server also allows you to train your own recognizers by uploading and labelling your own images.
+OpenText provides a set of pre-defined training packs for Media Server, including object class recognizers. Media Server also allows you to train your own recognizers by uploading and labelling your own images.
 
-That training can be performed through Media Server's API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Actions/Training/_ObjectClassRecognition.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
+That training can be performed through Media Server's API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Actions/Training/_ObjectClassRecognition.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
 
 ### Import pre-defined recognizers
 
@@ -67,7 +65,7 @@ Pre-trained *Object Class Recognition* packages are distributed separately from 
 
     ![get-software](../../setup/figs/get-software.png)
 
-1. From the list of available files, select and download `MediaServerPretrainedModels_12.13.0_COMMON.zip`.
+1. From the list of available files, select and download `MediaServerPretrainedModels_23.2.0_COMMON.zip`.
 
     ![get-pretrained-zip](../../setup/figs/get-pretrained-zip.png)
 
@@ -114,7 +112,7 @@ Type = objectclassrecognition
 Recognizer = ObjectClassRecognizer_Gen4_CommonObjects80
 ```
 
-> For full details on this and other available options for *Object Class Recognition*, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/Analysis/ObjectClass/_ObjectClass.htm).
+> For full details on this and other available options for *Object Class Recognition*, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Analysis/ObjectClass/_ObjectClass.htm).
 
 To show the object detection results, we are going to draw color-coded boxes around each one as overlays on the source image.  This requires two engines, a *Combine*-type Utility engine and a *Draw*-type Transform engine:
 
@@ -148,7 +146,7 @@ Before processing, we must first copy the included `drawObjects.lua` file into M
 With that copied, we're ready to go. Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
 ```url
-action=process&source=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/object-class-recognition/hong_kong.jpg&configPath=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/object-class-recognition/objectClassRecognition.cfg
+action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/object-class-recognition/hong_kong.jpg&configPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/object-class-recognition/objectClassRecognition.cfg
 ```
 
 > Select the blue arrow button to expand the process parameters and make any changes to file paths as needed on your system.
@@ -163,7 +161,7 @@ To review the resulting detection image, go to `output/hong_kong` and find `dete
 
 ![detections](./figs/detections.png)
 
-> Take a closer look at the included `drawObjects.lua` to see how the elements of the overlays and object class key were added.  To read more about Media Server's drawing functions, see the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Lua/Draw/_Drawing.htm).
+> Take a closer look at the included `drawObjects.lua` to see how the elements of the overlays and object class key were added.  To read more about Media Server's drawing functions, see the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Lua/Draw/_Drawing.htm).
 
 ## PART II - Build a custom classifier
 

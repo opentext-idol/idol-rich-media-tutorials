@@ -3,7 +3,6 @@
 This is a setup guide for a basic installation of IDOL rich media and associated components.
 
 ---
-<!-- TOC -->
 
 - [Useful third-party tools](#useful-third-party-tools)
 - [IDOL components](#idol-components)
@@ -14,7 +13,6 @@ This is a setup guide for a basic installation of IDOL rich media and associated
     - [Validate install](#validate-install)
   - [Further reading](#further-reading)
 
-<!-- /TOC -->
 ---
 
 ## Useful third-party tools
@@ -43,7 +41,7 @@ You can obtain software and licenses from the [Software Licensing and Downloads]
 
     ![get-license](./figs/get-license.png)
  
-1. On the "License Activation" screen, at the bottom, select the check box, choose your preferred version (the latest is 12.13), then fill in the quantity to activate:
+1. On the "License Activation" screen, at the bottom, select the check box, choose your preferred version (the latest is 23.2), then fill in the quantity to activate:
 
    ![eSoftware-selectLicense](./figs/eSoftware-selectLicense.png)
 
@@ -74,7 +72,7 @@ Get a local copy of this tutorial to give you all the configuration files and sa
 
 ![github-download](./figs/github-download.png)
 
-In the following tutorials, we will assume these materials are stored under `C:\MicroFocus`.
+In the following tutorials, we will assume these materials are stored under `C:\OpenText`.
 
 #### Following this guide offline
 
@@ -84,14 +82,14 @@ You can stay on GitHub to follow the steps in this and further linked README fil
 
 If you used the installer wizard, or the scripts without altering them, your installed software will be in:
 
-- `C:\MicroFocus\IDOLServer-12.13.0` (Windows)
-- `~/IDOLServer-12.13.0` (Linux)
+- `C:\OpenText\IDOLServer-23.2.0` (Windows)
+- `~/IDOLServer-23.2.0` (Linux)
 
 Each installed IDOL component will have its own sub-directory, which includes all required executables, dependencies and configuration files.  The primary configuration file for each shares the name of the component executable, *e.g.* `mediaserver.cfg` for `mediaserver.exe`.
 
 Now let's start up License Server:
 
-- On Windows, start the `MicroFocus-LicenseServer` Windows Service.
+- On Windows, start the `OpenText-LicenseServer` Windows Service.
 - On Linux, launch the startup script from the License Server directory:
 
   ```sh
@@ -107,5 +105,5 @@ Next start up IDOL Media Server in the same way and verify it is also running at
 The admin guides for all components can be accessed from these links:
 
 - [IDOL documentation home page](https://www.microfocus.com/documentation/idol/)
-- [License Server administration guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/LicenseServer_12.13_Documentation/Help/Content/_FT_SideNav_Startup.htm)
-- [Media Server administration guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/Content/_FT_SideNav_Startup.htm)
+- [License Server administration guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/LicenseServer_23.2_Documentation/Help/Content/_FT_SideNav_Startup.htm)
+- [Media Server administration guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/_FT_SideNav_Startup.htm)

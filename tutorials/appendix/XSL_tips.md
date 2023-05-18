@@ -1,7 +1,6 @@
 # XSL transform tips
 
 ---
-<!-- TOC -->
 
 - [Introduction](#introduction)
 - [Uses with Media Server](#uses-with-media-server)
@@ -21,7 +20,6 @@
   - [Our first iteration](#our-first-iteration)
 - [Next steps](#next-steps)
 
-<!-- /TOC -->
 ---
 
 ## Introduction

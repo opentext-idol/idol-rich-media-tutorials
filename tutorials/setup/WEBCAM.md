@@ -3,7 +3,6 @@
 This is a setup guide for ingestion of webcam video into Media Server.  If you do not have a webcam, go to [Plan B](#plan-b).
 
 ---
-<!-- TOC -->
 
 - [Connecting to your webcam](#connecting-to-your-webcam)
   - [Configuration change for Linux](#configuration-change-for-linux)
@@ -11,7 +10,6 @@ This is a setup guide for ingestion of webcam video into Media Server.  If you d
   - [Connectivity problems](#connectivity-problems)
     - [Plan B](#plan-b)
 
-<!-- /TOC -->
 ---
 
 ## Connecting to your webcam
@@ -124,7 +122,7 @@ To apply these device settings in Media Server, add the following config options
 + VideoSize = 1280x720
 ```
 
-> More options are available for the `Video`-type ingest engine.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm).
+> More options are available for the `Video`-type ingest engine.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm).
 
 ### Connectivity problems
 

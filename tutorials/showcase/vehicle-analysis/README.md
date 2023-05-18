@@ -9,10 +9,9 @@ In this tutorial we will:
 1. identify vehicle color
 1. (*Optionally*) Train new vehicle models
 
-This guide assumes you have already completed the [introductory tutorial](../../README.md#introduction).
+This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../README.md#introduction).
 
 ---
-<!-- TOC -->
 
 - [Setup](#setup)
   - [Configure vehicle analysis](#configure-vehicle-analysis)
@@ -27,7 +26,6 @@ This guide assumes you have already completed the [introductory tutorial](../../
 - [Processing video](#processing-video)
 - [Next steps](#next-steps)
 
-<!-- /TOC -->
 ---
 
 ## Setup
@@ -88,7 +86,7 @@ Location = GB
 > LocationWithPriorities=FR:1.0,BE:0.1,DE:0.01
 > ```
 
-This minimal configuration quietly uses the following default options, which can be read about in detail in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/Analysis/ANPR/_NumberPlate.htm) and are shown here grouped by their functions.
+This minimal configuration quietly uses the following default options, which can be read about in detail in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Analysis/ANPR/_NumberPlate.htm) and are shown here grouped by their functions.
 
 ```ini
 # Detection of plates
@@ -209,11 +207,11 @@ Open the training web app at [`/action=gui`](http://127.0.0.1:14000/a=gui#/train
 
 ![vehicle-training](./figs/vehicle-training.png)
 
-> TIP: Cameras that are positioned on a gantry over the traffic are best suited for recognition because they capture images where the vehicles approach head-on.  For further recommendations about image quality, and for instructions to collect your own vehicle model training images, read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/Content/Training/VehicleModel_Introduction.htm).
+> TIP: Cameras that are positioned on a gantry over the traffic are best suited for recognition because they capture images where the vehicles approach head-on.  For further recommendations about image quality, and for instructions to collect your own vehicle model training images, read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/Training/VehicleModel_Introduction.htm).
 
 ### Assessing images for training
 
-When selecting images of faces for training, we should follow the above guidance given in the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/Content/Training/VehicleModel_Introduction.htm).
+When selecting images of faces for training, we should follow the above guidance given in the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/Training/VehicleModel_Introduction.htm).
 
 > TIP: Cameras that are positioned on a gantry over the traffic are best suited for recognition because they capture images where the vehicles approach head-on.
 
@@ -242,7 +240,7 @@ If no number plates are detected a vehicle model cannot be trained:
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
 ```url
-action=process&source=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/vehicle-analysis/vehicles.mp4&configName=examples/VehicleModel/WithColor2
+action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/vehicle-analysis/vehicles.mp4&configName=examples/VehicleModel/WithColor2
 ```
 
 Click `Test Action` to start processing, then review the running process with [`/action=gui`](http://127.0.0.1:14000/a=gui#monitor).

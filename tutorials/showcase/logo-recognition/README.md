@@ -2,17 +2,16 @@
 
 Media Server includes an Object Recognition analysis engine, which can be trained to recognize specific 2-D and 3-D objects in images and video, such as a logo or painting.
 
-For a more detailed introduction to Object Recognition, see the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/Content/Operations/Analyze/ObjectRecognition_Introduction.htm).
+For a more detailed introduction to Object Recognition, see the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/Operations/Analyze/ObjectRecognition_Introduction.htm).
 
 In this tutorial we will:
 
 1. use the Object Recognition analysis engine to train Objects and identify them in a video from a football match
 1. use transform and image encoding engines to save cropped images of the Objects we find
 
-This guide assumes you have already completed the [introductory tutorial](../../README.md#introduction).
+This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../README.md#introduction).
 
 ---
-<!-- TOC -->
 
 - [Setup](#setup)
   - [Third-party software](#third-party-software)
@@ -29,7 +28,6 @@ This guide assumes you have already completed the [introductory tutorial](../../
 - [Running our analysis](#running-our-analysis)
 - [Next steps](#next-steps)
 
-<!-- /TOC -->
 ---
 
 ## Setup
@@ -114,7 +112,7 @@ Type = Video
 IngestDateTime = 0
 ```
 
-For full details on the options available for ingesting video (and other) sources, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/Ingest/_Ingest.htm).
+For full details on the options available for ingesting video (and other) sources, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Ingest/_Ingest.htm).
 
 ### Analysis
 
@@ -134,7 +132,7 @@ Here we have specified our newly created database with the `Database` parameter.
 - an identifier (or list of identifiers), *e.g.* for one-to-one validation (or matching a sub-set)
 - a metadata key-value pair, *e.g.* if you want to match only shirt sponsors in our example, set `Metadata = group:shirt`
 
-We have also specified some parameters that affect how the analytic runs.  For full details on these and other available options, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/Analysis/Object/_Object.htm).
+We have also specified some parameters that affect how the analytic runs.  For full details on these and other available options, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Analysis/Object/_Object.htm).
 
 ### Event processing
 
@@ -206,7 +204,7 @@ While testing, or if you simply wish to keep your config files in a project-spec
 Let's try it. Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
 ```url
-action=process&source=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/logo-recognition/bcnpsg.mp4&configPath=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/logo-recognition/objectRecognition.cfg
+action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/logo-recognition/bcnpsg.mp4&configPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/logo-recognition/objectRecognition.cfg
 ```
 
 Click `Test Action` to start processing.

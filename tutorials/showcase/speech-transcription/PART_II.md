@@ -12,7 +12,6 @@ In this tutorial we will:
 1. reprocess the same news clip and compare the transcription results
 
 ---
-<!-- TOC -->
 
 - [Setup](#setup)
   - [Third-party software](#third-party-software)
@@ -22,7 +21,6 @@ In this tutorial we will:
 - [Reprocess the news clip](#reprocess-the-news-clip)
 - [PART III - Quantifying transcript accuracy](#part-iii---quantifying-transcript-accuracy)
 
-<!-- /TOC -->
 ---
 
 ## Setup
@@ -64,7 +62,7 @@ To ingest a video file, we will update the `Ingest` and `Analysis` sections acco
     SpeedBias = 3
     ```
 
-    > More options are available for the *SpeechToText* analysis engine.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm) for details.
+    > More options are available for the *SpeechToText* analysis engine.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm) for details.
 
 1. To create a single plain text file of the transcript for the video clip, we will configure an XML-type output engine with `Mode` set to `AtEnd` and make use of the included the `toText.xsl` transform as follows:
 
@@ -82,7 +80,7 @@ To ingest a video file, we will update the `Ingest` and `Analysis` sections acco
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
 ```url
-action=process&source=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/aljazeera.mp4&configPath=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/speechToText2.cfg
+action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/aljazeera.mp4&configPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/speechToText2.cfg
 ```
 
 Click the `Test Action` button to start processing.
@@ -91,7 +89,7 @@ Navigate to `output/speechToText2` and open the transcript file to read the resu
 
 ## Build the custom language model
 
-The first step in creating a custom model is to source suitable text materials.  These should contain descriptive text written in normal sentences, not just a dictionary of new terms. For this tutorial we have sourced a small set of materials for you, copying the text from a news article about similar events in Libya into the file `libya.txt`, which is included with this guide.  In practice, the more data you have (and the more representative that data is) the better. Please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/Content/Training/CustomLM_Introduction.htm), for further advice.
+The first step in creating a custom model is to source suitable text materials.  These should contain descriptive text written in normal sentences, not just a dictionary of new terms. For this tutorial we have sourced a small set of materials for you, copying the text from a news article about similar events in Libya into the file `libya.txt`, which is included with this guide.  In practice, the more data you have (and the more representative that data is) the better. Please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/Training/CustomLM_Introduction.htm), for further advice.
 
 > A training text file should be encoded in UTF-8, without [BOM](https://en.wikipedia.org/wiki/Byte_order_mark#UTF-8).
 
@@ -99,7 +97,7 @@ We will next instruct Media Server to build our custom language model from this 
 
 1. paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action):
     ```url
-    action=TrainCustomSpeechLanguageModel&identifier=LibyaTerms&languagepack=ENUK&textpath=C:\MicroFocus\idol-rich-media-tutorials\tutorials\showcase\speech-transcription\libya.txt
+    action=TrainCustomSpeechLanguageModel&identifier=LibyaTerms&languagepack=ENUK&textpath=C:\OpenText\idol-rich-media-tutorials\tutorials\showcase\speech-transcription\libya.txt
     ```
 1. click the `Test Action` button to start building
 1. click the `token` link (or go to [`/action=queueinfo`](http://127.0.0.1:14000/a=queueinfo&queuename=TrainCustomSpeechLanguageModel&queueaction=getstatus)) to see the training status
@@ -133,7 +131,7 @@ CustomLanguageModel = LibyaTerms:0.3
 Then, paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
 ```url
-action=process&source=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/aljazeera.mp4&configPath=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/speechToText3.cfg
+action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/aljazeera.mp4&configPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/speechToText3.cfg
 ```
 
 Click the `Test Action` button to start processing.

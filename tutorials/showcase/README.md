@@ -7,11 +7,12 @@ Dip into any of the following showcase guides to try more analytics.
 ---
 
 - [Face recognition](#face-recognition)
-- [Clustering faces](#clustering-faces)
+- [Face Clustering](#face-clustering)
 - [Surveillance analytics](#surveillance-analytics)
 - [Vehicle analysis](#vehicle-analysis)
 - [Milestone VMS integration](#milestone-vms-integration)
 - [Speech transcription](#speech-transcription)
+- [Optical Character Recognition](#optical-character-recognition)
 - [Logo recognition](#logo-recognition)
 - [Image classification](#image-classification)
 - [Object class recognition](#object-class-recognition)
@@ -22,11 +23,11 @@ Dip into any of the following showcase guides to try more analytics.
 
 ## Face recognition
 
-Train and match faces from image and video. Discussion on how to tune your configuration for good real-world performance.
+Train and match faces from image and video. Discussion on how to tune your configuration for real-world performance.
 
 Start [here](./face-recognition/README.md).
 
-## Clustering faces
+## Face Clustering
 
 Automatically organize unsorted pictures of people into unique identities using Face Recognition clustering.
 
@@ -55,6 +56,12 @@ Integrate Media Server as an analytics "plug-in" for the Milestone XProtect vide
 Process audio to transcribe human speech from a news broadcast. Search those speech transcripts to understand what's being reported on without having to watch TV!
 
 [Get started](./speech-transcription/README.md).
+
+## Optical Character Recognition
+
+Use OCR to detect and transcribe text found in images in over 45 languages and scripts, preserving table data structure.  Follow scrolling news from a video clip to capture the latest headlines.
+
+[Get started](./optical-character-recognition/README.md).
 
 ## Logo recognition
 
