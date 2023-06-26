@@ -136,4 +136,4 @@ As stated above, GPU is (practically speaking) essential for training new recogn
 
 ## Next steps
 
-Why not try more tutorials to explore some of the other analytics available in Media Server, linked from the [main page](../../README.md).
+Why not try more tutorials to explore some of the other analytics available in Media Server, linked from the [showcase page](../README.md).
