@@ -5,7 +5,7 @@ In the previous lesson, we used a custom language model (CLM) to improve the spe
 In this tutorial we will use Media Server to:
 
 1. record and transcribe your own voice as you read from an example Wikipedia page into a microphone
-2. score the transcript against the original text you read from
+1. score the transcript against the original text you read from
 
 ---
 

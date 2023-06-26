@@ -5,9 +5,9 @@ Media Server can be used to perform image analytics to process scanned documents
 In this tutorial we will:
 
 1. configure and run OCR on a sample document to transcribe text
-2. use the PDF encoding engine to create a convenient PDF file with selectable text overlayed on the original image
-3. process a document containing multiple languages and scripts
-4. learn about the parameters available to optimize OCR for your use case
+1. use the PDF encoding engine to create a convenient PDF file with selectable text overlayed on the original image
+1. process a document containing multiple languages and scripts
+1. learn about the parameters available to optimize OCR for your use case
 
 This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../README.md#introduction).
 

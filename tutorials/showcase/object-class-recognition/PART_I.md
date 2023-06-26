@@ -20,7 +20,7 @@ This guide assumes you have already familiarized yourself with IDOL Media Server
   - [Config file](#config-file)
 - [Running our analysis](#running-our-analysis)
 - [Results](#results)
-- [PART II - Build a custom classifier](#part-ii---build-a-custom-classifier)
+- [PART II - Build a custom recognizer](#part-ii---build-a-custom-recognizer)
 
 ---
 
@@ -149,7 +149,7 @@ With that copied, we're ready to go. Paste the following parameters into [`test-
 action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/object-class-recognition/hong_kong.jpg&configPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/object-class-recognition/objectClassRecognition.cfg
 ```
 
-> Select the blue arrow button to expand the process parameters and make any changes to file paths as needed on your system.
+> TIP: Select the blue arrow button to expand the process parameters and make any changes to file paths as needed on your system.
 
 Click `Test Action` to start processing.
 
@@ -163,7 +163,6 @@ To review the resulting detection image, go to `output/hong_kong` and find `dete
 
 > Take a closer look at the included `drawObjects.lua` to see how the elements of the overlays and object class key were added.  To read more about Media Server's drawing functions, see the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Lua/Draw/_Drawing.htm).
 
-## PART II - Build a custom classifier
+## PART II - Build a custom recognizer
 
-<!-- Start [here](PART_II.md). -->
-> COMING SOON!
+Start [here](PART_II.md).

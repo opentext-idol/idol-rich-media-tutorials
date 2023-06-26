@@ -37,16 +37,16 @@ Follow the install wizard to get the required components.
 Keep the default options except in the following cases:
 
 1. Accept the license agreement.
-2. Keep the default installation directory.
-3. Select `Custom` under *Installation Mode*.
-4. Do not choose an OEM installation
-5. Confirm that `No`, you do not have an existing License Server.
-6. (On Windows keep the default service name.)
-7. Leave the default port settings and set location of your license `.dat` file.
-8. Component Selection:
+1. Keep the default installation directory.
+1. Select `Custom` under *Installation Mode*.
+1. Do not choose an OEM installation
+1. Confirm that `No`, you do not have an existing License Server.
+1. (On Windows keep the default service name.)
+1. Leave the default port settings and set location of your license `.dat` file.
+1. Component Selection:
    - To cover these tutorials you need to select only the *Media Server* component.
    - (On Windows also create a service with the default name).
 
       ![idol-installer](./figs/idol-installer.png)
 
-9. Click Next to proceed with the installation.
+1. Click Next to proceed with the installation.

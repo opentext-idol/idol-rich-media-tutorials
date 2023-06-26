@@ -22,20 +22,21 @@ This guide assumes you have already familiarized yourself with IDOL Media Server
 ---
 
 - [Setup](#setup)
-  - [Train object class recognition](#train-object-class-recognition)
+  - [Import object class recognizer](#import-object-class-recognizer)
     - [Enabled modules](#enabled-modules)
     - [Licensed channels](#licensed-channels)
     - [Pre-trained models](#pre-trained-models)
 - [Process configuration](#process-configuration)
 - [Run a process configuration](#run-a-process-configuration)
 - [Build configurations in the GUI](#build-configurations-in-the-gui)
+  - [(*Optional*) GPU acceleration](#optional-gpu-acceleration)
 - [Next steps](#next-steps)
 
 ---
 
 ## Setup
 
-### Train object class recognition
+### Import object class recognizer
 
 Media Server must be licensed for visual analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enabling-analytics).  To reconfigure Media Server you must edit your `mediaserver.cfg` file.
 
@@ -96,7 +97,7 @@ Extract the training pack `.zip` then, to load the surveillance recognizer, open
 
     ![rename-pretrained-recognizer](./figs/rename-pretrained-recognizer.png)
 
-> You have imported six classes: bicycle, bus, car, motorcycle, person and truck.  Each one contains metadata fields defining the expected real-world object dimensions.  These scales turn all detected objects into "standard candles", enabling the camera perspective to be estimated.  Read about conversion to real-world coordinates [here](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/Advanced/Perspective.htm).
+> NOTE: You have imported six classes: "bicycle", "bus", "car", "motorcycle", "person" and "truck".  Each one contains metadata fields defining the expected real-world object dimensions.  These scales turn all detected objects into "standard candles", enabling the camera perspective to be estimated.  Read about conversion to real-world coordinates [here](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/Advanced/Perspective.htm).
 
 ## Process configuration
 
@@ -162,6 +163,22 @@ Please watch this demo video from IDOL's YouTube playlist to see the easy setup 
 [![surveillance-training](https://img.youtube.com/vi/XjKjIxlKy9I/maxres2.jpg)](https://www.youtube.com/watch?v=XjKjIxlKy9I&list=PLlUdEXI83_Xoq5Fe2iUnY8fjV9PuX61FA)
 
 Now have a go yourself - it's easy!
+
+### (*Optional*) GPU acceleration
+
+When building your configuration, you can configure your Detector in either CPU or GPU mode:
+
+![gpu-mode](./figs/gpu-mode.png)
+
+When you select GPU mode, the configuration wizard modifies the underlying *Object Class Recognition* analysis engine to process more video frames (*i.e.* a higher [FullAnalysisRate](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/Configuration/Analysis/ObjectClass/FullAnalysisRate.htm)) at a higher resolution:
+
+CPU mode | GPU mode
+--- | ---
+![cpu-config](./figs/cpu-config.png) | ![gpu-config](./figs/gpu-config.png)
+
+> NOTE: For details on GPU support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/Getting_Started/Install_GPU.htm).
+
+Using GPU mode can be useful when tracking smaller objects or objects that more quickly across the field of view.
 
 ## Next steps
 

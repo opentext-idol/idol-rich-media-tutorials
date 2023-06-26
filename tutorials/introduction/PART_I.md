@@ -60,9 +60,9 @@ For this introductory tutorial, we will depend on the following items:
 The `Channels` section is where we instruct Media Server to request license seats from License Server.  Media Server has four license *flavours*:
 
 1. Audio
-2. Surveillance
-3. Visual
-4. Video Management
+1. Surveillance
+1. Visual
+1. Video Management
 
 To enable the face analytics required for this tutorial, you need to enable at least one channel of either *Surveillance* or *Visual*, *e.g.*
 
@@ -244,8 +244,8 @@ End | The same as the Data track, except it contains only the last record of eac
 Let's observe how these tracks are created for ourselves:
 
 1. Select the `DataWithSource` tab and observe new records being emitted almost every time the *Monitor* page makes a request.
-2. Select the `ResultWithSource` tab.  No new events are appearing.
-3. Now, cover the webcam with your hand *et viola*! a new event will appear as Media Server has stopped tracking your face.
+1. Select the `ResultWithSource` tab.  No new events are appearing.
+1. Now, cover the webcam with your hand *et viola*! a new event will appear as Media Server has stopped tracking your face.
 
 #### In-use track variants
 

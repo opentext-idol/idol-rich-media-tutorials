@@ -11,7 +11,7 @@ If you prefer to follow this guide with the files downloaded from the repository
     - Enable the option `Allow access to file URLs`.
     - Follow the link to `Extension Options`:
       - Select `Enable HTML content` .
-      - (Optionally) Choose your favorite theme, *e.g.* `GitHub`.
+      - (*Optionally*) Choose your favorite theme, *e.g.* `GitHub`.
 
 1. Download and install the cross-platform markdown editor [Typora](https://typora.io/).
 

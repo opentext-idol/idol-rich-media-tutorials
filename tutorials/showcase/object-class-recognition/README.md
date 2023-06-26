@@ -18,13 +18,11 @@ Start [here](PART_I.md).
 
 Use the Media Server GUI to annotate training images and build a custom recognizer to allow you to detect your own classes of object.
 
-<!-- Start [here](PART_II.md). -->
-
-> COMING SOON!
+Start [here](PART_II.md).
 
 ## Next steps
 
-Take a look at Media Server's sample configurations folder, which includes an example using *Image Classification* to process a video file: `configurations/examples/Other/Overlay_VideoTracking.cfg`.
+Take a look at Media Server's sample configurations folder, which includes an example using *Object Class Recognition* to process a video file: `configurations/examples/Other/Overlay_VideoTracking.cfg`.
 
 Try our [surveillance analytics](../surveillance/README.md) lesson, which combines *Object Class Recognition* with simple rules to trigger alerts on CCTV camera video.
 

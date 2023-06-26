@@ -2,7 +2,8 @@
 
 In this tutorial we will:
 
-1. train faces and use the `FaceRecognize` analysis engine to match them
+1. use the Media Server GUI to upload and train faces
+1. use the `FaceRecognize` analysis engine to match them
 1. match your identity from your webcam
 1. optimize analysis configuration for good performance
 
@@ -61,8 +62,8 @@ Open the Media Server [`gui`](http://localhost:14000/a=gui) (tested in Google Ch
     - rename the database to `Workshop`
 1. in the center column, click `Add` to add a new *identity*
     - give your identity a name
-    - (optionally) add key-value metadata
-1. in the right column, click `Add` to import images
+    - (*optionally*) add key-value metadata
+1. in the right column, click `Import` to import images
     - Navigate to `output/faces2b` to select some of cropped images we just created
 1. click `Build` to train your identity
 

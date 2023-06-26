@@ -59,7 +59,7 @@ Process audio to transcribe human speech from a news broadcast. Search those spe
 
 ## Optical Character Recognition
 
-Use OCR to detect and transcribe text found in images in over 45 languages and scripts, preserving table data structure.  Follow scrolling news from a video clip to capture the latest headlines.
+Use OCR to detect and transcribe text found in images in over 45 languages and scripts, preserving table data structure.  Extract more than just text: match logos, read barcodes and use pre-trained models to visually classify documents.  Follow scrolling news from a video clip to capture the latest headlines.
 
 [Get started](./optical-character-recognition/README.md).
 
@@ -77,7 +77,7 @@ Classify any image using the pre-trained ImageNet classifier.
 
 ## Object class recognition
 
-Detect and locate objects from 80 pre-defined classes in images using a pre-trained recognizer.
+Detect and locate objects from 80 pre-defined classes in images using a pre-trained recognizer, then create your own recognizer to detect different types of objects.
 
 [Get started](./object-class-recognition/README.md).
 

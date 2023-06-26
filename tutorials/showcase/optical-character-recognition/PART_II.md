@@ -9,10 +9,10 @@ Optionally, additional analysis engines like *Barcode Detection*, *Object Recogn
 In this tutorial we will:
 
 1. run OCR on a sample PDF file to extract embedded text data
-2. run OCR on a sample image to transcribe tabulated data
-3. include Barcode detection
-4. train and run Object Recognition for logos, and
-5. import pre-built Image Classification models to label scanned documents.
+1. run OCR on a sample image to transcribe tabulated data
+1. include Barcode detection
+1. train and run Object Recognition for logos, and
+1. import pre-built Image Classification models to label scanned documents.
 
 This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../README.md#introduction), as well as [Part I](./PART_I.md) of this OCR tutorial.
 
@@ -64,7 +64,7 @@ Pre-trained *Image Classification* packages are distributed separately from the 
 
     ![get-software](../../setup/figs/get-software.png)
 
-2. From the list of available files, select and download `MediaServerPretrainedModels_23.2.0_COMMON.zip`.
+1. From the list of available files, select and download `MediaServerPretrainedModels_23.2.0_COMMON.zip`.
 
     ![get-pretrained-zip](../../setup/figs/get-pretrained-zip.png)
 
@@ -262,11 +262,11 @@ To include this capability here, we must first load the pre-trained models into 
 Extract the training pack `.zip` then, to load one of the classifiers, open the Media Server GUI at [`/action=gui`](http://127.0.0.1:14000/a=gui#/train/imageClass(tool:select)) and follow these steps:
 
 1. in the left column, click `Import`
-2. navigate to your extracted training pack and select `ImageClassifier_Document.dat`
+1. navigate to your extracted training pack and select `ImageClassifier_Document.dat`
    
     > NOTE: This classifier contains 10 classes (from CV to Newspaper and Report).
 
-3. wait a few minutes for the import to complete.  You are now ready to classify media.
+1. wait a few minutes for the import to complete.  You are now ready to classify media.
 
     ![import-pretrained-classifier](./figs/import-pretrained-classifier.png)
 

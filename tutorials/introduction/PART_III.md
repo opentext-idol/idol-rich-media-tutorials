@@ -94,7 +94,7 @@ Copy `toPeopleCounter.xsl` into the `configurations/xsl` directory. The output e
 XSLTemplate = toPeopleCounter.xsl
 ```
 
-Finally, we can also configure out output engine to save both the original XML and the converted JSON data to disk, so we can look at them both later.  These files will be stored, as directed, under `output/toPeopleCounter`.
+Finally, we can also configure our output engine to save both the original XML and the converted JSON data to disk, so we can look at them both later.  These files will be stored, as directed, under `output/toPeopleCounter`.
 
 ```ini
 SavePreXML = True

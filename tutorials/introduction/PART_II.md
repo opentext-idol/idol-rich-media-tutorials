@@ -76,7 +76,7 @@ This is only *allowed* if the data output from the upstream engine contains the 
 
 You can see that `Demographics` requires `ImageData`, `FaceData`, `RegionData` and `UUIDData` as inputs.  Hence, in our process configuration we are allowed to pass the `ResultWithSource` output from face detection as input to demographics because it includes all of the required data types (as well as `CustomData`, which is a catch-all term for any analysis-specific properties).
 
-In out next test we will chain the following analytics together:
+In our next test we will chain the following analytics together:
 
 - Face detection &rarr; Face demographics
 - Face detection &rarr; Face state
@@ -145,7 +145,7 @@ end
 , and therefore applies the following additional filters:
 
 1. the angle of the face to the camera must be less than 90 degrees, *i.e.* the face must not be in profile,
-2. almost all of the face must be visible in the view of the frame.
+1. almost all of the face must be visible in the view of the frame.
 
 If the function `pred()` returns `true`, then this record will be kept, otherwise it will be discarded.
 

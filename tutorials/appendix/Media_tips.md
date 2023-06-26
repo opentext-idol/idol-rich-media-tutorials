@@ -242,13 +242,13 @@ To add a video track to an audio file by:
     ffmpeg -loop 1 -i image.png -i audio.mp3 -shortest out.mp4
     ```
 
-2. generating a test page:
+1. generating a test page:
 
     ```sh
     ffmpeg -f lavfi -i testsrc -i audio.mp3 -shortest out.mp4
     ```
 
-3. generating a blue background:
+1. generating a blue background:
 
     ```sh
     ffmpeg -f lavfi -i color=c=blue -i audio.mp3 -shortest out.mp4
