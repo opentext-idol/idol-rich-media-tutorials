@@ -1,8 +1,8 @@
 # IDOL Rich Media Tutorials
 
-A set of guides to get you doing great things with IDOL Media Server 23.2!
+A set of guides to get you doing great things with IDOL Media Server 23.4!
 
-For details of the latest changes to Media Server, please see the [Release Notes](https://www.microfocus.com/documentation/idol/IDOL_23_2/IDOLReleaseNotes_23.2_Documentation/idol/Content/Servers/MediaServer.htm).
+For details of the latest changes to IDOL Media Server, please see the [Release Notes](https://www.microfocus.com/documentation/idol/IDOL_23_4/IDOLReleaseNotes_23.4_Documentation/idol/Content/Servers/MediaServer.htm).
 
 ## Target audience
 

@@ -4,7 +4,7 @@ In this tutorial we will:
 
 1. connect to and ingest video from a webcam
 1. use the *FaceDetect* analysis engine to track people seen by the webcam
-1. display results in the Media Server GUI's *Monitor* app
+1. display results in the IDOL Media Server GUI's *Monitor* app
 
 ---
 
@@ -37,11 +37,11 @@ If you have not already followed [this short guide](../setup/SETUP.md) to instal
 
 ## Enabling analytics
 
-A single Media Server instance is capable of running many analytics.  Each must be enabled in the `mediaserver.cfg` and also permitted by your license key in order to be used.  The relevant sections to look at in your `mediaserver.cfg` are:
+A single IDOL Media Server instance is capable of running many analytics.  Each must be enabled in the `mediaserver.cfg` and also permitted by your license key in order to be used.  The relevant sections to look at in your `mediaserver.cfg` are:
 
 ### Modules
 
-The `Modules` section is where we list the engines that will be available to Media Server on startup.  By default this list contains all modules:
+The `Modules` section is where we list the engines that will be available to IDOL Media Server on startup.  By default this list contains all modules:
 
 ```ini
 [Modules]
@@ -57,7 +57,7 @@ For this introductory tutorial, we will depend on the following items:
 
 ### Channels
 
-The `Channels` section is where we instruct Media Server to request license seats from License Server.  Media Server has four license *flavours*:
+The `Channels` section is where we instruct IDOL Media Server to request license seats from IDOL License Server.  IDOL Media Server has four license *flavours*:
 
 1. Audio
 1. Surveillance
@@ -72,15 +72,15 @@ To enable the face analytics required for this tutorial, you need to enable at l
 VisualChannels=1
 ```
 
-> For any changes you make in `mediaserver.cfg` to take effect you must restart Media Server.
+> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
 
-For full details on the analytics enabled by (as well as the limitations imposed by) each license type, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Channels/Channels.htm).
+For full details on the analytics enabled by (as well as the limitations imposed by) each license type, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Channels/Channels.htm).
 
 ## Processing video
 
-Media Server is directed to process a video, audio or image source with a *process* configuration file that defines how Media Server should ingest, analyze, output and otherwise manipulate the content and any resulting information.  A number of example files is included in Media Server's `configurations/examples` directory.
+IDOL Media Server is directed to process a video, audio or image source with a *process* configuration file that defines how IDOL Media Server should ingest, analyze, output and otherwise manipulate the content and any resulting information.  A number of example files is included in IDOL Media Server's `configurations/examples` directory.
 
-Media Server can run multiple processes concurrently if licensed to do so.  The number of concurrent processes is limited in `mediaserver.cfg` by the parameter:
+IDOL Media Server can run multiple processes concurrently if licensed to do so.  The number of concurrent processes is limited in `mediaserver.cfg` by the parameter:
 
 ```ini
 [Process]
@@ -89,7 +89,7 @@ MaximumThreads=2
 
 ## GPU acceleration
 
-If you are lucky enough to have access to a supported NVIDIA graphics card, you can accelerate certain analytics (including face recognition), as well as video ingest and encoding.  For details on support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/Getting_Started/Install_GPU.htm).
+If you are lucky enough to have access to a supported NVIDIA graphics card, you can accelerate certain analytics (including face recognition), as well as video ingest and encoding.  For details on support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Advanced/GPU.htm).
 
 ## Process configuration
 
@@ -102,7 +102,7 @@ The format of a process configuration file is typically laid out in the followin
 - Encoding
 - Output
 
-We will introduce and use each of these sections in this tutorial.  Full details of the available configuration options can be found in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/SessionConfiguration.htm).
+We will introduce and use each of these sections in this tutorial.  Full details of the available configuration options can be found in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/SessionConfiguration.htm).
 
 ### Ingest
 
@@ -121,7 +121,7 @@ Type = Video
 Format = dshow
 ```
 
-More options are available for the `Video`-type ingest engine.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm).
+More options are available for the `Video`-type ingest engine.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm).
 
 ### Analysis
 
@@ -135,7 +135,7 @@ Engine1 = FaceDetection
 Type = FaceDetect
 ```
 
-More options are available for the `FaceDetect`-type analysis engine, such as the minimum expected face size.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Analysis/Face/_Face.htm).
+More options are available for the `FaceDetect`-type analysis engine, such as the minimum expected face size.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Analysis/Face/_Face.htm).
 
 ### Output
 
@@ -152,7 +152,7 @@ Input = FaceDetection.Result
 XMLOutputPath=output/faces1/%segment.startTime.timestamp%.xml
 ```
 
-More output options are available, such as HTTP POST and database insert.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/OutputEngines/_Output.htm), for details.
+More output options are available, such as HTTP POST and database insert.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/OutputEngines/_Output.htm), for details.
 
 ## Your first analysis: run Face Detection
 
@@ -178,11 +178,11 @@ For testing, we will launch these actions through the admin interface [`test-act
 
 1. Click `Test Action` to start processing. If your webcam has an indicator light, it should come on now.
 
-More options are available for the *Process* action.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Actions/VideoAnalysis/_MediaAnalysis.htm).
+More options are available for the *Process* action.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Actions/VideoAnalysis/_MediaAnalysis.htm).
 
 ### Monitoring and debugging
 
-Once you've launched the process request, there are a number of ways you can monitor Media Server:
+Once you've launched the process request, there are a number of ways you can monitor IDOL Media Server:
 
 #### Process queue
 
@@ -196,7 +196,7 @@ Click the token string link (open it in a new tab) to view your task's status in
 
 #### Log files
 
-Media Server writes out a number of different log files to its `logs` directory.  When testing process actions the main log to look at is `engine.log`.  You can see any configuration errors here.  For example, if I entered the wrong webcam name above I might see the lines:
+IDOL Media Server writes out a number of different log files to its `logs` directory.  When testing process actions the main log to look at is `engine.log`.  You can see any configuration errors here.  For example, if I entered the wrong webcam name above I might see the lines:
 
 ```ini
 29/03/2022 17:31:45 [167] 70-Error: [MTAuMTQuMTU3LjIxOjE0MDAwOlBST0NFU1M6MTUyODIxNjMwMzg5OTAxMDU4OTA4ODM5] Failed: Failed to set up 1 engine:
@@ -205,12 +205,12 @@ Media Server writes out a number of different log files to its `logs` directory.
 
 #### Display ongoing analytics in *Monitor* app
 
-The Media Server GUI's *Monitor* web app (tested in Google Chrome) is intended for the display of running analytics on your Media Server.  This app can be useful for both testing and demonstrating Media Server.
+The IDOL Media Server GUI's *Monitor* web app (tested in Google Chrome) is intended for the display of running analytics on your IDOL Media Server.  This app can be useful for both testing and demonstrating IDOL Media Server.
 
-The app makes use of two Media Server calls to get the list of channels and then to get the latest record for the channel you select:
+The app makes use of two IDOL Media Server calls to get the list of channels and then to get the latest record for the channel you select:
 
-- [`action=getStatus&showTracksStatistics`](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Actions/Status/GetStatus_ShowTracksStatistics.htm)
-- [`action=getLatestRecord`](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Actions/VideoAnalysis/GetLatestRecord.htm)
+- [`action=getStatus&showTracksStatistics`](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Actions/Status/GetStatus_ShowTracksStatistics.htm)
+- [`action=getLatestRecord`](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Actions/VideoAnalysis/GetLatestRecord.htm)
 
 With the analysis running, point your browser to [`/action=GUI`](http://localhost:14000/a=gui) to open the web application.
 
@@ -220,7 +220,7 @@ With the analysis running, point your browser to [`/action=GUI`](http://localhos
 
 ![face-monitor](./figs/monitor.png)
 
-> The `GetLatestRecord` action is not guaranteed to show every alert but only the latest one at the time of polling Media Server.
+> The `GetLatestRecord` action is not guaranteed to show every alert but only the latest one at the time of polling IDOL Media Server.
 
 > `Default_Image` is the automatically assigned name of the track containing the incoming video.
 
@@ -232,7 +232,7 @@ Name | Description
 --- | ---
 Data | Contains one record, describing the analysis results, per detected face, per video frame.
 DataWithSource | The same as the Data track, but each record also includes the source frame. This information can be passed to other analysis engines to run tasks such as face recognition or demographic analysis.
-Result | Contains one record, describing the analysis results, for each detected face. When the same face appears in many consecutive frames, Media Server produces a single result.
+Result | Contains one record, describing the analysis results, for each detected face. When the same face appears in many consecutive frames, IDOL Media Server produces a single result.
 ResultWithSource | The same as the Result track, but each record also includes the *best* source frame.
 SegmentedResult | (Available only when processing video). Contains one or more records, describing the analysis results, for each detected face. The maximum duration of records in this track is limited by the parameter `SegmentDuration`, so multiple records are created with the same ID when a face remains in the scene for longer than this duration.
 SegmentedResultWithSource | (Available only when processing video). The same as the SegmentedResult track, but each record also includes the best source frame.
@@ -245,11 +245,11 @@ Let's observe how these tracks are created for ourselves:
 
 1. Select the `DataWithSource` tab and observe new records being emitted almost every time the *Monitor* page makes a request.
 1. Select the `ResultWithSource` tab.  No new events are appearing.
-1. Now, cover the webcam with your hand *et viola*! a new event will appear as Media Server has stopped tracking your face.
+1. Now, cover the webcam with your hand *et viola*! a new event will appear as IDOL Media Server has stopped tracking your face.
 
 #### In-use track variants
 
-Let's look again at the config file we just used.  Notice the `Keep` engine at the bottom.  This is a *Combine*-type Event Processing engine and has been configured to take all the Face Detection track variants as its input.  Setting a track variant as input to another engine ensures that Media Server populates that track variants, *i.e.* so we can see what it contains in the *Monitor* page.  If a given track variant is not connected to any engine, Media Server will not populate it.  You can experiment with this by commenting out the `[Keep]` section:
+Let's look again at the config file we just used.  Notice the `Keep` engine at the bottom.  This is a *Combine*-type Event Processing engine and has been configured to take all the Face Detection track variants as its input.  Setting a track variant as input to another engine ensures that IDOL Media Server populates that track variants, *i.e.* so we can see what it contains in the *Monitor* page.  If a given track variant is not connected to any engine, IDOL Media Server will not populate it.  You can experiment with this by commenting out the `[Keep]` section:
 
 ```diff
 - Engine3 = Keep
@@ -260,7 +260,7 @@ If you re-run the analysis with this change, only the FaceDetection Result track
 
 ### View output
 
-Under your Media Server directory, open the folder `output/faces1` to see the `.xml` files produced with each face result. They contain all metadata associated with the detection event, *e.g.* tracking start and end times, as well the the face coordinates at the "peak" time of the track.
+Under your IDOL Media Server directory, open the folder `output/faces1` to see the `.xml` files produced with each face result. They contain all metadata associated with the detection event, *e.g.* tracking start and end times, as well the the face coordinates at the "peak" time of the track.
 
 > For Face Detection, the "peak" time of a tracked face is determined as the moment where that face is most clearly visible; based on a combination of pose angle and size.
 
@@ -317,7 +317,7 @@ Under your Media Server directory, open the folder `output/faces1` to see the `.
 
 To stop processing, click the `Stop Session` button on the *Monitor* app.
 
-Behind the scenes, the app is sending a "stop" action request to Media Server.  To do the same, paste the following into [`test-action`](http://localhost:14000/a=admin#page/console/test-action) then click `Test Action` to see the response:
+Behind the scenes, the app is sending a "stop" action request to IDOL Media Server.  To do the same, paste the following into [`test-action`](http://localhost:14000/a=admin#page/console/test-action) then click `Test Action` to see the response:
 
 ```url
 action=queueInfo&queueAction=stop&queueName=process
@@ -325,7 +325,7 @@ action=queueInfo&queueAction=stop&queueName=process
 
 Or simply click [`stop`](http://localhost:14000/a=queueInfo&queueAction=stop&queueName=process).
 
-If your Media Server is running multiple processes, you can supply a [token parameter](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Actions/General/_ACI_QueueInfo_Token.htm) to the above action.
+If your IDOL Media Server is running multiple processes, you can supply a [token parameter](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Actions/General/_ACI_QueueInfo_Token.htm) to the above action.
 
 If your webcam has an indicator light, it should now switch off.
 

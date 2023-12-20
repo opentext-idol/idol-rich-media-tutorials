@@ -7,7 +7,7 @@ pushd %~dp0
 
 set COMPONENTS=( LicenseServer, MediaServer )
 
-set VERSION=23.2.0
+set VERSION=23.4.0
 set INSTALL_BASE=C:\OpenText
 
 set SOURCE_DIR=%HOMEPATH%\Downloads

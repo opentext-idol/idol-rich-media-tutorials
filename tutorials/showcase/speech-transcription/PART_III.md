@@ -1,8 +1,8 @@
 # PART III - Quantifying Transcript Accuracy
 
-In the previous lesson, we used a custom language model (CLM) to improve the speech to text accuracy for a particular topic.  We saw the improvement in quality by comparing the before and after output of Media Server by eye.  In this lesson we will see how to quantify that accuracy level, *e.g.* to decide when you might want to create a CLM for your own use case.
+In the previous lesson, we used a custom language model (CLM) to improve the speech to text accuracy for a particular topic.  We saw the improvement in quality by comparing the before and after output of IDOL Media Server by eye.  In this lesson we will see how to quantify that accuracy level, *e.g.* to decide when you might want to create a CLM for your own use case.
 
-In this tutorial we will use Media Server to:
+In this tutorial we will use IDOL Media Server to:
 
 1. record and transcribe your own voice as you read from an example Wikipedia page into a microphone
 1. score the transcript against the original text you read from
@@ -20,7 +20,7 @@ In this tutorial we will use Media Server to:
 
 ## Transcribe your own voice
 
-First, you will record your voice and transcribe your speech using Media Server.  
+First, you will record your voice and transcribe your speech using IDOL Media Server.  
 
 ### Find your audio device
 
@@ -128,7 +128,7 @@ action=process&source=audio%3DHeadset%20Microphone%20(Plantronics%20C720-M)&conf
 
 Click the `Test Action` button to start processing.
 
-> HINT: If you are using a headset microphone, you may hear a click in the headphones when recording begins.
+> TIP: If you are using a headset microphone, you may hear a click in the headphones when recording begins.
 
 In order to monitor the on-going process while you read, open the monitoring page [`/action=gui`](http://127.0.0.1:14000/a=gui#/monitor) and select the "SpeechToText".  Here you will view periodic updates from the live transcription, *e.g.* the word "flooding" was detected with 93% confidence:
 
@@ -138,7 +138,7 @@ Once you have finished reading, click the red `Stop Session` button in the GUI, 
 
 ## Evaluate transcript accuracy
 
-IDOL Media Server includes an action to evaluate a speech transcript, called [`ScoreCustomSpeechLanguageModel`](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/Actions/Training/ScoreCustomSpeechLanguageModel.htm).  
+IDOL Media Server includes an action to evaluate a speech transcript, called [`ScoreCustomSpeechLanguageModel`](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Actions/Training/ScoreCustomSpeechLanguageModel.htm).  
 
 This action requires reprocessing the recorded audio, allowing you to do so with alternative language models to compare the performance. The action takes a process configuration snippet, defining the settings of the SpeechToText engine, *e.g.* the enclosed `scoreSpeechToText.cfg`, designed to evaluate the performance of the default `ENUK` language model:
 
@@ -150,14 +150,14 @@ SpeedBias = 1
 FilterMusic = False
 ```
 
-> NOTE: Here we have set the `SpeedBias` parameter to `1` to maximize transcription accuracy.  For full details on this parameter, see the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/Configuration/Analysis/SpeechToText/SpeedBias.htm).
+> NOTE: Here we have set the `SpeedBias` parameter to `1` to maximize transcription accuracy.  For full details on this parameter, see the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Configuration/Analysis/SpeechToText/SpeedBias.htm).
 
-> HINT: To evaluate any modifications to the language model, you will need to include the `CustomLanguageModel` or `CustomWordDatabase` parameters, as appropriate.
+> NOTE: To evaluate any modifications to the language model, you will need to include the `CustomLanguageModel` or `CustomWordDatabase` parameters, as appropriate.
 
 To run this evaluation, paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), making sure to update the file paths for your system. Make a note of the token returned.
 
 ```url
-action=ScoreCustomSpeechLanguageModel&AudioPath=C:\OpenText\IDOLServer-23.2.0\MediaServer\output\speechToText4\recording.aac&ConfigPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/scoreSpeechToText.cfg&TranscriptPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/Ancient_Egyptian_Agriculture.txt
+action=ScoreCustomSpeechLanguageModel&AudioPath=C:\OpenText\IDOLServer-23.4.0\MediaServer\output\speechToText4\recording.aac&ConfigPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/scoreSpeechToText.cfg&TranscriptPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/Ancient_Egyptian_Agriculture.txt
 ```
 
 To view the output, paste the following `QueueInfo` action into your web browser: http://127.0.0.1:14000/Action=QueueInfo&QueueAction=GetStatus&QueueName=ScoreCustomSpeechLanguageModel.
@@ -178,4 +178,4 @@ How did you do?
 
 ## Next steps
 
-Why not try more tutorials to explore some of the other analytics available in Media Server, linked from the [main page](../../README.md).
+Why not try more tutorials to explore some of the other analytics available in IDOL Media Server, linked from the [showcase page](../README.md).

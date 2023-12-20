@@ -1,12 +1,12 @@
 # PART I - Automatic Subtitles
 
-Media Server can be used to perform audio analytics, including speech transcription (often called Speech-to-Text), speaker identification and language identification.  We will configure Media Server to support a simple use case of this speech transcription capability: to record video clips from on a live news broadcast stream and automatically generate subtitles for those clips.
+IDOL Media Server can be used to perform audio analytics, including speech transcription (often called Speech-to-Text), speaker identification and language identification.  We will configure IDOL Media Server to support a simple use case of this speech transcription capability: to record video clips from on a live news broadcast stream and automatically generate subtitles for those clips.
 
 In this tutorial we will:
 
 1. configure a speech language pack and run speech transcription
 1. record video clips from a live stream
-1. use XSL transforms to re-format Media Server output to create subtitles
+1. use XSL transforms to re-format IDOL Media Server output to create subtitles
 
 This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../README.md#introduction).
 
@@ -35,11 +35,11 @@ Download and install [VLC player](http://www.videolan.org/vlc/) for video clip p
 
 ### Configure speech transcription
 
-Media Server is separately licensed for visual and audio analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enabling-analytics).  To reconfigure Media Server you must edit your `mediaserver.cfg` file.
+IDOL Media Server is separately licensed for visual and audio analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enabling-analytics).  To reconfigure IDOL Media Server you must edit your `mediaserver.cfg` file.
 
 #### Enabled modules
 
-The `Modules` section is where we list the engines that will be available to Media Server on startup.  Ensure that this list contains the module `speechtotext`:
+The `Modules` section is where we list the engines that will be available to IDOL Media Server on startup.  Ensure that this list contains the module `speechtotext`:
 
 ```ini
 [Modules]
@@ -48,7 +48,7 @@ Enable=...,speechtotext,...
 
 #### Licensed channels
 
-The `Channels` section is where we instruct Media Server to request license seats from License Server.  To enable speech transcription for this tutorial, you need to enable at least one channel of type *Audio*:
+The `Channels` section is where we instruct IDOL Media Server to request license seats from IDOL License Server.  To enable speech transcription for this tutorial, you need to enable at least one channel of type *Audio*:
 
 ```ini
 [Channels]
@@ -56,25 +56,25 @@ The `Channels` section is where we instruct Media Server to request license seat
 AudioChannels=1
 ```
 
-> For any changes you make in `mediaserver.cfg` to take effect you must restart Media Server.
+> For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
 
 #### Language packs
 
-Speech transcription language packs are distributed separately from the main Media Server installer.  To obtain a language pack, return to the [Software Licensing and Downloads](https://sld.microfocus.com/mysoftware/index) portal, then under the *Downloads* tab, select your product, product name and version from the dropdowns:
+Speech transcription language packs are distributed separately from the main IDOL Media Server installer.  To obtain a language pack, return to the [Software Licensing and Downloads](https://sld.microfocus.com/mysoftware/index) portal, then under the *Downloads* tab, select your product, product name and version from the dropdowns:
 
 ![get-software](../../setup/figs/get-software.png)
 
-For this tutorial we will use the British English pack.  From the list of available files, select and download `ENUK-23.2.0.zip`:
+For this tutorial we will use the British English pack.  From the list of available files, select and download `ENUK-23.4.0.zip`:
 
 ![get-lang-pack-zip](./figs/get-lang-pack-zip.png)
 
-Unzip the contents into Media Server's static data directory, to give you, *e.g.* `staticdata/speechtotext/ENUK`, containing files like `ver-ENUK-*`
+Unzip the contents into IDOL Media Server's static data directory, to give you, *e.g.* `staticdata/speechtotext/ENUK`, containing files like `ver-ENUK-*`
 
-> This language pack is targeted to high quality "broadband" audio.  An additional language pack is available for telephony.  Many other languages and dialects are supported.  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/Appendixes/SpeechLanguages.htm) for details.
+> This language pack is targeted to high quality "broadband" audio.  An additional language pack is available for telephony.  Many other languages and dialects are supported.  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Appendixes/SpeechLanguages.htm) for details.
 
 You can manually load the ENUK language pack with the action <http://127.0.0.1:14000/action=LoadSpeechLanguageResource&LanguagePack=ENUK>.
 
-> If you skip this manual load, Media Server will automatically load the language (if installed) when processing begins but doing this will add a delay to the processing.  
+> If you skip this manual load, IDOL Media Server will automatically load the language (if installed) when processing begins but doing this will add a delay to the processing.  
 
 This load is an asynchronous action, which can be monitored with [/a=admin](http://127.0.0.1:14000/action=admin#page/async-queues/LOADSPEECHLANGUAGERESOURCE).
 
@@ -101,7 +101,7 @@ LanguagePack = ENUK
 SpeedBias = Live
 ```
 
-More options are available for the *SpeechToText* analysis engine.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm) for details.
+More options are available for the *SpeechToText* analysis engine.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm) for details.
 
 To view the results in a simple and standalone way, we will record the stream to video files and format the speech transcription output to generate subtitles for those clips.
 
@@ -134,7 +134,7 @@ Next we need to generate the subtitles.  This requires two steps:
     And that's just really sad.
     ```
 
-    > [Wayne's World (1992) Quotes - IMDB](https://www.imdb.com/title/tt0105793/quotes)
+    > [Wayne's World (1992) Quotes - IMDB](https://www.imdb.com/title/tt0105793/quotes/)
 
 To achieve all this, we need to add the following to our process configuration:
 
@@ -153,7 +153,7 @@ XMLOutputPath = output/speechToText1/%session.token%/clip_%segment.sequence%.srt
 XslTemplate = toSRT.xsl
 ```
 
-We use using the *Bounded* output mode to bundle together all the text segments with the relevant video clip.  Please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/Operations/Outputs/IndexingModes_BoundedEvent.htm), for details.
+We use using the *Bounded* output mode to bundle together all the text segments with the relevant video clip.  Please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Operations/Outputs/IndexingModes_BoundedEvent.htm), for details.
 
 ## Process a news channel stream
 
@@ -181,7 +181,7 @@ Stop processing by clicking the `Stop Session` button in the GUI or with the [`s
 
 ## (Optional) Converting output offline
 
-In the above example, we used XSL transforms to convert records within Media Server for output.  You can also of course output standard XML during processing and convert it later.  
+In the above example, we used XSL transforms to convert records within IDOL Media Server for output.  You can also of course output standard XML during processing and convert it later.  
 
 ### Generate XML
 
@@ -211,7 +211,7 @@ Next, we will use the included python script `xml2srt.py` to convert one of the 
 
 ```sh
 cd C:\OpenText\idol-rich-media-tutorials\tutorials\showcase\speech-transcription
-python xml2srt.py "C:\OpenText\IDOLServer-23.2.0\MediaServer\output\speechToText1a\clip_1.xml"
+python xml2srt.py "C:\OpenText\IDOLServer-23.4.0\MediaServer\output\speechToText1a\clip_1.xml"
 ```
 
 This will produce a new file `clip_1.srt` in the same directory as the original `.xml` file.  As before, you can now open the video `clip_1.mp4` in VLC player to view the time-aligned subtitles.

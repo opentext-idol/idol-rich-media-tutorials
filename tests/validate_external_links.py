@@ -32,6 +32,8 @@ for dir_path, dir_names, file_names in os.walk(".."):
     file_path = os.path.join(dir_path, file_name)
     
     print(file_path)
+    if not file_path in report: 
+      report[file_path] = []
 
     with open(file_path, 'r') as md_file:
       for link in findDocsLinks(md_file.read()):
@@ -41,17 +43,17 @@ for dir_path, dir_names, file_names in os.walk(".."):
         
         count += 1
 
-        x = requests.get(link)
-        if verbose: print(f'{x.status_code}: {link}')
+        try:
+          x = requests.get(link)
+          if verbose: print(f'{x.status_code}: {link}')
+          if x.status_code == 200:
+            passed += 1
 
-        if x.status_code == 200:
-          passed += 1
-        else:
-          if not file_path in report: 
-            report[file_path] = []
-
-          report[file_path].append(f'{x.status_code}: {link}')
-
+          else:
+            report[file_path].append(f'{x.status_code}: {link}')
+        
+        except Exception as e:
+          report[file_path].append(f'{e}: {link}')
 
 result_line = f'Test complete. {passed} passed out of {count}.'
 print('='*len(result_line))

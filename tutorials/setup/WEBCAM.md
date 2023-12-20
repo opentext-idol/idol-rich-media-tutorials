@@ -1,6 +1,6 @@
 # Setup connection to your webcam
 
-This is a setup guide for ingestion of webcam video into Media Server.  If you do not have a webcam, go to [Plan B](#plan-b).
+This is a setup guide for ingestion of webcam video into IDOL Media Server.  If you do not have a webcam, go to [Plan B](#plan-b).
 
 ---
 
@@ -14,7 +14,7 @@ This is a setup guide for ingestion of webcam video into Media Server.  If you d
 
 ## Connecting to your webcam
 
-Open the Media Server user interface [`\a=gui`](http://localhost:14000/a=gui#/ingest) (tested in Google Chrome) then follow these steps to connect to your webcam:
+Open the IDOL Media Server user interface [`\a=gui`](http://localhost:14000/a=gui#/ingest) (tested in Google Chrome) then follow these steps to connect to your webcam:
 
 1. Set Ingest type to "Device"
 1. Set operating system family to "Linux" or "Windows" as appropriate
@@ -58,7 +58,7 @@ Open the Media Server user interface [`\a=gui`](http://localhost:14000/a=gui#/in
 
       ![webcam-connection-test](./figs/webcam-connection-test.png)
   
-      > Media Server is encoding your live webcam video to an MJPEG stream, which your browser natively knows how to play.  The configuration to do this is listed on the left panel of the ingest test page.  This configuration will be more comprehensible for you once you have completed the introductory tutorials.
+      > IDOL Media Server is encoding your live webcam video to an MJPEG stream, which your browser natively knows how to play.  The configuration to do this is listed on the left panel of the ingest test page.  This configuration will be more comprehensible for you once you have completed the introductory tutorials.
 
 
 To stop testing, click the red `Stop` button.
@@ -112,7 +112,7 @@ ffplay -f dshow -framerate 15 -video_size 640x480 -i video="USB Video Device"
 
 > For more details on options for DirectShow device control with `ffmpeg`, read this [documentation](https://trac.ffmpeg.org/wiki/DirectShow).
 
-To apply these device settings in Media Server, add the following config options to the *Video*-type ingest engine:
+To apply these device settings in IDOL Media Server, add the following config options to the *Video*-type ingest engine:
 
 ```diff
   [VideoIngest]
@@ -122,7 +122,7 @@ To apply these device settings in Media Server, add the following config options
 + VideoSize = 1280x720
 ```
 
-> More options are available for the `Video`-type ingest engine.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm).
+> More options are available for the `Video`-type ingest engine.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm).
 
 ### Connectivity problems
 

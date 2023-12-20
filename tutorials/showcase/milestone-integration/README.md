@@ -1,8 +1,8 @@
 # Milestone integration
 
-Media Server offers integration with popular third party Video Management System (VMS) products from Milestone and Genetec. Media Server includes dedicated ingest engines to process live streaming video from Milestone's "XProtect" and Genetec's "Security Center". Both of these products offer methods to receive events from external systems, so Media Server also includes dedicated Milestone and Genetec output engines to send events back to these products.  In this way, IDOL Media Server can be positioned as an analytics plug-in for existing Milestone and Genetec customers.
+IDOL Media Server offers integration with popular third party Video Management System (VMS) products from Milestone and Genetec. IDOL Media Server includes dedicated ingest engines to process live streaming video from Milestone's "XProtect" and Genetec's "Security Center". Both of these products offer methods to receive events from external systems, so IDOL Media Server also includes dedicated Milestone and Genetec output engines to send events back to these products.  In this way, IDOL Media Server can be positioned as an analytics plug-in for existing Milestone and Genetec customers.
 
-> For customers who do not already have a VMS, it should be noted that Media Server's own [Rolling Buffer](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/Operations/Encode/RollingBuffer_Introduction.htm) capability allows it to function as a VMS: recording live video from direct camera connection and facilitating playback, via HLS streaming, of that recorded video.
+> For customers who do not already have a VMS, it should be noted that IDOL Media Server's own [Rolling Buffer](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Operations/Encode/RollingBuffer_Introduction.htm) capability allows it to function as a VMS: recording live video from direct camera connection and facilitating playback, via HLS streaming, of that recorded video.
 
 In this tutorial we will focus on Milestone XProtect Corporate as an example external VMS.  We will:
 
@@ -21,9 +21,9 @@ This guide assumes you have already familiarized yourself with IDOL Media Server
   - [DirectShow driver setup](#directshow-driver-setup)
   - [Video file ingest](#video-file-ingest)
   - [(*Optional*) Webcam ingest](#optional-webcam-ingest)
-- [Test Media Server ingest](#test-media-server-ingest)
+- [Test IDOL Media Server ingest](#test-idol-media-server-ingest)
   - [Optional use of Milestone SDK](#optional-use-of-milestone-sdk)
-- [Configure Media Server for processing](#configure-media-server-for-processing)
+- [Configure IDOL Media Server for processing](#configure-idol-media-server-for-processing)
   - [Enabled modules](#enabled-modules)
   - [Licensed channels](#licensed-channels)
   - [Analysis Configuration](#analysis-configuration)
@@ -39,7 +39,7 @@ This guide assumes you have already familiarized yourself with IDOL Media Server
 
 ## Milestone setup
 
-Milestone offers a 30-day trial license for their XProtect Corporate application.  You can request a license [here](https://www.milestonesys.com/solutions/platform/try-our-software/xprotect-trial-download/).  After completing the form, you will receive an email including your `.lic` license key file.  Save that file somewhere.
+Milestone offers a 30-day trial license for their XProtect Corporate application.  You can request a license [here](https://www.milestonesys.com/products/software/try-xprotect/corporate/).  After completing the form, you will receive an email including your `.lic` license key file.  Save that file somewhere.
 
 Next, download a copy of the installer from [here](https://www.milestonesys.com/support/resources/download-software/?prod=3&type=11&lang=27).  Look for the version that matches your trial key.  The latest version at the time of writing is "XProtect Corporate 2021 R1 (21.1b)".
 
@@ -128,14 +128,14 @@ Select the second activated video input, then on the "Settings" tab, change "Inp
 
 To stop processing your webcam, right click on the second activated input and deselect "Enabled" from the context menu.
 
-## Test Media Server ingest
+## Test IDOL Media Server ingest
 
-We can make use of the Media Server user interface [/a=gui](http://localhost:14000/a=gui) to quickly test ingestion of our new video source from Milestone:
+We can make use of the IDOL Media Server user interface [/a=gui](http://localhost:14000/a=gui) to quickly test ingestion of our new video source from Milestone:
 
 1. Go to the *Ingest Test* page.
 1. Select from the option dropdowns to ingest a "Stream" using "Milestone" and "NTLM" authentication:
         
-    > Media Server's Milestone ingest engine, described in full [here](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm), offers multiple authentication options to support different versions of Milestone XProtect.  The "Corporate" version requires "NTLM" authentication.
+    > IDOL Media Server's Milestone ingest engine, described in full [here](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm), offers multiple authentication options to support different versions of Milestone XProtect.  The "Corporate" version requires "NTLM" authentication.
 
 1. The process action source for Milestone streams is the stream id, or `guid`.  Find it by running the following `curl` command:
     ```sh
@@ -177,7 +177,7 @@ We can make use of the Media Server user interface [/a=gui](http://localhost:140
     + NTLMPassword = <encrypted password>
     ```
 
-    > It is not recommended to enter your password in plain text.  Media Server includes a lightweight AES encryption tool `autpassword.exe`, which you can use to encrypt your password as follows:
+    > It is not recommended to enter your password in plain text.  IDOL Media Server includes a lightweight AES encryption tool `autpassword.exe`, which you can use to encrypt your password as follows:
     > ```sh
     > $ ./autpassword.exe -x -tAES -oKeyFile=./MyKeyFile.ky
     > ./MyKeyFile.ky=9b7aff82f1fa766985152790402a48f0ade3a20f196629b18e2eeb0c1735ff5f
@@ -185,7 +185,7 @@ We can make use of the Media Server user interface [/a=gui](http://localhost:140
     > W1BBU1NXT1JEXQpUeXBlPUFFUwpLZXlGaWxlPUM6L01pY3JvRm9jdXMvTWVkaWFTZXJ2ZXJfMTIuOC4yX1dJTkRPV1NfWDg2XzY0L015S2V5RmlsZS5reQpQYXNzd29yZD05UmwyUzlrNXdyODNGWnR5dUhZU1VaVjNMRkQrUGV1L2dzWHZnWFVGVWRBPQ==
     > ```
 
-1. Finally, click "Ingest" and watch the video successfully ingested into Media Server.
+1. Finally, click "Ingest" and watch the video successfully ingested into IDOL Media Server.
 
     ![ingest-test](./figs/ingest-test.png)
 
@@ -193,7 +193,7 @@ Click "Stop" now we're satisfied.
 
 ### Optional use of Milestone SDK
 
-Media Server now offers two ingest options for Milestone.  The new  **Windows-only** option makes use of the Milestone SDK decoding libraries to allow encoded video to be streamed to Media Server, reducing network traffic in comparison to the existing cross-platform option, which received MJPEG video from Milestone.  To take advantage of this, you must include the following parameter in your `mediaserver.cfg` file:
+IDOL Media Server now offers two ingest options for Milestone.  The new  **Windows-only** option makes use of the Milestone SDK decoding libraries to allow encoded video to be streamed to IDOL Media Server, reducing network traffic in comparison to the existing cross-platform option, which received MJPEG video from Milestone.  To take advantage of this, you must include the following parameter in your `mediaserver.cfg` file:
 
 ```ini
 [Paths]
@@ -203,19 +203,19 @@ MilestoneDirectory=libs/Milestone
 This `MilestoneDirectory` path must point to a folder containing the decoder libraries from Milestone's SDK.
 
 To obtain the Milestone SDK, 
-1.	Go to https://www.milestonesys.com/community/developer-tools/sdk/download-sdk/ and register (it's free).
+1.	Go to https://www.milestonesys.com/support/for-developers/sdk/ and register (it's free).
 1.	Install the MIPSDK (tested against 2021 R1), *e.g.* under `C:/Program Files/Milestone/MIPSDK`.
-1.	The MIPDSDK includes a handy batch script to copy the library files you need over to Media Server:
+1.	The MIPDSDK includes a handy batch script to copy the library files you need over to IDOL Media Server:
 
     ```
     cd "C:/Program Files/Milestone/MIPSDK/Bin"
-    CopyMediaCpp.bat "C:/OpenText/MediaServer_23.2.0_WINDOWS_X86_64/libs/Milestone"
+    CopyMediaCpp.bat "C:/OpenText/MediaServer_23.4.0_WINDOWS_X86_64/libs/Milestone"
     ```
     > NOTE: 25 files should be copied.
 
-No additional session config parameters are required to enable this option.  On Windows, Media Server will simply check for the existence of these Milestone libraries and quietly fall back to the cross-platform option if they do not exist.
+No additional session config parameters are required to enable this option.  On Windows, IDOL Media Server will simply check for the existence of these Milestone libraries and quietly fall back to the cross-platform option if they do not exist.
 
-The Milestone libraries offer some tuning options, which are exposed in Media Server's [Milestone Ingest Engine](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm).  These are:
+The Milestone libraries offer some tuning options, which are exposed in IDOL Media Server's [Milestone Ingest Engine](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm).  These are:
 
 Parameter | Default | Function
 --- | --- | ---
@@ -223,7 +223,7 @@ DecoderThreads | 1 | Number of CPU threads available for Milestone decoder libra
 FrameDropping | False | If set to "True", enables the Milestone decoder's ["Skip to catch up mode"](https://doc.developer.milestonesys.com/html/MMTKhelp/mmp_source_toolkit.html).
 
 
-## Configure Media Server for processing
+## Configure IDOL Media Server for processing
 
 Let's process our video with *Numberplate Recognition* to generate alerts to send back to Milestone.
 
@@ -231,7 +231,7 @@ Before getting started, check that you have the required analytics modules and l
 
 ### Enabled modules
 
-The `Modules` section is where we list the engines that will be available to Media Server on startup.  Ensure that this list contains the following item:
+The `Modules` section is where we list the engines that will be available to IDOL Media Server on startup.  Ensure that this list contains the following item:
 
 ```ini
 [Modules]
@@ -240,7 +240,7 @@ Enable=...,numberplate,...
 
 ### Licensed channels
 
-*Reminder*: The `Channels` section is where we instruct Media Server to request license seats from License Server.  Media Server has four license *flavours*:
+*Reminder*: The `Channels` section is where we instruct IDOL Media Server to request license seats from IDOL License Server.  IDOL Media Server has four license *flavours*:
 
 1. Audio
 1. Surveillance
@@ -255,7 +255,7 @@ To enable *Numberplate Recognition* for this tutorial, you need to enable at lea
 VisualChannels=1
 ```
 
-> For any changes you make in `mediaserver.cfg` to take effect you must restart Media Server.
+> For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
 
 ### Analysis Configuration
 
@@ -309,7 +309,7 @@ SavePostXML = true
 XMLOutputPath = output/milestone/%session.token%/%segment.type%_%%segment.sequence%.xml
 ```
 
-> See the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/OutputEngines/Milestone/_Milestone.htm) for full details the Milestone output engine. 
+> See the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/OutputEngines/Milestone/_Milestone.htm) for full details the Milestone output engine. 
 
 The complete configuration is included here as `MilestoneANPR.cfg`.
 
@@ -321,7 +321,7 @@ Before running this process, we must configure Milestone to accept events from a
   
   ![enable-analytics-events](./figs/enable-analytics-events.png)
 
-  > Verify that the port `9090` matches the value in the Media Server process configuration above.
+  > Verify that the port `9090` matches the value in the IDOL Media Server process configuration above.
 
 - On the side menu, under "Rules and Events", select "Analytics Events".
 - Right-click the top-level item, then select "Add New ..." from the context menu.
@@ -330,7 +330,7 @@ Before running this process, we must configure Milestone to accept events from a
 
 - Rename the event to "ANPR" and save changes.
 
-  > If you wished to change the alert name from "ANPR", *e.g.* to "MyCustomEventName", you would have to change the default message in Media Server's `configurations/xsl/toMilestone.xsl` to match, *e.g.*:
+  > If you wished to change the alert name from "ANPR", *e.g.* to "MyCustomEventName", you would have to change the default message in IDOL Media Server's `configurations/xsl/toMilestone.xsl` to match, *e.g.*:
   > ```diff
   > <xsl:template match="NumberPlateResult|NumberPlateResultAndImage">
   >   <xsl:variable name="score" select="numberplate/score"/>
@@ -395,10 +395,10 @@ You should already see a notification that `9+` alarms have been received.  Open
 
 ![alarm-manager](./figs/alarm-manager.png)
 
-This view shows you a list of alarms under a live view of the camera stream.  Click on any of those alarms to open a new window showing your Media Server-produced ANPR event:
+This view shows you a list of alarms under a live view of the camera stream.  Click on any of those alarms to open a new window showing your IDOL Media Server-produced ANPR event:
 
 ![alarm-view](./figs/alarm-view.png)
 
 ## Next steps
 
-Why not try more tutorials to explore some of the other analytics available in Media Server, linked from the [main page](../../README.md).
+Why not try more tutorials to explore some of the other analytics available in IDOL Media Server, linked from the [showcase page](../README.md).

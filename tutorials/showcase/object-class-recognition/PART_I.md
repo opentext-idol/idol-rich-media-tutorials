@@ -10,7 +10,7 @@ This guide assumes you have already familiarized yourself with IDOL Media Server
 ---
 
 - [Setup](#setup)
-  - [Configure Media Server](#configure-media-server)
+  - [Configure IDOL Media Server](#configure-idol-media-server)
     - [Enabled modules](#enabled-modules)
     - [Licensed channels](#licensed-channels)
 - [Training Object Class Recognizers](#training-object-class-recognizers)
@@ -26,13 +26,13 @@ This guide assumes you have already familiarized yourself with IDOL Media Server
 
 ## Setup
 
-### Configure Media Server
+### Configure IDOL Media Server
 
-Media Server must be licensed for visual analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enabling-analytics).  To reconfigure Media Server you must edit your `mediaserver.cfg` file.
+IDOL Media Server must be licensed for visual analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enabling-analytics).  To reconfigure IDOL Media Server you must edit your `mediaserver.cfg` file.
 
 #### Enabled modules
 
-The `Modules` section is where we list the engines that will be available to Media Server on startup.  Ensure that this list contains the module `objectclassrecognition`:
+The `Modules` section is where we list the engines that will be available to IDOL Media Server on startup.  Ensure that this list contains the module `objectclassrecognition`:
 
 ```ini
 [Modules]
@@ -41,7 +41,7 @@ Enable=...,objectclassrecognition,...
 
 #### Licensed channels
 
-The `Channels` section is where we instruct Media Server to request license seats from License Server.  To enable *Object Class Recognition* for this tutorial, you need to enable at least one channel of type *Visual*:
+The `Channels` section is where we instruct IDOL Media Server to request license seats from IDOL License Server.  To enable *Object Class Recognition* for this tutorial, you need to enable at least one channel of type *Visual*:
 
 ```ini
 [Channels]
@@ -49,27 +49,27 @@ The `Channels` section is where we instruct Media Server to request license seat
 VisualChannels=1
 ```
 
-> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart Media Server.
+> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
 
 ## Training Object Class Recognizers
 
-OpenText provides a set of pre-defined training packs for Media Server, including object class recognizers. Media Server also allows you to train your own recognizers by uploading and labelling your own images.
+OpenText provides a set of pre-defined training packs for IDOL Media Server, including object class recognizers. IDOL Media Server also allows you to train your own recognizers by uploading and labelling your own images.
 
-That training can be performed through Media Server's API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Actions/Training/_ObjectClassRecognition.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
+That training can be performed through IDOL Media Server's API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Actions/Training/_ObjectClassRecognition.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
 
 ### Import pre-defined recognizers
 
-Pre-trained *Object Class Recognition* packages are distributed separately from the main Media Server installer.  To obtain the training pack, return to the [Software Licensing and Downloads](https://sld.microfocus.com/mysoftware/index) portal, then:
+Pre-trained *Object Class Recognition* packages are distributed separately from the main IDOL Media Server installer.  To obtain the training pack, return to the [Software Licensing and Downloads](https://sld.microfocus.com/mysoftware/index) portal, then:
 
 1. Under the *Downloads* tab, select your product, product name and version from the dropdowns:
 
     ![get-software](../../setup/figs/get-software.png)
 
-1. From the list of available files, select and download `MediaServerPretrainedModels_23.2.0_COMMON.zip`.
+1. From the list of available files, select and download `MediaServerPretrainedModels_23.4.0_COMMON.zip`.
 
     ![get-pretrained-zip](../../setup/figs/get-pretrained-zip.png)
 
-Extract the training pack `.zip` then, to load one of the recognizers, open the Media Server GUI at [`/action=gui`](http://127.0.0.1:14000/a=gui#/train/objectClassRec(tool:select)) and follow these steps:
+Extract the training pack `.zip` then, to load one of the recognizers, open the IDOL Media Server GUI at [`/action=gui`](http://127.0.0.1:14000/a=gui#/train/objectClassRec(tool:select)) and follow these steps:
 
 1. in the left column, click `Import`
 1. navigate to your extracted training pack and select `ObjectClassRecognizer_Gen4_CommonObjects80.dat`
@@ -112,7 +112,7 @@ Type = objectclassrecognition
 Recognizer = ObjectClassRecognizer_Gen4_CommonObjects80
 ```
 
-> For full details on this and other available options for *Object Class Recognition*, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Analysis/ObjectClass/_ObjectClass.htm).
+> For full details on this and other available options for *Object Class Recognition*, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Analysis/ObjectClass/_ObjectClass.htm).
 
 To show the object detection results, we are going to draw color-coded boxes around each one as overlays on the source image.  This requires two engines, a *Combine*-type Utility engine and a *Draw*-type Transform engine:
 
@@ -141,7 +141,7 @@ OutputPath = output/%source.filename.stem%/detections.png
 
 ## Running our analysis
 
-Before processing, we must first copy the included `drawObjects.lua` file into Media Server's `configurations/lua` directory.
+Before processing, we must first copy the included `drawObjects.lua` file into IDOL Media Server's `configurations/lua` directory.
 
 With that copied, we're ready to go. Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
@@ -161,7 +161,7 @@ To review the resulting detection image, go to `output/hong_kong` and find `dete
 
 ![detections](./figs/detections.png)
 
-> Take a closer look at the included `drawObjects.lua` to see how the elements of the overlays and object class key were added.  To read more about Media Server's drawing functions, see the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Lua/Draw/_Drawing.htm).
+> Take a closer look at the included `drawObjects.lua` to see how the elements of the overlays and object class key were added.  To read more about IDOL Media Server's drawing functions, see the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Lua/Draw/_Drawing.htm).
 
 ## PART II - Build a custom recognizer
 

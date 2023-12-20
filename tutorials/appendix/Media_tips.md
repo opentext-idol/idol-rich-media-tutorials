@@ -27,6 +27,7 @@
     - [Download a video from YouTube](#download-a-video-from-youtube)
     - [Play a live YouTube channel](#play-a-live-youtube-channel)
     - [Record video/audio from a live YouTube channel](#record-videoaudio-from-a-live-youtube-channel)
+    - [Restream video/audio from a live YouTube channel](#restream-videoaudio-from-a-live-youtube-channel)
 - [Next steps](#next-steps)
 
 ---
@@ -56,7 +57,7 @@ There exist many free news streams on the web that you can connect to.  Often ne
 
 ![m3u8.png](./figs/m3u8.png)
 
-> While Media Server's Video ingest engine does support `https` on Windows, *it does not on Linux*.  Luckily, you can often change the URL protocol to `http` and it will still work, *e.g.* <https://live-hls-web-aje.getaj.net/AJE/03.m3u8> seen in the above screenshot can be safely changed to <http://live-hls-web-aje.getaj.net/AJE/03.m3u8>, as listed in the table below.
+> While IDOL Media Server's Video ingest engine does support `https` on Windows, *it does not on Linux*.  Luckily, you can often change the URL protocol to `http` and it will still work, *e.g.* <https://live-hls-web-aje.getaj.net/AJE/03.m3u8> seen in the above screenshot can be safely changed to <http://live-hls-web-aje.getaj.net/AJE/03.m3u8>, as listed in the table below.
 
 The following streams were working at time of writing.
 
@@ -68,7 +69,7 @@ English | CBS News | 640x360 | http://cbsn-us.cbsnstream.cbsnews.com/out/v1/55a8
 German | DW | 720x400 | http://dwamdstream106.akamaized.net/hls/live/2017965/dwstream106/stream04/streamPlaylist.m3u8
 Spanish | RTVE 24h | 1024x576 | http://rtvelivestream-clnx.rtve.es/rtvesec/24h/24h_main_576.m3u8
 
-These streams can be directly ingested by Media Server using the the multi-purpose [Video](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine, as we do in the Speech to Text [tutorial](../showcase/speech-transcription/PART_I.md#process-a-news-channel-stream).
+These streams can be directly ingested by IDOL Media Server using the the multi-purpose [Video](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine, as we do in the Speech to Text [tutorial](../showcase/speech-transcription/PART_I.md#process-a-news-channel-stream).
 
 #### Live YouTube channels
 
@@ -83,11 +84,11 @@ Spanish | Milenio TV | 1280x720 | https://www.youtube.com/watch?v=kKDMPnce24M
 Ukrainian | 112 Украина | 1920x1080 (max) | https://www.youtube.com/watch?v=v1ipuy14lBg
 Urdu | Geo TV | 640x360 | https://www.youtube.com/watch?v=HrrpR7zjFpU
 
-These urls *cannot* be directly ingested by Media Server however, YouTube also provides HLS index `.m3u8` files, which *can* be ingested as described [below](#record-videoaudio-from-a-live-youtube-channel).
+These urls *cannot* be directly ingested by IDOL Media Server however, YouTube also provides HLS index `.m3u8` files, which *can* be ingested as described [below](#record-videoaudio-from-a-live-youtube-channel).
 
 ### CCTV camera streams
 
-Media Server can connect directly to live streams from most CCTV camera brands.  To find the stream details you will usually need to consult the operating manual for the particular camera.  
+IDOL Media Server can connect directly to live streams from most CCTV camera brands.  To find the stream details you will usually need to consult the operating manual for the particular camera.  
 
 Most modern cameras will offer an [RTSP](https://en.wikipedia.org/wiki/Real_Time_Streaming_Protocol) stream, which looks like `rtsp://<user>:<password>@<IP>:<port>/<channel>`, where `IP` is the IP address (or hostname) of the camera.  If the port is not specified, the default is `554` for RTSP.  The channel part of the URL is optional.  The username and password can be added as shown and are required if security has been enabled on the camera.  Some examples from common brands:
 
@@ -107,12 +108,12 @@ Pelco | `rtsp://<IP>/stream1`
 
 As with the Bosch connection example above, some cameras also expose configuration parameters in the URL.Most cameras will need to be configured via an embedded web configuration UI, similar to what you have on your internet router at home.  This UI will be accessible at `http://IP:80/`, where `IP` is again the IP address (or hostname) of the camera.
 
-Media Server can connect directly to these RTSP streams if you configure the multi-purpose [Video](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  Media Server also includes the following additional ingest engines to support alternative stream types:
+IDOL Media Server can connect directly to these RTSP streams if you configure the multi-purpose [Video](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  IDOL Media Server also includes the following additional ingest engines to support alternative stream types:
 
-- [MJPEG](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Ingest/MJPEG/_MJPEG.htm): for cameras supporting motion Jpeg streaming
-- [MxPEG](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Ingest/MXPEG/_MXPEG.htm): for [Mobotix](https://www.mobotix.com/en/mxpeg) cameras
-- [Genetec](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Ingest/Genetec/_Genetec.htm): to connect to any camera already integrated into the Genetec Security Center Video Management System (VMS)
-- [Milestone](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm): to connect to any camera already integrated into the Milestone XProtect VMS
+- [MJPEG](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Ingest/MJPEG/_MJPEG.htm): for cameras supporting motion Jpeg streaming
+- [MxPEG](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Ingest/MXPEG/_MXPEG.htm): for [Mobotix](https://www.mobotix.com/en/mxpeg) cameras
+- [Genetec](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Ingest/Genetec/_Genetec.htm): to connect to any camera already integrated into the Genetec Security Center Video Management System (VMS)
+- [Milestone](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm): to connect to any camera already integrated into the Milestone XProtect VMS
 
 ### Academic datasets
 
@@ -145,7 +146,7 @@ The following examples are grouped by source type: video files, video steams and
 
 ### Devices
 
-Many devices, such as webcams and HDMI-to-USB dongles, can be used as video sources for Media Server thanks to DirectShow on Windows or Video4Linux on Linux.  For tips on connecting to such devices, see the [webcam setup page](../../tutorials/setup/WEBCAM.md).
+Many devices, such as webcams and HDMI-to-USB dongles, can be used as video sources for IDOL Media Server thanks to DirectShow on Windows or Video4Linux on Linux.  For tips on connecting to such devices, see the [webcam setup page](../../tutorials/setup/WEBCAM.md).
 
 ### Video files
 
@@ -272,7 +273,7 @@ With ffmpeg, you also get an executable called `ffplay`. From the command line y
 ffplay http://live-hls-web-aje.getaj.net/AJE/03.m3u8
 ```
 
-This executable uses the same underlying libraries as Media Server. So, if you can play with this, it is highly likely you can ingest with Media Server.
+This executable uses the same underlying libraries as IDOL Media Server. So, if you can play with this, it is highly likely you can ingest with IDOL Media Server.
 
 #### Record video/audio from an IP stream
 
@@ -308,11 +309,11 @@ To view this stream in VLC player, from the command line:
 vlc rtsp://127.0.0.1:8554/mystream
 ```
 
-To process this stream with Media Server, do:
+To process this stream with IDOL Media Server, do:
 
 <http://127.0.0.1:14000/action=process&source=rtsp://127.0.0.1:8554/mystream&persist=true&configName=mySessionConfig>
 
-, where setting `persist=true` instructs Media Server to wait out any short term interruptions in the incoming video stream that can occur due to network latency.
+, where setting `persist=true` instructs IDOL Media Server to wait out any short term interruptions in the incoming video stream that can occur due to network latency.
 
 ### YouTube
 
@@ -406,6 +407,29 @@ ffmpeg -i $(youtube-dl -f 94 --get-url https://www.youtube.com/watch?v=gxG3pdKvl
 > ffmpeg -i $(youtube-dl -f 94 --get-url https://www.youtube.com/watch?v=gxG3pdKvlIs) -f segment -segment_time 60 -c copy recording%04d.mp4
 > ```
 
+#### Restream video/audio from a live YouTube channel
+
+YouTube stream URLs use the `https:` protocol.  If I'm running IDOL Media Server on Linux, I cannot connect directly to an `https:` stream due to licensing restrictions of some underlying libraries; therefore, I want to convert this stream, *e.g.* to multicast `udp:`.
+
+This can be achieved, following from the above example, with `ffmpeg` as follows:
+
+```sh
+ffmpeg -i $(youtube-dl -f 94 --get-url https://www.youtube.com/watch?v=gxG3pdKvlIs) -f mpegts udp://239.255.1.4:1234
+```
+
+To view this stream in `ffmpeg`, from the command line:
+
+```sh
+ffplay udp://239.255.1.4:1234
+```
+
+To process this stream with IDOL Media Server, do:
+
+<http://127.0.0.1:14000/action=process&source=udp://239.255.1.4:1234&persist=true&configName=mySessionConfig>
+
+, where setting `persist=true` instructs IDOL Media Server to wait out any short term interruptions in the incoming video stream that can occur due to network latency.
+
+
 ## Next steps
 
-Why not try some tutorials to explore some of the analytics available in Media Server, linked from the [main page](../../README.md).
+Why not try some tutorials to explore some of the analytics available in IDOL Media Server, linked from the [main page](../../README.md).

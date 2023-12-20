@@ -1,14 +1,14 @@
 # PART II - Custom Language Models
 
-The language models that ship with Media Server cover a broad vocabulary, reflecting the general spoken language. In some cases, you might want to process speech data that covers specialized topics, including for example financial or medical terms.  The standard language model might not cover such specialized vocabulary or sentence structures in your language.
+The language models that ship with IDOL Media Server cover a broad vocabulary, reflecting the general spoken language. In some cases, you might want to process speech data that covers specialized topics, including for example financial or medical terms.  The standard language model might not cover such specialized vocabulary or sentence structures in your language.
 
-Media Server enables us to build custom language models, which can be used to improve the quality of a transcribed speech related to a specific domain.
+IDOL Media Server enables us to build custom language models, which can be used to improve the quality of a transcribed speech related to a specific domain.
 
 In this tutorial we will:
 
 1. automatically transcribe text from a news clip discussing political affairs in Libya
 1. build a custom language model from text about Libyan politicians and cities
-1. configure Media Server to use this custom model
+1. configure IDOL Media Server to use this custom model
 1. reprocess the same news clip and compare the transcription results
 
 ---
@@ -31,7 +31,7 @@ Download and install [WinMerge](http://winmerge.org/downloads/) or you favorite 
 
 ## Process configuration
 
-We will use a similar configuration to Part I, modified slightly to instruct Media Server to ingest a video file rather than a stream and output a single plain text transcript for our news clip.
+We will use a similar configuration to Part I, modified slightly to instruct IDOL Media Server to ingest a video file rather than a stream and output a single plain text transcript for our news clip.
 
 To ingest a video file, we will update the `Ingest` and `Analysis` sections accordingly:
 
@@ -62,7 +62,7 @@ To ingest a video file, we will update the `Ingest` and `Analysis` sections acco
     SpeedBias = 3
     ```
 
-    > More options are available for the *SpeechToText* analysis engine.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm) for details.
+    > More options are available for the *SpeechToText* analysis engine.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm) for details.
 
 1. To create a single plain text file of the transcript for the video clip, we will configure an XML-type output engine with `Mode` set to `AtEnd` and make use of the included the `toText.xsl` transform as follows:
 
@@ -89,11 +89,11 @@ Navigate to `output/speechToText2` and open the transcript file to read the resu
 
 ## Build the custom language model
 
-The first step in creating a custom model is to source suitable text materials.  These should contain descriptive text written in normal sentences, not just a dictionary of new terms. For this tutorial we have sourced a small set of materials for you, copying the text from a news article about similar events in Libya into the file `libya.txt`, which is included with this guide.  In practice, the more data you have (and the more representative that data is) the better. Please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/Training/CustomLM_Introduction.htm), for further advice.
+The first step in creating a custom model is to source suitable text materials.  These should contain descriptive text written in normal sentences, not just a dictionary of new terms. For this tutorial we have sourced a small set of materials for you, copying the text from a news article about similar events in Libya into the file `libya.txt`, which is included with this guide.  In practice, the more data you have (and the more representative that data is) the better. Please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Training/CustomLM_Introduction.htm), for further advice.
 
 > A training text file should be encoded in UTF-8, without [BOM](https://en.wikipedia.org/wiki/Byte_order_mark#UTF-8).
 
-We will next instruct Media Server to build our custom language model from this text:
+We will next instruct IDOL Media Server to build our custom language model from this text:
 
 1. paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action):
     ```url
@@ -119,7 +119,7 @@ We will next instruct Media Server to build our custom language model from this 
 
 ## Reprocess the news clip
 
-First, we will modify our Media Server process configuration to pick up this custom model, as follows:
+First, we will modify our IDOL Media Server process configuration to pick up this custom model, as follows:
 
 ```ini
 [SpeechToText]
@@ -141,8 +141,6 @@ The new text transcript will be produced after the whole video clip has been pro
 We can now compare the results, *e.g.* with WinMerge, to see improvements in people names, place names and related vocabulary:
 
 ![news-srt](./figs/language-model-diff.png)
-
-> Example output produced using Media Server 12.3.
 
 ## PART III - Quantifying transcript accuracy
 

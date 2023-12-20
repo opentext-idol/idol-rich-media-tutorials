@@ -1,8 +1,8 @@
 # PART II - Extracting tables and more
 
-Scanned documents don't only contain lines of text, so Media Server's capabilities have grown to include a rich set of analytic functions to get even more out of your scanned documents.  
+Scanned documents don't only contain lines of text, so IDOL Media Server's capabilities have grown to include a rich set of analytic functions to get even more out of your scanned documents.  
 
-The OCR analysis engine itself can automatically detect tables within images and preserve the table structure in the output.  Media Server's OCR can (using KeyView) also extract any embedded text contained in the files, *e.g.* PDFs.
+The OCR analysis engine itself can automatically detect tables within images and preserve the table structure in the output.  IDOL Media Server's OCR can (using KeyView) also extract any embedded text contained in the files, *e.g.* PDFs.
 
 Optionally, additional analysis engines like *Barcode Detection*, *Object Recognition* and *Image Classification* can also be applied in the same process (and with the same license) as OCR to capture even more information, as we will see below.
 
@@ -49,7 +49,7 @@ If you have already tried the [Image Classification](../image-classification/REA
 
 ### Enabled modules
 
-For this lesson, please ensure that you have the required modules enabled in Media Server. Ensure that the modules are enabled:
+For this lesson, please ensure that you have the required modules enabled in IDOL Media Server. Ensure that the modules are enabled:
 
 ```ini
 [Modules]
@@ -58,19 +58,19 @@ Enable=...,barcode,imageclassification,objectrecognition,ocr,...
 
 ### Pre-trained models
 
-Pre-trained *Image Classification* packages are distributed separately from the main Media Server installer.  To obtain the training pack, return to the [Software Licensing and Downloads](https://sld.microfocus.com/mysoftware/index) portal, then:
+Pre-trained *Image Classification* packages are distributed separately from the main IDOL Media Server installer.  To obtain the training pack, return to the [Software Licensing and Downloads](https://sld.microfocus.com/mysoftware/index) portal, then:
 
 1. Under the *Downloads* tab, select your product, product name and version from the dropdowns:
 
     ![get-software](../../setup/figs/get-software.png)
 
-1. From the list of available files, select and download `MediaServerPretrainedModels_23.2.0_COMMON.zip`.
+1. From the list of available files, select and download `MediaServerPretrainedModels_23.4.0_COMMON.zip`.
 
     ![get-pretrained-zip](../../setup/figs/get-pretrained-zip.png)
 
 #### Licensed channels
 
-The `Channels` section is where we instruct Media Server to request license seats from License Server.  To enable OCR for this tutorial, you need to enable at least one channel of type *Visual*:
+The `Channels` section is where we instruct IDOL Media Server to request license seats from IDOL License Server.  To enable OCR for this tutorial, you need to enable at least one channel of type *Visual*:
 
 ```ini
 [Channels]
@@ -78,7 +78,7 @@ The `Channels` section is where we instruct Media Server to request license seat
 VisualChannels=1
 ```
 
-> For any changes you make in `mediaserver.cfg` to take effect you must restart Media Server.
+> For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
 
 ## Capture embedded text
 
@@ -114,7 +114,7 @@ To view the results, go to `output/OCR` to see the text file `TextAndImage.txt`,
 
 The OCR analysis engine automatically detects tables in your images, so no special configuration is required for analysis.
 
-> NOTE: You can optionally modify the output of your table data by setting `OutputTablesByColumn=True` (default is `False`). For more details, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/Configuration/Analysis/OCR/OutputTablesByColumn.htm).
+> NOTE: You can optionally modify the output of your table data by setting `OutputTablesByColumn=True` (default is `False`). For more details, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Configuration/Analysis/OCR/OutputTablesByColumn.htm).
 
 Handling tabulated output though does require some thought.  A common approach is to separate the table text from non-table text in order to have more targeted downstream processing.
 
@@ -172,7 +172,7 @@ To process this information as well, add the *Barcode Detection* analysis engine
 Type = Barcode
 ```
 
-> NOTE: For details on the list of supported QR code and barcode types, please see the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_2/MediaServer_23.2_Documentation/Help/Content/Configuration/Analysis/Barcode/BarcodeTypes.htm).
+> NOTE: For details on the list of supported QR code and barcode types, please see the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Configuration/Analysis/Barcode/BarcodeTypes.htm).
 
 We will combine the read from the barcode with the OCR-produced text by adding a second input to the non-table text output engine:
 
@@ -201,11 +201,11 @@ To view the results, go to `output/OCR` to see the updated output text file `Tab
 
 You may have noticed that the PDF file processed above also contains an image of the OpenText logo.
 
-Media Server's *Object Recognition* analysis engine is often used to identify logos in images and video.  You can learn more about Logo Recognition in the dedicated tutorial [here](../logo-recognition/README.md).
+IDOL Media Server's *Object Recognition* analysis engine is often used to identify logos in images and video.  You can learn more about Logo Recognition in the dedicated tutorial [here](../logo-recognition/README.md).
 
 ### Training
 
-To include this capability here, we must first train Media Server to recognize the OpenText logo.  To do this, open the Media Server GUI at [`/action=gui`](http://127.0.0.1:14000/a=gui#/train/objectRec(tool:select)), the follow these steps:
+To include this capability here, we must first train IDOL Media Server to recognize the OpenText logo.  To do this, open the IDOL Media Server GUI at [`/action=gui`](http://127.0.0.1:14000/a=gui#/train/objectRec(tool:select)), the follow these steps:
 
 1. Click the "Create" button to add a new database
 1. Change the name of the database to "Logos"
@@ -253,13 +253,13 @@ To view the results, go to `output/OCR` to see the new output file `TablesAndMor
 
 ## (*Optional*) Image classification
 
-Media Server's *Image Classification* analysis engine ships with a number of pre-trained classifiers. You can learn more about Image Classification in the dedicated tutorial [here](../image-classification/README.md).
+IDOL Media Server's *Image Classification* analysis engine ships with a number of pre-trained classifiers. You can learn more about Image Classification in the dedicated tutorial [here](../image-classification/README.md).
 
 ### Loading models
 
-To include this capability here, we must first load the pre-trained models into Media Server.  To do this, open the Media Server GUI at [`/action=gui`](http://127.0.0.1:14000/a=gui#/train/imageClass(tool:select)), the follow these steps:
+To include this capability here, we must first load the pre-trained models into IDOL Media Server.  To do this, open the IDOL Media Server GUI at [`/action=gui`](http://127.0.0.1:14000/a=gui#/train/imageClass(tool:select)), the follow these steps:
 
-Extract the training pack `.zip` then, to load one of the classifiers, open the Media Server GUI at [`/action=gui`](http://127.0.0.1:14000/a=gui#/train/imageClass(tool:select)) and follow these steps:
+Extract the training pack `.zip` then, to load one of the classifiers, open the IDOL Media Server GUI at [`/action=gui`](http://127.0.0.1:14000/a=gui#/train/imageClass(tool:select)) and follow these steps:
 
 1. in the left column, click `Import`
 1. navigate to your extracted training pack and select `ImageClassifier_Document.dat`
@@ -269,6 +269,8 @@ Extract the training pack `.zip` then, to load one of the classifiers, open the 
 1. wait a few minutes for the import to complete.  You are now ready to classify media.
 
     ![import-pretrained-classifier](./figs/import-pretrained-classifier.png)
+
+> NOTE: See out tutorial on [training custom classifiers](../image-classification/PART_II.md), if you wish to generate your own document classes.
 
 ### Process configuration
 
