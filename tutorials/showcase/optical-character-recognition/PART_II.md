@@ -10,9 +10,9 @@ In this tutorial we will:
 
 1. run OCR on a sample PDF file to extract embedded text data
 1. run OCR on a sample image to transcribe tabulated data
-1. include Barcode detection
-1. train and run Object Recognition for logos, and
-1. import pre-built Image Classification models to label scanned documents.
+1. (*optionally*) include Barcode detection
+1. (*optionally*) train and run Object Recognition for logos, and
+1. (*optionally*) import pre-built Image Classification models to label scanned documents.
 
 This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../README.md#introduction), as well as [Part I](./PART_I.md) of this OCR tutorial.
 
@@ -64,7 +64,7 @@ Pre-trained *Image Classification* packages are distributed separately from the 
 
     ![get-software](../../setup/figs/get-software.png)
 
-1. From the list of available files, select and download `MediaServerPretrainedModels_23.4.0_COMMON.zip`.
+1. From the list of available files, select and download `MediaServerPretrainedModels_24.2.0_COMMON.zip`.
 
     ![get-pretrained-zip](../../setup/figs/get-pretrained-zip.png)
 
@@ -114,7 +114,7 @@ To view the results, go to `output/OCR` to see the text file `TextAndImage.txt`,
 
 The OCR analysis engine automatically detects tables in your images, so no special configuration is required for analysis.
 
-> NOTE: You can optionally modify the output of your table data by setting `OutputTablesByColumn=True` (default is `False`). For more details, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Configuration/Analysis/OCR/OutputTablesByColumn.htm).
+> NOTE: You can optionally modify the output of your table data by setting `OutputTablesByColumn=True` (default is `False`). For more details, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Configuration/Analysis/OCR/OutputTablesByColumn.htm).
 
 Handling tabulated output though does require some thought.  A common approach is to separate the table text from non-table text in order to have more targeted downstream processing.
 
@@ -172,7 +172,7 @@ To process this information as well, add the *Barcode Detection* analysis engine
 Type = Barcode
 ```
 
-> NOTE: For details on the list of supported QR code and barcode types, please see the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Configuration/Analysis/Barcode/BarcodeTypes.htm).
+> NOTE: For details on the list of supported QR code and barcode types, please see the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Configuration/Analysis/Barcode/BarcodeTypes.htm).
 
 We will combine the read from the barcode with the OCR-produced text by adding a second input to the non-table text output engine:
 

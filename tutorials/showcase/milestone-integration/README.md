@@ -2,7 +2,7 @@
 
 IDOL Media Server offers integration with popular third party Video Management System (VMS) products from Milestone and Genetec. IDOL Media Server includes dedicated ingest engines to process live streaming video from Milestone's "XProtect" and Genetec's "Security Center". Both of these products offer methods to receive events from external systems, so IDOL Media Server also includes dedicated Milestone and Genetec output engines to send events back to these products.  In this way, IDOL Media Server can be positioned as an analytics plug-in for existing Milestone and Genetec customers.
 
-> For customers who do not already have a VMS, it should be noted that IDOL Media Server's own [Rolling Buffer](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Operations/Encode/RollingBuffer_Introduction.htm) capability allows it to function as a VMS: recording live video from direct camera connection and facilitating playback, via HLS streaming, of that recorded video.
+> For customers who do not already have a VMS, it should be noted that IDOL Media Server's own [Rolling Buffer](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Operations/Encode/RollingBuffer_Introduction.htm) capability allows it to function as a VMS: recording live video from direct camera connection and facilitating playback, via HLS streaming, of that recorded video.
 
 In this tutorial we will focus on Milestone XProtect Corporate as an example external VMS.  We will:
 
@@ -135,7 +135,7 @@ We can make use of the IDOL Media Server user interface [/a=gui](http://localhos
 1. Go to the *Ingest Test* page.
 1. Select from the option dropdowns to ingest a "Stream" using "Milestone" and "NTLM" authentication:
         
-    > IDOL Media Server's Milestone ingest engine, described in full [here](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm), offers multiple authentication options to support different versions of Milestone XProtect.  The "Corporate" version requires "NTLM" authentication.
+    > IDOL Media Server's Milestone ingest engine, described in full [here](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm), offers multiple authentication options to support different versions of Milestone XProtect.  The "Corporate" version requires "NTLM" authentication.
 
 1. The process action source for Milestone streams is the stream id, or `guid`.  Find it by running the following `curl` command:
     ```sh
@@ -209,13 +209,13 @@ To obtain the Milestone SDK,
 
     ```
     cd "C:/Program Files/Milestone/MIPSDK/Bin"
-    CopyMediaCpp.bat "C:/OpenText/MediaServer_23.4.0_WINDOWS_X86_64/libs/Milestone"
+    CopyMediaCpp.bat "C:/OpenText/MediaServer_24.2.0_WINDOWS_X86_64/libs/Milestone"
     ```
     > NOTE: 25 files should be copied.
 
 No additional session config parameters are required to enable this option.  On Windows, IDOL Media Server will simply check for the existence of these Milestone libraries and quietly fall back to the cross-platform option if they do not exist.
 
-The Milestone libraries offer some tuning options, which are exposed in IDOL Media Server's [Milestone Ingest Engine](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm).  These are:
+The Milestone libraries offer some tuning options, which are exposed in IDOL Media Server's [Milestone Ingest Engine](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm).  These are:
 
 Parameter | Default | Function
 --- | --- | ---
@@ -309,7 +309,7 @@ SavePostXML = true
 XMLOutputPath = output/milestone/%session.token%/%segment.type%_%%segment.sequence%.xml
 ```
 
-> See the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/OutputEngines/Milestone/_Milestone.htm) for full details the Milestone output engine. 
+> See the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/OutputEngines/Milestone/_Milestone.htm) for full details the Milestone output engine. 
 
 The complete configuration is included here as `MilestoneANPR.cfg`.
 

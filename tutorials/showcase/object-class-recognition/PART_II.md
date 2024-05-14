@@ -26,7 +26,7 @@ The pre-trained Object Class Recognizers that ship with IDOL Media Server cover 
 
 IDOL Media Server can be trained to recognize classes of object, as well as specific objects, faces, vehicles and more.  We will now train a class for "wheels" using a small number of sample images in order to locate wheels in some test images.
 
-IDOL Media Server training can be performed through its web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Actions/Training/_TrainingActions.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
+IDOL Media Server training can be performed through its web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Actions/Training/_TrainingActions.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
 
 ### Add your own training images
 
@@ -84,17 +84,17 @@ For this tutorial, the small sample size means that you can effectively train yo
 If you do wish to train with CPU only, it is advisable to edit the default training options as follows (sacrificing some accuracy to save time):
 
 1. Select the `generation1` recognizer type, and
-2. Reduce the training iteration count to `50`.
+1. Reduce the training iteration count to `50`.
 
 ![build-recognizer-options](./figs/build-recognizer-options.png)
 
 > NOTE: With these configuration options on the author's laptop, this build took about nine minutes.
 
-> NOTE: For details on available recognizer types and other available training options, please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Operations/Analyze/ObjectClassRec_RecognizerTypes.htm).
+> NOTE: For details on available recognizer types and other available training options, please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Operations/Analyze/ObjectClassRec_RecognizerTypes.htm).
 
 When training your own recognizers, it is *strongly recommended* to utilize GPU acceleration.  This will allow you to train larger sample sets with many classes, as well as to utilize the most accurate "Generation 4" recognizer type.
 
-> NOTE: For details on GPU support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Advanced/GPU.htm).
+> NOTE: For details on GPU support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Advanced/GPU.htm).
 
 ## Running object class recognition
 
@@ -106,7 +106,7 @@ Type = ObjectClassRecognition
 Recognizer = Workshop
 ```
 
-More options are available for the `ObjectClassRecognition` analysis engine, including setting the matching threshold and allowing multiple matches to be returned.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Configuration/Analysis/ObjectClass/_ObjectClass.htm) for details.
+More options are available for the `ObjectClassRecognition` analysis engine, including setting the matching threshold and allowing multiple matches to be returned.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Configuration/Analysis/ObjectClass/_ObjectClass.htm) for details.
 
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
@@ -135,25 +135,6 @@ Modify the above command to do the same for the second test image `bike.jpg`:
 ### GPU for processing
 
 As stated above, GPU is (practically speaking) essential for training new recognizers; however, when running a process action to match objects, the benefit of GPU is much reduced. This is particularly true for image processing. For video processing, running on a GPU-enabled IDOL Media Server *can* offer a benefit in certain situations.  See the tutorial on using Object Class Recognition for [surveillance analytics](../surveillance/README.md#optional-gpu-acceleration) for more discussion.
-
-<!-- ### Train using stock images -->
-
-<!-- A commonly used set of stock faces is available from [Labeled Faces in the Wild: A Database for Studying Face Recognition in Unconstrained Environment](http://vis-www.cs.umass.edu/lfw/lfw.pdf).
-
-The images of three people from this database are included in these tutorial materials: David Bowie, Michael Jordan and Roger Federer.
-
-Use the included [Python 3](https://www.python.org/downloads/) script to add them to IDOL Media Server:
-
-```sh
-python train-faces.py
-```
-
-![face-training](./figs/face-training.png) -->
-
-
-<!-- ### Accuracy optimization -->
-
-<!-- TODO: snapshotting -->
 
 ## Next steps
 

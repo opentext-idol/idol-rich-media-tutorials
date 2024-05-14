@@ -122,7 +122,7 @@ To apply these device settings in IDOL Media Server, add the following config op
 + VideoSize = 1280x720
 ```
 
-> More options are available for the `Video`-type ingest engine.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm).
+> More options are available for the `Video`-type ingest engine.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm).
 
 ### Connectivity problems
 

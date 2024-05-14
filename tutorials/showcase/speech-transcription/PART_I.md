@@ -64,13 +64,13 @@ Speech transcription language packs are distributed separately from the main IDO
 
 ![get-software](../../setup/figs/get-software.png)
 
-For this tutorial we will use the British English pack.  From the list of available files, select and download `ENUK-23.4.0.zip`:
+For this tutorial we will use the British English pack.  From the list of available files, select and download `ENUK-24.2.0.zip`:
 
 ![get-lang-pack-zip](./figs/get-lang-pack-zip.png)
 
 Unzip the contents into IDOL Media Server's static data directory, to give you, *e.g.* `staticdata/speechtotext/ENUK`, containing files like `ver-ENUK-*`
 
-> This language pack is targeted to high quality "broadband" audio.  An additional language pack is available for telephony.  Many other languages and dialects are supported.  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Appendixes/SpeechLanguages.htm) for details.
+> This language pack is targeted to high quality "broadband" audio.  An additional language pack is available for telephony.  Many other languages and dialects are supported.  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Appendixes/SpeechLanguages.htm) for details.
 
 You can manually load the ENUK language pack with the action <http://127.0.0.1:14000/action=LoadSpeechLanguageResource&LanguagePack=ENUK>.
 
@@ -101,7 +101,7 @@ LanguagePack = ENUK
 SpeedBias = Live
 ```
 
-More options are available for the *SpeechToText* analysis engine.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm) for details.
+More options are available for the *SpeechToText* analysis engine.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm) for details.
 
 To view the results in a simple and standalone way, we will record the stream to video files and format the speech transcription output to generate subtitles for those clips.
 
@@ -153,7 +153,7 @@ XMLOutputPath = output/speechToText1/%session.token%/clip_%segment.sequence%.srt
 XslTemplate = toSRT.xsl
 ```
 
-We use using the *Bounded* output mode to bundle together all the text segments with the relevant video clip.  Please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Operations/Outputs/IndexingModes_BoundedEvent.htm), for details.
+We use using the *Bounded* output mode to bundle together all the text segments with the relevant video clip.  Please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Operations/Outputs/IndexingModes_BoundedEvent.htm), for details.
 
 ## Process a news channel stream
 
@@ -211,7 +211,7 @@ Next, we will use the included python script `xml2srt.py` to convert one of the 
 
 ```sh
 cd C:\OpenText\idol-rich-media-tutorials\tutorials\showcase\speech-transcription
-python xml2srt.py "C:\OpenText\IDOLServer-23.4.0\MediaServer\output\speechToText1a\clip_1.xml"
+python xml2srt.py "C:\OpenText\IDOLServer-24.2.0\MediaServer\output\speechToText1a\clip_1.xml"
 ```
 
 This will produce a new file `clip_1.srt` in the same directory as the original `.xml` file.  As before, you can now open the video `clip_1.mp4` in VLC player to view the time-aligned subtitles.

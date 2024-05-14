@@ -41,7 +41,7 @@ You can obtain software and licenses from the [Software Licensing and Downloads]
 
     ![get-license](./figs/get-license.png)
  
-1. On the "License Activation" screen, at the bottom, select the check box, choose your preferred version (the latest is 23.4), then fill in the quantity to activate:
+1. On the "License Activation" screen, at the bottom, select the check box, choose your preferred version (the latest is 24.2), then fill in the quantity to activate:
 
    ![eSoftware-selectLicense](./figs/eSoftware-selectLicense.png)
 
@@ -82,8 +82,8 @@ You can stay on GitHub to follow the steps in this and further linked README fil
 
 If you used the installer wizard, or the scripts without altering them, your installed software will be in:
 
-- `C:\OpenText\IDOLServer-23.4.0` (Windows)
-- `~/IDOLServer-23.4.0` (Linux)
+- `C:\OpenText\IDOLServer-24.2.0` (Windows)
+- `~/IDOLServer-24.2.0` (Linux)
 
 Each installed IDOL component will have its own sub-directory, which includes all required executables, dependencies and configuration files.  The primary configuration file for each shares the name of the component executable, *e.g.* `mediaserver.cfg` for `mediaserver.exe`.
 
@@ -105,5 +105,5 @@ Next start up IDOL Media Server in the same way and verify it is also running at
 The admin guides for all components can be accessed from these links:
 
 - [IDOL documentation home page](https://www.microfocus.com/documentation/idol/)
-- [License Server admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/LicenseServer_23.4_Documentation/Help/Content/_FT_SideNav_Startup.htm)
-- [Media Server admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/_FT_SideNav_Startup.htm)
+- [License Server admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/LicenseServer_24.2_Documentation/Help/Content/_FT_SideNav_Startup.htm)
+- [Media Server admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/_FT_SideNav_Startup.htm)

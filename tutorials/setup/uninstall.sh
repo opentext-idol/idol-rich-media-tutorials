@@ -5,9 +5,9 @@
 # ===========================================================================
 pushd $(dirname "${0}") > /dev/null
 
-COMPONENTS=( "LicenseServer" "MediaServer" )
+COMPONENTS=( "MediaServer" "LicenseServer" )
 
-VERSION="23.4.0"
+VERSION="24.2.0"
 INSTALL_BASE="~"
 
 INSTALL_DIR=$INSTALL_BASE"/IDOLServer-"$VERSION

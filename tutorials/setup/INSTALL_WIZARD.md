@@ -17,7 +17,7 @@ Download software from the [Software Licensing and Downloads](https://sld.microf
 
     ![get-software](./figs/get-software.png)
 
-1. From the list of available files, select and download `IDOLServer_23.4.0_WINDOWS_X86_64.exe` or `IDOLServer_23.4.0_LINUX_X86_64.exe` depending on your operating system.
+1. From the list of available files, select and download `IDOLServer_24.2.0_WINDOWS_X86_64.exe` or `IDOLServer_24.2.0_LINUX_X86_64.exe` depending on your operating system.
 
     ![get-idol-installer](./figs/get-idol-installer.png)
 
@@ -28,8 +28,8 @@ On Windows, right click the installer and __run as Administrator__.
 On Linux, run from the command line:
 
 ```sh
-chmod +x IDOLServer_23.4.0_LINUX_X86_64.exe
-./IDOLServer_23.4.0_LINUX_X86_64.exe
+chmod +x IDOLServer_24.2.0_LINUX_X86_64.exe
+./IDOLServer_24.2.0_LINUX_X86_64.exe
 ```
 
 Follow the install wizard to get the required components.

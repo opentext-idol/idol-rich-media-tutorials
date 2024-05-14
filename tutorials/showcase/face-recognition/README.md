@@ -14,7 +14,7 @@ In this tutorial we will:
   - [Train your own face](#train-your-own-face)
   - [Assessing faces for training](#assessing-faces-for-training)
 - [Face matching](#face-matching)
-  - [Auto enrollment of faces](#auto-enrollment-of-faces)
+  - [Auto-enrolling faces](#auto-enrolling-faces)
 - [Considerations when deploying a face recognition system](#considerations-when-deploying-a-face-recognition-system)
   - [Speed optimization](#speed-optimization)
     - [Processing images](#processing-images)
@@ -36,7 +36,7 @@ In this tutorial we will:
 
 IDOL Media Server can be trained to recognize faces, as well as specific objects, classes of object, vehicles and more.  We will now train our faces into the system and run the `FaceRecognize` analysis engine to identify ourselves from the webcam video stream.
 
-IDOL Media Server training can be performed through its web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Actions/Training/_TrainingActions.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
+IDOL Media Server training can be performed through its web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Actions/Training/_TrainingActions.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
 
 ### Train stock faces
 
@@ -44,7 +44,7 @@ A commonly used set of stock faces is available from [Labeled Faces in the Wild:
 
 The images of three people from this database are included in these tutorial materials: David Bowie, Michael Jordan and Roger Federer.
 
-Use the included [Python 3](https://www.python.org/downloads/) script to add them to IDOL Media Server:
+Use the included [Python](https://www.python.org/downloads/) script to add them to IDOL Media Server:
 
 ```sh
 python train-faces.py
@@ -69,35 +69,37 @@ Open the IDOL Media Server [`gui`](http://localhost:14000/a=gui) (tested in Goog
 
 The training status for each image is indicated at its bottom left: green for trained, yellow untrained and red for failed.
 
-> If you are running a laptop with an AMD processor, IDOL Media Server may become unresponsive when you attempt to train a face.  In this event, to configure IDOL Media Server correctly for your system, follow [these steps](../setup/PATCH_AMD.md).
+> NOTE: If you are running a laptop with an AMD processor, IDOL Media Server may become unresponsive when you attempt to train a face.  In this event, to configure IDOL Media Server correctly for your system, follow [these steps](../setup/PATCH_AMD.md).
 
 ### Assessing faces for training
 
-When selecting images of faces for training, we should follow the guidance given in the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Training/Face_ImageGuide.htm).
+When selecting images of faces for training, we should follow the guidance given in the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Training/Face_ImageGuide.htm).
 
-You can also instruct IDOL Media Server to assess training images without actually training them to warn you of any potential errors.  In the `gui`, follow these steps:
+IDOL Media Server can also assess training images to warn you of any potential errors.  In the `gui`, follow these steps:
 
 1. select one or more imported images
-1. on the menu bar above them, click `Assess`
-1. error and warning icons appear where there are any to report
-1. hover over the error/warning triangles to see the messages
 
-In this screenshot for example:
+1. hover over the on thumbnail image and click on the "Open" button
 
-![assess-faces](./figs/assess-faces.png)
+    ![open-face](figs/open-face.png)
 
-The following errors and warnings are returned:
+1. assessment results are automatically generated and any error and warning messages are reported on the side-pane
+    
+    ![assess-faces-zoom](./figs/assess-faces-zoom.png)
 
-<i></i> | __*left*__ | __*center*__ | __*right*__
---- | --- | --- | ---
-__*top*__ | *None* | *Error*: Image data nulled | *Error*: More than one face detected
-__*bottom*__ | *Error*: No face detected | *Warning*: Side-view face | *None*
+Warnings indicate that training would succeed but that matching performance may be sub-optimal.  
 
-> The warning triangles are colored yellow in the `gui` to indicate that training would succeed but that matching performance will be sub-optimal.  Red error triangles indicate that the image would not be trained successfully.
+Errors indicate that the image would not be trained successfully.
 
-> The detection of more than one face in the image does not guarantee an error.  If one face is significantly bigger than the others then it can be successfully trained, *e.g.* in the image below, where the trained face is overlayed in blue and the background faces in purple.
+Where Media Server detects more than one face, there is an attempt to identify a primary face for training, *e.g.* compare the two assessment reports below:
 
-![assess-faces-zoom](./figs/assess-faces-zoom.png)
+1. All detected faces have similar prominence and none would be trained:
+    
+    ![assess-faces-many](./figs/assess-faces-many.png)
+
+1. Once face is significantly larger and would be selected for training:
+    
+    ![assess-faces-primary](./figs/assess-faces-primary.png)
 
 ## Face matching
 
@@ -116,7 +118,7 @@ Type = FaceRecognize
 Input = FaceDetection.ResultWithSource
 ```
 
-More options are available for the `FaceRecognize` analysis engine, including GPU acceleration, restriction to a particular matching database, setting the matching threshold and allowing multiple matches to be returned.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Analysis/FaceRecognize/_FaceRecognize.htm) for details.
+More options are available for the `FaceRecognize` analysis engine, including GPU acceleration, restriction to a particular matching database, setting the matching threshold and allowing multiple matches to be returned.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/FaceRecognize/_FaceRecognize.htm) for details.
 
 Paste the following parameters into [`test-action`](http://localhost:14000/a=admin#page/console/test-action) (again remembering to update the webcam name from `USB Video Device` to match yours):
 
@@ -130,21 +132,15 @@ Review the results with [`/action=GUI`](http://localhost:14000/a=gui#/monitor(to
 
 Stop processing with [`stop`](http://localhost:14000/a=queueInfo&queueAction=stop&queueName=process).
 
-### Auto enrollment of faces
+### Auto-enrolling faces
 
 IDOL Media Server can be configured to automatically enroll face images to a chosen database and identity, for example if they are not matched to an identity already trained in that database.
 
-To enable auto enrollment, we must ensure that IDOL Media Server has at least one channel of type `Visual`, *e.g.* verify that your `mediaserver.cfg` includes the following.
+> NOTE: To enable auto enrollment, we must ensure that IDOL Media Server has at least one channel of type `Visual`.
 
-```ini
-[Channels]
-...
-VisualChannels=1
-```
+Configure the process session as follows:
 
-We can now configure the following process:
-
-- with a transform engine to crop the faces ready for enrollment:
+- add a transform engine to crop the faces ready for enrollment:
 
     ```ini
     [FaceImageCrop]
@@ -154,7 +150,7 @@ We can now configure the following process:
     BorderUnit = Percent
     ```
 
-- with event processing to filter known and unknown faces using out-of-the-box Lua functions:
+- add event processing to filter known and unknown faces using out-of-the-box Lua functions:
 
     ```ini
     [KnownFace]
@@ -168,7 +164,7 @@ We can now configure the following process:
     LuaScript = lua/unknownIdentity.lua
     ```
 
-- with the enroll engine actions themselves:
+- add the enroll engine actions themselves:
 
     ```ini
     [AutoEnrollKnown]
@@ -195,7 +191,7 @@ Click `Test Action` to start processing.
 
 Review the results with [`/action=GUI`](http://localhost:14000/a=gui#/monitor(tool:options)).  Remember we can interrupt the tracking by covering your webcam to trigger new entries in the `Result` track.
 
-To add an unknown face, ask your neighbor to look in your webcam, or hold your phone showing a photo of someone else up in front of your webcam.
+> TIP: To add an unknown face, ask your neighbor to look in your webcam, or hold your phone showing a photo of someone else up in front of your webcam.
 
 View the enrolled faces with the [`gui`](http://localhost:14000/a=graphicaluserinterface) web app.
 
@@ -211,24 +207,24 @@ We have important external factors to be aware of, as well as the configuration 
 
 Detecting faces in an image takes time.  How much processing do you really need to do with the image?
 
-- [`MinSize`](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Analysis/Face/MinSize.htm): Setting a minimum expected face size can reduce processing time.  Find out the minimum size you expect a face can be, *e.g.* by using the IDOL Media Server [`gui`](http://localhost:14000/a=gui#/ingest) to ingest your source and draw rectangles around a few faces.
-- [`Region`](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Analysis/Face/Region.htm): Setting a region to restrict detection to will also speed this up.  Can faces appear anywhere in an image, or always in a known region that you can restrict detection to?  Again, you can easily use the IDOL Media Server [`gui`](http://localhost:14000/a=gui#/ingest) to define a region.
-- [`Orientation`](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Analysis/Face/Orientation.htm): Will faces sometimes be seen upside down, or rotated? If not, restrict the orientation to save time.
+- [`MinSize`](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/Face/MinSize.htm): Setting a minimum expected face size can reduce processing time.  Find out the minimum size you expect a face can be, *e.g.* by using the IDOL Media Server [`gui`](http://localhost:14000/a=gui#/ingest) to ingest your source and draw rectangles around a few faces.
+- [`Region`](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/Face/Region.htm): Setting a region to restrict detection to will also speed this up.  Can faces appear anywhere in an image, or always in a known region that you can restrict detection to?  Again, you can easily use the IDOL Media Server [`gui`](http://localhost:14000/a=gui#/ingest) to define a region.
+- [`Orientation`](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/Face/Orientation.htm): Will faces sometimes be seen upside down, or rotated? If not, restrict the orientation to save time.
 
 Recognizing faces also takes time. Do you always need to match against the full list?
 
-- [`Identifier`](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Analysis/FaceRecognize/Identifier.htm): By selecting only one or some trained identities, the recognition step can be faster.
-- [`Database`](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Analysis/FaceRecognize/Database.htm): Trained identities may be grouped into "Databases".  By selecting only one or some databases, the recognition step can be faster.
+- [`Identifier`](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/FaceRecognize/Identifier.htm): By selecting only one or some trained identities, the recognition step can be faster.
+- [`Database`](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/FaceRecognize/Database.htm): Trained identities may be grouped into "Databases".  By selecting only one or some databases, the recognition step can be faster.
 
 #### Processing video
 
 The same as for images plus:
 
-- [`SampleInterval`](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Analysis/Face/SampleInterval.htm): How many frames per second do you really need to track faces in with Face Detection?  5 or 10 fps is typically good enough to track faces at walking speed.  Don't waste time processing more frames than you need.
-- [`NumParallel`](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Analysis/Face/NumParallel.htm): If you have additional processing capacity, you can use this parameter to process video frames in parallel for Face Detection.
+- [`SampleInterval`](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/Face/SampleInterval.htm): How many frames per second do you really need to track faces in with Face Detection?  5 or 10 fps is typically good enough to track faces at walking speed.  Don't waste time processing more frames than you need.
+- [`NumParallel`](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/Face/NumParallel.htm): If you have additional processing capacity, you can use this parameter to process video frames in parallel for Face Detection.
     > A similar parameter exists for Face Recognition but Face Detection is typically the bottleneck.
-- [`Input`](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Analysis/FaceRecognize/Input.htm): How many frames from a tracked face do you really need to pass on to Face Recognition for good results? If you use `ResultWithSource` as input for Face Recognition only one frame will be used for that recognition analysis. This is typically sufficient for good performance as this frame will be automatically selected from the face track as the one containing a face that is "best" for recognition, *i.e.* one that is turned most towards the camera.  Adding more recognition attempts for the tracked face by instead using `DataWithSource` or `SegmentedResultWithSource` may provide improved recognition results but will significantly take longer.
-- [`GPUNumParallel`](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Analysis/FaceRecognize/GPUNumParallel.htm): Configure GPU acceleration.  Although Face Detection does not benefit from this, Face Recognition will.  Using a GPU might allow you to run recognition on many frames with a detected face, *i.e.* you could use `DataWithSource` or `SegmentedResultWithSource` as input.
+- [`Input`](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/FaceRecognize/Input.htm): How many frames from a tracked face do you really need to pass on to Face Recognition for good results? If you use `ResultWithSource` as input for Face Recognition only one frame will be used for that recognition analysis. This is typically sufficient for good performance as this frame will be automatically selected from the face track as the one containing a face that is "best" for recognition, *i.e.* one that is turned most towards the camera.  Adding more recognition attempts for the tracked face by instead using `DataWithSource` or `SegmentedResultWithSource` may provide improved recognition results but will significantly take longer.
+- [`GPUNumParallel`](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/FaceRecognize/GPUNumParallel.htm): Configure GPU acceleration.  Although Face Detection does not benefit from this, Face Recognition will.  Using a GPU might allow you to run recognition on many frames with a detected face, *i.e.* you could use `DataWithSource` or `SegmentedResultWithSource` as input.
 
 ### Accuracy optimization
 
@@ -293,11 +289,11 @@ Processing requirements vary greatly, depending strongly on video resolution, fr
 - face recognition
 - video encoding (*if required*)
 
-> NOTE: Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Getting_Started/Install_Run/System_Requirements.htm) for more details.
+> NOTE: Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Getting_Started/Install_Run/System_Requirements.htm) for more details.
 
 When adding large numbers of faces to the database, you will need to start considering storage and memory requirements.  Each face descriptor must be loaded into memory for matching, so you need to have enough memory on each of the machines where IDOL Media Server is running.  Each descriptor is roughly 5KB in size, so each GB of RAM can hold approximately 200,000 faces.
 
-In this tutorial, we have used a local `mediaserver.db` to store our trained faces.  In production, you should configure an external database such as PostgreSQL, as described in the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Getting_Started/_SetupTrainingDatabase.htm).
+In this tutorial, we have used a local `mediaserver.db` to store our trained faces.  In production, you should configure an external database such as PostgreSQL, as described in the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Getting_Started/_SetupTrainingDatabase.htm).
 
 ## Next steps
 

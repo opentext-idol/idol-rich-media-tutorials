@@ -36,7 +36,7 @@ A quick first look at IDOL Media Server.  Watch a demonstration video where IDOL
 - Administrator privileges to install software.
 - A webcam.
 
-> NOTE: Sizing IDOL Media Server for your own production tasks depends greatly on your use case, as discussed [later in these tutorials](showcase/face-recognition/README.md#hardware-requirements).  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Getting_Started/Install_Run/System_Requirements.htm) for more details.
+> NOTE: Sizing IDOL Media Server for your own production tasks depends greatly on your use case, as discussed [later in these tutorials](showcase/face-recognition/README.md#hardware-requirements).  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Getting_Started/Install_Run/System_Requirements.htm) for more details.
 
 ### Setup IDOL Media Server
 
@@ -84,6 +84,6 @@ When IDOL Media Server is used in OEM, communication requires the ACI API.  See 
 ### Links
 
 - Full administration guides are available for all IDOL products [here](https://www.microfocus.com/documentation/idol/).
-- Read more tips on working with IDOL products in [IDOL Expert](https://www.microfocus.com/documentation/idol/IDOL_23_4/IDOLServer_23.4_Documentation/Guides/html/expert/Content/IDOLExpert_Welcome.htm).
-- For details of the latest changes to IDOL Media Server, please see the [Release Notes](https://www.microfocus.com/documentation/idol/IDOL_23_4/IDOLReleaseNotes_23.4_Documentation/idol/Content/Servers/MediaServer.htm).
+- Read more tips on working with IDOL products in [IDOL Expert](https://www.microfocus.com/documentation/idol/IDOL_24_2/IDOLServer_24.2_Documentation/Guides/html/expert/Content/IDOLExpert_Welcome.htm).
+- For details of the latest changes to IDOL Media Server, please see the [Release Notes](https://www.microfocus.com/documentation/idol/IDOL_24_2/IDOLReleaseNotes_24.2_Documentation/idol/Content/Servers/MediaServer.htm).
 - To learn more about IDOL Media Server and other IDOL products, visit [microfocus.com/idol](https://www.microfocus.com/en-us/products/information-data-analytics-idol/overview).

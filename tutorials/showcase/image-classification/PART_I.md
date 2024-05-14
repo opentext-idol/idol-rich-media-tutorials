@@ -2,7 +2,7 @@
 
 In this tutorial we will use the IDOL Media Server GUI to:
 
-1. import pre-trained classes to enable classification of common types,
+1. import pre-trained classes to enable classification (labelling) of common types in a test image,
 1. build and run a process configuration to label a random image from Flickr.
 
 This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../README.md#introduction).
@@ -54,7 +54,7 @@ VisualChannels=1
 
 OpenText provides a set of pre-defined training packs for IDOL Media Server, including image classifiers. IDOL Media Server also allows you to train your own classifiers by uploading and labelling your own images.
 
-That training can be performed through IDOL Media Server's web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Actions/Training/_ImageClassification.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
+That training can be performed through IDOL Media Server's web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Actions/Training/_ImageClassification.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
 
 ### Import pre-defined classifiers
 
@@ -64,7 +64,7 @@ Pre-trained *Image Classification* packages are distributed separately from the 
 
     ![get-software](../../setup/figs/get-software.png)
 
-1. From the list of available files, select and download `MediaServerPretrainedModels_23.4.0_COMMON.zip`.
+1. From the list of available files, select and download `MediaServerPretrainedModels_24.2.0_COMMON.zip`.
 
     ![get-pretrained-zip](../../setup/figs/get-pretrained-zip.png)
 
@@ -77,7 +77,9 @@ Extract the training pack `.zip` then, to load one of the classifiers, open the 
 
 1. wait a few minutes for the import to complete.  You are now ready to classify media.
 
-This classifier contains 1000 classes (from abucus to zucchini) and was built from the [ImageNet](https://www.image-net.org/index.php) set of labelled images:
+This classifier contains 1000 classes (from "abucus" to "zucchini") and was built from the [ImageNet](https://www.image-net.org/index.php) set of labelled images.  
+
+This word-cloud gives an indication of the relative abundance of labels in that training set:
 
 ![imagenet-wordcloud](./figs/imagenet-wordcloud.png)
 
@@ -107,7 +109,7 @@ To analyze an image file, include the following engines:
 
     ![config-classifier](./figs/config-classifier.png)
 
-    > For full details on this and other available options for *Image Classification*, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Configuration/Analysis/ImageClass/_ImageClassification.htm).
+    > For full details on this and other available options for *Image Classification*, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/ImageClass/_ImageClassification.htm).
 
 1. Let's output the results to disk.  Add the "XML"-type output engine to do that:
 
@@ -131,7 +133,7 @@ Click "Run" to launch the process:
 
 To review the results, go to IDOL Media Server's `output` directory to find `kitten.xml`.
 
-Open this file to see the classification results.  Within this XML, note the `<ImageClassificationResult>` tags, which contain the class matches.  In this case, three cat-like classes from ImageNet have been matched:
+Open this file to see the classification results.  Within this XML, note the `<ImageClassificationResult>` tags, which contain the class labels for this image.  In this case, three cat-like classes from ImageNet have been matched:
 
 ```xml
 <record>

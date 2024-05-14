@@ -5,7 +5,7 @@ The pre-trained Image Classifiers that ship with IDOL Media Server cover a broad
 1. use the IDOL Media Server GUI to upload sample images to train a classifier to distinguish between new classes
 1. understand key issues when selecting training images to build new classifiers
 1. process test images to label them with these new classes
-<!-- 1. use "snap-shotting" to optimize your own models -->
+1. use "snapshots" to optimize your own models
 
 ---
 
@@ -16,6 +16,11 @@ The pre-trained Image Classifiers that ship with IDOL Media Server cover a broad
   - [Build your classifier](#build-your-classifier)
 - [Running image classification](#running-image-classification)
 - [Results](#results)
+  - [Accuracy optimization](#accuracy-optimization)
+    - [Retrain with snapshots](#retrain-with-snapshots)
+    - [Compare snapshots](#compare-snapshots)
+    - [Fixing a snapshot](#fixing-a-snapshot)
+    - [Re-using validation data](#re-using-validation-data)
 - [Next steps](#next-steps)
 
 ---
@@ -32,11 +37,11 @@ Custom classifiers on the other hand, are most often used not to label but to pi
 - Is a bank teller's window open or closed?
 - Is a scanned document a copy of an ID Card, a Birth Certificate or a University diploma?
 - Is a sports broadcast showing a football match, a crowd of fans or a studio shot?
-- Is a "dash-cam" video showing a city scene, a country lane or a desert road?
+- Is a dash-cam video showing a city scene, a country lane or a desert road?
 
-> NOTE: This short list gives a flavor of the real-world problems have been successfully addressed with Image Classification in recent years.
+> NOTE: This short list gives a flavor of the real-world problems have been successfully addressed with Media Server's Image Classification in recent years.
 
-IDOL Media Server training can be performed through its web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/index.html#Actions/Training/_TrainingActions.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
+IDOL Media Server training can be performed through its web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Actions/Training/_TrainingActions.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
 
 ### Collect sample training images
 
@@ -91,23 +96,21 @@ Open the IDOL Media Server [`gui`](http://localhost:14000/a=gui#/train/imageClas
 
 Image classification uses Convolutional Neural Network (CNN) classifiers. A CNN classifier usually produces more accurate results than other types of classifier, but can require a significant amount of time to train.
 
-> NOTE: For this lesson we have only a small number of images, so training with CPU can be done in a manageable time; however, in general it is *strongly recommended* to utilize GPU acceleration for training.  For details on GPU support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Advanced/GPU.htm).
+> NOTE: For this lesson we have only a small number of images, so training with CPU can be done in a manageable time; however, in general it is *strongly recommended* to utilize GPU acceleration for training.  For details on GPU support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Advanced/GPU.htm).
 
 The time required to train a classifier is proportional to the number of training iterations.  Increasing the number of iterations can result in better accuracy, but running too many iterations may result in over-fitting.
 
 > TIP: For classifiers that have four or five dissimilar classes with around 100 training images per class, approximately 500 iterations produces reasonable results.
 
-> TIP: Media Server can help you find the optimum number of iterations by setting aside some of your training images for evaluation purposes. Media Server can take snapshots at regular intervals. You can then test the performance of the classifier (using the reserved images) with each snapshot.  For full details, please refer to the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Training/ImageClass_CreateClassifier.htm).
-
-Back in the GUI, on the bottom right of the list of list, click the "Options" button to open the training options menu and reduce the training iteration count to `50`.
+Back in the GUI, on the bottom right of the list of classes, click the "Options" button to open the training options menu and reduce the training iteration count to `50`.
 
 ![build-classifier-options](./figs/build-classifier-options.png)
 
-> NOTE: For details on available training options, please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Actions/Training/SetClassifierTrainingOption.htm).
+> NOTE: For details on available training options, please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Actions/Training/SetClassifierTrainingOption.htm).
 
 Click "Confirm" to apply your change.  Now we're ready to click `Build`.
 
-> NOTE: With these configuration options on the author's laptop, this build took about 20 minutes in CPU mode or 36 seconds with GPU.
+> NOTE: With these configuration options on the author's laptop, this build took about 20 minutes in CPU mode or 40 seconds with GPU.
 
 ## Running image classification
 
@@ -119,7 +122,7 @@ Type = ImageClassification
 Classifier = Workshop
 ```
 
-> NOTE: More options are available for the *Image Classification* analysis engine, including setting the matching threshold and allowing multiple matches to be returned.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_23_4/MediaServer_23.4_Documentation/Help/Content/Configuration/Analysis/ImageClass/_ImageClassification.htm) for details.
+> NOTE: More options are available for the *Image Classification* analysis engine, including setting the matching threshold and allowing multiple matches to be returned.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Configuration/Analysis/ImageClass/_ImageClassification.htm) for details.
 
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
@@ -152,9 +155,57 @@ Success!  Our small classifier gives us the correct label "interview", with a hi
 
 Modify the above command to do the same for the test images `newsreader.jpg` and `weather.jpg`.  Check the resulting XML.  Where the others as successful?
 
-<!-- ### Accuracy optimization -->
+### Accuracy optimization
 
-<!-- TODO: snapshotting -->
+We can optionally configure Media Server to take "snapshots" of our new model at regular intervals during the training process.  
+
+By setting aside some of your training images for evaluation purposes, you can then compare the accuracy (precision and recall) of your model at each snapshot. 
+
+You can then select the best performing snapshot to "publish" and therefore avoid over-fitting.
+
+> NOTE: For full details, please refer to the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Training/ImageClass_CreateClassifier.htm).
+
+#### Retrain with snapshots
+
+Back in the GUI, on the bottom right of the list of classes, click the "Options" button to open the training options menu and reduce the training iteration count to `50`.
+
+![build-classifier-options-snapshots](./figs/build-classifier-options-snapshots.png)
+
+Click "Confirm" and note that your classifier reverts to an untrained state.
+
+Click "Build" to re-run your training.
+
+When the build is complete, note that your classifier has entered a new "snapshotted" state and the "Snapshots" button is enabled.
+
+#### Compare snapshots
+
+Click the "Snapshots" button to open a dedicated window.  When you first do this, you will automatically trigger a task to test the last snapshot of your build:
+
+![view-snapshots](figs/view-snapshots.png)
+
+Once the test task is completed, you can view the calculated accuracy (recall, precision and F1) for the combined classifier as well as for each individual class.
+
+Optionally, click the "Test" button on the other snapshots to run test tasks for them:
+
+![more-snapshots](figs/more-snapshots.png)
+
+In this case, we see "perfect" accuracy for our first and last snapshots, so we have no reason to choose anything other than the last one. 
+
+#### Fixing a snapshot
+
+In the current state, our model is already usable and will operate using the final build state, *i.e.* the last snapshot.
+
+![workshop-demo](figs/workshop-demo.png)
+
+To "fix" or "publish" the model at your preferred snapshot, back to the snapshots window, hit "Select" button on your preferred snapshot.
+
+![confirm-snapshot](figs/confirm-snapshot.png)
+
+The unwanted snapshots will be removed and your model will now be in the "trained" (green) state.
+
+#### Re-using validation data
+
+This model is not exactly the same as the first model you created, since it did not use the reserved validation data.  Having decided on your optimal snapshot (*i.e.* number of steps), you may now wish to retrain you model with a `Snapshot Frequency` of `0` to include all the available training images.
 
 ## Next steps
 

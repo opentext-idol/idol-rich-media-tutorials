@@ -1,4 +1,4 @@
-(c) Copyright 2014-2023 OpenText or one of its affiliates.
+(c) Copyright 2014-2024 OpenText or one of its affiliates.
 
 Licensed under the MIT License (the "License"); you may not use this project except in compliance with the License.
 

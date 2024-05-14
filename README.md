@@ -1,8 +1,8 @@
 # IDOL Rich Media Tutorials
 
-A set of guides to get you doing great things with IDOL Media Server 23.4!
+A set of guides to get you doing great things with IDOL Media Server 24.2!
 
-For details of the latest changes to IDOL Media Server, please see the [Release Notes](https://www.microfocus.com/documentation/idol/IDOL_23_4/IDOLReleaseNotes_23.4_Documentation/idol/Content/Servers/MediaServer.htm).
+For details of the latest changes to IDOL Media Server, please see the [Release Notes](https://www.microfocus.com/documentation/idol/IDOL_24_2/IDOLReleaseNotes_24.2_Documentation/idol/Content/Servers/MediaServer.htm).
 
 ## Target audience
 
@@ -30,6 +30,6 @@ The tutorials start [here](tutorials/README.md)!
 
 ## License
 
-(c) Copyright 2014-2023 OpenText or one of its affiliates.
+(c) Copyright 2014-2024 OpenText or one of its affiliates.
 
 Licensed under the MIT License (the "License"); you may not use this project except in compliance with the [License](./LICENSE.md).

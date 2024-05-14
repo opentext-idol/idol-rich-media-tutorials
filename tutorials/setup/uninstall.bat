@@ -5,9 +5,9 @@ REM IDOL service uninstaller
 REM ===========================================================================
 pushd %~dp0
 
-set COMPONENTS=( LicenseServer, MediaServer )
+set COMPONENTS=( MediaServer, LicenseServer )
 
-set VERSION=23.4.0
+set VERSION=24.2.0
 set INSTALL_BASE=C:\OpenText
 
 set INSTALL_DIR=%INSTALL_BASE%\IDOLServer-%VERSION%

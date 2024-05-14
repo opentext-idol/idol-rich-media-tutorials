@@ -21,7 +21,7 @@ def listMetadata(person):
   metadata = []
   for meta_key in person['metadata'].keys():
     metadata.append(
-      f'{meta_key}:{person["metadata"][meta_key]}'
+      f'{urllib.parse.quote(meta_key)}:{urllib.parse.quote(person["metadata"][meta_key])}'
     )
 
   return ','.join(metadata)
@@ -52,12 +52,12 @@ def listImagesFileNames(person):
 #  m a i n   e x e c u t i o n
 if __name__ == '__main__':
   x = urllib.request.urlopen(
-    f'{api}RemoveFaceDatabase&database={database_name}'
+    f'{api}RemoveFaceDatabase&database={urllib.parse.quote(database_name)}'
   )
   print(x.read())
 
   x = urllib.request.urlopen(
-    f'{api}CreateFaceDatabase&database={database_name}'
+    f'{api}CreateFaceDatabase&database={urllib.parse.quote(database_name)}'
   )
   print(x.read())
 
@@ -67,7 +67,7 @@ if __name__ == '__main__':
     # print(listImagesFilePaths(person))
 
     x = urllib.request.urlopen(
-      f'{api}TrainFace&database={database_name}&nullimagedata={null_image_data}&identifier={person["identifier"]}&metadata={listMetadata(person)}&imagelabels={listImagesFileNames(person)}&imagepath={listImagesFilePaths(person)}'
+      f'{api}TrainFace&database={database_name}&nullimagedata={null_image_data}&identifier={urllib.parse.quote(person["identifier"])}&metadata={listMetadata(person)}&imagelabels={listImagesFileNames(person)}&imagepath={listImagesFilePaths(person)}'
     )
     print(x.read())
 
