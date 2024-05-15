@@ -51,7 +51,7 @@ LogFile=lua.log
 LogTypeCSVs=lua
 ```
 
-> For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
+> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
 
 ## Accessing record data
 

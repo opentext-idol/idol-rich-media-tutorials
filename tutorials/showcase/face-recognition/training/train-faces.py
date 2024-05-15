@@ -1,8 +1,9 @@
 """
 python train-faces.py
 """
-import os, urllib.parse, urllib.request
-
+import os
+import urllib.parse
+import requests
 
 #  v a r i a b l e s
 api = 'http://localhost:14000/action='
@@ -51,25 +52,25 @@ def listImagesFileNames(person):
 
 #  m a i n   e x e c u t i o n
 if __name__ == '__main__':
-  x = urllib.request.urlopen(
+  x = requests.get(
     f'{api}RemoveFaceDatabase&database={urllib.parse.quote(database_name)}'
   )
-  print(x.read())
+  print(f'{x.status_code}: {x.text}')
 
-  x = urllib.request.urlopen(
+  x = requests.get(
     f'{api}CreateFaceDatabase&database={urllib.parse.quote(database_name)}'
   )
-  print(x.read())
+  print(f'{x.status_code}: {x.text}')
 
   for person in person_list:
     # print(listMetadata(person))
     # print(listImagesFileNames(person))
     # print(listImagesFilePaths(person))
 
-    x = urllib.request.urlopen(
+    x = requests.get(
       f'{api}TrainFace&database={database_name}&nullimagedata={null_image_data}&identifier={urllib.parse.quote(person["identifier"])}&metadata={listMetadata(person)}&imagelabels={listImagesFileNames(person)}&imagepath={listImagesFilePaths(person)}'
     )
-    print(x.read())
+    print(f'{x.status_code}: {x.text}')
 
   print(
     f'{api}ListFaces&database={database_name}'

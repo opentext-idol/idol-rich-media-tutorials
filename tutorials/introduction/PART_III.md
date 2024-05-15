@@ -97,13 +97,14 @@ XSLTemplate = toPeopleCounter.xsl
 Finally, we can also configure our output engine to save both the original XML and the converted JSON data to disk, so we can look at them both later.  These files will be stored, as directed, under `output/toPeopleCounter`.
 
 ```ini
+OutputPath = output/toPeopleCounter/%session.token%/%segment.type%_%segment.sequence%_%segment.endTime.timestamp%.json
 SavePreXML = True
 XMLOutputPath = output/toPeopleCounter/%session.token%/%segment.type%_%segment.sequence%_%segment.endTime.timestamp%.xml
 ```
 
 ## Application logic
 
-Our people counting app can now send runtime configurations to IDOL Media Server, has the tools to monitor and manage on-going processes and will receive alerts in a tailored format.  We are now free to concentrate on the application logic itself, *i.e.* what do we want to acheive?
+Our people counting app can now send runtime configurations to IDOL Media Server, has the tools to monitor and manage on-going processes and will receive alerts in a tailored format.  We are now free to concentrate on the application logic itself, *i.e.* what do we want to achieve?
 
 On receipt of a face tracking event from IDOL Media Server, we want to update three quantities:
 

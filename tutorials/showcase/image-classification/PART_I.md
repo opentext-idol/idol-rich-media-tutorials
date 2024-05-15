@@ -7,6 +7,8 @@ In this tutorial we will use the IDOL Media Server GUI to:
 
 This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../README.md#introduction).
 
+If you want to start here, you must at least follow these [installation steps](../../setup/SETUP.md) before continuing.
+
 ---
 
 - [Setup](#setup)
@@ -48,7 +50,7 @@ The `Channels` section is where we instruct IDOL Media Server to request license
 VisualChannels=1
 ```
 
-> For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
+> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
 
 ## Training Image Classifiers
 
@@ -109,7 +111,7 @@ To analyze an image file, include the following engines:
 
     ![config-classifier](./figs/config-classifier.png)
 
-    > For full details on this and other available options for *Image Classification*, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/ImageClass/_ImageClassification.htm).
+    > NOTE: For full details on this and other available options for *Image Classification*, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/ImageClass/_ImageClassification.htm).
 
 1. Let's output the results to disk.  Add the "XML"-type output engine to do that:
 

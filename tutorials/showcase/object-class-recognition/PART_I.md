@@ -7,6 +7,8 @@ In this tutorial we will:
 
 This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../README.md#introduction).
 
+If you want to start here, you must at least follow these [installation steps](../../setup/SETUP.md) before continuing.
+
 ---
 
 - [Setup](#setup)
@@ -112,7 +114,7 @@ Type = objectclassrecognition
 Recognizer = ObjectClassRecognizer_Gen4_CommonObjects80
 ```
 
-> For full details on this and other available options for *Object Class Recognition*, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/ObjectClass/_ObjectClass.htm).
+> NOTE: For full details on this and other available options for *Object Class Recognition*, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/ObjectClass/_ObjectClass.htm).
 
 To show the object detection results, we are going to draw color-coded boxes around each one as overlays on the source image.  This requires two engines, a *Combine*-type Utility engine and a *Draw*-type Transform engine:
 
@@ -128,7 +130,7 @@ Input = CombineObjects.Output
 LuaScript = drawObjects.lua
 ```
 
-> The `LuaScript` parameter is set to refer to a custom drawing logic file, included with this tutorial.
+> NOTE: The `LuaScript` parameter is set to refer to a custom drawing logic file, included with this tutorial.
 
 The final engine we need is an image encoder:
 
@@ -161,7 +163,7 @@ To review the resulting detection image, go to `output/hong_kong` and find `dete
 
 ![detections](./figs/detections.png)
 
-> Take a closer look at the included `drawObjects.lua` to see how the elements of the overlays and object class key were added.  To read more about IDOL Media Server's drawing functions, see the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Lua/Draw/_Drawing.htm).
+> TIP: Take a closer look at the included `drawObjects.lua` to see how the elements of the overlays and object class key were added.  To read more about IDOL Media Server's drawing functions, see the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Lua/Draw/_Drawing.htm).
 
 ## PART II - Build a custom recognizer
 

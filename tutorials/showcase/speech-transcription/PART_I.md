@@ -1,6 +1,6 @@
 # PART I - Automatic Subtitles
 
-IDOL Media Server can be used to perform audio analytics, including speech transcription (often called Speech-to-Text), speaker identification and language identification.  We will configure IDOL Media Server to support a simple use case of this speech transcription capability: to record video clips from on a live news broadcast stream and automatically generate subtitles for those clips.
+As a hands-on introduction to speech transcription, we will configure IDOL Media Server to support the following example use case: to record video clips from on a live news broadcast stream and automatically generate subtitles for those clips.
 
 In this tutorial we will:
 
@@ -10,6 +10,8 @@ In this tutorial we will:
 
 This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../README.md#introduction).
 
+If you want to start here, you must at least follow these [installation steps](../../setup/SETUP.md) before continuing.
+
 ---
 
 - [Setup](#setup)
@@ -17,12 +19,13 @@ This guide assumes you have already familiarized yourself with IDOL Media Server
   - [Configure speech transcription](#configure-speech-transcription)
     - [Enabled modules](#enabled-modules)
     - [Licensed channels](#licensed-channels)
+    - [GPU acceleration](#gpu-acceleration)
     - [Language packs](#language-packs)
 - [Process configuration](#process-configuration)
 - [Process a news channel stream](#process-a-news-channel-stream)
-- [(Optional) Converting output offline](#optional-converting-output-offline)
+- [Working with "standard" XML output](#working-with-standard-xml-output)
   - [Generate XML](#generate-xml)
-  - [Convert XML with Python](#convert-xml-with-python)
+  - [(Optional) Convert XML to SRT with Python](#optional-convert-xml-to-srt-with-python)
 - [PART II - Custom Language Model](#part-ii---custom-language-model)
 
 ---
@@ -56,7 +59,11 @@ The `Channels` section is where we instruct IDOL Media Server to request license
 AudioChannels=1
 ```
 
-> For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
+> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
+
+#### GPU acceleration
+
+If you are lucky enough to have access to a supported NVIDIA graphics card, you can accelerate certain analytics (including new model speech to text), as well as video ingest and encoding.  For details on support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Advanced/GPU.htm).
 
 #### Language packs
 
@@ -64,21 +71,13 @@ Speech transcription language packs are distributed separately from the main IDO
 
 ![get-software](../../setup/figs/get-software.png)
 
-For this tutorial we will use the British English pack.  From the list of available files, select and download `ENUK-24.2.0.zip`:
+For this tutorial we will use the "Common" pack.  From the list of available files, select and download `MediaServerLanguagePack_24.2.0_COMMON.zip`:
 
-![get-lang-pack-zip](./figs/get-lang-pack-zip.png)
+![get-common-lang-pack-zip](./figs/get-common-lang-pack-zip.png)
 
-Unzip the contents into IDOL Media Server's static data directory, to give you, *e.g.* `staticdata/speechtotext/ENUK`, containing files like `ver-ENUK-*`
+Unzip the contents into IDOL Media Server's static data directory, renaming the extracted folder to "Common", to give you, *e.g.* `staticdata/Common/`, containing one folder per supported language, such as `ENUK`, and files like `micro.dat`.
 
-> This language pack is targeted to high quality "broadband" audio.  An additional language pack is available for telephony.  Many other languages and dialects are supported.  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Appendixes/SpeechLanguages.htm) for details.
-
-You can manually load the ENUK language pack with the action <http://127.0.0.1:14000/action=LoadSpeechLanguageResource&LanguagePack=ENUK>.
-
-> If you skip this manual load, IDOL Media Server will automatically load the language (if installed) when processing begins but doing this will add a delay to the processing.  
-
-This load is an asynchronous action, which can be monitored with [/a=admin](http://127.0.0.1:14000/action=admin#page/async-queues/LOADSPEECHLANGUAGERESOURCE).
-
-When the task is complete, review the list of loaded language pack(s) with the action <http://127.0.0.1:14000/action=ListSpeechLanguageResources>.
+> NOTE: This combined language pack enables transcription with the new models for all supported languages.  Additional, separate language packs are available for the "legacy" models.  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Appendixes/SpeechLanguages.htm) for the list of supported languages.
 
 ## Process configuration
 
@@ -98,6 +97,7 @@ To run speech transcription, we will add the following settings:
 [SpeechToText]
 Type = SpeechToText
 LanguagePack = ENUK
+ModelVersion = Micro 
 SpeedBias = Live
 ```
 
@@ -149,7 +149,7 @@ Type = XML
 Input = VideoClips.Proxy,TextSegmentation.Result
 Mode = Bounded
 EventTrack = VideoClips.Proxy
-XMLOutputPath = output/speechToText1/%session.token%/clip_%segment.sequence%.srt
+OutputPath = output/speechToText1/%session.token%/clip_%segment.sequence%.srt
 XslTemplate = toSRT.xsl
 ```
 
@@ -169,7 +169,9 @@ Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=adm
 action=process&source=http://live-hls-web-aje.getaj.net/AJE/03.m3u8&configPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/speechToText1.cfg
 ```
 
-Click the `Test Action` button to start processing.  The video clip and srt are produced every 30 seconds based on the `SegmentDuration` parameter.
+![test-action](figs/test-action.png)
+
+Click the `Test Action` button to start processing.  The video clip and srt file are produced every 30 seconds based on the `SegmentDuration` parameter.
 
 Review the results with [`/action=gui`](http://127.0.0.1:14000/a=gui#/monitor), then go to `output/speechToText1` to see the video clips and associated subtitle files.
 
@@ -177,19 +179,17 @@ Having ensured that the `.srt` file and the `.mp4` clip share the same filename 
 
 ![news-srt](./figs/news-srt.png)
 
+> NOTE: You will find the accuracy is typically excellent, even with the smallest `micro` model.  Also note that names of people and places are usually accurately transcribed.  The new models predict sub-word "tokens", allowing them to "guess" at spellings of words that did not appear in their training data.  This ability means that there isn't the same benefit to adding custom language models now as there was with "legacy" models.
+
 Stop processing by clicking the `Stop Session` button in the GUI or with the [`stop`](http://127.0.0.1:14000/a=queueInfo&queueAction=stop&queueName=process) action.
 
-## (Optional) Converting output offline
+## Working with "standard" XML output
 
-In the above example, we used XSL transforms to convert records within IDOL Media Server for output.  You can also of course output standard XML during processing and convert it later.  
+In the above example, we used XSL transforms to convert records within IDOL Media Server for output.  You can also of course output standard XML during processing and convert it as you like later.  
 
 ### Generate XML
 
-First, let's generate some `.xml` output.  We will reprocess the open stream from *Al Jazeera English*:
-
-``` url
-http://live-hls-web-aje.getaj.net/AJE/03.m3u8
-```
+First, let's generate some `.xml` output.  We will reprocess the same stream from *Al Jazeera English* with a modified config file `speechToText1a.cfg`.
 
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
@@ -203,7 +203,9 @@ Review the results with [`/action=gui`](http://127.0.0.1:14000/a=gui#/monitor), 
 
 Stop processing by clicking the `Stop Session` button in the GUI or with the [`stop`](http://127.0.0.1:14000/a=queueInfo&queueAction=stop&queueName=process) action.
 
-### Convert XML with Python
+> NOTE: if you wish to produce both `.xml` and `.srt` at the same time, look at the commented lines at the bottom of the original `speechToText1.cfg` file.
+
+### (Optional) Convert XML to SRT with Python
 
 > NOTE: the included script requires a [Python 3](https://www.python.org/downloads/) installation.
 

@@ -56,7 +56,7 @@ XSL transforms are defined with valid XML.  They require the following minimal h
 </xsl:stylesheet>
 ```
 
-> IDOL Media Server supports XSL version 1.0.
+> NOTE: IDOL Media Server supports XSL version 1.0.
 
 ### Output method
 

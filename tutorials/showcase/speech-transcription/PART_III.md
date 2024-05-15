@@ -1,6 +1,6 @@
 # PART III - Quantifying Transcript Accuracy
 
-In the previous lesson, we used a custom language model (CLM) to improve the speech to text accuracy for a particular topic.  We saw the improvement in quality by comparing the before and after output of IDOL Media Server by eye.  In this lesson we will see how to quantify that accuracy level, *e.g.* to decide when you might want to create a CLM for your own use case.
+In the previous lesson, we used a custom language model (CLM) to improve the "legacy" speech to text accuracy for a particular topic.  We saw the improvement in quality by comparing the before and after output of IDOL Media Server by eye.  In this lesson we will see how to quantify that accuracy level, *e.g.* to decide when you might want to create a CLM for your own use case.
 
 In this tutorial we will use IDOL Media Server to:
 
@@ -83,6 +83,7 @@ To run speech transcription, we will add the now familiar settings:
 [SpeechToText]
 Type = SpeechToText
 LanguagePack = ENUK
+ModelVersion = Legacy
 SpeedBias = Live
 ```
 
@@ -106,8 +107,9 @@ Type = XML
 Input = SpeechToText.Result
 Mode = AtEnd
 XSLTemplate = toText.xsl
-XMLOutputPath = output/speechToText4/transcript_%segment.type%.txt
+OutputPath = output/speechToText4/transcript_%segment.type%.txt
 SavePreXML = true
+XMLOutputPath = output/speechToText4/transcript_%segment.type%.xml
 ```
 
 > NOTE: We will use an XSL transform to output the plain text transcript, alongside the original structured XML output.
@@ -118,7 +120,7 @@ We will now read a section from the Wikipedia page on [Ancient Egyptian agricult
 
 Open that file now and be ready to read!
 
-> Remember to breathe! https://www.wikihow.com/Do-a-Relaxation-Exercise-for-Acting
+> TIP: Remember to breathe! https://www.wikihow.com/Do-a-Relaxation-Exercise-for-Acting
 
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials) (remembering to update the microphone name from `Headset Microphone (Plantronics C720-M)` to match yours):
 
@@ -146,6 +148,7 @@ This action requires reprocessing the recorded audio, allowing you to do so with
 [SpeechToText]
 Type = SpeechToText
 LanguagePack = ENUK
+ModelVersion = Legacy
 SpeedBias = 1
 FilterMusic = False
 ```

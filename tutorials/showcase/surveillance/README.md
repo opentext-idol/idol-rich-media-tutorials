@@ -19,6 +19,8 @@ In this tutorial we will:
 
 This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../README.md#introduction).
 
+If you want to start here, you must at least follow these [installation steps](../../setup/SETUP.md) before continuing.
+
 ---
 
 - [Setup](#setup)
@@ -112,7 +114,7 @@ IDOL Media Server configurations for Surveillance combine the base *Object Class
 - [Traffic Lights](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/TrafficLight/_TrafficLight.htm): Determines the state of traffic lights, so that you can detect vehicles failing to stop for a red light.
 - [Scene Filter](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Utilities/SceneFilter/_SceneFilter.htm): Filters out source video frames, and therefore stops analysis, when a PTZ-capable CCTV camera has been moved away from a trained scene by the operator.
 - [Lua Filter](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/ESP/Filter/_Filter.htm): Filters out records based on your custom logic defined using the Lua scripting language.  See [tips on working with Lua](../../appendix/Lua_tips.md) for more information.
-  > The detector schedule option in the Surveillance configuration builder is implemented as a Lua filter:
+  > NOTE: The detector schedule option in the Surveillance configuration builder is implemented as a Lua filter:
   > ![schedule-gui](./figs/schedule-gui.png)
 - [Perspective](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Utilities/Perspective/_Perspective.htm): Combines sizes and movement of people, buses, cars, *etc.* to estimate the perspective from which the camera views the scene. This allows IDOL Media Server to convert a position in a video frame into real-world 3D coordinates.
 - [Count](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Utilities/Count/_Count.htm): Counts the number of objects that are present within the scene or a specified region of the scene.
@@ -140,7 +142,7 @@ AlertWithSource | The same as the Alert track, but each record also includes the
 
 You will use an example configuration to generate a video clip with overlays for each tracked person and vehicle in the test video `pets2009.mp4`.  
 
-> From the [PETS 2009 benchmark data set](http://cs.binghamton.edu/~mrldata/pets2009).
+> NOTE: Created from the [PETS 2009 benchmark data set](http://cs.binghamton.edu/~mrldata/pets2009).
 
 You can look at the the included config file `Overlay_VideoTracking.cfg` in detail to get a sense of the process.
 

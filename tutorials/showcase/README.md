@@ -1,6 +1,6 @@
 # Rich Media Showcase
 
-> These guides assume familiarity with IDOL Media Server concepts.
+> NOTE: These guides assume familiarity with IDOL Media Server concepts.
 
 Dip into any of the following showcase guides to try more analytics.
 
@@ -33,6 +33,8 @@ Dip into any of the following showcase guides to try more analytics.
 Automatically organize unsorted pictures of people into unique identities using Face Recognition clustering.
 
 [Watch](https://www.youtube.com/watch?v=FlnAqKKrQYw&list=PLlUdEXI83_Xoq5Fe2iUnY8fjV9PuX61FA).
+
+<!-- TODO: Add lesson. -->
 
 ### Face Recognition
 

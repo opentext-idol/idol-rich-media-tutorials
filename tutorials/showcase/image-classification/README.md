@@ -8,7 +8,7 @@ IDOL Media Server includes an *Image Classification* analysis engine, which can 
 
 For more details on *Image Classification*, see the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Operations/Analyze/ImageClass.htm).
 
-> NOTE: *Image Classification* results tell you about the contents of the whole image (or a defined region of the image) and is not to be confused with *Object Class Recognition*, which is covered separately [here](../object-class-recognition/README.md) and is used to detect and track the location of objects of a particular class, *e.g.* individual people or buses.
+> NOTE: *Image Classification* results tell you about the contents of the whole image (or a defined region of the image) and is not to be confused with *Object Class Recognition*, which is covered separately [here](../object-class-recognition/README.md) and is used to detect and track the location of objects of a particular class, *e.g.* to draw a box around an individual person.
 
 ## Demo
 

@@ -1,6 +1,6 @@
 # PART II - Custom Language Models
 
-The language models that ship with IDOL Media Server cover a broad vocabulary, reflecting the general spoken language. In some cases, you might want to process speech data that covers specialized topics, including for example financial or medical terms.  The standard language model might not cover such specialized vocabulary or sentence structures in your language.
+The "legacy" language models that ship with IDOL Media Server cover a broad vocabulary, reflecting the general spoken language. In some cases, you might want to process speech data that covers specialized topics, including for example financial or medical terms.  The standard language model might not cover such specialized vocabulary or sentence structures in your language.
 
 IDOL Media Server enables us to build custom language models, which can be used to improve the quality of a transcribed speech related to a specific domain.
 
@@ -15,6 +15,7 @@ In this tutorial we will:
 
 - [Setup](#setup)
   - [Third-party software](#third-party-software)
+  - [Language packs](#language-packs)
 - [Process configuration](#process-configuration)
 - [Process our news clip](#process-our-news-clip)
 - [Build the custom language model](#build-the-custom-language-model)
@@ -28,6 +29,28 @@ In this tutorial we will:
 ### Third-party software
 
 Download and install [WinMerge](http://winmerge.org/downloads/) or you favorite text file *diff*-ing tool, so you can easily compare the results at the end.
+
+### Language packs
+
+Legacy speech transcription models are distributed separately per language.  To obtain a language pack, return to the [Software Licensing and Downloads](https://sld.microfocus.com/mysoftware/index) portal, then under the *Downloads* tab, select your product, product name and version from the dropdowns:
+
+![get-software](../../setup/figs/get-software.png)
+
+For this tutorial we will use the British English pack.  From the list of available files, select and download `ENUK-24.2.0.zip`:
+
+![get-lang-pack-zip](./figs/get-lang-pack-zip.png)
+
+Unzip the contents into IDOL Media Server's static data directory, to give you, *e.g.* `staticdata/speechtotext/ENUK`, containing files like `ver-ENUK-*`.
+
+> NOTE: This language pack is targeted to high quality "broadband" audio.  An additional language pack is available for telephony.  Many other languages and dialects are supported.  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Appendixes/SpeechLanguages.htm) for details.
+
+You can manually load the ENUK language pack with the action <http://127.0.0.1:14000/action=LoadSpeechLanguageResource&LanguagePack=ENUK>.
+
+> NOTE: If you skip this manual load, IDOL Media Server will automatically load the language (if installed) when processing begins but doing this will add a delay to the processing.  
+
+This load is an asynchronous action, which can be monitored with [/a=admin](http://127.0.0.1:14000/action=admin#page/async-queues/LOADSPEECHLANGUAGERESOURCE).
+
+When the task is complete, review the list of loaded language pack(s) with the action <http://127.0.0.1:14000/action=ListSpeechLanguageResources>.
 
 ## Process configuration
 
@@ -53,16 +76,17 @@ To ingest a video file, we will update the `Ingest` and `Analysis` sections acco
     IngestDateTime = 0
     ```
 
-1. modify the analysis `SpeedBias` to disable the adaptive quality level applied on live streams.  When processing files, the `SpeedBias` parameter effects the trade-off between transcription quality and processing time.
+1. set the `ModelVersion` to legacy and modify the analysis `SpeedBias` to disable the adaptive quality level applied on live streams.  When processing files, the `SpeedBias` parameter effects the trade-off between transcription quality and processing time.
 
     ```ini
     [SpeechToText]
     Type = SpeechToText
     LanguagePack = ENUK
+    ModelVersion = Legacy 
     SpeedBias = 3
     ```
 
-    > More options are available for the *SpeechToText* analysis engine.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm) for details.
+    > NOTE: More options are available for the *SpeechToText* analysis engine.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm) for details.
 
 1. To create a single plain text file of the transcript for the video clip, we will configure an XML-type output engine with `Mode` set to `AtEnd` and make use of the included the `toText.xsl` transform as follows:
 
@@ -71,7 +95,7 @@ To ingest a video file, we will update the `Ingest` and `Analysis` sections acco
     Type = XML
     Input = SpeechToText.Result
     Mode = AtEnd
-    XMLOutputPath = output/speechToText2/transcript.txt
+    OutputPath = output/speechToText2/transcript.txt
     XslTemplate = toText.xsl
     ```
 
@@ -89,9 +113,11 @@ Navigate to `output/speechToText2` and open the transcript file to read the resu
 
 ## Build the custom language model
 
-The first step in creating a custom model is to source suitable text materials.  These should contain descriptive text written in normal sentences, not just a dictionary of new terms. For this tutorial we have sourced a small set of materials for you, copying the text from a news article about similar events in Libya into the file `libya.txt`, which is included with this guide.  In practice, the more data you have (and the more representative that data is) the better. Please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Training/CustomLM_Introduction.htm), for further advice.
+The first step in creating a custom model is to source suitable text materials.  These should contain descriptive text written in normal sentences, not just a dictionary of new terms. 
 
-> A training text file should be encoded in UTF-8, without [BOM](https://en.wikipedia.org/wiki/Byte_order_mark#UTF-8).
+For this tutorial we have sourced a small set of materials for you, copying the text from a news article about similar events in Libya into the file `libya.txt`, which is included with this guide.  In practice, the more data you have (and the more representative that data is) the better. Please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Training/CustomLM_Introduction.htm), for further advice.
+
+> NOTE: A training text file should be encoded in UTF-8, without [BOM](https://en.wikipedia.org/wiki/Byte_order_mark#UTF-8).
 
 We will next instruct IDOL Media Server to build our custom language model from this text:
 
@@ -115,7 +141,7 @@ We will next instruct IDOL Media Server to build our custom language model from 
     </languagemodels>
     ```
 
-    > When we come to use this custom model, we are recommended to apply a relative weight of 30% to the likelihood of matching these new terms *vs.* terms in the main ENUK language model.
+    > NOTE: When we come to use this custom model, we are recommended to apply a relative weight of 30% to the likelihood of matching these new terms *vs.* terms in the main ENUK language model.
 
 ## Reprocess the news clip
 
@@ -125,6 +151,7 @@ First, we will modify our IDOL Media Server process configuration to pick up thi
 [SpeechToText]
 Type = SpeechToText
 LanguagePack = ENUK
+ModelVersion = Legacy
 CustomLanguageModel = LibyaTerms:0.3
 ```
 
@@ -141,6 +168,8 @@ The new text transcript will be produced after the whole video clip has been pro
 We can now compare the results, *e.g.* with WinMerge, to see improvements in people names, place names and related vocabulary:
 
 ![news-srt](./figs/language-model-diff.png)
+
+> NOTE: As an exercise for the reader, why not try using the new `micro` model for this audio clip.  Which output do you prefer?
 
 ## PART III - Quantifying transcript accuracy
 

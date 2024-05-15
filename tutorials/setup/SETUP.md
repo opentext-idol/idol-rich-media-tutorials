@@ -49,9 +49,9 @@ You can obtain software and licenses from the [Software Licensing and Downloads]
 
    ![eSoftware-configureLicense](./figs/eSoftware-configureLicense.png)
 
-    > IDOL License Server listens for HTTP requests from other IDOL components to provide them license seats.  The default port is `20000` but you are free to change this.
+    > NOTE: IDOL License Server listens for HTTP requests from other IDOL components to provide them license seats.  The default port is `20000` but you are free to change this.
 
-    > To obtain your MAC address and host name on Windows, open a command prompt and enter `ipconfig /all`.  Now look for the "Host Name" and "Physical Address" fields:
+    > TIP: To obtain your MAC address and host name on Windows, open a command prompt and enter `ipconfig /all`.  Now look for the "Host Name" and "Physical Address" fields:
     >
     > ![ipconfig](./figs/ipconfig.png)
     >

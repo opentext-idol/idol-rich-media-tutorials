@@ -2,7 +2,7 @@
 
 IDOL Media Server offers integration with popular third party Video Management System (VMS) products from Milestone and Genetec. IDOL Media Server includes dedicated ingest engines to process live streaming video from Milestone's "XProtect" and Genetec's "Security Center". Both of these products offer methods to receive events from external systems, so IDOL Media Server also includes dedicated Milestone and Genetec output engines to send events back to these products.  In this way, IDOL Media Server can be positioned as an analytics plug-in for existing Milestone and Genetec customers.
 
-> For customers who do not already have a VMS, it should be noted that IDOL Media Server's own [Rolling Buffer](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Operations/Encode/RollingBuffer_Introduction.htm) capability allows it to function as a VMS: recording live video from direct camera connection and facilitating playback, via HLS streaming, of that recorded video.
+> NOTE: For customers who do not already have a VMS, it should be noted that IDOL Media Server's own [Rolling Buffer](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Operations/Encode/RollingBuffer_Introduction.htm) capability allows it to function as a VMS: recording live video from direct camera connection and facilitating playback, via HLS streaming, of that recorded video.
 
 In this tutorial we will focus on Milestone XProtect Corporate as an example external VMS.  We will:
 
@@ -12,6 +12,8 @@ In this tutorial we will focus on Milestone XProtect Corporate as an example ext
 1. show how these events are visualized in Milestone XProtect Smart Client.
 
 This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [Introductory](../../README.md#introduction) tutorial.
+
+If you want to start here, you must at least follow these [installation steps](../../setup/SETUP.md) before continuing.
 
 ---
 
@@ -58,13 +60,13 @@ Once the download is complete, run the install wizard as your current Windows us
 - (*Optionally*) Configure certificates for secure communications.
 - Finalize installation steps with default options.
 
-> The install process may take quite a while.  Now would be a very good time to grab a coffee...
+> NOTE: The install process may take quite a while.  Now would be a very good time to grab a coffee...
 
 Once complete, the Milestone XProtect Smart Client application will open.  Log in with "Windows authentication (current user)".
 
 ![milestone-smart-client](./figs/milestone-smart-client.png)
 
-> Keep this client open, you will need it later on.
+> TIP: Keep this client open, you will need it later on.
 
 ### Install DirectShow driver
 
@@ -82,7 +84,7 @@ Milestone XProtect can attempt to automatically detect any IP cameras on your ne
 
 For this tutorial, we will use the video file `vehicles.avi`, which is included in the same folder as this guide.
 
-> To try your own video, note that Milestone requires you to encode your video to `.avi` format.  You can do this using `ffmpeg`, with the command:
+> NOTE: To try your own video, note that Milestone requires you to encode your video to `.avi` format.  You can do this using `ffmpeg`, with the command:
 > ```
 > ffmpeg -i vehicles.mp4 vehicles.avi
 > ```
@@ -135,7 +137,7 @@ We can make use of the IDOL Media Server user interface [/a=gui](http://localhos
 1. Go to the *Ingest Test* page.
 1. Select from the option dropdowns to ingest a "Stream" using "Milestone" and "NTLM" authentication:
         
-    > IDOL Media Server's Milestone ingest engine, described in full [here](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm), offers multiple authentication options to support different versions of Milestone XProtect.  The "Corporate" version requires "NTLM" authentication.
+    > NOTE: IDOL Media Server's Milestone ingest engine, described in full [here](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm), offers multiple authentication options to support different versions of Milestone XProtect.  The "Corporate" version requires "NTLM" authentication.
 
 1. The process action source for Milestone streams is the stream id, or `guid`.  Find it by running the following `curl` command:
     ```sh
@@ -177,7 +179,7 @@ We can make use of the IDOL Media Server user interface [/a=gui](http://localhos
     + NTLMPassword = <encrypted password>
     ```
 
-    > It is not recommended to enter your password in plain text.  IDOL Media Server includes a lightweight AES encryption tool `autpassword.exe`, which you can use to encrypt your password as follows:
+    > TIP: It is not recommended to enter your password in plain text.  IDOL Media Server includes a lightweight AES encryption tool `autpassword.exe`, which you can use to encrypt your password as follows:
     > ```sh
     > $ ./autpassword.exe -x -tAES -oKeyFile=./MyKeyFile.ky
     > ./MyKeyFile.ky=9b7aff82f1fa766985152790402a48f0ade3a20f196629b18e2eeb0c1735ff5f
@@ -255,7 +257,7 @@ To enable *Numberplate Recognition* for this tutorial, you need to enable at lea
 VisualChannels=1
 ```
 
-> For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
+> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
 
 ### Analysis Configuration
 
@@ -288,7 +290,7 @@ Type = numberplate
 Location = GB
 ```
 
-> For more on numberplate and vehicle analysis, try this [tutorial](../../README.md#vehicle-analysis).
+> NOTE: For more on numberplate and vehicle analysis, try this [tutorial](../../README.md#vehicle-analysis).
 
 #### Output
 
@@ -309,7 +311,7 @@ SavePostXML = true
 XMLOutputPath = output/milestone/%session.token%/%segment.type%_%%segment.sequence%.xml
 ```
 
-> See the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/OutputEngines/Milestone/_Milestone.htm) for full details the Milestone output engine. 
+> NOTE: See the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/OutputEngines/Milestone/_Milestone.htm) for full details the Milestone output engine. 
 
 The complete configuration is included here as `MilestoneANPR.cfg`.
 
@@ -321,7 +323,7 @@ Before running this process, we must configure Milestone to accept events from a
   
   ![enable-analytics-events](./figs/enable-analytics-events.png)
 
-  > Verify that the port `9090` matches the value in the IDOL Media Server process configuration above.
+  > TIP: Verify that the port `9090` matches the value in the IDOL Media Server process configuration above.
 
 - On the side menu, under "Rules and Events", select "Analytics Events".
 - Right-click the top-level item, then select "Add New ..." from the context menu.
@@ -330,7 +332,7 @@ Before running this process, we must configure Milestone to accept events from a
 
 - Rename the event to "ANPR" and save changes.
 
-  > If you wished to change the alert name from "ANPR", *e.g.* to "MyCustomEventName", you would have to change the default message in IDOL Media Server's `configurations/xsl/toMilestone.xsl` to match, *e.g.*:
+  > NOTE: If you wished to change the alert name from "ANPR", *e.g.* to "MyCustomEventName", you would have to change the default message in IDOL Media Server's `configurations/xsl/toMilestone.xsl` to match, *e.g.*:
   > ```diff
   > <xsl:template match="NumberPlateResult|NumberPlateResultAndImage">
   >   <xsl:variable name="score" select="numberplate/score"/>
@@ -375,7 +377,7 @@ Finally, to ensure that all of the metadata provided by IDOL Media Server will b
 
 That's all!  We're ready to go.
 
-> For more information about alert configuration in Milestone XProtect, please refer to the [XProtect VMS Administrator Manual](https://doc.milestonesys.com/2021R1/en-US/portal/htm/chapter-page-mc-administrator-manual.htm).
+> NOTE: For more information about alert configuration in Milestone XProtect, please refer to the [XProtect VMS Administrator Manual](https://doc.milestonesys.com/2021R1/en-US/portal/htm/chapter-page-mc-administrator-manual.htm).
 
 ## Run the Media Server process
 

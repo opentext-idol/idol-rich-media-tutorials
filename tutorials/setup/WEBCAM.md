@@ -20,7 +20,7 @@ Open the IDOL Media Server user interface [`\a=gui`](http://localhost:14000/a=gu
 1. Set operating system family to "Linux" or "Windows" as appropriate
 1. Enter the device connection string:
 
-    > To find your webcam connection name please follow these steps:
+    > TIP: To find your webcam connection name please follow these steps:
     > 
     > On Windows:
     > 
@@ -110,7 +110,7 @@ ffplay -f dshow -framerate 30 -video_size 1280x720 -i video="USB Video Device"
 ffplay -f dshow -framerate 15 -video_size 640x480 -i video="USB Video Device"
 ```
 
-> For more details on options for DirectShow device control with `ffmpeg`, read this [documentation](https://trac.ffmpeg.org/wiki/DirectShow).
+> NOTE: For more details on options for DirectShow device control with `ffmpeg`, read this [documentation](https://trac.ffmpeg.org/wiki/DirectShow).
 
 To apply these device settings in IDOL Media Server, add the following config options to the *Video*-type ingest engine:
 
@@ -122,7 +122,7 @@ To apply these device settings in IDOL Media Server, add the following config op
 + VideoSize = 1280x720
 ```
 
-> More options are available for the `Video`-type ingest engine.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm).
+> NOTE: More options are available for the `Video`-type ingest engine.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm).
 
 ### Connectivity problems
 

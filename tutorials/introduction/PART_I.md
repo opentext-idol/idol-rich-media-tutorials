@@ -149,7 +149,7 @@ Engine2 = OutputTrackedFaces
 Type = xml
 Mode = singleRecord
 Input = FaceDetection.Result
-XMLOutputPath=output/faces1/%segment.startTime.timestamp%.xml
+OutputPath=output/faces1/%segment.startTime.timestamp%.xml
 ```
 
 More output options are available, such as HTTP POST and database insert.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/OutputEngines/_Output.htm), for details.
@@ -220,9 +220,9 @@ With the analysis running, point your browser to [`/action=GUI`](http://localhos
 
 ![face-monitor](./figs/monitor.png)
 
-> The `GetLatestRecord` action is not guaranteed to show every alert but only the latest one at the time of polling IDOL Media Server.
+> NOTE: The `GetLatestRecord` action is not guaranteed to show every alert but only the latest one at the time of polling IDOL Media Server.
 
-> `Default_Image` is the automatically assigned name of the track containing the incoming video.
+> TIP: `Default_Image` is the automatically assigned name of the track containing the incoming video.
 
 #### Track types
 
@@ -262,7 +262,7 @@ If you re-run the analysis with this change, only the FaceDetection Result track
 
 Under your IDOL Media Server directory, open the folder `output/faces1` to see the `.xml` files produced with each face result. They contain all metadata associated with the detection event, *e.g.* tracking start and end times, as well the the face coordinates at the "peak" time of the track.
 
-> For Face Detection, the "peak" time of a tracked face is determined as the moment where that face is most clearly visible; based on a combination of pose angle and size.
+> NOTE: For Face Detection, the "peak" time of a tracked face is determined as the moment where that face is most clearly visible; based on a combination of pose angle and size.
 
 ```xml
 <record>

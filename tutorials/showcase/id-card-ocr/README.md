@@ -16,6 +16,8 @@ In this tutorial we will:
 
 This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../introduction/README.md).
 
+If you want to start here, you must at least follow these [installation steps](../../setup/SETUP.md) before continuing.
+
 ---
 
 - [Setup](#setup)
@@ -83,7 +85,7 @@ To enable *Face Detect* and *Object Recognition* for this tutorial, you need to 
 VisualChannels=1
 ```
 
-> For any changes you make in `mediaserver.cfg` to take effect you must restart Media Server.
+> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart Media Server.
 
 ## Process configuration to read text
 
@@ -124,7 +126,7 @@ For this first step we will simply output all the words we have read in a single
 [WriteText]
 Type = xml
 Input = OCR.Result
-XMLOutputPath = output/idCard1/%source.filename%.txt
+OutputPath = output/idCard1/%source.filename%.txt
 XSLTemplate = toText.xsl
 ```
 
@@ -168,7 +170,7 @@ Being able to recognize particular documents provides the following advantages:
 
 We can train Object Recognition to recognize a document by providing an "anchor image", *i.e.* a part of the document that will look the same for any instance of that document, such as a title bar or logo mark.
 
-> See the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/Content/Training/Object_ImageGuide.htm) for advice on selecting good images for training. 
+> NOTE: See the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/Content/Training/Object_ImageGuide.htm) for advice on selecting good images for training. 
 
 To create one, open your favorite image editing software and crop out a section and save it as a new image file, *e.g*:
 
@@ -355,7 +357,7 @@ Next we will again add these regions to the trained Object Recognition anchor as
 
     ![completed_metadata](./figs/completed_metadata.png)
   
-> As a short cut, you can add each OCR region for this particular ID Card by clicking each of the following links in turn to call the API: 
+> TIP: As a short cut, you can add each OCR region for this particular ID Card by clicking each of the following links in turn to call the API: 
 > - [`1. OCR_Surname`](http://localhost:14000/action=AddObjectMetadata&database=IDCardTemplates&identifier=TurkishDriversLicense&key=OCR_Surname&value=38%2022%2035%209)
 > - [`2. OCR_Forename`](http://localhost:14000/action=AddObjectMetadata&database=IDCardTemplates&identifier=TurkishDriversLicense&key=OCR_Forename&value=38%2030%2035%209)
 > - [`3. OCR_DateAndPlaceOfBirth`](http://localhost:14000/action=AddObjectMetadata&database=IDCardTemplates&identifier=TurkishDriversLicense&key=OCR_DateAndPlaceOfBirth&value=38%2038%2035%209)
@@ -384,7 +386,7 @@ LuaScript = getIdCardOCR_Surname.lua
 Type = ocr
 OCRMode = document
 Input = TextRegion_Surname.Output
-RestrictToInputRegion = true
+Region = Input
 Languages = tr
 CharacterTypes = uppercase
 ```
@@ -393,7 +395,7 @@ Where we need to invoke a custom Lua script to extract the required templated re
 
 An added benefit of this approach is that individual OCR engines can be customized for each field, *e.g.* if surnames are always uppercase, we can restrict the character types and potentially boost accuracy.
 
-> When you train multiple ID Card templates, you will need to additional pairs to cover any new fields those templates might specify.
+> NOTE: When you train multiple ID Card templates, you will need to additional pairs to cover any new fields those templates might specify.
 
 As an example format for the output data, let's use a custom XSL transform `IdCard_toJSON.xsl` to convert the results into JSON.
 

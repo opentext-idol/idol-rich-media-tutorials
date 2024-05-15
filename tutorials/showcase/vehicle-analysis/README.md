@@ -11,6 +11,8 @@ In this tutorial we will:
 
 This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../README.md#introduction).
 
+If you want to start here, you must at least follow these [installation steps](../../setup/SETUP.md) before continuing.
+
 ---
 
 - [Setup](#setup)
@@ -74,7 +76,7 @@ Type = numberplate
 Location = GB
 ```
 
-> You can also set multiple locations with or without weightings to indicate the relative likelihood of seeing a plate form that location:
+> TIP: You can also set multiple locations with or without weightings to indicate the relative likelihood of seeing a plate form that location:
 > 
 > ```ini
 > Location=FR,BE,DE

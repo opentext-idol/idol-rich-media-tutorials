@@ -11,6 +11,8 @@ In this tutorial we will:
 
 This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../README.md#introduction).
 
+If you want to start here, you must at least follow these [installation steps](../../setup/SETUP.md) before continuing.
+
 ---
 
 - [Setup](#setup)
@@ -59,7 +61,7 @@ The `Channels` section is where we instruct IDOL Media Server to request license
 VisualChannels=1
 ```
 
-> For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
+> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
 
 ## Training objects
 
@@ -168,8 +170,7 @@ Thickness = 3
 [CropObjects]
 Type = Crop
 Input = HighQualityObjects.Output
-Border = 15
-BorderUnit = Percent
+Border = 15%
 
 # Encoding
 [SaveFullImage]
@@ -183,7 +184,7 @@ ImageInput = CropObjects.Output
 OutputPath = output/football/%record.IdentityData.identifier%_%record.IdentityData.confidence%_%record.peakTime.timestamp%_crop.png
 ```
 
-> Unlike in the [introductory tutorial](../../introduction/PART_II.md#transformation-and-encoding), where used `draw.lua` to define out bound box color and line thickness, here were are specifying them directly.
+> NOTE: Unlike in the [introductory tutorial](../../introduction/PART_II.md#transformation-and-encoding), where used `draw.lua` to define out bound box color and line thickness, here were are specifying them directly.
 
 ### In-use tracks
 

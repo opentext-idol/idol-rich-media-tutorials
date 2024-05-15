@@ -67,6 +67,6 @@ module.exports = {
     top     : 50,
     width   : 50,
     height  : 50,
-    unit    : 'percent' // 'percent' or 'pixel'
+    unit    : '%' // '%' or 'px'
   }
 }

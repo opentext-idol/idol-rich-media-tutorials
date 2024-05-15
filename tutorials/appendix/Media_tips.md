@@ -57,7 +57,7 @@ There exist many free news streams on the web that you can connect to.  Often ne
 
 ![m3u8.png](./figs/m3u8.png)
 
-> While IDOL Media Server's Video ingest engine does support `https` on Windows, *it does not on Linux*.  Luckily, you can often change the URL protocol to `http` and it will still work, *e.g.* <https://live-hls-web-aje.getaj.net/AJE/03.m3u8> seen in the above screenshot can be safely changed to <http://live-hls-web-aje.getaj.net/AJE/03.m3u8>, as listed in the table below.
+> NOTE: While IDOL Media Server's Video ingest engine does support `https` on Windows, *it does not on Linux*.  Luckily, you can often change the URL protocol to `http` and it will still work, *e.g.* <https://live-hls-web-aje.getaj.net/AJE/03.m3u8> seen in the above screenshot can be safely changed to <http://live-hls-web-aje.getaj.net/AJE/03.m3u8>, as listed in the table below.
 
 The following streams were working at time of writing.
 
@@ -104,7 +104,7 @@ Hikvision | `rtsp://<IP>/Streaming/Channels/101/`
 IndigoVision | `rtsp://<IP>/`
 Pelco | `rtsp://<IP>/stream1`
 
-> If you cannot find a manual for your camera, or your manual does not include RTSP connection details (which is not uncommon), there are a number of websites that aggregate camera connection details.  I have found this one to be useful: <https://community.geniusvision.net/platform/cprndr/manurtsplist>.
+> TIP: If you cannot find a manual for your camera, or your manual does not include RTSP connection details (which is not uncommon), there are a number of websites that aggregate camera connection details.  I have found this one to be useful: <https://community.geniusvision.net/platform/cprndr/manurtsplist>.
 
 As with the Bosch connection example above, some cameras also expose configuration parameters in the URL.Most cameras will need to be configured via an embedded web configuration UI, similar to what you have on your internet router at home.  This UI will be accessible at `http://IP:80/`, where `IP` is again the IP address (or hostname) of the camera.
 
@@ -117,7 +117,7 @@ IDOL Media Server can connect directly to these RTSP streams if you configure th
 
 ### Academic datasets
 
-> Please check the license terms for these datasets.
+> NOTE: Please check the license terms for these datasets.
 
 - [COCO](http://cocodataset.org/): The "Common Objects in COntext" dataset is a large-scale object detection, segmentation, and captioning benchmark.
 - [Open Images](https://storage.googleapis.com/openimages/web/factsfigures.html): A dataset of 9.2M images with unified annotations for image classification, object detection and visual relationship detection.
@@ -126,14 +126,14 @@ IDOL Media Server can connect directly to these RTSP streams if you configure th
 - [MS-Celeb-1M](https://github.com/EB-Dodo/C-MS-Celeb): The Microsoft Research One Million Celebrities in the Real World dataset is a benchmark for large-scale face recognition.
 - [PETS2009](http://cs.binghamton.edu/~mrldata/pets2009): The IEEE International Workshop on Performance Evaluation of Tracking and Surveillance 2009 dataset is a public benchmark for the characterization of different crowd activities.
 
-    > The PETS2009 dataset is provided as folders of stills.  To concatenate them into videos, use the ffmpeg command:
+    > TIP: The PETS2009 dataset is provided as folders of stills.  To concatenate them into videos, use the ffmpeg command:
     > ```sh
     > ffmpeg -r 7 -i S3/Multiple_Flow/Time_12-43/View_008/frame_%04d.jpg -c:v libx264 -vf fps=25 -pix_fmt yuv420p S3_MF_Time_12-43_View_008.mp4
     > ```
 
 - [UA-DETRAC](http://detrac-db.rit.albany.edu/home): The University at Albany DEtection and TRACking dataset is a benchmark for challenging real-world multi-object detection and multi-object tracking.
 
-    > The UA-DETRAC dataset is provided as folders of stills.  To concatenate them into videos, use the ffmpeg command:
+    > TIP: The UA-DETRAC dataset is provided as folders of stills.  To concatenate them into videos, use the ffmpeg command:
     > ```sh
     > ffmpeg -r 25 -i ./MVI_40864/img%05d.jpg -c:v libx264 -vf fps=25 -pix_fmt yuv420p MVI_40864.mp4
     > ```
@@ -225,7 +225,7 @@ IDOL Media Server can read a playlist file in order to ingest a sequence of vide
 
 ![playlist-ingest](./figs/playlist-ingest.png)
 
-> To do this, note the Video-type ingest engine requires the `Format` option to be set to `Concat`.
+> NOTE: To do this, note the Video-type ingest engine requires the `Format` option to be set to `Concat`.
 
 #### Add tracks to existing media file
 

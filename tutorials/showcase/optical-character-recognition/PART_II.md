@@ -16,6 +16,8 @@ In this tutorial we will:
 
 This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../README.md#introduction), as well as [Part I](./PART_I.md) of this OCR tutorial.
 
+If you want to start here, you must at least follow these [installation steps](../../setup/SETUP.md) before continuing.
+
 If you have already tried the [Image Classification](../image-classification/README.md) and [Object Recognition](../logo-recognition/README.md) tutorials, you will be very familiar with those steps below.
 
 ---
@@ -78,7 +80,7 @@ The `Channels` section is where we instruct IDOL Media Server to request license
 VisualChannels=1
 ```
 
-> For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
+> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
 
 ## Capture embedded text
 
@@ -125,7 +127,7 @@ To separate and view the tabulated results in a convenient way, we will output a
 Type = XML
 Input0 = OCRAnalysis.Result
 Input1 = OCRAnalysis.TableResult
-XMLOutputPath = output/OCR/%source.filename.stem%_tables.html
+OutputPath = output/OCR/%source.filename.stem%_tables.html
 XslTemplate = toHTMLTable.xsl
 ```
 
@@ -141,7 +143,7 @@ LuaScript = tableText.lua
 [NonTableTextOutput]
 Type = XML
 Input = NonTableText.Output
-XMLOutputPath = output/OCR/%source.filename.stem%_notTables.txt
+OutputPath = output/OCR/%source.filename.stem%_notTables.txt
 XslTemplate = toText.xsl
 ```
 
@@ -181,7 +183,7 @@ We will combine the read from the barcode with the OCR-produced text by adding a
 Type = XML
 Input0 = NonTableText.Output
 Input1 = BarcodeAnalysis.Result
-XMLOutputPath = output/OCR/%source.filename.stem%_notTables.txt
+OutputPath = output/OCR/%source.filename.stem%_notTables.txt
 XslTemplate = toText.xsl
 ```
 
@@ -236,7 +238,7 @@ We will output the detection results as XML by adding the following output engin
 [DetectionXmlOutput]
 Type = XML
 Input = LogoAnalysis.Result
-XMLOutputPath = output/OCR/%source.filename.stem%_analysis.xml
+OutputPath = output/OCR/%source.filename.stem%_analysis.xml
 ```
 
 ### Process a document
@@ -289,7 +291,7 @@ We will output the detection results as XML by adding an additional input to the
 Type = XML
 Input0 = LogoAnalysis.Result
 Input1 = ImageClassAnalysis.Result
-XMLOutputPath = output/OCR/%source.filename.stem%_analysis.xml
+OutputPath = output/OCR/%source.filename.stem%_analysis.xml
 ```
 
 ### Process a document

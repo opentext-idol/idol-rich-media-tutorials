@@ -11,6 +11,8 @@ In this tutorial we will:
 
 This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../README.md#introduction).
 
+If you want to start here, you must at least follow these [installation steps](../../setup/SETUP.md) before continuing.
+
 ---
 
 - [Setup](#setup)
@@ -63,7 +65,7 @@ The `Channels` section is where we instruct IDOL Media Server to request license
 VisualChannels=1
 ```
 
-> For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
+> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
 
 #### Language support
 
@@ -100,7 +102,7 @@ To view the results in the simplest way, we will output lines of text by transfo
 [TxtOutput]
 Type = XML
 Input = OCRAnalysis.Result
-XMLOutputPath = output/OCR/%source.filename.stem%.txt
+OutputPath = output/OCR/%source.filename.stem%.txt
 XslTemplate = toText.xsl
 ```
 

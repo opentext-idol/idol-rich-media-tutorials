@@ -185,8 +185,7 @@ Engine4 = FaceDraw
 [FaceCrop]
 Type = Crop
 Input = FaceDetection.ResultWithSource
-Border = 15
-BorderUnit = Percent
+Border = 15%
 
 [FaceDraw]
 Type = Draw
@@ -370,7 +369,7 @@ Review the results with [`/action=GUI`](http://localhost:14000/a=gui#/monitor(to
 
 Stop processing with [`stop`](http://localhost:14000/a=queueInfo&queueAction=stop&queueName=process).
 
-> This is exactly the same process that was used *under the hood* in [this guide](../setup/WEBCAM.md) when testing your webcam connectivity using the IDOL Media Server user interface [`gui`](http://localhost:14000/a=gui#/ingest).
+> NOTE: This is exactly the same process that was used *under the hood* in [this guide](../setup/WEBCAM.md) when testing your webcam connectivity using the IDOL Media Server user interface [`gui`](http://localhost:14000/a=gui#/ingest).
 
 ## PART III - Face recognition
 

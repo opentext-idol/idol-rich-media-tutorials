@@ -5,7 +5,7 @@ The pre-trained Object Class Recognizers that ship with IDOL Media Server cover 
 1. use the IDOL Media Server GUI to upload and annotate sample images to train a recognizer for one new class
 1. process test images to identify this new class
 <!-- 1. discuss sources of new training data, e.g. OpenImages -->
-<!-- 1. use "snap-shotting" to optimize your own models -->
+<!-- 1. use "snapshots" to optimize your own models -->
 
 ---
 
