@@ -7,8 +7,8 @@ Dip into any of the following showcase guides to try more analytics.
 ---
 
 - [General interest](#general-interest)
-  - [Face Clustering](#face-clustering)
   - [Face Recognition](#face-recognition)
+  - [Face Clustering](#face-clustering)
   - [Image Classification](#image-classification)
   - [Object Class Recognition](#object-class-recognition)
   - [Optical Character Recognition](#optical-character-recognition)
@@ -28,6 +28,12 @@ Dip into any of the following showcase guides to try more analytics.
 
 ## General interest
 
+### Face Recognition
+
+Train and match faces from image and video. Discussion on how to tune your configuration for real-world performance.
+
+Start [here](./face-recognition/README.md).
+
 ### Face Clustering
 
 Automatically organize unsorted pictures of people into unique identities using Face Recognition clustering.
@@ -35,12 +41,6 @@ Automatically organize unsorted pictures of people into unique identities using 
 [Watch](https://www.youtube.com/watch?v=FlnAqKKrQYw&list=PLlUdEXI83_Xoq5Fe2iUnY8fjV9PuX61FA).
 
 <!-- TODO: Add lesson. -->
-
-### Face Recognition
-
-Train and match faces from image and video. Discussion on how to tune your configuration for real-world performance.
-
-Start [here](./face-recognition/README.md).
 
 ### Image Classification
 

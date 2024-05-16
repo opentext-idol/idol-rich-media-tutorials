@@ -1,6 +1,6 @@
 # Install Node.js
 
-This is a setup guide for the the server-side JavaScript interpreter `node.js`, which is required for [Part IV of the Introductory tutorial](../introduction/PART_III.md).
+This is a setup guide for the the server-side JavaScript interpreter `node.js`, which is required for [Part III of the Introductory tutorial](../introduction/PART_III.md).
 
 For other setup guides, follow [this link](README.md).
 

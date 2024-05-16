@@ -41,7 +41,7 @@ XSL templates are also commonly employed across many IDOL components to reformat
 
 ## People Counting app example
 
-Let's walk through the XSL transform we used in the people counting app in [PART IV](../introduction/PART_IV.md#receiving-alerts) of the introductory tutorial.  You can find the full file under `introduction/peopleCounter/toPeopleCounter.xsl`.
+Let's walk through the XSL transform we used in the people counting app in [PART III](../introduction/PART_III.md#receiving-alerts) of the introductory tutorial.  You can find the full file under `introduction/peopleCounter/toPeopleCounter.xsl`.
 
 ### The XSL stylesheet
 
@@ -205,7 +205,7 @@ My preferred approach for developing a new XSL transform is the following:
 
 ### Obtaining a source sample
 
-When we ran the XSL transform for the people counting app in [PART IV](../introduction/PART_IV.md#running-the-app) of the introductory tutorial, we configured the output engine to store XML before the transform with the following lines:
+When we ran the XSL transform for the people counting app in [PART III](../introduction/PART_III.md#running-the-app) of the introductory tutorial, we configured the output engine to store XML before the transform with the following lines:
 
 ```ini
 SavePreXML = True
@@ -216,7 +216,7 @@ You can go to this directory and copy one of those files, *e.g.* `pre_2_20180626
 
 ### Test running XSL transforms
 
-To make iterative testing faster, you can avoid the need to keep reprocessing your source with IDOL Media Server, *e.g.* on Windows by using a free command line tool `msxsl.exe` from Microsoft, and included in the folder next to this README.
+To make iterative testing faster, you can avoid the need to keep reprocessing your source with IDOL Media Server, *e.g.* on Windows by using a free command line tool `msxsl.exe` from Microsoft, and included in the folder next to this README since the download is no longer available.
 
 To run the transformation from your `introduction/peopleCounter` folder, download the command line tool and copy it here, then do:
 
@@ -246,7 +246,8 @@ Re-run the command line tool to see the new results:
 
 ```sh
 $ msxsl.exe pre_2_20180626-134615.xml toPeopleCounter2.xsl
-
+```
+```json
 { "eventType" : "Result", "elapsedMSec" : 10289, "faceWidth" : 190 }
 ```
 
