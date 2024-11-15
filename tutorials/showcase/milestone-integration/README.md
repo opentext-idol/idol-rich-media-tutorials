@@ -2,7 +2,7 @@
 
 IDOL Media Server offers integration with popular third party Video Management System (VMS) products from Milestone and Genetec. IDOL Media Server includes dedicated ingest engines to process live streaming video from Milestone's "XProtect" and Genetec's "Security Center". Both of these products offer methods to receive events from external systems, so IDOL Media Server also includes dedicated Milestone and Genetec output engines to send events back to these products.  In this way, IDOL Media Server can be positioned as an analytics plug-in for existing Milestone and Genetec customers.
 
-> NOTE: For customers who do not already have a VMS, it should be noted that IDOL Media Server's own [Rolling Buffer](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Operations/Encode/RollingBuffer_Introduction.htm) capability allows it to function as a VMS: recording live video from direct camera connection and facilitating playback, via HLS streaming, of that recorded video.
+> NOTE: For customers who do not already have a VMS, it should be noted that IDOL Media Server's own [Rolling Buffer](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Operations/Encode/RollingBuffer_Introduction.htm) capability allows it to function as a VMS: recording live video from direct camera connection and facilitating playback, via HLS streaming, of that recorded video.
 
 In this tutorial we will focus on Milestone XProtect Corporate as an example external VMS.  We will:
 
@@ -85,7 +85,8 @@ Milestone XProtect can attempt to automatically detect any IP cameras on your ne
 For this tutorial, we will use the video file `vehicles.avi`, which is included in the same folder as this guide.
 
 > NOTE: To try your own video, note that Milestone requires you to encode your video to `.avi` format.  You can do this using `ffmpeg`, with the command:
-> ```
+>
+> ```sh
 > ffmpeg -i vehicles.mp4 vehicles.avi
 > ```
 
@@ -136,10 +137,11 @@ We can make use of the IDOL Media Server user interface [/a=gui](http://localhos
 
 1. Go to the *Ingest Test* page.
 1. Select from the option dropdowns to ingest a "Stream" using "Milestone" and "NTLM" authentication:
-        
-    > NOTE: IDOL Media Server's Milestone ingest engine, described in full [here](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm), offers multiple authentication options to support different versions of Milestone XProtect.  The "Corporate" version requires "NTLM" authentication.
+
+    > NOTE: IDOL Media Server's Milestone ingest engine, described in full [here](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm), offers multiple authentication options to support different versions of Milestone XProtect.  The "Corporate" version requires "NTLM" authentication.
 
 1. The process action source for Milestone streams is the stream id, or `guid`.  Find it by running the following `curl` command:
+
     ```sh
     curl --ntlm --user <DOMAIN>/<USER>:<PASSWORD> http://localhost/rcserver/systeminfo.xml > systeminfo.xml
     ```
@@ -180,6 +182,7 @@ We can make use of the IDOL Media Server user interface [/a=gui](http://localhos
     ```
 
     > TIP: It is not recommended to enter your password in plain text.  IDOL Media Server includes a lightweight AES encryption tool `autpassword.exe`, which you can use to encrypt your password as follows:
+    >
     > ```sh
     > $ ./autpassword.exe -x -tAES -oKeyFile=./MyKeyFile.ky
     > ./MyKeyFile.ky=9b7aff82f1fa766985152790402a48f0ade3a20f196629b18e2eeb0c1735ff5f
@@ -204,26 +207,27 @@ MilestoneDirectory=libs/Milestone
 
 This `MilestoneDirectory` path must point to a folder containing the decoder libraries from Milestone's SDK.
 
-To obtain the Milestone SDK, 
-1.	Go to https://www.milestonesys.com/support/for-developers/sdk/ and register (it's free).
-1.	Install the MIPSDK (tested against 2021 R1), *e.g.* under `C:/Program Files/Milestone/MIPSDK`.
-1.	The MIPDSDK includes a handy batch script to copy the library files you need over to IDOL Media Server:
+To obtain the Milestone SDK,
 
-    ```
+1. Go to <https://www.milestonesys.com/support/for-developers/sdk/> and register (it's free).
+1. Install the MIPSDK (tested against 2021 R1), *e.g.* under `C:/Program Files/Milestone/MIPSDK`.
+1. The MIPDSDK includes a handy batch script to copy the library files you need over to IDOL Media Server:
+
+    ```cmd
     cd "C:/Program Files/Milestone/MIPSDK/Bin"
-    CopyMediaCpp.bat "C:/OpenText/MediaServer_24.2.0_WINDOWS_X86_64/libs/Milestone"
+    CopyMediaCpp.bat "C:/OpenText/MediaServer_24.4.0_WINDOWS_X86_64/libs/Milestone"
     ```
+
     > NOTE: 25 files should be copied.
 
 No additional session config parameters are required to enable this option.  On Windows, IDOL Media Server will simply check for the existence of these Milestone libraries and quietly fall back to the cross-platform option if they do not exist.
 
-The Milestone libraries offer some tuning options, which are exposed in IDOL Media Server's [Milestone Ingest Engine](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm).  These are:
+The Milestone libraries offer some tuning options, which are exposed in IDOL Media Server's [Milestone Ingest Engine](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm).  These are:
 
 Parameter | Default | Function
 --- | --- | ---
 DecoderThreads | 1 | Number of CPU threads available for Milestone decoder libraries.
 FrameDropping | False | If set to "True", enables the Milestone decoder's ["Skip to catch up mode"](https://doc.developer.milestonesys.com/html/MMTKhelp/mmp_source_toolkit.html).
-
 
 ## Configure IDOL Media Server for processing
 
@@ -290,7 +294,7 @@ Type = numberplate
 Location = GB
 ```
 
-> NOTE: For more on numberplate and vehicle analysis, try this [tutorial](../../README.md#vehicle-analysis).
+> NOTE: For more on numberplate and vehicle analysis, try this [tutorial](../../showcase/README.md#vehicle-analysis).
 
 #### Output
 
@@ -311,7 +315,7 @@ SavePostXML = true
 XMLOutputPath = output/milestone/%session.token%/%segment.type%_%%segment.sequence%.xml
 ```
 
-> NOTE: See the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/OutputEngines/Milestone/_Milestone.htm) for full details the Milestone output engine. 
+> NOTE: See the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/OutputEngines/Milestone/_Milestone.htm) for full details the Milestone output engine.
 
 The complete configuration is included here as `MilestoneANPR.cfg`.
 
@@ -333,6 +337,7 @@ Before running this process, we must configure Milestone to accept events from a
 - Rename the event to "ANPR" and save changes.
 
   > NOTE: If you wished to change the alert name from "ANPR", *e.g.* to "MyCustomEventName", you would have to change the default message in IDOL Media Server's `configurations/xsl/toMilestone.xsl` to match, *e.g.*:
+  >
   > ```diff
   > <xsl:template match="NumberPlateResult|NumberPlateResultAndImage">
   >   <xsl:variable name="score" select="numberplate/score"/>
@@ -360,11 +365,12 @@ Next, we must define an alarm, which will be triggered by our incoming ANPR even
   ![add-anpr-alarm](./figs/add-anpr-alarm.png)
 
 - Rename the alarm to "ANPR Alarm Definition".
-- Under "Trigger", 
-    - select "Analytics Events" from the first dropdown menu, 
-    - select your event called "ANPR",
-    - select your camera source, then 
-    - save changes.
+- Under "Trigger",
+
+  - select "Analytics Events" from the first dropdown menu,
+  - select your event called "ANPR",
+  - select your camera source, then
+  - save changes.
 
   ![configure-anpr-alarm](./figs/configure-anpr-alarm.png)
 

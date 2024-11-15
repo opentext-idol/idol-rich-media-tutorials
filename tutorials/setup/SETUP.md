@@ -40,8 +40,8 @@ You can obtain software and licenses from the [Software Licensing and Downloads]
 1. Scroll to the bottom and click `Activate` next to your *IDOL SW license*
 
     ![get-license](./figs/get-license.png)
- 
-1. On the "License Activation" screen, at the bottom, select the check box, choose your preferred version (the latest is 24.2), then fill in the quantity to activate:
+
+1. On the "License Activation" screen, at the bottom, select the check box, choose your preferred version (the latest is 24.4), then fill in the quantity to activate:
 
    ![eSoftware-selectLicense](./figs/eSoftware-selectLicense.png)
 
@@ -50,7 +50,7 @@ You can obtain software and licenses from the [Software Licensing and Downloads]
    ![eSoftware-configureLicense](./figs/eSoftware-configureLicense.png)
 
     > NOTE: IDOL License Server listens for HTTP requests from other IDOL components to provide them license seats.  The default port is `20000` but you are free to change this.
-
+    >
     > TIP: To obtain your MAC address and host name on Windows, open a command prompt and enter `ipconfig /all`.  Now look for the "Host Name" and "Physical Address" fields:
     >
     > ![ipconfig](./figs/ipconfig.png)
@@ -61,14 +61,11 @@ You can obtain software and licenses from the [Software Licensing and Downloads]
 
 ### Install IDOL software
 
-Follow one of these two methods to obtain and install IDOL software on your system:
-
-- Follow [these steps](INSTALL_WIZARD.md) to install IDOL using the graphical installer (*recommended*).
-- Follow [these steps](INSTALL_ZIPS.md) for a scripted installation of IDOL components (*advanced*).
+Follow [these steps](./INSTALL_ZIPS.md) for a scripted installation of IDOL components.
 
 ### Obtaining tutorial materials
 
-Get a local copy of this tutorial to give you all the configuration files and sample media you will need.  You can either clone this repository or download the `.zip` from [GitHub](https://github.com/microfocus-idol/idol-rich-media-tutorials).
+Get a local copy of this tutorial to give you all the configuration files and sample media you will need.  You can either clone this repository or download the `.zip` from [GitHub](https://github.com/opentext-idol/idol-rich-media-tutorials).
 
 ![github-download](./figs/github-download.png)
 
@@ -80,10 +77,10 @@ You can stay on GitHub to follow the steps in this and further linked README fil
 
 #### Validate install
 
-If you used the installer wizard, or the scripts without altering them, your installed software will be in:
+If you used the scripts without altering them, your installed software will be in:
 
-- `C:\OpenText\IDOLServer-24.2.0` (Windows)
-- `~/IDOLServer-24.2.0` (Linux)
+- `C:\OpenText\IDOLServer-24.4.0` (Windows)
+- `~/IDOLServer-24.4.0` (Linux)
 
 Each installed IDOL component will have its own sub-directory, which includes all required executables, dependencies and configuration files.  The primary configuration file for each shares the name of the component executable, *e.g.* `mediaserver.cfg` for `mediaserver.exe`.
 
@@ -105,5 +102,5 @@ Next start up IDOL Media Server in the same way and verify it is also running at
 The admin guides for all components can be accessed from these links:
 
 - [IDOL documentation home page](https://www.microfocus.com/documentation/idol/)
-- [License Server admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/LicenseServer_24.2_Documentation/Help/Content/_FT_SideNav_Startup.htm)
-- [Media Server admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/_FT_SideNav_Startup.htm)
+- [License Server admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/LicenseServer_24.4_Documentation/Help/Content/_FT_SideNav_Startup.htm)
+- [Media Server admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/_FT_SideNav_Startup.htm)

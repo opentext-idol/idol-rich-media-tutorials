@@ -7,7 +7,7 @@ pushd %~dp0
 
 set COMPONENTS=( LicenseServer, MediaServer )
 
-set VERSION=24.2.0
+set VERSION=24.4.0
 set INSTALL_BASE=C:\OpenText
 
 set SOURCE_DIR=%HOMEPATH%\Downloads
@@ -27,11 +27,11 @@ for %%i in %COMPONENTS% do (
   ren %INSTALL_DIR%\%%i_%VERSION%_WINDOWS_X86_64 %%i
 
   echo Installing %%i runtime dependencies...
-  if exist %INSTALL_DIR%\%%i\vcredist_2017.exe (
-    %INSTALL_DIR%\%%i\vcredist_2017.exe /install /passive /norestart
+  if exist %INSTALL_DIR%\%%i\vcredist.exe (
+    %INSTALL_DIR%\%%i\vcredist.exe /install /passive /norestart
   )
-  if exist %INSTALL_DIR%\%%i\runtime\vcredist_2017.exe (
-    %INSTALL_DIR%\%%i\runtime\vcredist_2017.exe /install /passive /norestart
+  if exist %INSTALL_DIR%\%%i\runtime\vcredist.exe (
+    %INSTALL_DIR%\%%i\runtime\vcredist.exe /install /passive /norestart
   )
   if exist %INSTALL_DIR%\%%i\runtime\vcredist_2019.exe (
     %INSTALL_DIR%\%%i\runtime\vcredist_2019.exe /install /passive /norestart

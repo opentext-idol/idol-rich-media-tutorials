@@ -77,18 +77,18 @@ Location = GB
 ```
 
 > TIP: You can also set multiple locations with or without weightings to indicate the relative likelihood of seeing a plate form that location:
-> 
+>
 > ```ini
 > Location=FR,BE,DE
 > ```
-> 
+>
 > or
-> 
+>
 > ```ini
 > LocationWithPriorities=FR:1.0,BE:0.1,DE:0.01
 > ```
 
-This minimal configuration quietly uses the following default options, which can be read about in detail in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/ANPR/_NumberPlate.htm) and are shown here grouped by their functions.
+This minimal configuration quietly uses the following default options, which can be read about in detail in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Analysis/ANPR/_NumberPlate.htm) and are shown here grouped by their functions.
 
 ```ini
 # Detection of plates
@@ -209,11 +209,11 @@ Open the training web app at [`/action=gui`](http://127.0.0.1:14000/a=gui#/train
 
 ![vehicle-training](./figs/vehicle-training.png)
 
-> TIP: Cameras that are positioned on a gantry over the traffic are best suited for recognition because they capture images where the vehicles approach head-on.  For further recommendations about image quality, and for instructions to collect your own vehicle model training images, read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Training/VehicleModel_Introduction.htm).
+> TIP: Cameras that are positioned on a gantry over the traffic are best suited for recognition because they capture images where the vehicles approach head-on.  For further recommendations about image quality, and for instructions to collect your own vehicle model training images, read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Training/VehicleModel_Introduction.htm).
 
 ### Assessing images for training
 
-When selecting images of faces for training, we should follow the above guidance given in the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Training/VehicleModel_Introduction.htm).
+When selecting images of faces for training, we should follow the above guidance given in the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Training/VehicleModel_Introduction.htm).
 
 > TIP: Cameras that are positioned on a gantry over the traffic are best suited for recognition because they capture images where the vehicles approach head-on.
 

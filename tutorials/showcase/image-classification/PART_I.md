@@ -19,7 +19,7 @@ If you want to start here, you must at least follow these [installation steps](.
   - [Import pre-defined classifiers](#import-pre-defined-classifiers)
 - [Process configuration](#process-configuration)
   - [Obtaining a random test image](#obtaining-a-random-test-image)
-  - [Config file](#config-file)
+  - [Config file creation](#config-file-creation)
 - [Running our analysis](#running-our-analysis)
 - [PART II - Build a custom classifier](#part-ii---build-a-custom-classifier)
 
@@ -56,17 +56,17 @@ VisualChannels=1
 
 OpenText provides a set of pre-defined training packs for IDOL Media Server, including image classifiers. IDOL Media Server also allows you to train your own classifiers by uploading and labelling your own images.
 
-That training can be performed through IDOL Media Server's web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Actions/Training/_ImageClassification.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
+That training can be performed through IDOL Media Server's web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Actions/Training/_ImageClassification.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
 
 ### Import pre-defined classifiers
 
-Pre-trained *Image Classification* packages are distributed separately from the main IDOL Media Server installer.  To obtain the training pack, return to the [Software Licensing and Downloads](https://sld.microfocus.com/mysoftware/index) portal, then:
+Pre-trained *Image Classification* packages are distributed separately from the main IDOL Media Server package.  To obtain the training pack, return to the [Software Licensing and Downloads](https://sld.microfocus.com/mysoftware/index) portal, then:
 
 1. Under the *Downloads* tab, select your product, product name and version from the dropdowns:
 
     ![get-software](../../setup/figs/get-software.png)
 
-1. From the list of available files, select and download `MediaServerPretrainedModels_24.2.0_COMMON.zip`.
+1. From the list of available files, select and download `MediaServerPretrainedModels_24.4.0_COMMON.zip`.
 
     ![get-pretrained-zip](../../setup/figs/get-pretrained-zip.png)
 
@@ -93,7 +93,7 @@ A fun source of random photographs is the [Lorem Flickr](https://loremflickr.com
 
 ![random-image](./kitten.jpg)
 
-### Config file 
+### Config file creation
 
 Let's build a process configuration using the interactive [config builder](http://localhost:14000/a=gui#/process).
 
@@ -111,7 +111,7 @@ To analyze an image file, include the following engines:
 
     ![config-classifier](./figs/config-classifier.png)
 
-    > NOTE: For full details on this and other available options for *Image Classification*, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/ImageClass/_ImageClassification.htm).
+    > NOTE: For full details on this and other available options for *Image Classification*, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Analysis/ImageClass/_ImageClassification.htm).
 
 1. Let's output the results to disk.  Add the "XML"-type output engine to do that:
 
@@ -177,9 +177,10 @@ Open this file to see the classification results.  Within this XML, note the `<I
 ```
 
 > NOTE: This image labelling can be used to facilitate image search, where:
+>
 > - the image can be retrieved from the search term "Egyptian cat". and
 > - the image can be used to generate a query looking for documents (and other images) about Egyptian cats.
 
 ## PART II - Build a custom classifier
 
-Start [here](PART_II.md).
+Start [here](./PART_II.md).

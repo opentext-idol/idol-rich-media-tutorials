@@ -31,7 +31,7 @@ IDOL Media Server can be trained to distinguish between classes of image content
 
 Image Classification works by saying how alike a test image (or video frame) is to each of the trained classes in a given classifier.  In the previous lesson you used the ImageNet pre-trained classifier to label a test image of a kitten.  The ImageNet classifier contains many other classes and is usually a sufficient and capable tool for any image labelling use case out of the box.
 
-Custom classifiers on the other hand, are most often used not to label but to pick a winner, *i.e.*: 
+Custom classifiers on the other hand, are most often used not to label but to pick a winner, *i.e.*:
 
 - Is a railway platform crowded or quiet?
 - Is a bank teller's window open or closed?
@@ -41,7 +41,7 @@ Custom classifiers on the other hand, are most often used not to label but to pi
 
 > NOTE: This short list gives a flavor of the real-world problems have been successfully addressed with Media Server's Image Classification in recent years.
 
-IDOL Media Server training can be performed through its web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Actions/Training/_TrainingActions.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
+IDOL Media Server training can be performed through its web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Actions/Training/_TrainingActions.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
 
 ### Collect sample training images
 
@@ -52,16 +52,20 @@ In this tutorial, we will train a new classifier to distinguish between video fr
 These images are included in the folder `tutorials/showcase/image-classification/train`.  
 
 > NOTE: For reference, these were obtained with the following steps:
-> 
+>
 > 1. Recording five-minute video clips from the RTVE News channel [live stream](../../appendix/Media_tips.md#video-file-and-streamed-sources-from-the-web), using the method described in the [appendix](../../appendix/Media_tips.md#record-videoaudio-from-an-ip-stream):
+>
 >     ```sh
 >     ffmpeg -i http://rtvelivestream-clnx.rtve.es/rtvesec/24h/24h_main_576.m3u8 -f segment -segment_time 300 -an -vcodec copy clip%04d.mp4
 >     ```
+>
 > 1. Extracting stills from the clips at 2-second intervals, using the method described in the [appendix](../../appendix/Media_tips.md#extract-still-images-from-a-video-file), *e.g.*:
+>
 >     ```sh
 >     mkdir clip0001
 >     ffmpeg -i clip0001.mp4 -vf fps=0.5 clip0001/out%03d.jpg
 >     ```
+>
 > 1. Manually reviewing the stills to select a variety of weather report, interview and newsreader (newscaster) shots.  For each class, six shots were selected: five for training and one reserved for testing.
 
 ### Class and image selection best practice
@@ -69,11 +73,12 @@ These images are included in the folder `tutorials/showcase/image-classification
 An image classifier is trained to differentiate between different types of scene.  Therefore a classifier must contain at least two classes and the classes you choose to define should be well differentiated, *i.e.* any image from one class should look different by eye to an image from any other class.
 
 When selecting images to exemplify a class, make sure they are:
+
 - self-similar, *i.e.* any two images from the class look similar by eye, and
 - representative of real-world variation.
 
 > NOTE: In the sample data provided for news readers, we include backgrounds and different people.
-
+>
 > INFO: Read the cautionary tale of the time-of-day-detecting [tank recognition AI](https://gwern.net/tank).
 
 ### Add training images
@@ -96,7 +101,7 @@ Open the IDOL Media Server [`gui`](http://localhost:14000/a=gui#/train/imageClas
 
 Image classification uses Convolutional Neural Network (CNN) classifiers. A CNN classifier usually produces more accurate results than other types of classifier, but can require a significant amount of time to train.
 
-> NOTE: For this lesson we have only a small number of images, so training with CPU can be done in a manageable time; however, in general it is *strongly recommended* to utilize GPU acceleration for training.  For details on GPU support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Advanced/GPU.htm).
+> NOTE: For this lesson we have only a small number of images, so training with CPU can be done in a manageable time; however, in general it is *strongly recommended* to utilize GPU acceleration for training.  For details on GPU support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Advanced/GPU.htm).
 
 The time required to train a classifier is proportional to the number of training iterations.  Increasing the number of iterations can result in better accuracy, but running too many iterations may result in over-fitting.
 
@@ -106,7 +111,7 @@ Back in the GUI, on the bottom right of the list of classes, click the "Options"
 
 ![build-classifier-options](./figs/build-classifier-options.png)
 
-> NOTE: For details on available training options, please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Actions/Training/SetClassifierTrainingOption.htm).
+> NOTE: For details on available training options, please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Actions/Training/SetClassifierTrainingOption.htm).
 
 Click "Confirm" to apply your change.  Now we're ready to click `Build`.
 
@@ -122,7 +127,7 @@ Type = ImageClassification
 Classifier = Workshop
 ```
 
-> NOTE: More options are available for the *Image Classification* analysis engine, including setting the matching threshold and allowing multiple matches to be returned.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Configuration/Analysis/ImageClass/_ImageClassification.htm) for details.
+> NOTE: More options are available for the *Image Classification* analysis engine, including setting the matching threshold and allowing multiple matches to be returned.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Configuration/Analysis/ImageClass/_ImageClassification.htm) for details.
 
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
@@ -159,11 +164,11 @@ Modify the above command to do the same for the test images `newsreader.jpg` and
 
 We can optionally configure Media Server to take "snapshots" of our new model at regular intervals during the training process.  
 
-By setting aside some of your training images for evaluation purposes, you can then compare the accuracy (precision and recall) of your model at each snapshot. 
+By setting aside some of your training images for evaluation purposes, you can then compare the accuracy (precision and recall) of your model at each snapshot.
 
 You can then select the best performing snapshot to "publish" and therefore avoid over-fitting.
 
-> NOTE: For full details, please refer to the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Training/ImageClass_CreateClassifier.htm).
+> NOTE: For full details, please refer to the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Training/ImageClass_CreateClassifier.htm).
 
 #### Retrain with snapshots
 
@@ -181,25 +186,25 @@ When the build is complete, note that your classifier has entered a new "snapsho
 
 Click the "Snapshots" button to open a dedicated window.  When you first do this, you will automatically trigger a task to test the last snapshot of your build:
 
-![view-snapshots](figs/view-snapshots.png)
+![view-snapshots](./figs/view-snapshots.png)
 
 Once the test task is completed, you can view the calculated accuracy (recall, precision and F1) for the combined classifier as well as for each individual class.
 
 Optionally, click the "Test" button on the other snapshots to run test tasks for them:
 
-![more-snapshots](figs/more-snapshots.png)
+![more-snapshots](./figs/more-snapshots.png)
 
-In this case, we see "perfect" accuracy for our first and last snapshots, so we have no reason to choose anything other than the last one. 
+In this case, we see "perfect" accuracy for our first and last snapshots, so we have no reason to choose anything other than the last one.
 
 #### Fixing a snapshot
 
 In the current state, our model is already usable and will operate using the final build state, *i.e.* the last snapshot.
 
-![workshop-demo](figs/workshop-demo.png)
+![workshop-demo](./figs/workshop-demo.png)
 
 To "fix" or "publish" the model at your preferred snapshot, back to the snapshots window, hit "Select" button on your preferred snapshot.
 
-![confirm-snapshot](figs/confirm-snapshot.png)
+![confirm-snapshot](./figs/confirm-snapshot.png)
 
 The unwanted snapshots will be removed and your model will now be in the "trained" (green) state.
 

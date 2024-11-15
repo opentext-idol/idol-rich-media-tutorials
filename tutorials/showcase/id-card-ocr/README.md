@@ -2,14 +2,14 @@
 
 Media Server includes an Optical Character Recognition (OCR) analysis engine, which can be configured to read specific scripts in images and video, such as Japanese characters or Arabic numerals.
 
-For a detailed introduction to Optical Character Recognition, see the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/Content/Operations/Analyze/OCR_overview.htm).
+For a detailed introduction to Optical Character Recognition, see the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_3/MediaServer_24.3_Documentation/Help/Content/Operations/Analyze/OCR_overview.htm).
 
 In this tutorial we will:
 
 1. use the OCR analysis engine to read the text from an image of an ID card
 
-    ![id-card](Turkey1.png)
-    
+    ![id-card](./Turkey1.png)
+
 1. use Object Recognition to recognize a specific document type
 1. define a document type template in order to maintain document structure after OCR
 1. encode a redacted version of the ID card image to hide sensitive data
@@ -32,23 +32,23 @@ If you want to start here, you must at least follow these [installation steps](.
 - [Recognize a specific document](#recognize-a-specific-document)
   - [Train Object Recognition](#train-object-recognition)
   - [Detect and extract an ID Card](#detect-and-extract-an-id-card)
-    - [Analysis](#analysis-1)
+    - [Analysis with Object Recognition](#analysis-with-object-recognition)
     - [Rotate and crop](#rotate-and-crop)
     - [Run](#run)
   - [Templated cropping](#templated-cropping)
     - [Train a template](#train-a-template)
     - [Use our template](#use-our-template)
-    - [Run](#run-1)
+    - [Run card cropping](#run-card-cropping)
   - [Templated OCR](#templated-ocr)
     - [Define the OCR regions](#define-the-ocr-regions)
     - [Add the OCR regions to the template](#add-the-ocr-regions-to-the-template)
     - [Use the OCR regions](#use-the-ocr-regions)
-    - [Run](#run-2)
+    - [Run templated OCR](#run-templated-ocr)
 - [Redact personal information](#redact-personal-information)
   - [Text data](#text-data)
   - [Other sensitive information](#other-sensitive-information)
   - [Face Detection](#face-detection)
-  - [Running our analysis](#running-our-analysis-1)
+  - [Run with redaction](#run-with-redaction)
 - [Next steps](#next-steps)
 
 ---
@@ -103,7 +103,7 @@ Engine0 = Source
 Type = image
 ```
 
-For full details on the options available for ingesting image sources, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/Ingest/Image/_Image.htm).
+For full details on the options available for ingesting image sources, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_3/MediaServer_24.3_Documentation/Help/index.html#Configuration/Ingest/Image/_Image.htm).
 
 ### Analysis
 
@@ -116,7 +116,7 @@ OCRMode = document
 Languages = en,tr
 ```
 
-We have specified parameters that affect how the analytic runs, namely the running mode and which languages to search for.  For full details on these and other available options, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/Analysis/OCR/_OCR.htm).
+We have specified parameters that affect how the analytic runs, namely the running mode and which languages to search for.  For full details on these and other available options, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_3/MediaServer_24.3_Documentation/Help/index.html#Configuration/Analysis/OCR/_OCR.htm).
 
 ### Output
 
@@ -130,7 +130,7 @@ OutputPath = output/idCard1/%source.filename%.txt
 XSLTemplate = toText.xsl
 ```
 
-As in the introductory tutorials, we are using an XSL transform to extract the words from the standard XML output.  In this case, using an out-of-the-box transform included with Media Server.  See [tips on XSL transforms](../../appendix/XSL_tips.md) for more information. 
+As in the introductory tutorials, we are using an XSL transform to extract the words from the standard XML output.  In this case, using an out-of-the-box transform included with Media Server.  See [tips on XSL transforms](../../appendix/XSL_tips.md) for more information.
 
 ### Running our analysis
 
@@ -163,6 +163,7 @@ We have correctly read almost all the text and, for many use cases, this may be 
 ## Recognize a specific document
 
 Being able to recognize particular documents provides the following advantages:
+
 1. If there is more than one ID Card on the same page, we can separate individual documents.
 1. We can define regions for OCR where we can read specific information, such as Surname or Birth Date and preserve that information structure in our output.
 
@@ -170,7 +171,7 @@ Being able to recognize particular documents provides the following advantages:
 
 We can train Object Recognition to recognize a document by providing an "anchor image", *i.e.* a part of the document that will look the same for any instance of that document, such as a title bar or logo mark.
 
-> NOTE: See the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/Content/Training/Object_ImageGuide.htm) for advice on selecting good images for training. 
+> NOTE: See the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_3/MediaServer_24.3_Documentation/Help/Content/Training/Object_ImageGuide.htm) for advice on selecting good images for training.
 
 To create one, open your favorite image editing software and crop out a section and save it as a new image file, *e.g*:
 
@@ -186,15 +187,15 @@ We can now train this image via the API or by using the Media Server [GUI](http:
 
     ![trained_template](./figs/trained_template.png)
 
-For full details on training options for Object Recognition, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Actions/Training/TrainObject.htm).
+For full details on training options for Object Recognition, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_3/MediaServer_24.3_Documentation/Help/index.html#Actions/Training/TrainObject.htm).
 
 ### Detect and extract an ID Card
 
 Imagine this document was scanned and the person who did it put the card in upside down or rotated to one side.  We want to be able to automatically correct that rotation and crop out each card to a separate them.
 
-![rotated](Turkey2.png)
+![rotated](./Turkey2.png)
 
-#### Analysis
+#### Analysis with Object Recognition
 
 To identify the trained document anchor, we need to run Object Recognition using the following configuration:
 
@@ -205,7 +206,7 @@ Database = IDCardTemplates
 Geometry = SIM2
 ```
 
-Here we use the Geometry option `SIM2` to only consider 2-dimensional rotations, since we assume these ID cards are scanned.  For full details on options for Object Recognition, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/Analysis/Object/_Object.htm).
+Here we use the Geometry option `SIM2` to only consider 2-dimensional rotations, since we assume these ID cards are scanned.  For full details on options for Object Recognition, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_3/MediaServer_24.3_Documentation/Help/index.html#Configuration/Analysis/Object/_Object.htm).
 
 #### Rotate and crop
 
@@ -218,7 +219,7 @@ Input = DetectAnchor.ResultWithSource
 LuaLine = function getAngle(x) return -x.ObjectRecognitionResultAndImage.inPlaneRotation end
 ```
 
-Where we are using a Lua line to capture the angle of rotation of the detected anchor.  See [tips on working with Lua](../../appendix/Lua_tips.md) for more information. 
+Where we are using a Lua line to capture the angle of rotation of the detected anchor.  See [tips on working with Lua](../../appendix/Lua_tips.md) for more information.
 
 To set a region around the anchor to define the entire card, we need to include the following transform configuration:
 
@@ -230,7 +231,7 @@ LuaLine = function rectangle(x) return { left = x.RegionData.left - 0.5 * x.Regi
 
 ```
 
-For full details on these and other available transformations, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Configuration/Transform/_Transform.htm).
+For full details on these and other available transformations, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_3/MediaServer_24.3_Documentation/Help/index.html#Configuration/Transform/_Transform.htm).
 
 Finally we can crop to that region and encode an image for each card.  See the included file `idCard2.cfg` for full details.
 
@@ -259,7 +260,7 @@ We can make use of the Media Server [GUI](http://localhost:14000/a=gui) to defin
 1. Go to the *Ingest Test* page.
 1. Import the image file `Turkey1.png`, then click the `Ingest` button.
 1. Click the `draw regions` button:
-    
+
     ![draw_regions](./figs/draw_regions.png)
 
 1. With your mouse over the image of the ID card, click and drag then release to define a region to match your anchor image.
@@ -298,7 +299,7 @@ LuaScript = getIdCardBoundary.lua
 
 This script reads the metadata fields from the Object Recognition result and uses them to calculate the ID card boundary rectangle.
 
-#### Run
+#### Run card cropping
 
 First, copy the included file `getIdCardBoundary.lua` into Media Server's `configurations\lua` folder.
 
@@ -327,7 +328,7 @@ We will again make use of the Media Server [GUI](http://localhost:14000/a=gui) t
 1. Go to the *Ingest Test* page.
 1. Import the image file `Turkey1.png`, then click the `Ingest` button.
 1. Click the `draw regions` button:
-    
+
     ![draw_regions](./figs/draw_regions.png)
 
 1. With your mouse over the image of the ID card, click and drag then release to define your regions.
@@ -353,11 +354,12 @@ Next we will again add these regions to the trained Object Recognition anchor as
 
     > NOTE: As before, you must replace the commas between numbers with spaces.
 
-2. Repeat this process for each field and you will start to build a list of metadata like this:
+1. Repeat this process for each field and you will start to build a list of metadata like this:
 
     ![completed_metadata](./figs/completed_metadata.png)
   
-> TIP: As a short cut, you can add each OCR region for this particular ID Card by clicking each of the following links in turn to call the API: 
+> TIP: As a short cut, you can add each OCR region for this particular ID Card by clicking each of the following links in turn to call the API:
+>
 > - [`1. OCR_Surname`](http://localhost:14000/action=AddObjectMetadata&database=IDCardTemplates&identifier=TurkishDriversLicense&key=OCR_Surname&value=38%2022%2035%209)
 > - [`2. OCR_Forename`](http://localhost:14000/action=AddObjectMetadata&database=IDCardTemplates&identifier=TurkishDriversLicense&key=OCR_Forename&value=38%2030%2035%209)
 > - [`3. OCR_DateAndPlaceOfBirth`](http://localhost:14000/action=AddObjectMetadata&database=IDCardTemplates&identifier=TurkishDriversLicense&key=OCR_DateAndPlaceOfBirth&value=38%2038%2035%209)
@@ -370,7 +372,7 @@ Next we will again add these regions to the trained Object Recognition anchor as
 >
 > NOTE: You may need to refresh the GUI to display these new metadata fields.
 
-For full details on the metadata API for Object Recognition, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_12_13/MediaServer_12.13_Documentation/Help/index.html#Actions/Training/AddObjectMetadata.htm).
+For full details on the metadata API for Object Recognition, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_3/MediaServer_24.3_Documentation/Help/index.html#Actions/Training/AddObjectMetadata.htm).
 
 #### Use the OCR regions
 
@@ -399,7 +401,7 @@ An added benefit of this approach is that individual OCR engines can be customiz
 
 As an example format for the output data, let's use a custom XSL transform `IdCard_toJSON.xsl` to convert the results into JSON.
 
-#### Run
+#### Run templated OCR
 
 First, copy the included set of Lua scripts `getIdCardOCR_*.lua` into Media Server's `configurations\lua` folder.
 
@@ -436,7 +438,7 @@ We can also define non-OCR readable elements in our template for later redaction
 
 ### Face Detection
 
-This and many ID cards contain faces.  We could define a redaction region in our template for this face but for fun, let's use Media Server to find and then blur it automatically.:
+This and many ID cards contain faces.  We could define a redaction region in our template for this face but for fun, let's use Media Server to find and then blur it automatically:
 
 ```ini
 [FaceDetect]
@@ -452,7 +454,7 @@ Type = Blur
 Input = CombineFaces.Output
 ```
 
-### Running our analysis
+### Run with redaction
 
 First, copy the additional Lua scripts `redactIdCard.lua` and `getIdCardRegion_VehicleType.lua` into Media Server's `configurations\lua` folder.
 

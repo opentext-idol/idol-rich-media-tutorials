@@ -245,8 +245,9 @@ Now, add an additional line to get the face width:
 Re-run the command line tool to see the new results:
 
 ```sh
-$ msxsl.exe pre_2_20180626-134615.xml toPeopleCounter2.xsl
+msxsl.exe pre_2_20180626-134615.xml toPeopleCounter2.xsl
 ```
+
 ```json
 { "eventType" : "Result", "elapsedMSec" : 10289, "faceWidth" : 190 }
 ```

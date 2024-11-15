@@ -72,7 +72,7 @@ Process CCTV video to track people and vehicles.  Learn how to use IDOL Media Se
 
 Detect people and perform additional visual analytics to label clothing type and color, head covering and more.
 
-__*COMING SOON*__
+> COMING SOON!
 
 ### Vehicle analysis
 

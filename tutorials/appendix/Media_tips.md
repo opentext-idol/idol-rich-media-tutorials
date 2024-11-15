@@ -1,5 +1,7 @@
 # Rich media tips
 
+A collection of tips and tricks to support your future projects in image, video and audio processing.
+
 ---
 
 - [Useful third-party software](#useful-third-party-software)
@@ -53,11 +55,11 @@ Typically, you will be able to get audio, video or image samples from your custo
 1. Make use of open data shared by the academic community, see [below](#academic-datasets).
 1. Search for rights-free media on the web, *e.g.* [pexels.com](https://www.pexels.com/).
 1. Download video files or stream video from YouTube, *e.g.* as described [below](#download-a-video-from-youtube).
-1. Connect to a video file or stream embedded in a website, *e.g.* from a news broadcaster's website, as described [below](#video-stream-sources-from-the-web).
+1. Connect to a video file or stream embedded in a website, *e.g.* from a news broadcaster's website, as described [below](#video-file-and-streamed-sources-from-the-web).
 
 ### Video file and streamed sources from the web
 
-There exist many free news streams on the web that you can connect to.  Often news websites include a "Live" page where you can view the channel in your browser.  Under the hood, the page is often requesting an HLS stream index `.m3u8` file.  We can identify these files by manually inspecting websites, *i.e.* by pressing `F12` and filtering on files downloaded in the Network tab. 
+There exist many free news streams on the web that you can connect to.  Often news websites include a "Live" page where you can view the channel in your browser.  Under the hood, the page is often requesting an HLS stream index `.m3u8` file.  We can identify these files by manually inspecting websites, *i.e.* by pressing `F12` and filtering on files downloaded in the Network tab.
 
 ![m3u8.png](./figs/m3u8.png)
 
@@ -69,48 +71,51 @@ The following streams were working at time of writing.
 
 Language | Broadcaster | Resolution | Link
 --- | --- | --- | ---
-Arabic | Al Jazeera | 960x540 | http://live-hls-web-aja.getaj.net/AJA/03.m3u8
-English | CBS News | 640x360 | http://cbsn-us.cbsnstream.cbsnews.com/out/v1/55a8648e8f134e82a470f83d562deeca/master_11.m3u8
-English | DW | 712x400 | https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream02/streamPlaylist.m3u8
-Spanish | RTVE 24h | 1024x576 | https://rtvelivestream-clnx.rtve.es/rtvesec/24h/24h_main_576.m3u8
+Arabic | Al Jazeera | 960x540 | <http://live-hls-web-aja.getaj.net/AJA/03.m3u8>
+English | CBS News | 640x360 | <http://cbsn-us.cbsnstream.cbsnews.com/out/v1/55a8648e8f134e82a470f83d562deeca/master_11.m3u8>
+English | DW | 712x400 | <https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream02/streamPlaylist.m3u8>
+Spanish | RTVE 24h | 1024x576 | <https://rtvelivestream-clnx.rtve.es/rtvesec/24h/24h_main_576.m3u8>
 
-These streams can be directly ingested by IDOL Media Server using the the multi-purpose [Video](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  The easiest way to try this is with the [GUI Ingest Test page](http://localhost:14000/a=gui#/ingest):
+These streams can be directly ingested by IDOL Media Server using the the multi-purpose [Video](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  The easiest way to try this is with the [GUI Ingest Test page](http://localhost:14000/a=gui#/ingest):
 
-![ingest-test-stream](figs/ingest-test-stream.png)
+![ingest-test-stream](./figs/ingest-test-stream.png)
 
 #### Language variants
 
 For some channels, you can find alternative language streams:
 
 - Al Jazeera:
+
     Stream | Resolution
     --- | ---
-    http://live-hls-web-aja.getaj.net/AJA/03.m3u8 | Arabic
-    http://live-hls-web-aje.getaj.net/AJE/03.m3u8 | English
+    <http://live-hls-web-aja.getaj.net/AJA/03.m3u8> | Arabic
+    <http://live-hls-web-aje.getaj.net/AJE/03.m3u8> | English
 
 #### Resolution variants
 
 Some channels have multiple streams with different quality, which may be easy to switch between if you inspect the URL:
 
 - Al Jazeera English:
+
     Stream | Resolution
     --- | ---
-    http://live-hls-web-aje.getaj.net/AJE/01.m3u8 | 1920x1080
-    http://live-hls-web-aje.getaj.net/AJE/02.m3u8 | 1280x720
-    http://live-hls-web-aje.getaj.net/AJE/03.m3u8 | 960x540
-    http://live-hls-web-aje.getaj.net/AJE/04.m3u8 | 746x420
-    http://live-hls-web-aje.getaj.net/AJE/05.m3u8 | 640x360
+    <http://live-hls-web-aje.getaj.net/AJE/01.m3u8> | 1920x1080
+    <http://live-hls-web-aje.getaj.net/AJE/02.m3u8> | 1280x720
+    <http://live-hls-web-aje.getaj.net/AJE/03.m3u8> | 960x540
+    <http://live-hls-web-aje.getaj.net/AJE/04.m3u8> | 746x420
+    <http://live-hls-web-aje.getaj.net/AJE/05.m3u8> | 640x360
 
 - Deutsche Welle English:
+
     Stream | Resolution
     --- | ---
-    https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream01/streamPlaylist.m3u8 | 640x360
-    https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream02/streamPlaylist.m3u8 | 712x400
-    https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream03/streamPlaylist.m3u8 | 1024x576
-    https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream04/streamPlaylist.m3u8 | 1280x720
-    https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream05/streamPlaylist.m3u8 | 1920x1080
+    <https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream01/streamPlaylist.m3u8> | 640x360
+    <https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream02/streamPlaylist.m3u8> | 712x400
+    <https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream03/streamPlaylist.m3u8> | 1024x576
+    <https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream04/streamPlaylist.m3u8> | 1280x720
+    <https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream05/streamPlaylist.m3u8> | 1920x1080
 
-> TIP: There are also good third-party lists of IPTV streams on the web, *e.g.* https://iptv-org.github.io/.
+> TIP: There are also good third-party lists of IPTV streams on the web, *e.g.* <https://iptv-org.github.io/>.
 
 #### Live YouTube channels
 
@@ -118,13 +123,13 @@ Increasingly, broadcasters are offering live streaming news via YouTube.  Some e
 
 Language | Broadcaster | Link
 --- | --- | ---
-Chinese | TVBS NEWS | https://www.youtube.com/watch?v=m_dhMSvUCIc
-French | France 24 | https://www.youtube.com/watch?v=l8PMl7tUDIE
-Japanese | ANN News | https://www.youtube.com/watch?v=coYw-eVU0Ks
-Hindi | NDTV | https://www.youtube.com/watch?v=MN8p-Vrn6G0
-Spanish | Milenio TV | https://www.youtube.com/watch?v=CdipE7sDoDU
-Turkish | CNN | https://www.youtube.com/watch?v=X_EWYemclKA
-Ukrainian | 112 Украина | https://www.youtube.com/watch?v=EITCN6MhNbY
+Chinese | TVBS NEWS | <https://www.youtube.com/watch?v=m_dhMSvUCIc>
+French | France 24 | <https://www.youtube.com/watch?v=l8PMl7tUDIE>
+Japanese | ANN News | <https://www.youtube.com/watch?v=coYw-eVU0Ks>
+Hindi | NDTV | <https://www.youtube.com/watch?v=MN8p-Vrn6G0>
+Spanish | Milenio TV | <https://www.youtube.com/watch?v=xIfl74SFiDA>
+Turkish | CNN | <https://www.youtube.com/watch?v=Ue9SnIpwNB4>
+Ukrainian | 112 Украина | <https://www.youtube.com/watch?v=EITCN6MhNbY>
 
 These urls __*cannot*__ be directly ingested by IDOL Media Server however, YouTube also provides HLS index `.m3u8` files, which __*can*__ be ingested as described [below](#record-videoaudio-from-a-live-youtube-channel).
 
@@ -150,19 +155,19 @@ Pelco | `rtsp://<IP>/stream1`
 
 As with the Bosch connection example above, some cameras also expose configuration parameters in the URL.Most cameras will need to be configured via an embedded web configuration UI, similar to what you have on your internet router at home.  This UI will be accessible at `http://IP:80/`, where `IP` is again the IP address (or hostname) of the camera.
 
-IDOL Media Server can connect directly to these RTSP streams if you configure the multi-purpose [Video](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  IDOL Media Server also includes the following additional ingest engines to support alternative stream types:
+IDOL Media Server can connect directly to these RTSP streams if you configure the multi-purpose [Video](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  IDOL Media Server also includes the following additional ingest engines to support alternative stream types:
 
-- [MJPEG](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Ingest/MJPEG/_MJPEG.htm): for cameras supporting motion Jpeg streaming
-- [MxPEG](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Ingest/MXPEG/_MXPEG.htm): for [Mobotix](https://www.mobotix.com/en/mxpeg) cameras
-- [Genetec](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Ingest/Genetec/_Genetec.htm): to connect to any camera already integrated into the Genetec Security Center Video Management System (VMS)
-- [Milestone](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm): to connect to any camera already integrated into the Milestone XProtect VMS
+- [MJPEG](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Ingest/MJPEG/_MJPEG.htm): for cameras supporting motion Jpeg streaming
+- [MxPEG](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Ingest/MXPEG/_MXPEG.htm): for [Mobotix](https://www.mobotix.com/en/mxpeg) cameras
+- [Genetec](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Ingest/Genetec/_Genetec.htm): to connect to any camera already integrated into the Genetec Security Center Video Management System (VMS)
+- [Milestone](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm): to connect to any camera already integrated into the Milestone XProtect VMS
 
 The easiest way to try this is with the [GUI Ingest Test page](http://localhost:14000/a=gui#/ingest):
 
-![ingest-test-camera-stream](figs/ingest-test-camera-stream.png)
+![ingest-test-camera-stream](./figs/ingest-test-camera-stream.png)
 
-> TIP: If you don't have access to a camera right now, there are also many third-party lists of IPTV streams on the web.  These are hit-and-miss so you may have to try a few, *e.g.* http://insecam.org/en/bytag/Traffic/.
-> ![insecam-stream](figs/insecam-stream.png)
+> TIP: If you don't have access to a camera right now, there are also many third-party lists of IPTV streams on the web.  These are hit-and-miss so you may have to try a few, *e.g.* <http://insecam.org/en/bytag/Traffic/>.
+> ![insecam-stream](./figs/insecam-stream.png)
 
 ### Academic datasets
 
@@ -176,6 +181,7 @@ The easiest way to try this is with the [GUI Ingest Test page](http://localhost:
 - [PETS2009](http://cs.binghamton.edu/~mrldata/pets2009): The IEEE International Workshop on Performance Evaluation of Tracking and Surveillance 2009 dataset is a public benchmark for the characterization of different crowd activities.
 
     > TIP: The PETS2009 dataset is provided as folders of stills.  To concatenate them into videos, use the ffmpeg command:
+    >
     > ```sh
     > ffmpeg -r 7 -i S3/Multiple_Flow/Time_12-43/View_008/frame_%04d.jpg -c:v libx264 -vf fps=25 -pix_fmt yuv420p S3_MF_Time_12-43_View_008.mp4
     > ```
@@ -183,6 +189,7 @@ The easiest way to try this is with the [GUI Ingest Test page](http://localhost:
 - [UA-DETRAC](http://detrac-db.rit.albany.edu/home): The University at Albany DEtection and TRACking dataset is a benchmark for challenging real-world multi-object detection and multi-object tracking.
 
     > TIP: The UA-DETRAC dataset is provided as folders of stills.  To concatenate them into videos, use the ffmpeg command:
+    >
     > ```sh
     > ffmpeg -r 25 -i ./MVI_40864/img%05d.jpg -c:v libx264 -vf fps=25 -pix_fmt yuv420p MVI_40864.mp4
     > ```
@@ -211,13 +218,13 @@ ffprobe -v quiet -print_format json -show_format -show_streams myVideo.mp4
 
 Use ffmpeg to extract an image from the third second of your video:
 
-```sh
+```cmd
 ffmpeg -ss 00:00:03 -i path\to\my\video.mp4 -frames:v 1 path\to\interesting\frame.png
 ```
 
 Use ffmpeg to extract one image every second from a video, starting from the third second:
 
-```sh
+```cmd
 ffmpeg -ss 00:00:03 -i path\to\my\video.mp4 -vf fps=1 out%03d.png
 ```
 
@@ -227,7 +234,7 @@ For more details, read this [documentation](https://trac.ffmpeg.org/wiki/Create%
 
 Use ffmpeg to create a sequence of 60-second clips from your video:
 
-```sh
+```cmd
 ffmpeg -i path\to\my\video.mp4 -c copy -map 0 -segment_time 00:01:00 -f segment out%03d.mp4
 ```
 
@@ -235,13 +242,13 @@ ffmpeg -i path\to\my\video.mp4 -c copy -map 0 -segment_time 00:01:00 -f segment 
 
 Use ffmpeg to create a 135 second long clip, starting from the 1st hour, 6th minute and 11th second of your video:
 
-```sh
+```cmd
 ffmpeg -ss 01:06:11 -i path\to\my\video.ext -t 135 path\to\interesting\clip.ext
 ```
 
 or
 
-```sh
+```cmd
 ffmpeg -i path\to\my\video.ext -ss 01:06:11 -t 135 path\to\interesting\clip.ext
 ```
 
@@ -278,7 +285,7 @@ IDOL Media Server can read a playlist file in order to ingest a sequence of vide
 
 #### Add tracks to existing media file
 
-To add an empty audio track to a video file: 
+To add an empty audio track to a video file:
 
 ```sh
 ffmpeg -f lavfi -i aevalsrc=0 -i in.mp4 -vcodec copy -acodec aac -map 0:0 -map 1:0 -shortest -strict experimental -y out.mp4
@@ -306,7 +313,7 @@ To add a video track to an audio file by:
 
 #### Strip tracks to existing media file
 
-To remove the audio track to a video file: 
+To remove the audio track to a video file:
 
 ```sh
 ffmpeg -i in.mp4 -vcodec copy -an out.mp4
@@ -314,7 +321,7 @@ ffmpeg -i in.mp4 -vcodec copy -an out.mp4
 
 ### Video streams
 
-> TIP: When working with external streams be aware that they may sometimes drop out.  To help with this, Media Server's *Video* type ingest engine includes a configurable [StreamTimeout](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Configuration/Ingest/Libav/StreamTimeout.htm) to control how long you want to wait before giving up the process.  Additionally, the process action itself has a [Persist](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Actions/VideoAnalysis/parameters/Persist.htm) option, which instructs Media Server to retry processing a stream automatically if it does time out.
+> TIP: When working with external streams be aware that they may sometimes drop out.  To help with this, Media Server's *Video* type ingest engine includes a configurable [StreamTimeout](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Configuration/Ingest/Libav/StreamTimeout.htm) to control how long you want to wait before giving up the process.  Additionally, the process action itself has a [Persist](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Actions/VideoAnalysis/parameters/Persist.htm) option, which instructs Media Server to retry processing a stream automatically if it does time out.
 
 #### Test availability of an IP stream
 
@@ -381,7 +388,7 @@ pip install yt-dlp
 Simply pass your video url to `yt-dlp`:
 
 ```sh
-$ yt-dlp https://www.youtube.com/watch?v=MDn20owH-uI
+yt-dlp https://www.youtube.com/watch?v=MDn20owH-uI
 ```
 
 You now have a local video file: `TFI Friday： Baby Left, Baby Right ｜ Channel 4 [MDn20owH-uI].webm`.
@@ -495,7 +502,7 @@ Press `Ctrl`+`C` to stop the stream.
 
 I need to copy the full URL string to play it in Media Server.  The easiest way to try this is with the [GUI Ingest Test page](http://localhost:14000/a=gui#/ingest):
 
-![ingest-test-stream-youtube](figs/ingest-test-stream-youtube.png)
+![ingest-test-stream-youtube](./figs/ingest-test-stream-youtube.png)
 
 #### Record video/audio from a live YouTube channel
 
@@ -510,10 +517,13 @@ ffmpeg -i $(yt-dlp -f 93 --get-url https://www.youtube.com/watch?v=l8PMl7tUDIE) 
 To record the audio only, I could modify the above command to:
 
 1. instruct ffmpeg to drop the video:
+
     ```sh
     ffmpeg -i $(yt-dlp -f 93 --get-url https://www.youtube.com/watch?v=l8PMl7tUDIE) -f segment -segment_time 60 -vn -acodec copy recording%04d.aac
     ```
+
 1. or, since it is available for this channel, select an audio-only stream:
+
     ```sh
     ffmpeg -i $(yt-dlp -f 233 --get-url https://www.youtube.com/watch?v=l8PMl7tUDIE) -f segment -segment_time 60 -c copy recording%04d.aac
     ```
@@ -534,9 +544,9 @@ To view this stream in `ffmpeg`, from the command line:
 ffplay udp://239.255.1.4:1234
 ```
 
-These streams can be directly ingested by IDOL Media Server using the the multi-purpose [Video](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  The easiest way to try this is with the [GUI Ingest Test page](http://localhost:14000/a=gui#/ingest):
+These streams can be directly ingested by IDOL Media Server using the the multi-purpose [Video](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  The easiest way to try this is with the [GUI Ingest Test page](http://localhost:14000/a=gui#/ingest):
 
-![ingest-test-stream-restream](figs/ingest-test-stream-restream.png)
+![ingest-test-stream-restream](./figs/ingest-test-stream-restream.png)
 
 ## Next steps
 

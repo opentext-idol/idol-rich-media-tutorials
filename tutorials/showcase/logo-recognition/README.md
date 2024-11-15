@@ -2,7 +2,7 @@
 
 IDOL Media Server includes an Object Recognition analysis engine, which can be trained to recognize specific 2-D and 3-D objects in images and video, such as a logo or painting.
 
-For a more detailed introduction to Object Recognition, see the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Operations/Analyze/ObjectRecognition_Introduction.htm).
+For a more detailed introduction to Object Recognition, see the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Operations/Analyze/ObjectRecognition_Introduction.htm).
 
 In this tutorial we will:
 
@@ -36,7 +36,7 @@ If you want to start here, you must at least follow these [installation steps](.
 
 ### Third-party software
 
-This guide makes use of `node.js`.  Please follow these [instructions](../setup/NODE_JS.md) if you do not already have it on your system.
+This guide makes use of `node.js`.  Please follow these [instructions](../../setup/NODE_JS.md) if you do not already have it on your system.
 
 ### Configure object recognition
 
@@ -81,14 +81,14 @@ Alternatively you can list the trained models by pointing your browser to [`/act
 
 Name | Type | Object images
 :---: | :---: | :---:
-MasterCard | Billboard | <img src="billboard/mastercard.png" height="24">
-Nissan | Billboard | <img src="billboard/nissan.png" height="24">
-PlayStation | Billboard | <img src="billboard/playstation.png" height="24">
-Unicredit | Billboard | <img src="billboard/unicredit.png" height="24">
-PSG | Shirt | <img src="shirt/psg.png" height="48">
-Emirates | Shirt | <img src="shirt/fly-emirates.jpg" height="48">
-Barcelona | Shirt | <img src="shirt/barcelona-crest.png" height="48">
-Qatar Airways | Shirt | <img src="shirt/qatar-airways.jpg" height="48">
+MasterCard | Billboard | <img src="billboard/mastercard.png" alt="mastercard" height="24">
+Nissan | Billboard | <img src="billboard/nissan.png" alt="nissan" height="24">
+PlayStation | Billboard | <img src="billboard/playstation.png" alt="playstation" height="24">
+Unicredit | Billboard | <img src="billboard/unicredit.png" alt="unicredit" height="24">
+PSG | Shirt | <img src="shirt/psg.png" alt="psg" height="48">
+Emirates | Shirt | <img src="shirt/fly-emirates.jpg" alt="fly-emirates" height="48">
+Barcelona | Shirt | <img src="shirt/barcelona-crest.png" alt="barcelona-crest" height="48">
+Qatar Airways | Shirt | <img src="shirt/qatar-airways.jpg" alt="qatar-airways" height="48">
 
 These objects are all 2D, *i.e.* flat images that might be seen from different angles but will always be flat when seen.  These objects can be trained with one or more images.  
 
@@ -114,7 +114,7 @@ Type = Video
 IngestDateTime = 0
 ```
 
-For full details on the options available for ingesting video (and other) sources, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Ingest/_Ingest.htm).
+For full details on the options available for ingesting video (and other) sources, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Ingest/_Ingest.htm).
 
 ### Analysis
 
@@ -134,7 +134,7 @@ Here we have specified our newly created database with the `Database` parameter.
 - an identifier (or list of identifiers), *e.g.* for one-to-one validation (or matching a sub-set)
 - a metadata key-value pair, *e.g.* if you want to match only shirt sponsors in our example, set `Metadata = group:shirt`
 
-We have also specified some parameters that affect how the analytic runs.  For full details on these and other available options, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/Object/_Object.htm).
+We have also specified some parameters that affect how the analytic runs.  For full details on these and other available options, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Analysis/Object/_Object.htm).
 
 ### Event processing
 

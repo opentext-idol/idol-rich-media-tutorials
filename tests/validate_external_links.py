@@ -37,14 +37,15 @@ for dir_path, dir_names, file_names in os.walk(".."):
 
     with open(file_path, 'r') as md_file:
       for link in findDocsLinks(md_file.read()):
-        if -1 < link.find("swinfra.net"): continue
-        if -1 < link.find("autonomy.com"): continue
-        if -1 < link.find("oauth2"): continue
+        if "swinfra.net" in link: continue
+        if "autonomy.com" in link: continue
+        if "oauth2" in link: continue
+        if ".m3u8" in link: continue
         
         count += 1
 
         try:
-          x = requests.get(link)
+          x = requests.head(link)
           if verbose: print(f'{x.status_code}: {link}')
           if x.status_code == 200:
             passed += 1
@@ -61,6 +62,7 @@ print(result_line)
 print('='*len(result_line))
 
 for file_path in report.keys():
+  if len(report[file_path]) > 0:
     print('-'*len(file_path))
     print(file_path)
     print('-'*len(file_path))

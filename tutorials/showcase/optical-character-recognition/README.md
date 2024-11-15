@@ -10,7 +10,7 @@ Before rolling up our sleeves, let's run a quick demo, using the Media Server GU
 - With "Source" set to "Data", click "Open" and navigate to this tutorial folder to load the included image `24.1.png`.
 - Select the pre-configured analysis option "OCR Scene" then hit the blue "Process" button.
 
-    ![gui-demo](figs/gui-demo.png)
+    ![gui-demo](./figs/gui-demo.png)
 
 > NOTE: This image is a screenshot from our 24.1 release event and lists the key new features of IDOL Media Server. These improvements included the new improved "Scene" mode, which we have just used, and is great for accurately locating sparse text over busy backgrounds.
 
@@ -20,13 +20,13 @@ Try some of the other samples documents and images from this tutorial, in the `d
 
 Use IDOL Media Server to perform OCR on a scanned document, exploring various output options.
 
-Start [here](PART_I.md).
+Start [here](./PART_I.md).
 
 ## PART II - Extracting tables and more
 
 Scanned documents don't only contain lines of text.  Use IDOL Media Server to detect tabulated text, read barcodes, recognize logos and classify documents.
 
-Start [here](PART_II.md).
+Start [here](./PART_II.md).
 
 ## PART III - Scrolling news headlines
 

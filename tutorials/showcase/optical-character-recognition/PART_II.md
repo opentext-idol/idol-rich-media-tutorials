@@ -30,19 +30,19 @@ If you have already tried the [Image Classification](../image-classification/REA
   - [Process configuration](#process-configuration)
   - [Process a PDF file](#process-a-pdf-file)
 - [OCR for tabulated data](#ocr-for-tabulated-data)
-  - [Process configuration](#process-configuration-1)
+  - [Process configuration steps](#process-configuration-steps)
   - [Process a document](#process-a-document)
 - [(*Optional*) Barcode detection](#optional-barcode-detection)
-  - [Process configuration](#process-configuration-2)
-  - [Process a document](#process-a-document-1)
+  - [Process configuration for Barcodes](#process-configuration-for-barcodes)
+  - [Process a PDF](#process-a-pdf)
 - [(*Optional*) Logo recognition](#optional-logo-recognition)
   - [Training](#training)
-  - [Process configuration](#process-configuration-3)
-  - [Process a document](#process-a-document-2)
+  - [Process configuration for logo detection](#process-configuration-for-logo-detection)
+  - [Process a document for logo detection](#process-a-document-for-logo-detection)
 - [(*Optional*) Image classification](#optional-image-classification)
   - [Loading models](#loading-models)
-  - [Process configuration](#process-configuration-4)
-  - [Process a document](#process-a-document-3)
+  - [Process configuration for image classification](#process-configuration-for-image-classification)
+  - [Process to classify a document](#process-to-classify-a-document)
 - [PART III - Scrolling news headlines](#part-iii---scrolling-news-headlines)
 
 ---
@@ -60,13 +60,13 @@ Enable=...,barcode,imageclassification,objectrecognition,ocr,...
 
 ### Pre-trained models
 
-Pre-trained *Image Classification* packages are distributed separately from the main IDOL Media Server installer.  To obtain the training pack, return to the [Software Licensing and Downloads](https://sld.microfocus.com/mysoftware/index) portal, then:
+Pre-trained *Image Classification* packages are distributed separately from the main IDOL Media Server package.  To obtain the training pack, return to the [Software Licensing and Downloads](https://sld.microfocus.com/mysoftware/index) portal, then:
 
 1. Under the *Downloads* tab, select your product, product name and version from the dropdowns:
 
     ![get-software](../../setup/figs/get-software.png)
 
-1. From the list of available files, select and download `MediaServerPretrainedModels_24.2.0_COMMON.zip`.
+1. From the list of available files, select and download `MediaServerPretrainedModels_24.4.0_COMMON.zip`.
 
     ![get-pretrained-zip](../../setup/figs/get-pretrained-zip.png)
 
@@ -112,11 +112,11 @@ To view the results, go to `output/OCR` to see the text file `TextAndImage.txt`,
 
 ## OCR for tabulated data
 
-### Process configuration
+### Process configuration steps
 
 The OCR analysis engine automatically detects tables in your images, so no special configuration is required for analysis.
 
-> NOTE: You can optionally modify the output of your table data by setting `OutputTablesByColumn=True` (default is `False`). For more details, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Configuration/Analysis/OCR/OutputTablesByColumn.htm).
+> NOTE: You can optionally modify the output of your table data by setting `OutputTablesByColumn=True` (default is `False`). For more details, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Configuration/Analysis/OCR/OutputTablesByColumn.htm).
 
 Handling tabulated output though does require some thought.  A common approach is to separate the table text from non-table text in order to have more targeted downstream processing.
 
@@ -165,7 +165,7 @@ To view the results, go to `output/OCR` to see the two output files `TablesAndMo
 
 You may have noticed that the PDF file processed above also contains an image of a QR code.  
 
-### Process configuration
+### Process configuration for Barcodes
 
 To process this information as well, add the *Barcode Detection* analysis engine with default options:
 
@@ -174,7 +174,7 @@ To process this information as well, add the *Barcode Detection* analysis engine
 Type = Barcode
 ```
 
-> NOTE: For details on the list of supported QR code and barcode types, please see the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Configuration/Analysis/Barcode/BarcodeTypes.htm).
+> NOTE: For details on the list of supported QR code and barcode types, please see the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Configuration/Analysis/Barcode/BarcodeTypes.htm).
 
 We will combine the read from the barcode with the OCR-produced text by adding a second input to the non-table text output engine:
 
@@ -187,7 +187,7 @@ OutputPath = output/OCR/%source.filename.stem%_notTables.txt
 XslTemplate = toText.xsl
 ```
 
-### Process a document
+### Process a PDF
 
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), to reprocess the same PDF file with this updated configuration:
 
@@ -222,7 +222,7 @@ To include this capability here, we must first train IDOL Media Server to recogn
 
     ![train-logo](./figs/train-logo.png)
 
-### Process configuration
+### Process configuration for logo detection
 
 To match this logo, add the *Object Recognition* analysis engine with default options:
 
@@ -241,7 +241,7 @@ Input = LogoAnalysis.Result
 OutputPath = output/OCR/%source.filename.stem%_analysis.xml
 ```
 
-### Process a document
+### Process a document for logo detection
 
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), to reprocess the same PDF file with this updated configuration:
 
@@ -265,7 +265,7 @@ Extract the training pack `.zip` then, to load one of the classifiers, open the 
 
 1. in the left column, click `Import`
 1. navigate to your extracted training pack and select `ImageClassifier_Document.dat`
-   
+
     > NOTE: This classifier contains 10 classes (from CV to Newspaper and Report).
 
 1. wait a few minutes for the import to complete.  You are now ready to classify media.
@@ -274,7 +274,7 @@ Extract the training pack `.zip` then, to load one of the classifiers, open the 
 
 > NOTE: See out tutorial on [training custom classifiers](../image-classification/PART_II.md), if you wish to generate your own document classes.
 
-### Process configuration
+### Process configuration for image classification
 
 To match this logo, add the *Image Classification* analysis engine with default options:
 
@@ -294,7 +294,7 @@ Input1 = ImageClassAnalysis.Result
 OutputPath = output/OCR/%source.filename.stem%_analysis.xml
 ```
 
-### Process a document
+### Process to classify a document
 
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), to reprocess the same PDF file with this updated configuration:
 
@@ -307,7 +307,5 @@ Click the `Test Action` button to start processing.
 To view the results, go to `output/OCR` to see the new *Image Classification* results in output file `TablesAndMore_analysis.xml`.
 
 ## PART III - Scrolling news headlines
-
-<!-- Start [here](PART_III.md). -->
 
 > COMING SOON!

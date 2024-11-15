@@ -10,11 +10,11 @@ The "legacy" models use Convolutional Neural Networks, have the smallest hardwar
 
 The new STT models use Transformer-style Neural Networks, with a larger memory footprint and optional GPU acceleration.  Transformers have an Encoder that ingests the source audio, and one or more Decoders, which produce the output text transcript.
 
-![transformer-stt](figs/transformer-stt.png)
+![transformer-stt](./figs/transformer-stt.png)
 
 Because the audio is encoded in 30-second chunks, there is a built-in delay when processing live streams.
 
-The resulting transcripts are typically very clear, smooth and often without the "ums", "ahs" and repeated words of the real speech.  You could think of the output as text *inspired by* what is spoken and for that reason the transcripts are often preferred by human readers over the "legacy" model's more directly transcribed output. 
+The resulting transcripts are typically very clear, smooth and often without the "ums", "ahs" and repeated words of the real speech.  You could think of the output as text *inspired by* what is spoken and for that reason the transcripts are often preferred by human readers over the "legacy" model's more directly transcribed output.
 
 ### Accuracy impact
 
@@ -47,7 +47,7 @@ Observe that CPU usage is similar for all models but the RAM required increases,
 
 Model | Processing rate | CPU / core-% | RAM / GB | GPU Memory / GB
 --- | :---: | :---: | :---: | :---:
-Legacy | N/A | | |
+Legacy | N/A | - | - | -
 Micro | 0.13 +/- 0.01 | 218 +/- 114 | 3.7 +/- 0.0 | 2.7 +/- 0.2
 Small | 0.18 +/- 0.02 | 150 +/- 85 | 7.0 +/- 0.2 | 7.6 +/- 0.8
 Medium | 0.32 +/- 0.02 | 114 +/- 47 | 15.0 +/- 0.4 | 17.1 +/- 1.6
@@ -63,25 +63,19 @@ An introduction to speech transcription with IDOL Media Server.
 
 Use IDOL Media Server with it's new models to perform Speech-to-Text transcription on a live news broadcast stream to record video clips and generate subtitles for those clips.
 
-Start [here](PART_I.md).
+Start [here](./PART_I.md).
 
 ## PART II - Custom Language Models
 
 Use IDOL Media Server with it's legacy models and build a custom language model to improve speech transcription of a video discussing political affairs in Libya.
 
-Start [here](PART_II.md).
+Start [here](./PART_II.md).
 
 ## PART III - Quantifying Transcript Accuracy
 
 Use IDOL Media Server to transcribe your speech as you read from a script.  Score your transcript to measure the accuracy of Speech-to-Text.
 
-Start [here](PART_III.md).
-
-<!-- TODO: ## PART IV - Multiple Languages
-
-Use IDOL Media Server's Language Identification analysis engine in combination with Speech to Text to generate a transcript for a dialogue between the Canadian Prime Minister speaking French and a constituent speaking English.
-
-Start [here](PART_IV.md). -->
+Start [here](./PART_III.md).
 
 ## Next steps
 

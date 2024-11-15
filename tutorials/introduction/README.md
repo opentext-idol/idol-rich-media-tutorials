@@ -8,19 +8,19 @@ After completing this tutorial, we will have a working end-to-end system: from i
 
 Getting started with IDOL Media Server.  Familiarize yourself with key concepts.
 
-Start [here](PART_I.md).
+Start [here](./PART_I.md).
 
 ## PART II - More face analytics
 
 Analysis chaining, event processing, as well as image and video encoding.
 
-Start [here](PART_II.md).
+Start [here](./PART_II.md).
 
 ## PART III - People counting
 
 Creating a simple example of a custom solution that integrates with IDOL Media Server.
 
-Start [here](PART_III.md).
+Start [here](./PART_III.md).
 
 ## Next steps
 

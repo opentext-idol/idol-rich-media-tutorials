@@ -7,7 +7,7 @@ pushd $(dirname "${0}") > /dev/null
 
 COMPONENTS=( "LicenseServer" "MediaServer" )
 
-VERSION="24.2.0"
+VERSION="24.4.0"
 INSTALL_BASE="~"
 
 SOURCE_DIR="~/Downloads"

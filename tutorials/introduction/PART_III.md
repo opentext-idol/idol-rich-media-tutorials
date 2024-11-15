@@ -30,7 +30,7 @@ These key features are:
 
 ### Runtime configuration
 
-So far in these tutorials, when launching a process action, we have defined the process configuration with `configName=<FILE_NAME>`.  This references a file stored under your `configurations` directory and is therefore fixed.  In an application, you may want to modify some settings at runtime, *e.g.* based on a user setting the minimum face size or defining a region of interest.  To provide this flexibility, IDOL Media Server also allows you to send a session configuration file in the process action, *e.g.* as a [base-64 encoded](https://en.wikipedia.org/wiki/Base64#URL_applications) string, using `config=<BASE_64_STRING>` in the process request.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Actions/VideoAnalysis/Process.htm) for details.
+So far in these tutorials, when launching a process action, we have defined the process configuration with `configName=<FILE_NAME>`.  This references a file stored under your `configurations` directory and is therefore fixed.  In an application, you may want to modify some settings at runtime, *e.g.* based on a user setting the minimum face size or defining a region of interest.  To provide this flexibility, IDOL Media Server also allows you to send a session configuration file in the process action, *e.g.* as a [base-64 encoded](https://en.wikipedia.org/wiki/Base64#URL_applications) string, using `config=<BASE_64_STRING>` in the process request.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Actions/VideoAnalysis/Process.htm) for details.
 
 In this app, our runtime options are defined in `options.js`.  These are used to fill in a templated process configuration file `mediaserver/peopleCounter.tmpl.cfg`, which is then base-64 encoded and sent to IDOL Media Server.  One way to achieve this in `node.js` is with standard JavaScript [templated strings](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals), *e.g.*:
 
@@ -46,7 +46,7 @@ const cfgTmpl = fs.readFileSync(cfgFile, 'utf8'), // read the templated config f
 
 ### Managing processes
 
-As you know, the `/action=process` request returns a unique token (returned, as directed above, in JSON format).  This token can be used by the people counting app to poll the process for status updates and to stop the process, *e.g.* if requested by the user (by pressing `Ctrl-C` with the command window in focus).
+As you know, the `/action=process` request returns a unique token (returned, as directed above, in JSON format).  This token can be used by the people counting app to poll the process for status updates and to stop the process, *e.g.* if requested by the user (by pressing `Ctrl`+`C` with the command window in focus).
 
 ```javascript
 var path = '/action=queueinfo&queueaction=GETSTATUS' +
@@ -58,7 +58,7 @@ var path = '/action=queueinfo&queueaction=STOP' +
       `&queuename=process&token=${token}`;
 ```
 
-Other queue actions are available, including `PAUSE` and `RESUME`, as well as `PROGRESS` (only relevant for sources with known length, *i.e.* files).  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Actions/General/_ACI_QueueInfo.htm) for details.
+Other queue actions are available, including `PAUSE` and `RESUME`, as well as `PROGRESS` (only relevant for sources with known length, *i.e.* files).  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Actions/General/_ACI_QueueInfo.htm) for details.
 
 ### Receiving alerts
 
@@ -135,7 +135,7 @@ We will see counts being output to the command window:
 
 You can make use of all the now familiar resources to monitor IDOL Media Server, such as [`/action=GUI`](http://localhost:14000/a=gui#/monitor(tool:options)).
 
-To trigger a new count, get your neighbor to look in your webcam or interrupt the tracking by covering your webcam.  When you're satisfied, stop the app with [`Ctrl-C`].  The app will instruct IDOL Media Server to stop processing before it exits.
+To trigger a new count, get your neighbor to look in your webcam or interrupt the tracking by covering your webcam.  When you're satisfied, stop the app with `Ctrl`+`C`.  The app will instruct IDOL Media Server to stop processing before it exits.
 
 ## Conclusion
 

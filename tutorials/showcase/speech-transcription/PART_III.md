@@ -49,7 +49,7 @@ Based on this list, my connection string should be `audio=Headset Microphone (Pl
 On Ubuntu:
 
 Install `v4l-utils`, then use the control tool to list available devices:
- 
+
 ```sh
 $ apt-get install v4l-utils
 $ v4l2-ctl --list-devices
@@ -120,7 +120,7 @@ We will now read a section from the Wikipedia page on [Ancient Egyptian agricult
 
 Open that file now and be ready to read!
 
-> TIP: Remember to breathe! https://www.wikihow.com/Do-a-Relaxation-Exercise-for-Acting
+> TIP: Remember to breathe! <https://www.wikihow.com/Do-a-Relaxation-Exercise-for-Acting>
 
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials) (remembering to update the microphone name from `Headset Microphone (Plantronics C720-M)` to match yours):
 
@@ -140,7 +140,7 @@ Once you have finished reading, click the red `Stop Session` button in the GUI, 
 
 ## Evaluate transcript accuracy
 
-IDOL Media Server includes an action to evaluate a speech transcript, called [`ScoreCustomSpeechLanguageModel`](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Actions/Training/ScoreCustomSpeechLanguageModel.htm).  
+IDOL Media Server includes an action to evaluate a speech transcript, called [`ScoreCustomSpeechLanguageModel`](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Actions/Training/ScoreCustomSpeechLanguageModel.htm).  
 
 This action requires reprocessing the recorded audio, allowing you to do so with alternative language models to compare the performance. The action takes a process configuration snippet, defining the settings of the SpeechToText engine, *e.g.* the enclosed `scoreSpeechToText.cfg`, designed to evaluate the performance of the default `ENUK` language model:
 
@@ -153,17 +153,17 @@ SpeedBias = 1
 FilterMusic = False
 ```
 
-> NOTE: Here we have set the `SpeedBias` parameter to `1` to maximize transcription accuracy.  For full details on this parameter, see the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Configuration/Analysis/SpeechToText/SpeedBias.htm).
-
+> NOTE: Here we have set the `SpeedBias` parameter to `1` to maximize transcription accuracy.  For full details on this parameter, see the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Configuration/Analysis/SpeechToText/SpeedBias.htm).
+>
 > NOTE: To evaluate any modifications to the language model, you will need to include the `CustomLanguageModel` or `CustomWordDatabase` parameters, as appropriate.
 
 To run this evaluation, paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), making sure to update the file paths for your system. Make a note of the token returned.
 
 ```url
-action=ScoreCustomSpeechLanguageModel&AudioPath=C:\OpenText\IDOLServer-24.2.0\MediaServer\output\speechToText4\recording.aac&ConfigPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/scoreSpeechToText.cfg&TranscriptPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/Ancient_Egyptian_Agriculture.txt
+action=ScoreCustomSpeechLanguageModel&AudioPath=C:\OpenText\IDOLServer-24.4.0\MediaServer\output\speechToText4\recording.aac&ConfigPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/scoreSpeechToText.cfg&TranscriptPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/Ancient_Egyptian_Agriculture.txt
 ```
 
-To view the output, paste the following `QueueInfo` action into your web browser: http://127.0.0.1:14000/Action=QueueInfo&QueueAction=GetStatus&QueueName=ScoreCustomSpeechLanguageModel.
+To view the output, paste the following `QueueInfo` action into your web browser: <http://127.0.0.1:14000/Action=QueueInfo&QueueAction=GetStatus&QueueName=ScoreCustomSpeechLanguageModel>.
 
 See the score summary in the XML response.  For my own reading of the text, the "Fmeasure", or [F1 score](https://en.wikipedia.org/wiki/Precision_and_recall), was __88%__.  Full details below:
 

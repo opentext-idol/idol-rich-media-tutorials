@@ -4,7 +4,7 @@ The pre-trained Object Class Recognizers that ship with IDOL Media Server cover 
 
 1. use the IDOL Media Server GUI to upload and annotate sample images to train a recognizer for one new class
 1. process test images to identify this new class
-<!-- 1. discuss sources of new training data, e.g. OpenImages -->
+<!-- 1. discuss sources of new training data, *e.g.* OpenImages -->
 <!-- 1. use "snapshots" to optimize your own models -->
 
 ---
@@ -26,7 +26,7 @@ The pre-trained Object Class Recognizers that ship with IDOL Media Server cover 
 
 IDOL Media Server can be trained to recognize classes of object, as well as specific objects, faces, vehicles and more.  We will now train a class for "wheels" using a small number of sample images in order to locate wheels in some test images.
 
-IDOL Media Server training can be performed through its web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Actions/Training/_TrainingActions.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
+IDOL Media Server training can be performed through its web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Actions/Training/_TrainingActions.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
 
 ### Add your own training images
 
@@ -89,12 +89,12 @@ If you do wish to train with CPU only, it is advisable to edit the default train
 ![build-recognizer-options](./figs/build-recognizer-options.png)
 
 > NOTE: With these configuration options on the author's laptop, this build took about nine minutes.
-
-> NOTE: For details on available recognizer types and other available training options, please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Operations/Analyze/ObjectClassRec_RecognizerTypes.htm).
+>
+> NOTE: For details on available recognizer types and other available training options, please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Operations/Analyze/ObjectClassRec_RecognizerTypes.htm).
 
 When training your own recognizers, it is *strongly recommended* to utilize GPU acceleration.  This will allow you to train larger sample sets with many classes, as well as to utilize the most accurate "Generation 4" recognizer type.
 
-> NOTE: For details on GPU support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Advanced/GPU.htm).
+> NOTE: For details on GPU support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Advanced/GPU.htm).
 
 ## Running object class recognition
 
@@ -106,7 +106,7 @@ Type = ObjectClassRecognition
 Recognizer = Workshop
 ```
 
-More options are available for the `ObjectClassRecognition` analysis engine, including setting the matching threshold and allowing multiple matches to be returned.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Configuration/Analysis/ObjectClass/_ObjectClass.htm) for details.
+More options are available for the `ObjectClassRecognition` analysis engine, including setting the matching threshold and allowing multiple matches to be returned.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Configuration/Analysis/ObjectClass/_ObjectClass.htm) for details.
 
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 

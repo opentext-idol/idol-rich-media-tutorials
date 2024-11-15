@@ -130,15 +130,15 @@ Input = FaceForward.Output
 
 > NOTE: The name of the event processing output track variant is always `Output`, *e.g.* `FaceForward.Output`.
 
-Many logical operators are available in addition to `Filter`, which include the capability to compare or combine records from multiple tracks. See the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/ESP/ESP.htm) for more details.
+Many logical operators are available in addition to `Filter`, which include the capability to compare or combine records from multiple tracks. See the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/ESP/ESP.htm) for more details.
 
 Most of these operators provide additional flexibility through Lua scripts that allow you to create more complex logic.  IDOL Media Server ships with a number of example scripts that can be found in the `configurations/lua` directory.  Here was have used the out-of-the-box `frontalFace.lua` script, which contains the following code
 
 ```lua
 -- return if face is forward-facing (i.e. non-profile) and mostly within image
 function pred(record)
-	local oopangle = record.FaceData.outOfPlaneAngleX
-	return oopangle ~= 90 and oopangle ~= -90 and record.FaceData.percentageInImage > 95
+  local oopangle = record.FaceData.outOfPlaneAngleX
+  return oopangle ~= 90 and oopangle ~= -90 and record.FaceData.percentageInImage > 95
 end
 ```
 
@@ -235,7 +235,7 @@ ImageInput = FaceDraw.Output
 OutputPath = output/faces2b/%record.startTime.timestamp%_overlay.png
 ```
 
-We can access parameter values from the alert record such as `startTime` using *macros* to generate the image `OutputPath`.  See the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Macros.htm) for details.
+We can access parameter values from the alert record such as `startTime` using *macros* to generate the image `OutputPath`.  See the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Macros.htm) for details.
 
 ### Run face image encoding
 
@@ -287,7 +287,7 @@ Input = RateLimitedIngest.Output
 SampleInterval = 0
 ```
 
-The `FaceDetect` analysis produces output only when a face is detected.  In order to produce a smooth output video showing all frames - whether a face was detected or not - we therefore cannot rely on this output alone. 
+The `FaceDetect` analysis produces output only when a face is detected.  In order to produce a smooth output video showing all frames - whether a face was detected or not - we therefore cannot rely on this output alone.
 
 We need to combine the rate-limited source video frames, *i.e.* "every" frame, with face detection data where available.
 
@@ -373,4 +373,4 @@ Stop processing with [`stop`](http://localhost:14000/a=queueInfo&queueAction=sto
 
 ## PART III - Face recognition
 
-Start [here](PART_III.md).
+Start [here](./PART_III.md).

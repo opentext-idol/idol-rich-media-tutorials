@@ -36,13 +36,13 @@ Legacy speech transcription models are distributed separately per language.  To 
 
 ![get-software](../../setup/figs/get-software.png)
 
-For this tutorial we will use the British English pack.  From the list of available files, select and download `ENUK-24.2.0.zip`:
+For this tutorial we will use the British English pack.  From the list of available files, select and download `ENUK-24.4.0.zip`:
 
 ![get-lang-pack-zip](./figs/get-lang-pack-zip.png)
 
 Unzip the contents into IDOL Media Server's static data directory, to give you, *e.g.* `staticdata/speechtotext/ENUK`, containing files like `ver-ENUK-*`.
 
-> NOTE: This language pack is targeted to high quality "broadband" audio.  An additional language pack is available for telephony.  Many other languages and dialects are supported.  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Appendixes/SpeechLanguages.htm) for details.
+> NOTE: This language pack is targeted to high quality "broadband" audio.  An additional language pack is available for telephony.  Many other languages and dialects are supported.  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Appendixes/SpeechLanguages.htm) for details.
 
 You can manually load the ENUK language pack with the action <http://127.0.0.1:14000/action=LoadSpeechLanguageResource&LanguagePack=ENUK>.
 
@@ -86,7 +86,7 @@ To ingest a video file, we will update the `Ingest` and `Analysis` sections acco
     SpeedBias = 3
     ```
 
-    > NOTE: More options are available for the *SpeechToText* analysis engine.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm) for details.
+    > NOTE: More options are available for the *SpeechToText* analysis engine.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm) for details.
 
 1. To create a single plain text file of the transcript for the video clip, we will configure an XML-type output engine with `Mode` set to `AtEnd` and make use of the included the `toText.xsl` transform as follows:
 
@@ -113,18 +113,20 @@ Navigate to `output/speechToText2` and open the transcript file to read the resu
 
 ## Build the custom language model
 
-The first step in creating a custom model is to source suitable text materials.  These should contain descriptive text written in normal sentences, not just a dictionary of new terms. 
+The first step in creating a custom model is to source suitable text materials.  These should contain descriptive text written in normal sentences, not just a dictionary of new terms.
 
-For this tutorial we have sourced a small set of materials for you, copying the text from a news article about similar events in Libya into the file `libya.txt`, which is included with this guide.  In practice, the more data you have (and the more representative that data is) the better. Please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_2/MediaServer_24.2_Documentation/Help/Content/Training/CustomLM_Introduction.htm), for further advice.
+For this tutorial we have sourced a small set of materials for you, copying the text from a news article about similar events in Libya into the file `libya.txt`, which is included with this guide.  In practice, the more data you have (and the more representative that data is) the better. Please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Training/CustomLM_Introduction.htm), for further advice.
 
 > NOTE: A training text file should be encoded in UTF-8, without [BOM](https://en.wikipedia.org/wiki/Byte_order_mark#UTF-8).
 
 We will next instruct IDOL Media Server to build our custom language model from this text:
 
 1. paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action):
+
     ```url
     action=TrainCustomSpeechLanguageModel&identifier=LibyaTerms&languagepack=ENUK&textpath=C:\OpenText\idol-rich-media-tutorials\tutorials\showcase\speech-transcription\libya.txt
     ```
+
 1. click the `Test Action` button to start building
 1. click the `token` link (or go to [`/action=queueinfo`](http://127.0.0.1:14000/a=queueinfo&queuename=TrainCustomSpeechLanguageModel&queueaction=getstatus)) to see the training status
 1. we can review the results with [`/action=ListCustomSpeechLanguageModels`](http://127.0.0.1:14000/action=ListCustomSpeechLanguageModels):
@@ -173,4 +175,4 @@ We can now compare the results, *e.g.* with WinMerge, to see improvements in peo
 
 ## PART III - Quantifying transcript accuracy
 
-Start [here](PART_III.md).
+Start [here](./PART_III.md).
