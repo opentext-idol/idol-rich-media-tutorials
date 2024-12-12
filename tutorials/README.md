@@ -42,7 +42,7 @@ A quick first look at IDOL Media Server.  Watch a demonstration video where IDOL
 
 > NOTE: Do this before starting any tutorials.
 
-Follow [these steps./setup/SETUP.md) to install IDOL Media Server and get ready to run the tutorials.
+Follow [these steps](./setup/SETUP.md) to install IDOL Media Server and get ready to run the tutorials.
 
 ## Introduction
 
