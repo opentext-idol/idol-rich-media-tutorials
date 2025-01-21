@@ -6,7 +6,7 @@ If you prefer to follow this guide with the files downloaded from the repository
 
 1. Follow these steps to turn your Google Chrome browser into a smart markdown viewer:
     - Open Google Chrome
-    - Install [Markdown Preview Plus](https://chrome.google.com/webstore/detail/febilkbfcbhebfnokafefeacimjdckgl?utm_source=chrome-app-launcher-info-dialog)
+    - Install [Markdown Preview Plus](https://chromewebstore.google.com/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl?utm_source=chrome-app-launcher-info-dialog)
     - Navigate to [Extensions](chrome://extensions/) and select `Details` for Markdown Preview Plus
     - Enable the option `Allow access to file URLs`.
     - Follow the link to `Extension Options`:

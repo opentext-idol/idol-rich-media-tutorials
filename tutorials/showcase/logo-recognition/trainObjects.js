@@ -42,7 +42,7 @@ function getAutnResponse(action, options, callback) {
     });
 
   }).on('error', e => {
-    console.log(`Cannot connect to IDOL Media Server on ${opts.mediaServer.host}:${opts.mediaServer.port}`);
+    console.log(`Cannot connect to Knowledge Discovery Media Server on ${opts.mediaServer.host}:${opts.mediaServer.port}`);
   });
 }
 

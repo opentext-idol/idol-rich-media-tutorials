@@ -1,13 +1,13 @@
 @echo off
 
 REM ===========================================================================
-REM IDOL service uninstaller
+REM Knowledge Discovery service uninstaller
 REM ===========================================================================
 pushd %~dp0
 
 set COMPONENTS=( MediaServer, LicenseServer )
 
-set VERSION=24.4.0
+set VERSION=25.1.0
 set INSTALL_BASE=C:\OpenText
 
 set INSTALL_DIR=%INSTALL_BASE%\IDOLServer-%VERSION%

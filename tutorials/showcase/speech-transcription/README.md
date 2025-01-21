@@ -1,10 +1,10 @@
 # Speech transcription
 
-IDOL Media Server can be used to perform audio analytics, including speech transcription (often called Speech-to-Text), speaker identification and language identification.
+Knowledge Discovery Media Server can be used to perform audio analytics, including speech transcription (often called Speech-to-Text), speaker identification and language identification.
 
 ## *NEW* Model options
 
-IDOL's Speech-to-text can be run with multiple alternative models, which have their own strengths and weaknesses.
+Knowledge Discovery's Speech-to-text can be run with multiple alternative models, which have their own strengths and weaknesses.
 
 The "legacy" models use Convolutional Neural Networks, have the smallest hardware footprint and produce output very close to live from streaming audio.  Their accuracy level is not as high as the newer models out-of-the-box (see below) but can be significantly improved for specific use cases with custom language models (see [PART II](#part-ii---custom-language-models)).  The resulting transcript is a best attempt to map exactly what is spoken (including "ums" and "ahs").
 
@@ -59,24 +59,24 @@ With GPU acceleration enabled, processing duration is dramatically increased: al
 
 ## PART I - Automatic Subtitles
 
-An introduction to speech transcription with IDOL Media Server.
+An introduction to speech transcription with Knowledge Discovery Media Server.
 
-Use IDOL Media Server with it's new models to perform Speech-to-Text transcription on a live news broadcast stream to record video clips and generate subtitles for those clips.
+Use Knowledge Discovery Media Server with it's new models to perform Speech-to-Text transcription on a live news broadcast stream to record video clips and generate subtitles for those clips.
 
 Start [here](./PART_I.md).
 
 ## PART II - Custom Language Models
 
-Use IDOL Media Server with it's legacy models and build a custom language model to improve speech transcription of a video discussing political affairs in Libya.
+Use Knowledge Discovery Media Server with it's legacy models and build a custom language model to improve speech transcription of a video discussing political affairs in Libya.
 
 Start [here](./PART_II.md).
 
 ## PART III - Quantifying Transcript Accuracy
 
-Use IDOL Media Server to transcribe your speech as you read from a script.  Score your transcript to measure the accuracy of Speech-to-Text.
+Use Knowledge Discovery Media Server to transcribe your speech as you read from a script.  Score your transcript to measure the accuracy of Speech-to-Text.
 
 Start [here](./PART_III.md).
 
 ## Next steps
 
-Why not try more tutorials to explore some of the other analytics available in IDOL Media Server, linked from the [showcase page](../README.md).
+Why not try more tutorials to explore some of the other analytics available in Knowledge Discovery Media Server, linked from the [showcase page](../README.md).

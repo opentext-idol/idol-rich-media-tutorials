@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 # ===========================================================================
-# IDOL service uninstaller
+# Knowledge Discovery service uninstaller
 # ===========================================================================
 pushd $(dirname "${0}") > /dev/null
 
 COMPONENTS=( "MediaServer" "LicenseServer" )
 
-VERSION="24.4.0"
+VERSION="25.1.0"
 INSTALL_BASE="~"
 
 INSTALL_DIR=$INSTALL_BASE"/IDOLServer-"$VERSION

@@ -1,13 +1,13 @@
 @echo off
 
 REM ===========================================================================
-REM IDOL service installer
+REM Knowledge Discovery service installer
 REM ===========================================================================
 pushd %~dp0
 
 set COMPONENTS=( LicenseServer, MediaServer )
 
-set VERSION=24.4.0
+set VERSION=25.1.0
 set INSTALL_BASE=C:\OpenText
 
 set SOURCE_DIR=%HOMEPATH%\Downloads

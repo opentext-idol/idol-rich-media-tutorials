@@ -1,8 +1,8 @@
 # Milestone integration
 
-IDOL Media Server offers integration with popular third party Video Management System (VMS) products from Milestone and Genetec. IDOL Media Server includes dedicated ingest engines to process live streaming video from Milestone's "XProtect" and Genetec's "Security Center". Both of these products offer methods to receive events from external systems, so IDOL Media Server also includes dedicated Milestone and Genetec output engines to send events back to these products.  In this way, IDOL Media Server can be positioned as an analytics plug-in for existing Milestone and Genetec customers.
+Knowledge Discovery Media Server offers integration with popular third party Video Management System (VMS) products from Milestone and Genetec. Knowledge Discovery Media Server includes dedicated ingest engines to process live streaming video from Milestone's "XProtect" and Genetec's "Security Center". Both of these products offer methods to receive events from external systems, so Knowledge Discovery Media Server also includes dedicated Milestone and Genetec output engines to send events back to these products.  In this way, Knowledge Discovery Media Server can be positioned as an analytics plug-in for existing Milestone and Genetec customers.
 
-> NOTE: For customers who do not already have a VMS, it should be noted that IDOL Media Server's own [Rolling Buffer](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Operations/Encode/RollingBuffer_Introduction.htm) capability allows it to function as a VMS: recording live video from direct camera connection and facilitating playback, via HLS streaming, of that recorded video.
+> NOTE: For customers who do not already have a VMS, it should be noted that Knowledge Discovery Media Server's own [Rolling Buffer](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Operations/Encode/RollingBuffer_Introduction.htm) capability allows it to function as a VMS: recording live video from direct camera connection and facilitating playback, via HLS streaming, of that recorded video.
 
 In this tutorial we will focus on Milestone XProtect Corporate as an example external VMS.  We will:
 
@@ -11,7 +11,7 @@ In this tutorial we will focus on Milestone XProtect Corporate as an example ext
 1. run a Media Server process action to analyze video streamed from Milestone to create events that we will send back to Milestone, and
 1. show how these events are visualized in Milestone XProtect Smart Client.
 
-This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [Introductory](../../README.md#introduction) tutorial.
+This guide assumes you have already familiarized yourself with Knowledge Discovery Media Server by completing the [Introductory](../../README.md#introduction) tutorial.
 
 If you want to start here, you must at least follow these [installation steps](../../setup/SETUP.md) before continuing.
 
@@ -23,9 +23,9 @@ If you want to start here, you must at least follow these [installation steps](.
   - [DirectShow driver setup](#directshow-driver-setup)
   - [Video file ingest](#video-file-ingest)
   - [(*Optional*) Webcam ingest](#optional-webcam-ingest)
-- [Test IDOL Media Server ingest](#test-idol-media-server-ingest)
+- [Test Knowledge Discovery Media Server ingest](#test-knowledge-discovery-media-server-ingest)
   - [Optional use of Milestone SDK](#optional-use-of-milestone-sdk)
-- [Configure IDOL Media Server for processing](#configure-idol-media-server-for-processing)
+- [Configure Knowledge Discovery Media Server for processing](#configure-knowledge-discovery-media-server-for-processing)
   - [Enabled modules](#enabled-modules)
   - [Licensed channels](#licensed-channels)
   - [Analysis Configuration](#analysis-configuration)
@@ -131,14 +131,14 @@ Select the second activated video input, then on the "Settings" tab, change "Inp
 
 To stop processing your webcam, right click on the second activated input and deselect "Enabled" from the context menu.
 
-## Test IDOL Media Server ingest
+## Test Knowledge Discovery Media Server ingest
 
-We can make use of the IDOL Media Server user interface [/a=gui](http://localhost:14000/a=gui) to quickly test ingestion of our new video source from Milestone:
+We can make use of the Knowledge Discovery Media Server user interface [/a=gui](http://localhost:14000/a=gui) to quickly test ingestion of our new video source from Milestone:
 
 1. Go to the *Ingest Test* page.
 1. Select from the option dropdowns to ingest a "Stream" using "Milestone" and "NTLM" authentication:
 
-    > NOTE: IDOL Media Server's Milestone ingest engine, described in full [here](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm), offers multiple authentication options to support different versions of Milestone XProtect.  The "Corporate" version requires "NTLM" authentication.
+    > NOTE: Knowledge Discovery Media Server's Milestone ingest engine, described in full [here](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm), offers multiple authentication options to support different versions of Milestone XProtect.  The "Corporate" version requires "NTLM" authentication.
 
 1. The process action source for Milestone streams is the stream id, or `guid`.  Find it by running the following `curl` command:
 
@@ -181,7 +181,7 @@ We can make use of the IDOL Media Server user interface [/a=gui](http://localhos
     + NTLMPassword = <encrypted password>
     ```
 
-    > TIP: It is not recommended to enter your password in plain text.  IDOL Media Server includes a lightweight AES encryption tool `autpassword.exe`, which you can use to encrypt your password as follows:
+    > TIP: It is not recommended to enter your password in plain text.  Knowledge Discovery Media Server includes a lightweight AES encryption tool `autpassword.exe`, which you can use to encrypt your password as follows:
     >
     > ```sh
     > $ ./autpassword.exe -x -tAES -oKeyFile=./MyKeyFile.ky
@@ -190,7 +190,7 @@ We can make use of the IDOL Media Server user interface [/a=gui](http://localhos
     > W1BBU1NXT1JEXQpUeXBlPUFFUwpLZXlGaWxlPUM6L01pY3JvRm9jdXMvTWVkaWFTZXJ2ZXJfMTIuOC4yX1dJTkRPV1NfWDg2XzY0L015S2V5RmlsZS5reQpQYXNzd29yZD05UmwyUzlrNXdyODNGWnR5dUhZU1VaVjNMRkQrUGV1L2dzWHZnWFVGVWRBPQ==
     > ```
 
-1. Finally, click "Ingest" and watch the video successfully ingested into IDOL Media Server.
+1. Finally, click "Ingest" and watch the video successfully ingested into Knowledge Discovery Media Server.
 
     ![ingest-test](./figs/ingest-test.png)
 
@@ -198,7 +198,7 @@ Click "Stop" now we're satisfied.
 
 ### Optional use of Milestone SDK
 
-IDOL Media Server now offers two ingest options for Milestone.  The new  **Windows-only** option makes use of the Milestone SDK decoding libraries to allow encoded video to be streamed to IDOL Media Server, reducing network traffic in comparison to the existing cross-platform option, which received MJPEG video from Milestone.  To take advantage of this, you must include the following parameter in your `mediaserver.cfg` file:
+Knowledge Discovery Media Server now offers two ingest options for Milestone.  The new  **Windows-only** option makes use of the Milestone SDK decoding libraries to allow encoded video to be streamed to Knowledge Discovery Media Server, reducing network traffic in comparison to the existing cross-platform option, which received MJPEG video from Milestone.  To take advantage of this, you must include the following parameter in your `mediaserver.cfg` file:
 
 ```ini
 [Paths]
@@ -211,25 +211,25 @@ To obtain the Milestone SDK,
 
 1. Go to <https://www.milestonesys.com/support/for-developers/sdk/> and register (it's free).
 1. Install the MIPSDK (tested against 2021 R1), *e.g.* under `C:/Program Files/Milestone/MIPSDK`.
-1. The MIPDSDK includes a handy batch script to copy the library files you need over to IDOL Media Server:
+1. The MIPDSDK includes a handy batch script to copy the library files you need over to Knowledge Discovery Media Server:
 
     ```cmd
     cd "C:/Program Files/Milestone/MIPSDK/Bin"
-    CopyMediaCpp.bat "C:/OpenText/MediaServer_24.4.0_WINDOWS_X86_64/libs/Milestone"
+    CopyMediaCpp.bat "C:/OpenText/MediaServer_25.1.0_WINDOWS_X86_64/libs/Milestone"
     ```
 
     > NOTE: 25 files should be copied.
 
-No additional session config parameters are required to enable this option.  On Windows, IDOL Media Server will simply check for the existence of these Milestone libraries and quietly fall back to the cross-platform option if they do not exist.
+No additional session config parameters are required to enable this option.  On Windows, Knowledge Discovery Media Server will simply check for the existence of these Milestone libraries and quietly fall back to the cross-platform option if they do not exist.
 
-The Milestone libraries offer some tuning options, which are exposed in IDOL Media Server's [Milestone Ingest Engine](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm).  These are:
+The Milestone libraries offer some tuning options, which are exposed in Knowledge Discovery Media Server's [Milestone Ingest Engine](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm).  These are:
 
 Parameter | Default | Function
 --- | --- | ---
 DecoderThreads | 1 | Number of CPU threads available for Milestone decoder libraries.
 FrameDropping | False | If set to "True", enables the Milestone decoder's ["Skip to catch up mode"](https://doc.developer.milestonesys.com/html/MMTKhelp/mmp_source_toolkit.html).
 
-## Configure IDOL Media Server for processing
+## Configure Knowledge Discovery Media Server for processing
 
 Let's process our video with *Numberplate Recognition* to generate alerts to send back to Milestone.
 
@@ -237,7 +237,7 @@ Before getting started, check that you have the required analytics modules and l
 
 ### Enabled modules
 
-The `Modules` section is where we list the engines that will be available to IDOL Media Server on startup.  Ensure that this list contains the following item:
+The `Modules` section is where we list the engines that will be available to Knowledge Discovery Media Server on startup.  Ensure that this list contains the following item:
 
 ```ini
 [Modules]
@@ -246,7 +246,7 @@ Enable=...,numberplate,...
 
 ### Licensed channels
 
-*Reminder*: The `Channels` section is where we instruct IDOL Media Server to request license seats from IDOL License Server.  IDOL Media Server has four license *flavours*:
+*Reminder*: The `Channels` section is where we instruct Knowledge Discovery Media Server to request license seats from Knowledge Discovery License Server.  Knowledge Discovery Media Server has four license *flavours*:
 
 1. Audio
 1. Surveillance
@@ -261,7 +261,7 @@ To enable *Numberplate Recognition* for this tutorial, you need to enable at lea
 VisualChannels=1
 ```
 
-> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
+> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart Knowledge Discovery Media Server.
 
 ### Analysis Configuration
 
@@ -315,7 +315,7 @@ SavePostXML = true
 XMLOutputPath = output/milestone/%session.token%/%segment.type%_%%segment.sequence%.xml
 ```
 
-> NOTE: See the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/OutputEngines/Milestone/_Milestone.htm) for full details the Milestone output engine.
+> NOTE: See the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/OutputEngines/Milestone/_Milestone.htm) for full details the Milestone output engine.
 
 The complete configuration is included here as `MilestoneANPR.cfg`.
 
@@ -327,7 +327,7 @@ Before running this process, we must configure Milestone to accept events from a
   
   ![enable-analytics-events](./figs/enable-analytics-events.png)
 
-  > TIP: Verify that the port `9090` matches the value in the IDOL Media Server process configuration above.
+  > TIP: Verify that the port `9090` matches the value in the Knowledge Discovery Media Server process configuration above.
 
 - On the side menu, under "Rules and Events", select "Analytics Events".
 - Right-click the top-level item, then select "Add New ..." from the context menu.
@@ -336,7 +336,7 @@ Before running this process, we must configure Milestone to accept events from a
 
 - Rename the event to "ANPR" and save changes.
 
-  > NOTE: If you wished to change the alert name from "ANPR", *e.g.* to "MyCustomEventName", you would have to change the default message in IDOL Media Server's `configurations/xsl/toMilestone.xsl` to match, *e.g.*:
+  > NOTE: If you wished to change the alert name from "ANPR", *e.g.* to "MyCustomEventName", you would have to change the default message in Knowledge Discovery Media Server's `configurations/xsl/toMilestone.xsl` to match, *e.g.*:
   >
   > ```diff
   > <xsl:template match="NumberPlateResult|NumberPlateResultAndImage">
@@ -374,7 +374,7 @@ Next, we must define an alarm, which will be triggered by our incoming ANPR even
 
   ![configure-anpr-alarm](./figs/configure-anpr-alarm.png)
 
-Finally, to ensure that all of the metadata provided by IDOL Media Server will be visible to users in Milestone, we must make one last configuration change:
+Finally, to ensure that all of the metadata provided by Knowledge Discovery Media Server will be visible to users in Milestone, we must make one last configuration change:
 
 - On the side menu, under "Alarms", select "Alarm Data Settings".
 - Under the "Alarm List Configuration" tab, select all of the available columns:
@@ -403,10 +403,10 @@ You should already see a notification that `9+` alarms have been received.  Open
 
 ![alarm-manager](./figs/alarm-manager.png)
 
-This view shows you a list of alarms under a live view of the camera stream.  Click on any of those alarms to open a new window showing your IDOL Media Server-produced ANPR event:
+This view shows you a list of alarms under a live view of the camera stream.  Click on any of those alarms to open a new window showing your Knowledge Discovery Media Server-produced ANPR event:
 
 ![alarm-view](./figs/alarm-view.png)
 
 ## Next steps
 
-Why not try more tutorials to explore some of the other analytics available in IDOL Media Server, linked from the [showcase page](../README.md).
+Why not try more tutorials to explore some of the other analytics available in Knowledge Discovery Media Server, linked from the [showcase page](../README.md).

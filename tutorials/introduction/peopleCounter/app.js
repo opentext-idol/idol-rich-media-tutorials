@@ -1,5 +1,5 @@
 /*
- * Listen for face-tracking alerts from IDOL Media Server and produce a count of people.
+ * Listen for face-tracking alerts from Knowledge Discovery Media Server and produce a count of people.
  */
 
 //  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -69,14 +69,14 @@ const aciServer = {
       });
 
     }).on('error', (e) => {
-      logger.debug(action, 'Cannot connect to IDOL Media Server on '+opts.mediaserver.host+':'+opts.mediaserver.port);
+      logger.debug(action, 'Cannot connect to Knowledge Discovery Media Server on '+opts.mediaserver.host+':'+opts.mediaserver.port);
     });
   }
 }
 
 const mediaServer = {
   /**
-   * Provide actions to interact with IDOL Media Server.
+   * Provide actions to interact with Knowledge Discovery Media Server.
    */
   startProcess: (cfg, callback) => {
     logger.debug('startProcess', 'Processing ' + opts.source);
@@ -120,19 +120,19 @@ const mediaServer = {
       newStatus = d.autnresponse.responsedata.actions.action[0].status.$;
       
       if ('Finished' === newStatus) {
-        logger.debug('checkProgress', 'IDOL Media Server process finished.  Exiting...');
+        logger.debug('checkProgress', 'Knowledge Discovery Media Server process finished.  Exiting...');
         process.exit();
         
       } else if ('Error' === newStatus) {
         const errorMessage = d.autnresponse.responsedata.actions.action[0].error.$;
-        logger.debug('checkProgress', `IDOL Media Server process failed with error:\n\'${errorMessage}\'.\nExiting...`);
+        logger.debug('checkProgress', `Knowledge Discovery Media Server process failed with error:\n\'${errorMessage}\'.\nExiting...`);
         process.exit();
         
       } else {
         if (newStatus === currentStatus) {
-          logger.debug('checkProgress', `IDOL Media Server process state: \'${newStatus}\'`);
+          logger.debug('checkProgress', `Knowledge Discovery Media Server process state: \'${newStatus}\'`);
         } else {
-          logger.info('checkProgress', `IDOL Media Server process state: \'${newStatus}\'`);
+          logger.info('checkProgress', `Knowledge Discovery Media Server process state: \'${newStatus}\'`);
           currentStatus = newStatus;
         }
         callback();
@@ -157,7 +157,7 @@ const mediaServer = {
 
 const parseProcessConfig = () => {
   /**
-   * Process the templated IDOL Media Server session configuration file.
+   * Process the templated Knowledge Discovery Media Server session configuration file.
    */
   const cfgTmpl = fs.readFileSync(opts.cfgFile, 'utf8'),
     isVideoFile = opts.isVideoFile,
@@ -216,7 +216,7 @@ const onRequest = (req, res) => {
   /**
    * Process HTTP request.
    */
-  logger.debug('onRequest', 'Connection received from IDOL Media Server');
+  logger.debug('onRequest', 'Connection received from Knowledge Discovery Media Server');
 
   if ('POST' !== req.method) {
     res.writeHead(405, { 'Content-Type': 'text/plain', 'Allow': 'POST' }); // 405 Method Not Allowed
@@ -274,7 +274,7 @@ process.on('SIGINT', doGracefulExit);
 http.createServer(onRequest).listen(opts.listener.port);
 logger.info('listener', opts.serverName + ' has started on port ' + opts.listener.port.toString() + '.');
 
-// Launch IDOL Media Server processing
+// Launch Knowledge Discovery Media Server processing
 const doChecking = () => {
   setTimeout(() => {
     mediaServer.checkProgress(() => { doChecking(); });

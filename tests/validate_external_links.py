@@ -37,6 +37,7 @@ for dir_path, dir_names, file_names in os.walk(".."):
 
     with open(file_path, 'r') as md_file:
       for link in findDocsLinks(md_file.read()):
+        if "sld.microfocus.com" in link: continue
         if "swinfra.net" in link: continue
         if "autonomy.com" in link: continue
         if "oauth2" in link: continue

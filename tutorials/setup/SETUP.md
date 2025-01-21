@@ -1,13 +1,13 @@
-# Create your own IDOL rich media setup
+# Create your own Knowledge Discovery rich media setup
 
-This is a setup guide for a basic installation of IDOL rich media and associated components.
+This is a setup guide for a basic installation of Knowledge Discovery rich media and associated components.
 
 ---
 
 - [Useful third-party tools](#useful-third-party-tools)
-- [IDOL components](#idol-components)
-  - [Obtain an IDOL license](#obtain-an-idol-license)
-  - [Install IDOL software](#install-idol-software)
+- [Knowledge Discovery components](#knowledge-discovery-components)
+  - [Obtain an Knowledge Discovery license](#obtain-an-knowledge-discovery-license)
+  - [Install Knowledge Discovery software](#install-knowledge-discovery-software)
   - [Obtaining tutorial materials](#obtaining-tutorial-materials)
     - [Following this guide offline](#following-this-guide-offline)
     - [Validate install](#validate-install)
@@ -20,36 +20,36 @@ This is a setup guide for a basic installation of IDOL rich media and associated
 A text editor, *e.g.*:
 
 - [VS Code](https://code.visualstudio.com/download), or
-- [Notepad++](https://notepad-plus-plus.org/download)
+- [Notepad++](https://notepad-plus-plus.org/downloads/)
 
 A log follower, *e.g.*:
 
 - `tail -F` from the command line, or
 - [Baretail](https://www.baremetalsoft.com/baretail/) - select the *Free Version*
 
-## IDOL components
+## Knowledge Discovery components
 
-IDOL components are licensed via the IDOL License Server application, which requires a license key.
+Knowledge Discovery components are licensed via the Knowledge Discovery License Server application, which requires a license key.
 
-### Obtain an IDOL license
+### Obtain an Knowledge Discovery license
 
 You can obtain software and licenses from the [Software Licensing and Downloads](https://sld.microfocus.com/mysoftware/index) portal.
 
 1. Under the *Entitlements* tab, search for *IDOL*
 1. Select from your available environment types:
-1. Scroll to the bottom and click `Activate` next to your *IDOL SW license*
+1. Scroll to the bottom and click `Activate` next to your *Knowledge Discovery SW license*
 
     ![get-license](./figs/get-license.png)
 
-1. On the "License Activation" screen, at the bottom, select the check box, choose your preferred version (the latest is 24.4), then fill in the quantity to activate:
+1. On the "License Activation" screen, at the bottom, select the check box, choose your preferred version (the latest is 25.1), then fill in the quantity to activate:
 
    ![eSoftware-selectLicense](./figs/eSoftware-selectLicense.png)
 
-1. Above this section, fill in the requested details, including the MAC address and host name of the machine where you will install IDOL License Server:
+1. Above this section, fill in the requested details, including the MAC address and host name of the machine where you will install Knowledge Discovery License Server:
 
    ![eSoftware-configureLicense](./figs/eSoftware-configureLicense.png)
 
-    > NOTE: IDOL License Server listens for HTTP requests from other IDOL components to provide them license seats.  The default port is `20000` but you are free to change this.
+    > NOTE: Knowledge Discovery License Server listens for HTTP requests from other Knowledge Discovery components to provide them license seats.  The default port is `20000` but you are free to change this.
     >
     > TIP: To obtain your MAC address and host name on Windows, open a command prompt and enter `ipconfig /all`.  Now look for the "Host Name" and "Physical Address" fields:
     >
@@ -59,9 +59,9 @@ You can obtain software and licenses from the [Software Licensing and Downloads]
 
 1. Click "Next", then confirm your details and click "Submit".  You will soon received your key, which is a `.dat` file, by email.
 
-### Install IDOL software
+### Install Knowledge Discovery software
 
-Follow [these steps](./INSTALL_ZIPS.md) for a scripted installation of IDOL components.
+Follow [these steps](./INSTALL_ZIPS.md) for a scripted installation of Knowledge Discovery components.
 
 ### Obtaining tutorial materials
 
@@ -79,28 +79,28 @@ You can stay on GitHub to follow the steps in this and further linked README fil
 
 If you used the scripts without altering them, your installed software will be in:
 
-- `C:\OpenText\IDOLServer-24.4.0` (Windows)
-- `~/IDOLServer-24.4.0` (Linux)
+- `C:\OpenText\IDOLServer-25.1.0` (Windows)
+- `~/IDOLServer-25.1.0` (Linux)
 
-Each installed IDOL component will have its own sub-directory, which includes all required executables, dependencies and configuration files.  The primary configuration file for each shares the name of the component executable, *e.g.* `mediaserver.cfg` for `mediaserver.exe`.
+Each installed Knowledge Discovery component will have its own sub-directory, which includes all required executables, dependencies and configuration files.  The primary configuration file for each shares the name of the component executable, *e.g.* `mediaserver.cfg` for `mediaserver.exe`.
 
-Now let's start up IDOL License Server:
+Now let's start up Knowledge Discovery License Server:
 
 - On Windows, start the `OpenText-LicenseServer` Windows Service.
-- On Linux, launch the startup script from the IDOL License Server directory:
+- On Linux, launch the startup script from the Knowledge Discovery License Server directory:
 
   ```sh
   ./start-licenseserver.sh
   ```
 
-To ensure IDOL License Server is running, point your browser to [`action=getLicenseInfo`](http://localhost:20000/a=getlicenseinfo).
+To ensure Knowledge Discovery License Server is running, point your browser to [`action=getLicenseInfo`](http://localhost:20000/a=getlicenseinfo).
 
-Next start up IDOL Media Server in the same way and verify it is also running at [`action=getStatus`](http://localhost:14000/a=getstatus).
+Next start up Knowledge Discovery Media Server in the same way and verify it is also running at [`action=getStatus`](http://localhost:14000/a=getstatus).
 
 ### Further reading
 
 The admin guides for all components can be accessed from these links:
 
-- [IDOL documentation home page](https://www.microfocus.com/documentation/idol/)
-- [License Server admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/LicenseServer_24.4_Documentation/Help/Content/_FT_SideNav_Startup.htm)
-- [Media Server admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/_FT_SideNav_Startup.htm)
+- [Knowledge Discovery documentation home page](https://www.microfocus.com/documentation/idol/)
+- [License Server admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/LicenseServer_25.1_Documentation/Help/Content/_FT_SideNav_Startup.htm)
+- [Media Server admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/_FT_SideNav_Startup.htm)

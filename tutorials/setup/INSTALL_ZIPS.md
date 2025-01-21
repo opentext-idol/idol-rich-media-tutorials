@@ -1,17 +1,17 @@
-# Install IDOL Media Server
+# Install Knowledge Discovery Media Server
 
-Use a script to install IDOL Media Server from the component `.zip` files.
+Use a script to install Knowledge Discovery Media Server from the component `.zip` files.
 
 ---
 
-- [Download IDOL components](#download-idol-components)
+- [Download Knowledge Discovery components](#download-knowledge-discovery-components)
 - [Install](#install)
   - [Windows](#windows)
   - [Ubuntu](#ubuntu)
 
 ---
 
-## Download IDOL components
+## Download Knowledge Discovery components
 
 Download software from the [Software Licensing and Downloads](https://sld.microfocus.com/mysoftware/index) portal.
 
@@ -21,8 +21,8 @@ Download software from the [Software Licensing and Downloads](https://sld.microf
 
 1. From the list of available files, select and download the following (depending on your operating system):
 
-   - `LicenseServer_24.4.0_WINDOWS_X86_64.zip` or `LicenseServer_24.4.0_LINUX_X86_64.zip`, and
-   - `MediaServer_24.4.0_WINDOWS_X86_64.zip` or `MediaServer_24.4.0_LINUX_X86_64.zip`.
+   - `LicenseServer_25.1.0_WINDOWS_X86_64.zip` or `LicenseServer_25.1.0_LINUX_X86_64.zip`, and
+   - `MediaServer_25.1.0_WINDOWS_X86_64.zip` or `MediaServer_25.1.0_LINUX_X86_64.zip`.
 
     ![get-idol-zips](./figs/get-idol-zips.png)
 

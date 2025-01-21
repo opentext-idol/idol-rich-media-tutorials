@@ -1,5 +1,5 @@
 /*
- *  IDOL People Counter Server options.
+ *  Knowledge Discovery People Counter Server options.
  */
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

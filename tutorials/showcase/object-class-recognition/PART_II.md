@@ -1,8 +1,8 @@
 # PART II - Build a custom recognizer
 
-The pre-trained Object Class Recognizers that ship with IDOL Media Server cover a broad range of objects; however, there may be occasions when you wish to work with additional classes of object.  IDOL Media Server enables us to build custom recognizers by uploading and annotating your own sample images.
+The pre-trained Object Class Recognizers that ship with Knowledge Discovery Media Server cover a broad range of objects; however, there may be occasions when you wish to work with additional classes of object.  Knowledge Discovery Media Server enables us to build custom recognizers by uploading and annotating your own sample images.
 
-1. use the IDOL Media Server GUI to upload and annotate sample images to train a recognizer for one new class
+1. use the Knowledge Discovery Media Server GUI to upload and annotate sample images to train a recognizer for one new class
 1. process test images to identify this new class
 <!-- 1. discuss sources of new training data, *e.g.* OpenImages -->
 <!-- 1. use "snapshots" to optimize your own models -->
@@ -24,13 +24,13 @@ The pre-trained Object Class Recognizers that ship with IDOL Media Server cover 
 
 ## Object class training
 
-IDOL Media Server can be trained to recognize classes of object, as well as specific objects, faces, vehicles and more.  We will now train a class for "wheels" using a small number of sample images in order to locate wheels in some test images.
+Knowledge Discovery Media Server can be trained to recognize classes of object, as well as specific objects, faces, vehicles and more.  We will now train a class for "wheels" using a small number of sample images in order to locate wheels in some test images.
 
-IDOL Media Server training can be performed through its web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Actions/Training/_TrainingActions.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
+Knowledge Discovery Media Server training can be performed through its web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Actions/Training/_TrainingActions.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
 
 ### Add your own training images
 
-Open the IDOL Media Server [`gui`](http://localhost:14000/a=gui#/train/objectClassRec(tool:select)) (tested in Google Chrome) then follow these steps to upload your class training images:
+Open the Knowledge Discovery Media Server [`gui`](http://localhost:14000/a=gui#/train/objectClassRec(tool:select)) (tested in Google Chrome) then follow these steps to upload your class training images:
 
 1. at the top right, note that the analytic *Object Class Recognition* is selected
 1. in the left column, click `Create` to add a new *recognizer* (a collection of *classes*)
@@ -54,7 +54,7 @@ An object class recognizer is trained to locate objects of a specified class wit
 
 ### Annotate images for training
 
-Back in the IDOL Media Server GUI:
+Back in the Knowledge Discovery Media Server GUI:
 
 1. select (or hover over) one of the imported images and click the "Open" button
 1. in the pop-up window that appears, at the top right, notice the class selector dropdown is automatically set for our single class "wheel"
@@ -73,9 +73,9 @@ Because object class recognizer training uses the regions around your annotated 
 
 ### Build your recognizer
 
-Back in the IDOL Media Server GUI, click `Build`.
+Back in the Knowledge Discovery Media Server GUI, click `Build`.
 
-If you do not have GPU enabled for your IDOL Media Server instance, you will see an warning message at this point:
+If you do not have GPU enabled for your Knowledge Discovery Media Server instance, you will see an warning message at this point:
 
 ![build-recognizer-warning](./figs/build-recognizer-warning.png)
 
@@ -90,11 +90,11 @@ If you do wish to train with CPU only, it is advisable to edit the default train
 
 > NOTE: With these configuration options on the author's laptop, this build took about nine minutes.
 >
-> NOTE: For details on available recognizer types and other available training options, please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Operations/Analyze/ObjectClassRec_RecognizerTypes.htm).
+> NOTE: For details on available recognizer types and other available training options, please read the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Operations/Analyze/ObjectClassRec_RecognizerTypes.htm).
 
 When training your own recognizers, it is *strongly recommended* to utilize GPU acceleration.  This will allow you to train larger sample sets with many classes, as well as to utilize the most accurate "Generation 4" recognizer type.
 
-> NOTE: For details on GPU support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Advanced/GPU.htm).
+> NOTE: For details on GPU support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Advanced/GPU.htm).
 
 ## Running object class recognition
 
@@ -106,7 +106,7 @@ Type = ObjectClassRecognition
 Recognizer = Workshop
 ```
 
-More options are available for the `ObjectClassRecognition` analysis engine, including setting the matching threshold and allowing multiple matches to be returned.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Configuration/Analysis/ObjectClass/_ObjectClass.htm) for details.
+More options are available for the `ObjectClassRecognition` analysis engine, including setting the matching threshold and allowing multiple matches to be returned.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Configuration/Analysis/ObjectClass/_ObjectClass.htm) for details.
 
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
@@ -134,8 +134,8 @@ Modify the above command to do the same for the second test image `bike.jpg`:
 
 ### GPU for processing
 
-As stated above, GPU is (practically speaking) essential for training new recognizers; however, when running a process action to match objects, the benefit of GPU is much reduced. This is particularly true for image processing. For video processing, running on a GPU-enabled IDOL Media Server *can* offer a benefit in certain situations.  See the tutorial on using Object Class Recognition for [surveillance analytics](../surveillance/README.md#optional-gpu-acceleration) for more discussion.
+As stated above, GPU is (practically speaking) essential for training new recognizers; however, when running a process action to match objects, the benefit of GPU is much reduced. This is particularly true for image processing. For video processing, running on a GPU-enabled Knowledge Discovery Media Server *can* offer a benefit in certain situations.  See the tutorial on using Object Class Recognition for [surveillance analytics](../surveillance/README.md#optional-gpu-acceleration) for more discussion.
 
 ## Next steps
 
-Why not try more tutorials to explore some of the other analytics available in IDOL Media Server, linked from the [showcase page](../README.md).
+Why not try more tutorials to explore some of the other analytics available in Knowledge Discovery Media Server, linked from the [showcase page](../README.md).

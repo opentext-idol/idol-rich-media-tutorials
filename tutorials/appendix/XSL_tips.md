@@ -3,7 +3,7 @@
 ---
 
 - [Introduction](#introduction)
-- [Uses with IDOL Media Server](#uses-with-idol-media-server)
+- [Uses with Knowledge Discovery Media Server](#uses-with-knowledge-discovery-media-server)
   - [Formatting process output](#formatting-process-output)
   - [Formatting synchronous server responses](#formatting-synchronous-server-responses)
 - [People Counting app example](#people-counting-app-example)
@@ -24,17 +24,17 @@
 
 ## Introduction
 
-XSL (eXtensible Stylesheet Language) is a styling language for XML.  XSL transformations (XSLT) are commonly used on the web to reformat XML data, *e.g.* to publish that data as an HTML page.  These transforms make use of the XPath query language to navigate through elements and attributes in an XML document.  For a general introduction to XSL transforms, [w3schools](https://www.w3schools.com/xml/xsl_intro.asp) has a good beginners tutorial.  For key concepts that are commonly used with IDOL Media Server, read on.
+XSL (eXtensible Stylesheet Language) is a styling language for XML.  XSL transformations (XSLT) are commonly used on the web to reformat XML data, *e.g.* to publish that data as an HTML page.  These transforms make use of the XPath query language to navigate through elements and attributes in an XML document.  For a general introduction to XSL transforms, [w3schools](https://www.w3schools.com/xml/xsl_intro.asp) has a good beginners tutorial.  For key concepts that are commonly used with Knowledge Discovery Media Server, read on.
 
-## Uses with IDOL Media Server
+## Uses with Knowledge Discovery Media Server
 
 ### Formatting process output
 
-In IDOL Media Server land, we use XSL extensively to customize the XML records produced by output engines.  Many such XSL templates can be found in your `configurations/xsl` directory.
+In Knowledge Discovery Media Server land, we use XSL extensively to customize the XML records produced by output engines.  Many such XSL templates can be found in your `configurations/xsl` directory.
 
 ### Formatting synchronous server responses
 
-XSL templates are also commonly employed across many IDOL components to reformat ACI responses.  IDOL Media Server also includes some such templates in the `acitemplates` directory.  For a simple example, compare the difference between the following two IDOL Media Server requests:
+XSL templates are also commonly employed across many Knowledge Discovery components to reformat ACI responses.  Knowledge Discovery Media Server also includes some such templates in the `acitemplates` directory.  For a simple example, compare the difference between the following two Knowledge Discovery Media Server requests:
 
 - <http://localhost:14000/a=getExampleRecord&engineType=ColorCluster>
 - <http://localhost:14000/a=getExampleRecord&engineType=ColorCluster&template=getExampleRecord>
@@ -56,7 +56,7 @@ XSL transforms are defined with valid XML.  They require the following minimal h
 </xsl:stylesheet>
 ```
 
-> NOTE: IDOL Media Server supports XSL version 1.0.
+> NOTE: Knowledge Discovery Media Server supports XSL version 1.0.
 
 ### Output method
 
@@ -199,7 +199,7 @@ Our `importantRecord` contains additional sub-nodes that we do not need to proce
 
 My preferred approach for developing a new XSL transform is the following:
 
-1. Get an example source XML file from IDOL Media Server output
+1. Get an example source XML file from Knowledge Discovery Media Server output
 1. Take an existing XSL transform
 1. Iterate changes until you achieve your aims
 
@@ -216,7 +216,7 @@ You can go to this directory and copy one of those files, *e.g.* `pre_2_20180626
 
 ### Test running XSL transforms
 
-To make iterative testing faster, you can avoid the need to keep reprocessing your source with IDOL Media Server, *e.g.* on Windows by using a free command line tool `msxsl.exe` from Microsoft, and included in the folder next to this README since the download is no longer available.
+To make iterative testing faster, you can avoid the need to keep reprocessing your source with Knowledge Discovery Media Server, *e.g.* on Windows by using a free command line tool `msxsl.exe` from Microsoft, and included in the folder next to this README since the download is no longer available.
 
 To run the transformation from your `introduction/peopleCounter` folder, download the command line tool and copy it here, then do:
 
@@ -256,4 +256,4 @@ Now you are ready to collect any nodes you wish from this source XML.
 
 ## Next steps
 
-Why not try some tutorials to explore some of the analytics available in IDOL Media Server, linked from the [main page](../../README.md).
+Why not try some tutorials to explore some of the analytics available in Knowledge Discovery Media Server, linked from the [main page](../../README.md).

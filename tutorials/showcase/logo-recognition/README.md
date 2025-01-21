@@ -1,15 +1,15 @@
 # Logo Recognition
 
-IDOL Media Server includes an Object Recognition analysis engine, which can be trained to recognize specific 2-D and 3-D objects in images and video, such as a logo or painting.
+Knowledge Discovery Media Server includes an Object Recognition analysis engine, which can be trained to recognize specific 2-D and 3-D objects in images and video, such as a logo or painting.
 
-For a more detailed introduction to Object Recognition, see the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Operations/Analyze/ObjectRecognition_Introduction.htm).
+For a more detailed introduction to Object Recognition, see the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Operations/Analyze/ObjectRecognition_Introduction.htm).
 
 In this tutorial we will:
 
 1. use the Object Recognition analysis engine to train Objects and identify them in a video from a football match
 1. use transform and image encoding engines to save cropped images of the Objects we find
 
-This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../README.md#introduction).
+This guide assumes you have already familiarized yourself with Knowledge Discovery Media Server by completing the [introductory tutorial](../../README.md#introduction).
 
 If you want to start here, you must at least follow these [installation steps](../../setup/SETUP.md) before continuing.
 
@@ -40,11 +40,11 @@ This guide makes use of `node.js`.  Please follow these [instructions](../../set
 
 ### Configure object recognition
 
-IDOL Media Server must be licensed for visual analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enabling-analytics).  To reconfigure IDOL Media Server you must edit your `mediaserver.cfg` file.
+Knowledge Discovery Media Server must be licensed for visual analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enabling-analytics).  To reconfigure Knowledge Discovery Media Server you must edit your `mediaserver.cfg` file.
 
 #### Enabled modules
 
-The `Modules` section is where we list the engines that will be available to IDOL Media Server on startup.  Ensure that this list contains the module `objectrecognition`:
+The `Modules` section is where we list the engines that will be available to Knowledge Discovery Media Server on startup.  Ensure that this list contains the module `objectrecognition`:
 
 ```ini
 [Modules]
@@ -53,7 +53,7 @@ Enable=...,objectrecognition,...
 
 #### Licensed channels
 
-The `Channels` section is where we instruct IDOL Media Server to request license seats from IDOL License Server.  To enable *Object Recognition* for this tutorial, you need to enable at least one channel of type *Visual*:
+The `Channels` section is where we instruct Knowledge Discovery Media Server to request license seats from Knowledge Discovery License Server.  To enable *Object Recognition* for this tutorial, you need to enable at least one channel of type *Visual*:
 
 ```ini
 [Channels]
@@ -61,7 +61,7 @@ The `Channels` section is where we instruct IDOL Media Server to request license
 VisualChannels=1
 ```
 
-> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
+> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart Knowledge Discovery Media Server.
 
 ## Training objects
 
@@ -114,7 +114,7 @@ Type = Video
 IngestDateTime = 0
 ```
 
-For full details on the options available for ingesting video (and other) sources, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Ingest/_Ingest.htm).
+For full details on the options available for ingesting video (and other) sources, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/Ingest/_Ingest.htm).
 
 ### Analysis
 
@@ -134,7 +134,7 @@ Here we have specified our newly created database with the `Database` parameter.
 - an identifier (or list of identifiers), *e.g.* for one-to-one validation (or matching a sub-set)
 - a metadata key-value pair, *e.g.* if you want to match only shirt sponsors in our example, set `Metadata = group:shirt`
 
-We have also specified some parameters that affect how the analytic runs.  For full details on these and other available options, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Analysis/Object/_Object.htm).
+We have also specified some parameters that affect how the analytic runs.  For full details on these and other available options, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/Analysis/Object/_Object.htm).
 
 ### Event processing
 
@@ -188,7 +188,7 @@ OutputPath = output/football/%record.IdentityData.identifier%_%record.IdentityDa
 
 ### In-use tracks
 
-Remember that only connected tracks are populated as a IDOL Media Server process runs.  If you want to monitor additional tracks, *e.g.* in IDOL Media Server's GUI, you can force them to be "in use" by adding them as inputs to a "dummy" engine, for example in this *Combine*-type event processing engine:
+Remember that only connected tracks are populated as a Knowledge Discovery Media Server process runs.  If you want to monitor additional tracks, *e.g.* in Knowledge Discovery Media Server's GUI, you can force them to be "in use" by adding them as inputs to a "dummy" engine, for example in this *Combine*-type event processing engine:
 
 ```ini
 [Keep]
@@ -200,7 +200,7 @@ Input2 = ObjectRecognition.End
 
 ## Running our analysis
 
-While testing, or if you simply wish to keep your config files in a project-specific directory outside of `configurations`, you can reference a config file path in the process action by setting the `configPath` parameter (assuming of course that IDOL Media Server can access the location where your process configuration file is stored).
+While testing, or if you simply wish to keep your config files in a project-specific directory outside of `configurations`, you can reference a config file path in the process action by setting the `configPath` parameter (assuming of course that Knowledge Discovery Media Server can access the location where your process configuration file is stored).
 
 Let's try it. Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
@@ -218,4 +218,4 @@ Stop processing with [`stop`](http://127.0.0.1:14000/a=queueInfo&queueAction=sto
 
 ## Next steps
 
-Why not try more tutorials to explore some of the other analytics available in IDOL Media Server, linked from the [showcase page](../README.md).
+Why not try more tutorials to explore some of the other analytics available in Knowledge Discovery Media Server, linked from the [showcase page](../README.md).

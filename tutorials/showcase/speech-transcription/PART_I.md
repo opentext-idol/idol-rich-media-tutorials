@@ -1,14 +1,14 @@
 # PART I - Automatic Subtitles
 
-As a hands-on introduction to speech transcription, we will configure IDOL Media Server to support the following example use case: to record video clips from on a live news broadcast stream and automatically generate subtitles for those clips.
+As a hands-on introduction to speech transcription, we will configure Knowledge Discovery Media Server to support the following example use case: to record video clips from on a live news broadcast stream and automatically generate subtitles for those clips.
 
 In this tutorial we will:
 
 1. configure a speech language pack and run speech transcription
 1. record video clips from a live stream
-1. use XSL transforms to re-format IDOL Media Server output to create subtitles
+1. use XSL transforms to re-format Knowledge Discovery Media Server output to create subtitles
 
-This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../README.md#introduction).
+This guide assumes you have already familiarized yourself with Knowledge Discovery Media Server by completing the [introductory tutorial](../../README.md#introduction).
 
 If you want to start here, you must at least follow these [installation steps](../../setup/SETUP.md) before continuing.
 
@@ -38,11 +38,11 @@ Download and install [VLC player](http://www.videolan.org/vlc/) for video clip p
 
 ### Configure speech transcription
 
-IDOL Media Server is separately licensed for visual and audio analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enabling-analytics).  To reconfigure IDOL Media Server you must edit your `mediaserver.cfg` file.
+Knowledge Discovery Media Server is separately licensed for visual and audio analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enabling-analytics).  To reconfigure Knowledge Discovery Media Server you must edit your `mediaserver.cfg` file.
 
 #### Enabled modules
 
-The `Modules` section is where we list the engines that will be available to IDOL Media Server on startup.  Ensure that this list contains the module `speechtotext`:
+The `Modules` section is where we list the engines that will be available to Knowledge Discovery Media Server on startup.  Ensure that this list contains the module `speechtotext`:
 
 ```ini
 [Modules]
@@ -51,7 +51,7 @@ Enable=...,speechtotext,...
 
 #### Licensed channels
 
-The `Channels` section is where we instruct IDOL Media Server to request license seats from IDOL License Server.  To enable speech transcription for this tutorial, you need to enable at least one channel of type *Audio*:
+The `Channels` section is where we instruct Knowledge Discovery Media Server to request license seats from Knowledge Discovery License Server.  To enable speech transcription for this tutorial, you need to enable at least one channel of type *Audio*:
 
 ```ini
 [Channels]
@@ -59,25 +59,25 @@ The `Channels` section is where we instruct IDOL Media Server to request license
 AudioChannels=1
 ```
 
-> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
+> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart Knowledge Discovery Media Server.
 
 #### GPU acceleration
 
-If you are lucky enough to have access to a supported NVIDIA graphics card, you can accelerate certain analytics (including new model speech to text), as well as video ingest and encoding.  For details on support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Advanced/GPU.htm).
+If you are lucky enough to have access to a supported NVIDIA graphics card, you can accelerate certain analytics (including new model speech to text), as well as video ingest and encoding.  For details on support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Advanced/GPU.htm).
 
 #### Language packs
 
-Speech transcription language packs are distributed separately from the main IDOL Media Server package.  To obtain a language pack, return to the [Software Licensing and Downloads](https://sld.microfocus.com/mysoftware/index) portal, then under the *Downloads* tab, select your product, product name and version from the dropdowns:
+Speech transcription language packs are distributed separately from the main Knowledge Discovery Media Server package.  To obtain a language pack, return to the [Software Licensing and Downloads](https://sld.microfocus.com/mysoftware/index) portal, then under the *Downloads* tab, select your product, product name and version from the dropdowns:
 
 ![get-software](../../setup/figs/get-software.png)
 
-For this tutorial we will use the "Common" pack.  From the list of available files, select and download `MediaServerLanguagePack_24.4.0_COMMON.zip`:
+For this tutorial we will use the "Common" pack.  From the list of available files, select and download `MediaServerLanguagePack_25.1.0_COMMON.zip`:
 
 ![get-common-lang-pack-zip](./figs/get-common-lang-pack-zip.png)
 
-Unzip the contents into IDOL Media Server's static data directory, renaming the extracted folder to "Common", to give you, *e.g.* `staticdata/Common/`, containing one folder per supported language, such as `ENUK`, and files like `micro.dat`.
+Unzip the contents into Knowledge Discovery Media Server's static data directory, renaming the extracted folder to "Common", to give you, *e.g.* `staticdata/Common/`, containing one folder per supported language, such as `ENUK`, and files like `micro.dat`.
 
-> NOTE: This combined language pack enables transcription with the new models for all supported languages.  Additional, separate language packs are available for the "legacy" models.  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Appendixes/SpeechLanguages.htm) for the list of supported languages.
+> NOTE: This combined language pack enables transcription with the new models for all supported languages.  Additional, separate language packs are available for the "legacy" models.  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Appendixes/SpeechLanguages.htm) for the list of supported languages.
 
 ## Process configuration
 
@@ -101,7 +101,7 @@ ModelVersion = Micro
 SpeedBias = Live
 ```
 
-More options are available for the *SpeechToText* analysis engine.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm) for details.
+More options are available for the *SpeechToText* analysis engine.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm) for details.
 
 To view the results in a simple and standalone way, we will record the stream to video files and format the speech transcription output to generate subtitles for those clips.
 
@@ -153,7 +153,7 @@ OutputPath = output/speechToText1/%session.token%/clip_%segment.sequence%.srt
 XslTemplate = toSRT.xsl
 ```
 
-We use using the *Bounded* output mode to bundle together all the text segments with the relevant video clip.  Please read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Operations/Outputs/IndexingModes_BoundedEvent.htm), for details.
+We use using the *Bounded* output mode to bundle together all the text segments with the relevant video clip.  Please read the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Operations/Outputs/IndexingModes_BoundedEvent.htm), for details.
 
 ## Process a news channel stream
 
@@ -185,7 +185,7 @@ Stop processing by clicking the `Stop Session` button in the GUI or with the [`s
 
 ## Working with "standard" XML output
 
-In the above example, we used XSL transforms to convert records within IDOL Media Server for output.  You can also of course output standard XML during processing and convert it as you like later.  
+In the above example, we used XSL transforms to convert records within Knowledge Discovery Media Server for output.  You can also of course output standard XML during processing and convert it as you like later.  
 
 ### Generate XML
 
@@ -213,7 +213,7 @@ Next, we will use the included python script `xml2srt.py` to convert one of the 
 
 ```sh
 cd C:\OpenText\idol-rich-media-tutorials\tutorials\showcase\speech-transcription
-python xml2srt.py "C:\OpenText\IDOLServer-24.4.0\MediaServer\output\speechToText1a\clip_1.xml"
+python xml2srt.py "C:\OpenText\IDOLServer-25.1.0\MediaServer\output\speechToText1a\clip_1.xml"
 ```
 
 This will produce a new file `clip_1.srt` in the same directory as the original `.xml` file.  As before, you can now open the video `clip_1.mp4` in VLC player to view the time-aligned subtitles.

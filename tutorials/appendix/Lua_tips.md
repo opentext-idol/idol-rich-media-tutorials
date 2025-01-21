@@ -15,7 +15,7 @@
 
 For an introduction to the Lua language, look no further than [lua.org](https://www.lua.org/pil/contents.html).
 
-In IDOL Media Server we use Lua to apply custom logic.  This provides an enormous flexibility that makes complex requirements easy to deliver:
+In Knowledge Discovery Media Server we use Lua to apply custom logic.  This provides an enormous flexibility that makes complex requirements easy to deliver:
 
 - Preparing a recording of a telephone call for a court hearing, you want to detect when a specific person's name is mentioned and bleep it out.
 - If running license plate recognition in Mexico City, you want alert on plates ending in "5" or "6" on Mondays, when they are [forbidden from being out on the road](https://en.wikipedia.org/wiki/Hoy_No_Circula).
@@ -23,13 +23,13 @@ In IDOL Media Server we use Lua to apply custom logic.  This provides an enormou
 - While monitoring a building entrance, you want to produce a face recognition alert when a person comes into view, but if they move out of the scene and then come back within a specified time, you do not want to be alerted again.
 - When exporting a video to show people-tracking in a crowded scene, you want to overlay each person with a different colored box.
 
-IDOL Media Server includes many example Lua scripts, which you can see under `configurations/lua`.  
+Knowledge Discovery Media Server includes many example Lua scripts, which you can see under `configurations/lua`.  
 
-To support writing your own Lua scripts, IDOL Media Server also provides helper functions.  See the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Lua/LuaFunctions.htm) for more details.
+To support writing your own Lua scripts, Knowledge Discovery Media Server also provides helper functions.  See the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Lua/LuaFunctions.htm) for more details.
 
 ## Logging
 
-When developing your own Lua scripts, it is obviously very useful to be able to log values to check your logic.  IDOL Media Server provides a logging helper function to do just that, which is used as follows:
+When developing your own Lua scripts, it is obviously very useful to be able to log values to check your logic.  Knowledge Discovery Media Server provides a logging helper function to do just that, which is used as follows:
 
 ```lua
 function pred(record)
@@ -51,7 +51,7 @@ LogFile=lua.log
 LogTypeCSVs=lua
 ```
 
-> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
+> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart Knowledge Discovery Media Server.
 
 ## Accessing record data
 
@@ -63,7 +63,7 @@ local oopangle = record.FaceData.outOfPlaneAngleX
 
 ### Example records
 
-IDOL Media Server provides a useful action to list the record data structure for your analytic of interest, in this case *Face Detection*.  Launch this action (with or without the template) in your browser to see the structure:
+Knowledge Discovery Media Server provides a useful action to list the record data structure for your analytic of interest, in this case *Face Detection*.  Launch this action (with or without the template) in your browser to see the structure:
 
 ```url
 http://localhost:14000/action=GetExampleRecord&EngineType=FaceDetect&Track=Result
@@ -137,7 +137,7 @@ You will notice that the table structure contains some repetition.  The followin
 - timestamp
 - FaceResult
 
-In addition there are three other keys, which are named for IDOL Media Server data types, and act as alternative accessors to the same data:
+In addition there are three other keys, which are named for Knowledge Discovery Media Server data types, and act as alternative accessors to the same data:
 
 - FaceData
 - RegionData
@@ -164,7 +164,7 @@ local width = record.FaceRecognitionResultAndImage.face.region.width
 
 ### Output Lua records
 
-IDOL Media Server provides a [Lua output engine](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/OutputEngines/Lua/_Lua.htm), which produces a Lua representation of each record that it receives, and writes it to a file on disk. You can use the output to help you to write and troubleshoot Lua scripts.
+Knowledge Discovery Media Server provides a [Lua output engine](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/OutputEngines/Lua/_Lua.htm), which produces a Lua representation of each record that it receives, and writes it to a file on disk. You can use the output to help you to write and troubleshoot Lua scripts.
 
 An example configuration file based on our first process session from [PART I](../introduction/PART_I.md#run-face-detection) of the introductory tutorial:
 
@@ -189,4 +189,4 @@ LuaOutputPath=output/faces1/%segment.startTime.timestamp%.lua
 
 ## Next steps
 
-Why not try some tutorials to explore some of the analytics available in IDOL Media Server, linked from the [main page](../../README.md).
+Why not try some tutorials to explore some of the analytics available in Knowledge Discovery Media Server, linked from the [main page](../../README.md).

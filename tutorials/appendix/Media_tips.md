@@ -44,8 +44,8 @@ A collection of tips and tricks to support your future projects in image, video 
 - A video player, *e.g.* [VLC](http://www.videolan.org/vlc/), [ffmpeg](https://ffmpeg.org/download.html)
 - A video editor, *e.g.* [ffmpeg](https://ffmpeg.org/download.html)
 - A screen recorder, *e.g.* with the [Xbox Game Bar](https://support.xbox.com/en-GB/help/friends-social-activity/share-socialize/record-game-clips-game-bar-windows-10) included with Windows 10, or [ffmpeg](https://ffmpeg.org/download.html)
-- A scripting language, *e.g.* [node.js](https://nodejs.org/), [python](https://www.python.org/downloads/)
-- A better terminal for Windows, *e.g.* [GitBash](https://gitforwindows.org/) (even better with [Cmder](https://cmder.app/) or [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701))
+- A scripting language, *e.g.* [python](https://www.python.org/downloads/) or [node.js](https://nodejs.org/en)
+- A better terminal for Windows, *e.g.* [GitBash](https://gitforwindows.org/) (even better with [Windows Terminal](https://apps.microsoft.com/detail/9n0dx20hk701?hl=en-US&gl=GB))
 
 ## Collecting sample media
 
@@ -63,7 +63,7 @@ There exist many free news streams on the web that you can connect to.  Often ne
 
 ![m3u8.png](./figs/m3u8.png)
 
-> NOTE: While IDOL Media Server's Video ingest engine does support `https` on Windows, *it does not on Linux*.  Luckily, you can often change the URL protocol to `http` and it will still work, *e.g.* <https://live-hls-web-aje.getaj.net/AJE/03.m3u8> seen in the above screenshot can be safely changed to <http://live-hls-web-aje.getaj.net/AJE/03.m3u8>, as listed in the table below.
+> NOTE: While Knowledge Discovery Media Server's Video ingest engine does support `https` on Windows, *it does not on Linux*.  Luckily, you can often change the URL protocol to `http` and it will still work, *e.g.* <https://live-hls-web-aje.getaj.net/AJE/03.m3u8> seen in the above screenshot can be safely changed to <http://live-hls-web-aje.getaj.net/AJE/03.m3u8>, as listed in the table below.
 >
 > If your target stream does not support HTTP, you can use ffmpeg to restream the source for Media Server to ingest, as shown [below](#restream-videoaudio-from-a-live-youtube-channel).
 
@@ -76,7 +76,7 @@ English | CBS News | 640x360 | <http://cbsn-us.cbsnstream.cbsnews.com/out/v1/55a
 English | DW | 712x400 | <https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream02/streamPlaylist.m3u8>
 Spanish | RTVE 24h | 1024x576 | <https://rtvelivestream-clnx.rtve.es/rtvesec/24h/24h_main_576.m3u8>
 
-These streams can be directly ingested by IDOL Media Server using the the multi-purpose [Video](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  The easiest way to try this is with the [GUI Ingest Test page](http://localhost:14000/a=gui#/ingest):
+These streams can be directly ingested by Knowledge Discovery Media Server using the the multi-purpose [Video](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  The easiest way to try this is with the [GUI Ingest Test page](http://localhost:14000/a=gui#/ingest):
 
 ![ingest-test-stream](./figs/ingest-test-stream.png)
 
@@ -131,11 +131,11 @@ Spanish | Milenio TV | <https://www.youtube.com/watch?v=xIfl74SFiDA>
 Turkish | CNN | <https://www.youtube.com/watch?v=Ue9SnIpwNB4>
 Ukrainian | 112 Украина | <https://www.youtube.com/watch?v=EITCN6MhNbY>
 
-These urls __*cannot*__ be directly ingested by IDOL Media Server however, YouTube also provides HLS index `.m3u8` files, which __*can*__ be ingested as described [below](#record-videoaudio-from-a-live-youtube-channel).
+These urls __*cannot*__ be directly ingested by Knowledge Discovery Media Server however, YouTube also provides HLS index `.m3u8` files, which __*can*__ be ingested as described [below](#record-videoaudio-from-a-live-youtube-channel).
 
 ### CCTV camera streams
 
-IDOL Media Server can connect directly to live streams from most CCTV camera brands.  To find the stream details you will usually need to consult the operating manual for the particular camera.  
+Knowledge Discovery Media Server can connect directly to live streams from most CCTV camera brands.  To find the stream details you will usually need to consult the operating manual for the particular camera.  
 
 Most modern cameras will offer an [RTSP](https://en.wikipedia.org/wiki/Real_Time_Streaming_Protocol) stream, which looks like `rtsp://<user>:<password>@<IP>:<port>/<channel>`, where `IP` is the IP address (or hostname) of the camera.  If the port is not specified, the default is `554` for RTSP.  The channel part of the URL is optional.  The username and password can be added as shown and are required if security has been enabled on the camera.  Some examples from common brands:
 
@@ -155,12 +155,12 @@ Pelco | `rtsp://<IP>/stream1`
 
 As with the Bosch connection example above, some cameras also expose configuration parameters in the URL.Most cameras will need to be configured via an embedded web configuration UI, similar to what you have on your internet router at home.  This UI will be accessible at `http://IP:80/`, where `IP` is again the IP address (or hostname) of the camera.
 
-IDOL Media Server can connect directly to these RTSP streams if you configure the multi-purpose [Video](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  IDOL Media Server also includes the following additional ingest engines to support alternative stream types:
+Knowledge Discovery Media Server can connect directly to these RTSP streams if you configure the multi-purpose [Video](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  Knowledge Discovery Media Server also includes the following additional ingest engines to support alternative stream types:
 
-- [MJPEG](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Ingest/MJPEG/_MJPEG.htm): for cameras supporting motion Jpeg streaming
-- [MxPEG](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Ingest/MXPEG/_MXPEG.htm): for [Mobotix](https://www.mobotix.com/en/mxpeg) cameras
-- [Genetec](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Ingest/Genetec/_Genetec.htm): to connect to any camera already integrated into the Genetec Security Center Video Management System (VMS)
-- [Milestone](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm): to connect to any camera already integrated into the Milestone XProtect VMS
+- [MJPEG](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/Ingest/MJPEG/_MJPEG.htm): for cameras supporting motion Jpeg streaming
+- [MxPEG](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/Ingest/MXPEG/_MXPEG.htm): for [Mobotix](https://www.mobotix.com/en/mxpeg) cameras
+- [Genetec](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/Ingest/Genetec/_Genetec.htm): to connect to any camera already integrated into the Genetec Security Center Video Management System (VMS)
+- [Milestone](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm): to connect to any camera already integrated into the Milestone XProtect VMS
 
 The easiest way to try this is with the [GUI Ingest Test page](http://localhost:14000/a=gui#/ingest):
 
@@ -173,12 +173,12 @@ The easiest way to try this is with the [GUI Ingest Test page](http://localhost:
 
 > NOTE: Please check the license terms for these datasets.
 
-- [COCO](http://cocodataset.org/): The "Common Objects in COntext" dataset is a large-scale object detection, segmentation, and captioning benchmark.
+- [COCO](https://cocodataset.org/#home): The "Common Objects in COntext" dataset is a large-scale object detection, segmentation, and captioning benchmark.
 - [Open Images](https://storage.googleapis.com/openimages/web/factsfigures.html): A dataset of 9.2M images with unified annotations for image classification, object detection and visual relationship detection.
-- [ImageNet](http://www.image-net.org/): ImageNet is an image dataset organized according to the WordNet hierarchy.
-- [LFW](http://vis-www.cs.umass.edu/lfw/): The University of Massachusetts Labeled Faces in the Wild dataset is a public benchmark for face verification.
-- [MS-Celeb-1M](https://github.com/EB-Dodo/C-MS-Celeb): The Microsoft Research One Million Celebrities in the Real World dataset is a benchmark for large-scale face recognition.
-- [PETS2009](http://cs.binghamton.edu/~mrldata/pets2009): The IEEE International Workshop on Performance Evaluation of Tracking and Surveillance 2009 dataset is a public benchmark for the characterization of different crowd activities.
+- [ImageNet](https://image-net.org/): ImageNet is an image dataset organized according to the WordNet hierarchy.
+- [LFW](https://www.kaggle.com/datasets/atulanandjha/lfwpeople): The University of Massachusetts Labeled Faces in the Wild dataset is a public benchmark for face verification.
+- [MS-Celeb-1M](https://github.com/ruochunjin/C-MS-Celeb): The Microsoft Research One Million Celebrities in the Real World dataset is a benchmark for large-scale face recognition.
+- [PETS2009](https://www.kaggle.com/datasets/yeeandres/pets2009): The IEEE International Workshop on Performance Evaluation of Tracking and Surveillance 2009 dataset is a public benchmark for the characterization of different crowd activities.
 
     > TIP: The PETS2009 dataset is provided as folders of stills.  To concatenate them into videos, use the ffmpeg command:
     >
@@ -186,7 +186,7 @@ The easiest way to try this is with the [GUI Ingest Test page](http://localhost:
     > ffmpeg -r 7 -i S3/Multiple_Flow/Time_12-43/View_008/frame_%04d.jpg -c:v libx264 -vf fps=25 -pix_fmt yuv420p S3_MF_Time_12-43_View_008.mp4
     > ```
 
-- [UA-DETRAC](http://detrac-db.rit.albany.edu/home): The University at Albany DEtection and TRACking dataset is a benchmark for challenging real-world multi-object detection and multi-object tracking.
+- [UA-DETRAC](https://www.kaggle.com/datasets/dtrnngc/ua-detrac-dataset): The University at Albany DEtection and TRACking dataset is a benchmark for challenging real-world multi-object detection and multi-object tracking.
 
     > TIP: The UA-DETRAC dataset is provided as folders of stills.  To concatenate them into videos, use the ffmpeg command:
     >
@@ -202,7 +202,7 @@ The following examples are grouped by source type: video files, video steams and
 
 ### Devices
 
-Many devices, such as webcams and HDMI-to-USB dongles, can be used as video sources for IDOL Media Server thanks to DirectShow on Windows or Video4Linux on Linux.  For tips on connecting to such devices, see the [webcam setup page](../../tutorials/setup/WEBCAM.md).
+Many devices, such as webcams and HDMI-to-USB dongles, can be used as video sources for Knowledge Discovery Media Server thanks to DirectShow on Windows or Video4Linux on Linux.  For tips on connecting to such devices, see the [webcam setup page](../../tutorials/setup/WEBCAM.md).
 
 ### Video files
 
@@ -277,7 +277,7 @@ For more details, read this [documentation](https://trac.ffmpeg.org/wiki/Concate
 
 #### Ingest a sequence of videos as a playlist
 
-IDOL Media Server can read a playlist file in order to ingest a sequence of video files in a single process action.  The easiest way to ingest a playlist file, is with the Ingest Test page:
+Knowledge Discovery Media Server can read a playlist file in order to ingest a sequence of video files in a single process action.  The easiest way to ingest a playlist file, is with the Ingest Test page:
 
 ![playlist-ingest](./figs/playlist-ingest.png)
 
@@ -321,7 +321,7 @@ ffmpeg -i in.mp4 -vcodec copy -an out.mp4
 
 ### Video streams
 
-> TIP: When working with external streams be aware that they may sometimes drop out.  To help with this, Media Server's *Video* type ingest engine includes a configurable [StreamTimeout](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Configuration/Ingest/Libav/StreamTimeout.htm) to control how long you want to wait before giving up the process.  Additionally, the process action itself has a [Persist](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Actions/VideoAnalysis/parameters/Persist.htm) option, which instructs Media Server to retry processing a stream automatically if it does time out.
+> TIP: When working with external streams be aware that they may sometimes drop out.  To help with this, Media Server's *Video* type ingest engine includes a configurable [StreamTimeout](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Configuration/Ingest/Libav/StreamTimeout.htm) to control how long you want to wait before giving up the process.  Additionally, the process action itself has a [Persist](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Actions/VideoAnalysis/parameters/Persist.htm) option, which instructs Media Server to retry processing a stream automatically if it does time out.
 
 #### Test availability of an IP stream
 
@@ -331,7 +331,7 @@ With ffmpeg, you also get an executable called `ffplay`. From the command line y
 ffplay http://live-hls-web-aje.getaj.net/AJE/03.m3u8
 ```
 
-This executable uses the same underlying libraries as IDOL Media Server. So, if you can play with this, it is highly likely you can ingest with IDOL Media Server.
+This executable uses the same underlying libraries as Knowledge Discovery Media Server. So, if you can play with this, it is highly likely you can ingest with Knowledge Discovery Media Server.
 
 #### Record video/audio from an IP stream
 
@@ -367,11 +367,11 @@ To view this stream in VLC player, from the command line:
 vlc rtsp://127.0.0.1:8554/mystream
 ```
 
-To process this stream with IDOL Media Server, do:
+To process this stream with Knowledge Discovery Media Server, do:
 
 <http://127.0.0.1:14000/action=process&source=rtsp://127.0.0.1:8554/mystream&persist=true&configName=mySessionConfig>
 
-, where setting `persist=true` instructs IDOL Media Server to wait out any short term interruptions in the incoming video stream that can occur due to network latency.
+, where setting `persist=true` instructs Knowledge Discovery Media Server to wait out any short term interruptions in the incoming video stream that can occur due to network latency.
 
 ### YouTube
 
@@ -530,7 +530,7 @@ To record the audio only, I could modify the above command to:
 
 #### Restream video/audio from a live YouTube channel
 
-YouTube stream URLs use the `https:` protocol.  If I'm running IDOL Media Server on Linux, I cannot connect directly to an `https:` stream due to licensing restrictions of some underlying libraries; therefore, I want to convert this stream, *e.g.* to multicast `udp:`.
+YouTube stream URLs use the `https:` protocol.  If I'm running Knowledge Discovery Media Server on Linux, I cannot connect directly to an `https:` stream due to licensing restrictions of some underlying libraries; therefore, I want to convert this stream, *e.g.* to multicast `udp:`.
 
 This can be achieved, following from the above example, with `ffmpeg` as follows:
 
@@ -544,10 +544,10 @@ To view this stream in `ffmpeg`, from the command line:
 ffplay udp://239.255.1.4:1234
 ```
 
-These streams can be directly ingested by IDOL Media Server using the the multi-purpose [Video](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  The easiest way to try this is with the [GUI Ingest Test page](http://localhost:14000/a=gui#/ingest):
+These streams can be directly ingested by Knowledge Discovery Media Server using the the multi-purpose [Video](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  The easiest way to try this is with the [GUI Ingest Test page](http://localhost:14000/a=gui#/ingest):
 
 ![ingest-test-stream-restream](./figs/ingest-test-stream-restream.png)
 
 ## Next steps
 
-Why not try some tutorials to explore some of the analytics available in IDOL Media Server, linked from the [main page](../../README.md).
+Why not try some tutorials to explore some of the analytics available in Knowledge Discovery Media Server, linked from the [main page](../../README.md).

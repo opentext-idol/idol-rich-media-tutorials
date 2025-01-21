@@ -1,6 +1,6 @@
 # Vehicle analysis
 
-IDOL Media Server includes a *NumberPlate* analysis engine, which can be configured to read number (license) plates from over 100 countries and states around the world.  With analysis chaining, the vehicle make, model and color can also be determined.
+Knowledge Discovery Media Server includes a *NumberPlate* analysis engine, which can be configured to read number (license) plates from over 100 countries and states around the world.  With analysis chaining, the vehicle make, model and color can also be determined.
 
 In this tutorial we will:
 
@@ -9,7 +9,7 @@ In this tutorial we will:
 1. identify vehicle color
 1. (*Optionally*) Train new vehicle models
 
-This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../README.md#introduction).
+This guide assumes you have already familiarized yourself with Knowledge Discovery Media Server by completing the [introductory tutorial](../../README.md#introduction).
 
 If you want to start here, you must at least follow these [installation steps](../../setup/SETUP.md) before continuing.
 
@@ -34,11 +34,11 @@ If you want to start here, you must at least follow these [installation steps](.
 
 ### Configure vehicle analysis
 
-IDOL Media Server must be licensed for visual analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enabling-analytics).  To reconfigure IDOL Media Server you must edit your `mediaserver.cfg` file.
+Knowledge Discovery Media Server must be licensed for visual analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enabling-analytics).  To reconfigure Knowledge Discovery Media Server you must edit your `mediaserver.cfg` file.
 
 #### Enabled modules
 
-The `Modules` section is where we list the engines that will be available to IDOL Media Server on startup.  Ensure that this list contains the modules `numberplate` and `vehiclemodel`:
+The `Modules` section is where we list the engines that will be available to Knowledge Discovery Media Server on startup.  Ensure that this list contains the modules `numberplate` and `vehiclemodel`:
 
 ```ini
 [Modules]
@@ -47,7 +47,7 @@ Enable=...,numberplate,...,vehiclemodel
 
 #### Licensed channels
 
-*Reminder*: The `Channels` section is where we instruct IDOL Media Server to request license seats from IDOL License Server.  IDOL Media Server has four license *flavours*:
+*Reminder*: The `Channels` section is where we instruct Knowledge Discovery Media Server to request license seats from Knowledge Discovery License Server.  Knowledge Discovery Media Server has four license *flavours*:
 
 1. Audio
 1. Surveillance
@@ -62,11 +62,11 @@ To enable object recognition for this tutorial, you need to enable at least one 
 VisualChannels=1
 ```
 
-> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart IDOL Media Server.
+> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart Knowledge Discovery Media Server.
 
 ## Process configuration
 
-IDOL Media Server ships with a number of sample configurations, including some for number plate and vehicle analysis.  We will use the example `configurations/examples/VehicleModel/WithColor.cfg`, which configures the required analysis engines, as well as engines to output XML alerts and to encode images of the detected number plates.
+Knowledge Discovery Media Server ships with a number of sample configurations, including some for number plate and vehicle analysis.  We will use the example `configurations/examples/VehicleModel/WithColor.cfg`, which configures the required analysis engines, as well as engines to output XML alerts and to encode images of the detected number plates.
 
 This file already includes the minimal configuration for number plate recognition, which requires only that you set a location, *i.e.* `GB` for the United Kingdom.
 
@@ -88,7 +88,7 @@ Location = GB
 > LocationWithPriorities=FR:1.0,BE:0.1,DE:0.01
 > ```
 
-This minimal configuration quietly uses the following default options, which can be read about in detail in the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/index.html#Configuration/Analysis/ANPR/_NumberPlate.htm) and are shown here grouped by their functions.
+This minimal configuration quietly uses the following default options, which can be read about in detail in the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/Analysis/ANPR/_NumberPlate.htm) and are shown here grouped by their functions.
 
 ```ini
 # Detection of plates
@@ -116,7 +116,7 @@ RejectReadsWithInvalidGaps = True
 
 In addition to these parameters it is also possible to set a region of interest in which the analysis will work.  This can be a rectangle, specified by `Region` or a polygon, specified by `FreeFormRegion`.
 
-Once a number plate has been detected, we can usually safely assume a vehicle has also been found.  With IDOL Media Server's analysis chaining, we can use this location to feed additional analytic engines:
+Once a number plate has been detected, we can usually safely assume a vehicle has also been found.  With Knowledge Discovery Media Server's analysis chaining, we can use this location to feed additional analytic engines:
 
 - The *VehicleRecognition* analysis engine, which:
   - recognizes one of the pre-trained vehicle makes, *i.e.* "Tesla"
@@ -209,15 +209,15 @@ Open the training web app at [`/action=gui`](http://127.0.0.1:14000/a=gui#/train
 
 ![vehicle-training](./figs/vehicle-training.png)
 
-> TIP: Cameras that are positioned on a gantry over the traffic are best suited for recognition because they capture images where the vehicles approach head-on.  For further recommendations about image quality, and for instructions to collect your own vehicle model training images, read the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Training/VehicleModel_Introduction.htm).
+> TIP: Cameras that are positioned on a gantry over the traffic are best suited for recognition because they capture images where the vehicles approach head-on.  For further recommendations about image quality, and for instructions to collect your own vehicle model training images, read the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Training/VehicleModel_Introduction.htm).
 
 ### Assessing images for training
 
-When selecting images of faces for training, we should follow the above guidance given in the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Training/VehicleModel_Introduction.htm).
+When selecting images of faces for training, we should follow the above guidance given in the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Training/VehicleModel_Introduction.htm).
 
 > TIP: Cameras that are positioned on a gantry over the traffic are best suited for recognition because they capture images where the vehicles approach head-on.
 
-You can also instruct IDOL Media Server to assess training images without actually training them to warn you of any potential errors.  
+You can also instruct Knowledge Discovery Media Server to assess training images without actually training them to warn you of any potential errors.  
 
 > NOTE: Ensure that you have first set the location for the number plate in a given image before running assessment.
 
@@ -253,8 +253,8 @@ Note the bounding box detected for the vehicle carrying the plate:
 
 ![vehicle-color](./figs/vehicle-color.png)
 
-Wait for the video to finish processing, or stop early with [`stop`](http://127.0.0.1:14000/a=queueInfo&queueAction=stop&queueName=process), then go to your IDOL Media Server's `output` folder to see the saved image files and XML.  These will be written in a sub-directory named after the uuid of the session, so look for the newest folder.
+Wait for the video to finish processing, or stop early with [`stop`](http://127.0.0.1:14000/a=queueInfo&queueAction=stop&queueName=process), then go to your Knowledge Discovery Media Server's `output` folder to see the saved image files and XML.  These will be written in a sub-directory named after the uuid of the session, so look for the newest folder.
 
 ## Next steps
 
-Why not try more tutorials to explore some of the other analytics available in IDOL Media Server, linked from the [showcase page](../README.md).
+Why not try more tutorials to explore some of the other analytics available in Knowledge Discovery Media Server, linked from the [showcase page](../README.md).

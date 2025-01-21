@@ -16,6 +16,6 @@ From this `tests` folder, run the script `python validate_external_links.py`.  T
 
 ### Config validation
 
-From this `tests` folder, run the script `python validate_session_cfgs.py`, which requires access to IDOL Media Server, and sends all .cfg files for validation. This is intended to pick up any breaking changes in future releases of Media Server.
+From this `tests` folder, run the script `python validate_session_cfgs.py`, which requires access to Knowledge Discovery Media Server, and sends all `.cfg` files for validation. This is intended to pick up any breaking changes in future releases of Media Server.
 
 *That's all folks!*

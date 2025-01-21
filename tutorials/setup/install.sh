@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 # ===========================================================================
-# IDOL service installer
+# Knowledge Discovery service installer
 # ===========================================================================
 pushd $(dirname "${0}") > /dev/null
 
 COMPONENTS=( "LicenseServer" "MediaServer" )
 
-VERSION="24.4.0"
+VERSION="25.1.0"
 INSTALL_BASE="~"
 
 SOURCE_DIR="~/Downloads"

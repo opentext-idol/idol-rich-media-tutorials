@@ -1,8 +1,8 @@
 # PART III - Quantifying Transcript Accuracy
 
-In the previous lesson, we used a custom language model (CLM) to improve the "legacy" speech to text accuracy for a particular topic.  We saw the improvement in quality by comparing the before and after output of IDOL Media Server by eye.  In this lesson we will see how to quantify that accuracy level, *e.g.* to decide when you might want to create a CLM for your own use case.
+In the previous lesson, we used a custom language model (CLM) to improve the "legacy" speech to text accuracy for a particular topic.  We saw the improvement in quality by comparing the before and after output of Knowledge Discovery Media Server by eye.  In this lesson we will see how to quantify that accuracy level, *e.g.* to decide when you might want to create a CLM for your own use case.
 
-In this tutorial we will use IDOL Media Server to:
+In this tutorial we will use Knowledge Discovery Media Server to:
 
 1. record and transcribe your own voice as you read from an example Wikipedia page into a microphone
 1. score the transcript against the original text you read from
@@ -20,7 +20,7 @@ In this tutorial we will use IDOL Media Server to:
 
 ## Transcribe your own voice
 
-First, you will record your voice and transcribe your speech using IDOL Media Server.  
+First, you will record your voice and transcribe your speech using Knowledge Discovery Media Server.  
 
 ### Find your audio device
 
@@ -120,7 +120,7 @@ We will now read a section from the Wikipedia page on [Ancient Egyptian agricult
 
 Open that file now and be ready to read!
 
-> TIP: Remember to breathe! <https://www.wikihow.com/Do-a-Relaxation-Exercise-for-Acting>
+> TIP: Remember to breathe! <https://www.wikihow-fun.com/Do-a-Relaxation-Exercise-for-Acting>
 
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials) (remembering to update the microphone name from `Headset Microphone (Plantronics C720-M)` to match yours):
 
@@ -140,7 +140,7 @@ Once you have finished reading, click the red `Stop Session` button in the GUI, 
 
 ## Evaluate transcript accuracy
 
-IDOL Media Server includes an action to evaluate a speech transcript, called [`ScoreCustomSpeechLanguageModel`](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Actions/Training/ScoreCustomSpeechLanguageModel.htm).  
+Knowledge Discovery Media Server includes an action to evaluate a speech transcript, called [`ScoreCustomSpeechLanguageModel`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Actions/Training/ScoreCustomSpeechLanguageModel.htm).  
 
 This action requires reprocessing the recorded audio, allowing you to do so with alternative language models to compare the performance. The action takes a process configuration snippet, defining the settings of the SpeechToText engine, *e.g.* the enclosed `scoreSpeechToText.cfg`, designed to evaluate the performance of the default `ENUK` language model:
 
@@ -153,14 +153,14 @@ SpeedBias = 1
 FilterMusic = False
 ```
 
-> NOTE: Here we have set the `SpeedBias` parameter to `1` to maximize transcription accuracy.  For full details on this parameter, see the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_4/MediaServer_24.4_Documentation/Help/Content/Configuration/Analysis/SpeechToText/SpeedBias.htm).
+> NOTE: Here we have set the `SpeedBias` parameter to `1` to maximize transcription accuracy.  For full details on this parameter, see the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Configuration/Analysis/SpeechToText/SpeedBias.htm).
 >
 > NOTE: To evaluate any modifications to the language model, you will need to include the `CustomLanguageModel` or `CustomWordDatabase` parameters, as appropriate.
 
 To run this evaluation, paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), making sure to update the file paths for your system. Make a note of the token returned.
 
 ```url
-action=ScoreCustomSpeechLanguageModel&AudioPath=C:\OpenText\IDOLServer-24.4.0\MediaServer\output\speechToText4\recording.aac&ConfigPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/scoreSpeechToText.cfg&TranscriptPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/Ancient_Egyptian_Agriculture.txt
+action=ScoreCustomSpeechLanguageModel&AudioPath=C:\OpenText\IDOLServer-25.1.0\MediaServer\output\speechToText4\recording.aac&ConfigPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/scoreSpeechToText.cfg&TranscriptPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/Ancient_Egyptian_Agriculture.txt
 ```
 
 To view the output, paste the following `QueueInfo` action into your web browser: <http://127.0.0.1:14000/Action=QueueInfo&QueueAction=GetStatus&QueueName=ScoreCustomSpeechLanguageModel>.
@@ -181,4 +181,4 @@ How did you do?
 
 ## Next steps
 
-Why not try more tutorials to explore some of the other analytics available in IDOL Media Server, linked from the [showcase page](../README.md).
+Why not try more tutorials to explore some of the other analytics available in Knowledge Discovery Media Server, linked from the [showcase page](../README.md).

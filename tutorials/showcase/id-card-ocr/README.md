@@ -14,7 +14,7 @@ In this tutorial we will:
 1. define a document type template in order to maintain document structure after OCR
 1. encode a redacted version of the ID card image to hide sensitive data
 
-This guide assumes you have already familiarized yourself with IDOL Media Server by completing the [introductory tutorial](../../introduction/README.md).
+This guide assumes you have already familiarized yourself with Knowledge Discovery Media Server by completing the [introductory tutorial](../../introduction/README.md).
 
 If you want to start here, you must at least follow these [installation steps](../../setup/SETUP.md) before continuing.
 

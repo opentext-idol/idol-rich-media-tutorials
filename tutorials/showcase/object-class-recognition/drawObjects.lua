@@ -1,5 +1,5 @@
 --
--- IDOL Rich Media Tutorials:
+-- Knowledge Discovery Rich Media Tutorials:
 -- Object Recognition
 --
 function str2int(str)

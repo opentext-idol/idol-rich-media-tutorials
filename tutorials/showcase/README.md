@@ -1,6 +1,6 @@
 # Rich Media Showcase
 
-> NOTE: These guides assume familiarity with IDOL Media Server concepts.
+> NOTE: These guides assume familiarity with Knowledge Discovery Media Server concepts.
 
 Dip into any of the following showcase guides to try more analytics.
 
@@ -64,7 +64,7 @@ Use OCR to detect and transcribe text found in images in over 45 languages and s
 
 ### Surveillance alerting
 
-Process CCTV video to track people and vehicles.  Learn how to use IDOL Media Server's GUI to easily configure scenario-based alerts to capture events such as loitering, wrong way driving and illegal turning.  Let's keep the roads safe!
+Process CCTV video to track people and vehicles.  Learn how to use Knowledge Discovery Media Server's GUI to easily configure scenario-based alerts to capture events such as loitering, wrong way driving and illegal turning.  Let's keep the roads safe!
 
 [Get started](./surveillance/README.md).
 
@@ -82,7 +82,7 @@ Read numberplates (licenseplates) and perform additional vehicle analytics to id
 
 ### VMS integration with Milestone
 
-Integrate IDOL Media Server as an analytics "plug-in" for the Milestone XProtect video management system.  Set up a trial version of Milestone XProtect Corporate (in case you don't already have one), then learn how to ingest video from it and send alert results back for viewing.
+Integrate Knowledge Discovery Media Server as an analytics "plug-in" for the Milestone XProtect video management system.  Set up a trial version of Milestone XProtect Corporate (in case you don't already have one), then learn how to ingest video from it and send alert results back for viewing.
 
 [Get started](./milestone-integration/README.md).
 
