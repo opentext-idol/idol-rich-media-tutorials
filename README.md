@@ -30,6 +30,6 @@ The tutorials start [here](./tutorials/README.md)!
 
 ## License
 
-(c) Copyright 2014-2025 OpenText or one of its affiliates.
+(c) Copyright 2022-2025 OpenText or one of its affiliates.
 
 Licensed under the MIT License (the "License"); you may not use this project except in compliance with the [License](./LICENSE.md).
