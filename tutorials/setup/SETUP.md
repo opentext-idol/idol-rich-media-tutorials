@@ -6,7 +6,7 @@ This is a setup guide for a basic installation of Knowledge Discovery rich media
 
 - [Useful third-party tools](#useful-third-party-tools)
 - [Knowledge Discovery components](#knowledge-discovery-components)
-  - [Obtain an Knowledge Discovery license](#obtain-an-knowledge-discovery-license)
+  - [Generate a Knowledge Discovery license key](#generate-a-knowledge-discovery-license-key)
   - [Install Knowledge Discovery software](#install-knowledge-discovery-software)
   - [Obtaining tutorial materials](#obtaining-tutorial-materials)
     - [Following this guide offline](#following-this-guide-offline)
@@ -31,7 +31,7 @@ A log follower, *e.g.*:
 
 Knowledge Discovery components are licensed via the Knowledge Discovery License Server application, which requires a license key.
 
-### Obtain an Knowledge Discovery license
+### Generate a Knowledge Discovery license key
 
 You can obtain software and licenses from the [Software Licensing and Downloads](https://sld.microfocus.com/mysoftware/index) portal.
 
@@ -50,10 +50,29 @@ You can obtain software and licenses from the [Software Licensing and Downloads]
    ![eSoftware-configureLicense](./figs/eSoftware-configureLicense.png)
 
     > NOTE: Knowledge Discovery License Server listens for HTTP requests from other Knowledge Discovery components to provide them license seats.  The default port is `20000` but you are free to change this.
+
+    > TIP: To obtain your host name and [MAC address](https://en.wikipedia.org/wiki/MAC_address) on Windows, open a command prompt and enter `ipconfig /all`.
     >
-    > TIP: To obtain your MAC address and host name on Windows, open a command prompt and enter `ipconfig /all`.  Now look for the "Host Name" and "Physical Address" fields:
+    > Copy the value of "Host Name" at the top of the response:
     >
-    > ![ipconfig](./figs/ipconfig.png)
+    > ```sh
+    > > ipconfig /all
+    >
+    > Windows IP Configuration
+    >
+    > Host Name . . . . . . . . . . . . : OTX-JL82BS3
+    > ```
+    >
+    > Scrolling down, there may be more than one physical address to choose from. Copy the value of the "Physical Address" field for the "Wireless LAN adapter Wi-Fi":
+    >
+    > ```sh
+    > > ipconfig /all
+    > ...
+    > Wireless LAN adapter Wi-Fi:
+    > ...
+    > Physical Address. . . . . . . . . : 8C-17-59-DD-ED-52
+    > ...
+    > ```
     >
     > On Linux the equivalent command is [`ifconfig`](https://man.openbsd.org/ifconfig.8).
 
