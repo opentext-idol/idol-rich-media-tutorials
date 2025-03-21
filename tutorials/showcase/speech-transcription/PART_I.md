@@ -77,7 +77,7 @@ For this tutorial we will use the "Common" pack.  From the list of available fil
 
 Unzip the contents into Knowledge Discovery Media Server's `staticdata/speechtotext` directory, renaming the extracted folder to "Common", to give you:
 
-![speech-data-dir](figs/speech-data-dir.png)
+![speech-data-dir](./figs/speech-data-dir.png)
 
 > NOTE: This combined language pack enables transcription with the new models for all supported languages.  Additional, separate language packs are available for the "legacy" models.  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Appendixes/SpeechLanguages.htm) for the list of supported languages.
 

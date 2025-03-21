@@ -14,7 +14,7 @@ For more details on *Image Classification*, see the [admin guide](https://www.mi
 
 Before rolling up our sleeves, let's run a quick demo, using the Media Server GUI, to see the results of Image Classification on a sample image.
 
-First, follow [these steps](./PART_I#import-pre-defined-classifiers) to load the latest "ImageNet" pre-trained classifier, then return here.
+First, follow [these steps](./PART_I.md#import-pre-defined-classifiers) to load the latest "ImageNet" pre-trained classifier, then return here.
 
 Process a test image:
 

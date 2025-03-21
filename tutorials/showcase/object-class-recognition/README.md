@@ -12,7 +12,7 @@ For more details on *Object Class Recognition*, see the [admin guide](https://ww
 
 Before rolling up our sleeves, let's run a quick demo, using the Media Server GUI, to see the results of Object Class Recognition on a sample image.
 
-First, follow [these steps](./PART_I#import-pre-defined-recognizers) to load the latest "CommonObjects80" pre-trained recognizer, then return here.
+First, follow [these steps](./PART_I.md#import-pre-defined-recognizers) to load the latest "CommonObjects80" pre-trained recognizer, then return here.
 
 Process a test image:
 

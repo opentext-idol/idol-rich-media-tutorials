@@ -20,7 +20,7 @@ def findDocsLinks(_text):
   return match_list
 
 def referenceCheck(link_path, link):
-  if link["section"] is "":
+  if link["section"] == "":
     return True
 
   link_found = False

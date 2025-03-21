@@ -13,7 +13,6 @@ def isExternalUrl(link):
   return link.find("http://$") == -1 and link.find("&configPath=") == -1 and link.find("IP") == -1 and link.find("localhost") == -1 and link.find("127.0.0.1") == -1
 
 def findDocsLinks(_text):
-  # pattern = r'(https:\/\/www\.microfocus\.com\/documentation([\w\d:#@%/;$~_?\+-=\.&](#!)?)*)'
   pattern = r'(https?:\/\/([\w\d:#@%\/;$~_?\+-=\.&](#!)?)*)'
   match_list = []
   for match in re.findall(pattern, _text):
