@@ -172,7 +172,6 @@ Knowledge Discovery Media Server can encode video, images and audio.  We will no
 To enable cropping and to draw overlays, we could include the following:
 
 ```ini
-// ======================= Transform ==============================
 [Session]
 ...
 Engine1 = FaceDetection
@@ -190,10 +189,10 @@ Border = 15%
 [FaceDraw]
 Type = Draw
 Input = FaceDemographics.ResultWithSource
-LuaScript = draw.lua
+LuaScript = draw_demo.lua
 ```
 
-Again, Lua scripts can be used to provide flexibility.  The included script `draw.lua` sets the overlay color based on the detected gender of the face:
+Again, Lua scripts can be used to provide flexibility.  Copy the included `draw_demo.lua` script from this tutorial into your `configuraitons/lua` directory.  This script does a number of things; for example it sets the overlay color based on the detected gender of the face:
 
 ```lua
 ResultsProcessor = {
@@ -214,7 +213,6 @@ ResultsProcessor = {
 To encode these cropped images:
 
 ```ini
-// ======================= Encoding ===============================
 [Session]
 ...
 Engine2 = FaceCrop

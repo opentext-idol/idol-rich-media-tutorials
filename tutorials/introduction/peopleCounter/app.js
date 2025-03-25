@@ -254,7 +254,7 @@ const countPeople = (requestPath, body, callback) => {
       averageElapsedMSec = (sumElapsedMSec + data.elapsedMSec) / cumulative;
     }
 
-    logger.info('count', '> > > > > > > > > > > > > > > > > > > > > > > > > > > >');
+    logger.info('count', '> > > > > > > > > > > UPDATE > > > > > > > > > > >');
     logger.info('count', 'Cumulative count: ' + cumulative);
     logger.info('count', 'Tracking now: ' + trackingNow);
     logger.info('count', 'Average duration (seconds): ' + (averageElapsedMSec / 1000).toFixed(1));

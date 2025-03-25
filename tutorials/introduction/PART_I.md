@@ -154,6 +154,10 @@ OutputPath=output/faces1/%segment.startTime.timestamp%.xml
 
 More output options are available, such as HTTP POST and database insert.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/OutputEngines/_Output.htm), for details.
 
+Media Server looks for process configuration files in its `configurations` folder.  Create a sub folder there called `tutorials` and copy over all the `faceAnalysis*.cfg` files from this lesson, so that we can use them.
+
+![config-folder](figs/config-folder.png)
+
 ## Your first analysis: run Face Detection
 
 A process action is started with an HTTP request of the form:

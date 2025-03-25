@@ -62,7 +62,7 @@ module.exports = {
   faceDirection  : 'front',   // 'front' or 'any'
   orientation    : 'upright', // 'upright' or 'any'
   region: {
-    enabled : true,    // set to 'true' to activate
+    enabled : false,    // set to 'true' to activate
     left    : 50,
     top     : 50,
     width   : 50,

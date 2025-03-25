@@ -12,6 +12,7 @@ In this tutorial we will:
   - [Runtime configuration](#runtime-configuration)
   - [Managing processes](#managing-processes)
   - [Receiving alerts](#receiving-alerts)
+- [Configure your video source](#configure-your-video-source)
 - [Application logic](#application-logic)
 - [Running the app](#running-the-app)
 - [Conclusion](#conclusion)
@@ -73,6 +74,7 @@ Engine2 = ToPeopleCounter
 Type = httppost
 Mode = singleRecord
 Input = FaceTracker.Start,FaceTracker.Result
+XSLTemplate = toPeopleCounter.xsl
 DestinationURL = http://${appHost}:${appPort}/api/v1?addFaceTrackingEvent
 ```
 
@@ -90,16 +92,39 @@ To meet this requirement, a custom XSL transform `toPeopleCounter.xsl` has been 
 
 Copy `toPeopleCounter.xsl` into the `configurations/xsl` directory. The output engine then requires further configuration to make use of that `.xsl` file:
 
-```ini
-XSLTemplate = toPeopleCounter.xsl
-```
-
 Finally, we can also configure our output engine to save both the original XML and the converted JSON data to disk, so we can look at them both later.  These files will be stored, as directed, under `output/toPeopleCounter`.
 
 ```ini
+[ToXML]
+Type = XML
+Mode = singleRecord
+Input = FaceTracker.Start,FaceTracker.Result
+XSLTemplate = toPeopleCounter.xsl
 OutputPath = output/toPeopleCounter/%session.token%/%segment.type%_%segment.sequence%_%segment.endTime.timestamp%.json
 SavePreXML = True
 XMLOutputPath = output/toPeopleCounter/%session.token%/%segment.type%_%segment.sequence%_%segment.endTime.timestamp%.xml
+```
+
+## Configure your video source
+
+The NodeJS application will call the process action, so needs to know the video source as well as the process configuration.  Please update this section to reference your webcam (or other video source):
+
+```js
+// ingest
+/* WEBCAM */
+source       : 'video=USB Video Device',
+isVideoFile  : false,
+isDevice     : true,
+
+/* STREAM */
+// source       : 'http://host:port/channel.m3u8',
+// isVideoFile  : false,
+// isDevice     : false,
+
+/* VIDEO FILE */
+// source       : "C:\\video\\clip.mp4",
+// isVideoFile  : true,
+// isDevice     : false,
 ```
 
 ## Application logic
