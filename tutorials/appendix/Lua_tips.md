@@ -25,7 +25,7 @@ In Knowledge Discovery Media Server we use Lua to apply custom logic.  This prov
 
 Knowledge Discovery Media Server includes many example Lua scripts, which you can see under `configurations/lua`.  
 
-To support writing your own Lua scripts, Knowledge Discovery Media Server also provides helper functions.  See the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Lua/LuaFunctions.htm) for more details.
+To support writing your own Lua scripts, Knowledge Discovery Media Server also provides helper functions.  See the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Lua/LuaFunctions.htm) for more details.
 
 ## Logging
 
@@ -164,7 +164,7 @@ local width = record.FaceRecognitionResultAndImage.face.region.width
 
 ### Output Lua records
 
-Knowledge Discovery Media Server provides a [Lua output engine](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/OutputEngines/Lua/_Lua.htm), which produces a Lua representation of each record that it receives, and writes it to a file on disk. You can use the output to help you to write and troubleshoot Lua scripts.
+Knowledge Discovery Media Server provides a [Lua output engine](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Configuration/OutputEngines/Lua/_Lua.htm), which produces a Lua representation of each record that it receives, and writes it to a file on disk. You can use the output to help you to write and troubleshoot Lua scripts.
 
 An example configuration file based on our first process session from [PART I](../introduction/PART_I.md#run-face-detection) of the introductory tutorial:
 

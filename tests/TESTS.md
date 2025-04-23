@@ -2,6 +2,8 @@
 
 This folder contains test files to be run to validate aspects of these tutorial files.
 
+> NOTE: The included scripts depend on having `python` installed. Please follow these [instructions](../tutorials/setup/PYTHON.md) if you do not already have it on your system.
+
 ## List of validation tests
 
 ### Internal links

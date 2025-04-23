@@ -30,21 +30,21 @@ On Windows:
 
 Using `ffmpeg` from the command line, list the available devices:
 
-```sh
-$ ffmpeg -list_devices true -f dshow -i dummy
-...
-[dshow @ 000001f3d89e93c0] DirectShow video devices (some may be both video and audio devices)
-[dshow @ 000001f3d89e93c0]  "USB Video Device"
-[dshow @ 000001f3d89e93c0]     Alternative name "@device_pnp_\\?\usb  #vid_04f2&    pid_b5ee&>     mi_00#6&244de3b&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global" 
-[dshow @ 000001f3d89e93c0] DirectShow audio devices
-[dshow @ 000001f3d89e93c0]  "Headset Microphone (Plantronics C720-M)"
-[dshow @ 000001f3d89e93c0]     Alternative name "@device_cm_>         {33D9A762-90C8-11D0-BD43-00A0C911CE86}\wave_{465A54BD-F5FC-4B9A-9EC8-1C310C728109}"
-[dshow @ 000001f3d89e93c0]  "Microphone (Conexant ISST Audio)"
-[dshow @ 000001f3d89e93c0]     Alternative name "@device_cm_>         {33D9A762-90C8-11D0-BD43-00A0C911CE86}\wave_{7FD05CD2-493B-49AA-BFE2-C091EB64D594}"
+```cmd
+> ffmpeg -list_devices true -f dshow -i dummy
+  ...
+[dshow @ 000001e913238880] DirectShow video devices (some may be both video and audio devices)
+[dshow @ 000001e913238880]  "Integrated Webcam"
+[dshow @ 000001e913238880]     Alternative name "@device_pnp_\\?\usb#vid_0bda&pid_554c&mi_00#6&34a67fa&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global"
+[dshow @ 000001e913238880] DirectShow audio devices
+[dshow @ 000001e913238880]  "Headset Microphone (Poly BT600)"
+[dshow @ 000001e913238880]     Alternative name "@device_cm_{33D9A762-90C8-11D0-BD43-00A0C911CE86}\wave_{C111ACBE-1A8E-4A6F-AFE5-3900BFFA5BCB}"
+[dshow @ 000001e913238880]  "Microphone Array (Realtek(R) Audio)"
+[dshow @ 000001e913238880]     Alternative name "@device_cm_{33D9A762-90C8-11D0-BD43-00A0C911CE86}\wave_{EB047B5C-FE38-40BB-A89F-6A1993C710EF}"
 dummy: Immediate exit requested
 ```
 
-Based on this list, my connection string should be `audio=Headset Microphone (Plantronics C720-M)`.
+Based on this list, my connection string should be `audio=Headset Microphone (Poly BT600)`.
 
 On Ubuntu:
 
@@ -54,7 +54,7 @@ Install `v4l-utils`, then use the control tool to list available devices:
 $ apt-get install v4l-utils
 $ v4l2-ctl --list-devices
 
-Headset Microphone (Plantronics C720-M) (usb-0000:00:1d.0-1.4):
+Headset Microphone (Poly BT600) (usb-0000:00:1d.0-1.4):
         /dev/audio0
 ```
 
@@ -122,10 +122,10 @@ Open that file now and be ready to read!
 
 > TIP: Remember to breathe! <https://www.wikihow-fun.com/Do-a-Relaxation-Exercise-for-Acting>
 
-Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials) (remembering to update the microphone name from `Headset Microphone (Plantronics C720-M)` to match yours):
+Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials) (remembering to update the microphone name from `Headset Microphone (Poly BT600)` to match yours):
 
 ```url
-action=process&source=audio%3DHeadset%20Microphone%20(Plantronics%20C720-M)&configPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/speechToText4.cfg
+action=process&source=audio%3DHeadset%20Microphone%20(Poly%20BT600)&configName=tutorials/speechToText4.cfg
 ```
 
 Click the `Test Action` button to start processing.
@@ -140,7 +140,7 @@ Once you have finished reading, click the red `Stop Session` button in the GUI, 
 
 ## Evaluate transcript accuracy
 
-Knowledge Discovery Media Server includes an action to evaluate a speech transcript, called [`ScoreCustomSpeechLanguageModel`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Actions/Training/ScoreCustomSpeechLanguageModel.htm).  
+Knowledge Discovery Media Server includes an action to evaluate a speech transcript, called [`ScoreCustomSpeechLanguageModel`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Actions/Training/ScoreCustomSpeechLanguageModel.htm).  
 
 This action requires reprocessing the recorded audio, allowing you to do so with alternative language models to compare the performance. The action takes a process configuration snippet, defining the settings of the SpeechToText engine, *e.g.* the enclosed `scoreSpeechToText.cfg`, designed to evaluate the performance of the default `ENUK` language model:
 
@@ -153,15 +153,17 @@ SpeedBias = 1
 FilterMusic = False
 ```
 
-> NOTE: Here we have set the `SpeedBias` parameter to `1` to maximize transcription accuracy.  For full details on this parameter, see the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Configuration/Analysis/SpeechToText/SpeedBias.htm).
+> NOTE: Here we have set the `SpeedBias` parameter to `1` to maximize transcription accuracy.  For full details on this parameter, see the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/SpeechToText/SpeedBias.htm).
 >
 > NOTE: To evaluate any modifications to the language model, you will need to include the `CustomLanguageModel` or `CustomWordDatabase` parameters, as appropriate.
 
 To run this evaluation, paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), making sure to update the file paths for your system. Make a note of the token returned.
 
 ```url
-action=ScoreCustomSpeechLanguageModel&AudioPath=C:\OpenText\IDOLServer-25.1.0\MediaServer\output\speechToText4\recording.aac&ConfigPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/scoreSpeechToText.cfg&TranscriptPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/Ancient_Egyptian_Agriculture.txt
+action=ScoreCustomSpeechLanguageModel&AudioPath=C:\OpenText\IDOLServer-25.2.0\MediaServer\output\speechToText4\recording.aac&configPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/scoreSpeechToText.cfg&TranscriptPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/Ancient_Egyptian_Agriculture.txt
 ```
+
+> NOTE: Ensure that you have configured Media Server to read files from these source directories, as described in the [introduction](../../introduction/PART_I.md#enabling-file-access).
 
 To view the output, paste the following `QueueInfo` action into your web browser: <http://127.0.0.1:14000/Action=QueueInfo&QueueAction=GetStatus&QueueName=ScoreCustomSpeechLanguageModel>.
 

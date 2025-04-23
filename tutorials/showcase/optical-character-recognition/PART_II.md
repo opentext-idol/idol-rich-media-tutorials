@@ -66,7 +66,7 @@ Pre-trained *Image Classification* packages are distributed separately from the 
 
     ![get-software](../../setup/figs/get-software.png)
 
-1. From the list of available files, select and download `MediaServerPretrainedModels_25.1.0_COMMON.zip`.
+1. From the list of available files, select and download `MediaServerPretrainedModels_25.2.0_COMMON.zip`.
 
     ![get-pretrained-zip](../../setup/figs/get-pretrained-zip.png)
 
@@ -103,8 +103,10 @@ We will process a PDF file that contains text both as embedded metadata to be ex
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
 ```url
-action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/optical-character-recognition/docs/TextAndImage.pdf&configPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/optical-character-recognition/ocr2a.cfg
+action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/optical-character-recognition/docs/TextAndImage.pdf&configName=tutorials/ocr2a
 ```
+
+> NOTE: Ensure that you have configured Media Server to read files from this source directory, as described in the [introduction](../../introduction/PART_I.md#enabling-file-access).
 
 Click the `Test Action` button to start processing.
 
@@ -116,7 +118,7 @@ To view the results, go to `output/OCR` to see the text file `TextAndImage.txt`,
 
 The OCR analysis engine automatically detects tables in your images, so no special configuration is required for analysis.
 
-> NOTE: You can optionally modify the output of your table data by setting `OutputTablesByColumn=True` (default is `False`). For more details, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Configuration/Analysis/OCR/OutputTablesByColumn.htm).
+> NOTE: You can optionally modify the output of your table data by setting `OutputTablesByColumn=True` (default is `False`). For more details, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/OCR/OutputTablesByColumn.htm).
 
 Handling tabulated output though does require some thought.  A common approach is to separate the table text from non-table text in order to have more targeted downstream processing.
 
@@ -154,7 +156,7 @@ We will process a PDF file that contains a screenshot image of some table data.
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
 ```url
-action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/optical-character-recognition/docs/TablesAndMore.pdf&configPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/optical-character-recognition/ocr2b.cfg
+action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/optical-character-recognition/docs/TablesAndMore.pdf&configName=tutorials/ocr2b
 ```
 
 Click the `Test Action` button to start processing.
@@ -174,7 +176,7 @@ To process this information as well, add the *Barcode Detection* analysis engine
 Type = Barcode
 ```
 
-> NOTE: For details on the list of supported QR code and barcode types, please see the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Configuration/Analysis/Barcode/BarcodeTypes.htm).
+> NOTE: For details on the list of supported QR code and barcode types, please see the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/Barcode/BarcodeTypes.htm).
 
 We will combine the read from the barcode with the OCR-produced text by adding a second input to the non-table text output engine:
 
@@ -192,7 +194,7 @@ XslTemplate = toText.xsl
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), to reprocess the same PDF file with this updated configuration:
 
 ```url
-action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/optical-character-recognition/docs/TablesAndMore.pdf&configPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/optical-character-recognition/ocr2c.cfg
+action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/optical-character-recognition/docs/TablesAndMore.pdf&configName=tutorials/ocr2c
 ```
 
 Click the `Test Action` button to start processing.
@@ -246,7 +248,7 @@ OutputPath = output/OCR/%source.filename.stem%_analysis.xml
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), to reprocess the same PDF file with this updated configuration:
 
 ```url
-action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/optical-character-recognition/docs/TablesAndMore.pdf&configPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/optical-character-recognition/ocr2d.cfg
+action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/optical-character-recognition/docs/TablesAndMore.pdf&configName=tutorials/ocr2d
 ```
 
 Click the `Test Action` button to start processing.
@@ -299,7 +301,7 @@ OutputPath = output/OCR/%source.filename.stem%_analysis.xml
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), to reprocess the same PDF file with this updated configuration:
 
 ```url
-action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/optical-character-recognition/docs/TablesAndMore.pdf&configPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/optical-character-recognition/ocr2e.cfg
+action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/optical-character-recognition/docs/TablesAndMore.pdf&configName=tutorials/ocr2e
 ```
 
 Click the `Test Action` button to start processing.

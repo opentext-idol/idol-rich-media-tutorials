@@ -56,7 +56,7 @@ VisualChannels=1
 
 OpenText provides a set of pre-defined training packs for Knowledge Discovery Media Server, including image classifiers. Knowledge Discovery Media Server also allows you to train your own classifiers by uploading and labelling your own images.
 
-That training can be performed through Knowledge Discovery Media Server's web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Actions/Training/_ImageClassification.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
+That training can be performed through Knowledge Discovery Media Server's web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Actions/Training/_ImageClassification.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
 
 ### Import pre-defined classifiers
 
@@ -66,7 +66,7 @@ Pre-trained *Image Classification* packages are distributed separately from the 
 
     ![get-software](../../setup/figs/get-software.png)
 
-1. From the list of available files, select and download `MediaServerPretrainedModels_25.1.0_COMMON.zip`.
+1. From the list of available files, select and download `MediaServerPretrainedModels_25.2.0_COMMON.zip`.
 
     ![get-pretrained-zip](../../setup/figs/get-pretrained-zip.png)
 
@@ -111,7 +111,7 @@ To analyze an image file, include the following engines:
 
     ![config-classifier](./figs/config-classifier.png)
 
-    > NOTE: For full details on this and other available options for *Image Classification*, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/Analysis/ImageClass/_ImageClassification.htm).
+    > NOTE: For full details on this and other available options for *Image Classification*, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Configuration/Analysis/ImageClass/_ImageClassification.htm).
 
 1. Let's output the results to disk.  Add the "XML"-type output engine to do that:
 

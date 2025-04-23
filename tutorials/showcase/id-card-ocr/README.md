@@ -2,13 +2,13 @@
 
 Media Server includes an Optical Character Recognition (OCR) analysis engine, which can be configured to read specific scripts in images and video, such as Japanese characters or Arabic numerals.
 
-For a detailed introduction to Optical Character Recognition, see the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_3/MediaServer_24.3_Documentation/Help/Content/Operations/Analyze/OCR_overview.htm).
+For a detailed introduction to Optical Character Recognition, see the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Operations/Analyze/OCR_overview.htm).
 
 In this tutorial we will:
 
 1. use the OCR analysis engine to read the text from an image of an ID card
 
-    ![id-card](./Turkey1.png)
+    ![id-card](./samples/Turkey1.png)
 
 1. use Object Recognition to recognize a specific document type
 1. define a document type template in order to maintain document structure after OCR
@@ -103,7 +103,7 @@ Engine0 = Source
 Type = image
 ```
 
-For full details on the options available for ingesting image sources, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_3/MediaServer_24.3_Documentation/Help/index.html#Configuration/Ingest/Image/_Image.htm).
+For full details on the options available for ingesting image sources, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Configuration/Ingest/Image/_Image.htm).
 
 ### Analysis
 
@@ -116,7 +116,7 @@ OCRMode = document
 Languages = en,tr
 ```
 
-We have specified parameters that affect how the analytic runs, namely the running mode and which languages to search for.  For full details on these and other available options, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_3/MediaServer_24.3_Documentation/Help/index.html#Configuration/Analysis/OCR/_OCR.htm).
+We have specified parameters that affect how the analytic runs, namely the running mode and which languages to search for.  For full details on these and other available options, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Configuration/Analysis/OCR/_OCR.htm).
 
 ### Output
 
@@ -134,11 +134,15 @@ As in the introductory tutorials, we are using an XSL transform to extract the w
 
 ### Running our analysis
 
+Media Server looks for process configuration files in its `configurations` folder.  You have already created a sub folder there called `tutorials`.  Copy over all the `idCard*.cfg` files from this lesson, so that we can use them.
+
 Paste the following parameters into [`test-action`](http://localhost:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
 ```url
-action=process&source=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/id-card-ocr/Turkey1.png&configPath=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/id-card-ocr/idCard1.cfg
+action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/id-card-ocr/samples/Turkey1.png&configName=tutorials/idCard1
 ```
+
+> NOTE: Ensure that you have configured Media Server to read files from this source directory, as described in the [introduction](../../introduction/PART_I.md#enabling-file-access).
 
 Click `Test Action` to start processing.
 
@@ -171,11 +175,11 @@ Being able to recognize particular documents provides the following advantages:
 
 We can train Object Recognition to recognize a document by providing an "anchor image", *i.e.* a part of the document that will look the same for any instance of that document, such as a title bar or logo mark.
 
-> NOTE: See the [admin guide](https://www.microfocus.com/documentation/idol/IDOL_24_3/MediaServer_24.3_Documentation/Help/Content/Training/Object_ImageGuide.htm) for advice on selecting good images for training.
+> NOTE: See the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Training/Object_ImageGuide.htm) for advice on selecting good images for training.
 
 To create one, open your favorite image editing software and crop out a section and save it as a new image file, *e.g*:
 
-![trained_template](./TurkishDriversLicenseHeader.png)
+![trained_template](./samples/TurkishDriversLicenseHeader.png)
 
 We can now train this image via the API or by using the Media Server [GUI](http://localhost:14000/a=gui), with the following steps:
 
@@ -187,13 +191,13 @@ We can now train this image via the API or by using the Media Server [GUI](http:
 
     ![trained_template](./figs/trained_template.png)
 
-For full details on training options for Object Recognition, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_3/MediaServer_24.3_Documentation/Help/index.html#Actions/Training/TrainObject.htm).
+For full details on training options for Object Recognition, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Actions/Training/TrainObject.htm).
 
 ### Detect and extract an ID Card
 
 Imagine this document was scanned and the person who did it put the card in upside down or rotated to one side.  We want to be able to automatically correct that rotation and crop out each card to a separate them.
 
-![rotated](./Turkey2.png)
+![rotated](./samples/Turkey2.png)
 
 #### Analysis with Object Recognition
 
@@ -206,7 +210,7 @@ Database = IDCardTemplates
 Geometry = SIM2
 ```
 
-Here we use the Geometry option `SIM2` to only consider 2-dimensional rotations, since we assume these ID cards are scanned.  For full details on options for Object Recognition, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_3/MediaServer_24.3_Documentation/Help/index.html#Configuration/Analysis/Object/_Object.htm).
+Here we use the Geometry option `SIM2` to only consider 2-dimensional rotations, since we assume these ID cards are scanned.  For full details on options for Object Recognition, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Configuration/Analysis/Object/_Object.htm).
 
 #### Rotate and crop
 
@@ -231,7 +235,7 @@ LuaLine = function rectangle(x) return { left = x.RegionData.left - 0.5 * x.Regi
 
 ```
 
-For full details on these and other available transformations, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_3/MediaServer_24.3_Documentation/Help/index.html#Configuration/Transform/_Transform.htm).
+For full details on these and other available transformations, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Configuration/Transform/_Transform.htm).
 
 Finally we can crop to that region and encode an image for each card.  See the included file `idCard2.cfg` for full details.
 
@@ -240,7 +244,7 @@ Finally we can crop to that region and encode an image for each card.  See the i
 Paste the following parameters into [`test-action`](http://localhost:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
 ```url
-action=process&source=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/id-card-ocr/Turkey2.png&configPath=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/id-card-ocr/idCard2.cfg
+action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/id-card-ocr/samples/Turkey2.png&configName=tutorials/idCard2
 ```
 
 Click `Test Action` to start processing.
@@ -306,7 +310,7 @@ First, copy the included file `getIdCardBoundary.lua` into Media Server's `confi
 Now, paste the following parameters into [`test-action`](http://localhost:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
 ```url
-action=process&source=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/id-card-ocr/Turkey2.png&configPath=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/id-card-ocr/idCard2a.cfg
+action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/id-card-ocr/samples/Turkey2.png&configName=tutorials/idCard2a
 ```
 
 Click `Test Action` to start processing.
@@ -372,7 +376,7 @@ Next we will again add these regions to the trained Object Recognition anchor as
 >
 > NOTE: You may need to refresh the GUI to display these new metadata fields.
 
-For full details on the metadata API for Object Recognition, please read the [reference guide](https://www.microfocus.com/documentation/idol/IDOL_24_3/MediaServer_24.3_Documentation/Help/index.html#Actions/Training/AddObjectMetadata.htm).
+For full details on the metadata API for Object Recognition, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Actions/Training/AddObjectMetadata.htm).
 
 #### Use the OCR regions
 
@@ -410,7 +414,7 @@ Next, copy the included XSL transform `IdCard_toJSON.xsl` into Media Server's `c
 Now, paste the following parameters into [`test-action`](http://localhost:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
 ```url
-action=process&source=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/id-card-ocr/Turkey1.png&configPath=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/id-card-ocr/idCard3.cfg
+action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/id-card-ocr/samples/Turkey1.png&configName=tutorials/idCard3
 ```
 
 Click `Test Action` to start processing.
@@ -461,7 +465,7 @@ First, copy the additional Lua scripts `redactIdCard.lua` and `getIdCardRegion_V
 Now, paste the following parameters into [`test-action`](http://localhost:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
 ```url
-action=process&source=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/id-card-ocr/Turkey1.png&configPath=C:/MicroFocus/idol-rich-media-tutorials/tutorials/showcase/id-card-ocr/idCard4.cfg
+action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/id-card-ocr/samples/Turkey1.png&configName=tutorials/idCard4
 ```
 
 Click `Test Action` to start processing.

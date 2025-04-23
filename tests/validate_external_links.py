@@ -10,7 +10,7 @@ except:
   verbose = False
 
 def isExternalUrl(link):
-  return link.find("http://$") == -1 and link.find("&configPath=") == -1 and link.find("IP") == -1 and link.find("localhost") == -1 and link.find("127.0.0.1") == -1
+  return link.find("http://$") == -1 and link.find("&configName=") == -1 and link.find("IP") == -1 and link.find("localhost") == -1 and link.find("127.0.0.1") == -1
 
 def findDocsLinks(_text):
   pattern = r'(https?:\/\/([\w\d:#@%\/;$~_?\+-=\.&](#!)?)*)'

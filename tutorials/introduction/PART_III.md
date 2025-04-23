@@ -31,7 +31,7 @@ These key features are:
 
 ### Runtime configuration
 
-So far in these tutorials, when launching a process action, we have defined the process configuration with `configName=<FILE_NAME>`.  This references a file stored under your `configurations` directory and is therefore fixed.  In an application, you may want to modify some settings at runtime, *e.g.* based on a user setting the minimum face size or defining a region of interest.  To provide this flexibility, Knowledge Discovery Media Server also allows you to send a session configuration file in the process action, *e.g.* as a [base-64 encoded](https://en.wikipedia.org/wiki/Base64#URL_applications) string, using `config=<BASE_64_STRING>` in the process request.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Actions/VideoAnalysis/Process.htm) for details.
+So far in these tutorials, when launching a process action, we have defined the process configuration with `configName=<FILE_NAME>`.  This references a file stored under your `configurations` directory and is therefore fixed.  In an application, you may want to modify some settings at runtime, *e.g.* based on a user setting the minimum face size or defining a region of interest.  To provide this flexibility, Knowledge Discovery Media Server also allows you to send a session configuration file in the process action, *e.g.* as a [base-64 encoded](https://en.wikipedia.org/wiki/Base64#URL_applications) string, using `config=<BASE_64_STRING>` in the process request.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Actions/VideoAnalysis/Process.htm) for details.
 
 In this app, our runtime options are defined in `options.js`.  These are used to fill in a templated process configuration file `mediaserver/peopleCounter.tmpl.cfg`, which is then base-64 encoded and sent to Knowledge Discovery Media Server.  One way to achieve this in `node.js` is with standard JavaScript [templated strings](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals), *e.g.*:
 
@@ -40,7 +40,7 @@ const cfgTmpl = fs.readFileSync(cfgFile, 'utf8'), // read the templated config f
   cfg = eval(`\`${cfgTmpl}\``),                   // process the template to create a plain text config
   bsf = new Buffer(cfg).toString('base64'),       // create a base 64 encoded string
   path = '/action=process' +
-    '&source=video=USB Video Device' +
+    '&source=video=Integrated Webcam' +
     `&config=${encodeURIComponent(bsf)}` +        // make the encoded string URI safe
     '&responseFormat=JSON';
 ```
@@ -59,7 +59,7 @@ var path = '/action=queueinfo&queueaction=STOP' +
       `&queuename=process&token=${token}`;
 ```
 
-Other queue actions are available, including `PAUSE` and `RESUME`, as well as `PROGRESS` (only relevant for sources with known length, *i.e.* files).  Please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Actions/General/_ACI_QueueInfo.htm) for details.
+Other queue actions are available, including `PAUSE` and `RESUME`, as well as `PROGRESS` (only relevant for sources with known length, *i.e.* files).  Please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Actions/General/_ACI_QueueInfo.htm) for details.
 
 ### Receiving alerts
 
@@ -112,7 +112,7 @@ The NodeJS application will call the process action, so needs to know the video 
 ```js
 // ingest
 /* WEBCAM */
-source       : 'video=USB Video Device',
+source       : 'video=Integrated Webcam',
 isVideoFile  : false,
 isDevice     : true,
 

@@ -44,6 +44,7 @@ for dir_path, dir_names, file_names in os.walk(".."):
         if link["value"].endswith(".md"): continue # Markdown
         if link["value"].find(".md#") > -1: continue # Markdown section
         if link["value"].startswith("chrome://"): continue # browser extension
+        if link["value"].find("/samples/") > -1 and link["value"].endswith(".png"): continue # Figure
         if link["value"].find("/figs/") > -1 and link["value"].endswith(".png"): continue # Figure
         if link["value"].find("/figs/") > -1 and link["value"].endswith(".gif"): continue # Figure
         if link["value"].find("/figs/") > -1 and link["value"].endswith(".svg"): continue # Figure

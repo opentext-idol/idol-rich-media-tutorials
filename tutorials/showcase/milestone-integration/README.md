@@ -2,7 +2,7 @@
 
 Knowledge Discovery Media Server offers integration with popular third party Video Management System (VMS) products from Milestone and Genetec. Knowledge Discovery Media Server includes dedicated ingest engines to process live streaming video from Milestone's "XProtect" and Genetec's "Security Center". Both of these products offer methods to receive events from external systems, so Knowledge Discovery Media Server also includes dedicated Milestone and Genetec output engines to send events back to these products.  In this way, Knowledge Discovery Media Server can be positioned as an analytics plug-in for existing Milestone and Genetec customers.
 
-> NOTE: For customers who do not already have a VMS, it should be noted that Knowledge Discovery Media Server's own [Rolling Buffer](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Operations/Encode/RollingBuffer_Introduction.htm) capability allows it to function as a VMS: recording live video from direct camera connection and facilitating playback, via HLS streaming, of that recorded video.
+> NOTE: For customers who do not already have a VMS, it should be noted that Knowledge Discovery Media Server's own [Rolling Buffer](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Operations/Encode/RollingBuffer_Introduction.htm) capability allows it to function as a VMS: recording live video from direct camera connection and facilitating playback, via HLS streaming, of that recorded video.
 
 In this tutorial we will focus on Milestone XProtect Corporate as an example external VMS.  We will:
 
@@ -138,7 +138,7 @@ We can make use of the Knowledge Discovery Media Server user interface [/a=gui](
 1. Go to the *Ingest Test* page.
 1. Select from the option dropdowns to ingest a "Stream" using "Milestone" and "NTLM" authentication:
 
-    > NOTE: Knowledge Discovery Media Server's Milestone ingest engine, described in full [here](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm), offers multiple authentication options to support different versions of Milestone XProtect.  The "Corporate" version requires "NTLM" authentication.
+    > NOTE: Knowledge Discovery Media Server's Milestone ingest engine, described in full [here](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm), offers multiple authentication options to support different versions of Milestone XProtect.  The "Corporate" version requires "NTLM" authentication.
 
 1. The process action source for Milestone streams is the stream id, or `guid`.  Find it by running the following `curl` command:
 
@@ -215,14 +215,14 @@ To obtain the Milestone SDK,
 
     ```cmd
     cd "C:/Program Files/Milestone/MIPSDK/Bin"
-    CopyMediaCpp.bat "C:/OpenText/MediaServer_25.1.0_WINDOWS_X86_64/libs/Milestone"
+    CopyMediaCpp.bat "C:/OpenText/MediaServer_25.2.0_WINDOWS_X86_64/libs/Milestone"
     ```
 
     > NOTE: 25 files should be copied.
 
 No additional session config parameters are required to enable this option.  On Windows, Knowledge Discovery Media Server will simply check for the existence of these Milestone libraries and quietly fall back to the cross-platform option if they do not exist.
 
-The Milestone libraries offer some tuning options, which are exposed in Knowledge Discovery Media Server's [Milestone Ingest Engine](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm).  These are:
+The Milestone libraries offer some tuning options, which are exposed in Knowledge Discovery Media Server's [Milestone Ingest Engine](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm).  These are:
 
 Parameter | Default | Function
 --- | --- | ---
@@ -315,7 +315,7 @@ SavePostXML = true
 XMLOutputPath = output/milestone/%session.token%/%segment.type%_%%segment.sequence%.xml
 ```
 
-> NOTE: See the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/OutputEngines/Milestone/_Milestone.htm) for full details the Milestone output engine.
+> NOTE: See the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Configuration/OutputEngines/Milestone/_Milestone.htm) for full details the Milestone output engine.
 
 The complete configuration is included here as `MilestoneANPR.cfg`.
 
@@ -387,10 +387,12 @@ That's all!  We're ready to go.
 
 ## Run the Media Server process
 
+Media Server looks for process configuration files in its `configurations` folder.  You have already created a sub folder there called `tutorials`.  Copy over the `MilestoneANPR.cfg` file from this lesson.
+
 Paste the following parameters into [`test-action`](http://localhost:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials), entering your camera's GUID as the source:
 
 ```url
-action=process&source=<CAMERA_GUID>&configPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/milestone-integration/MilestoneANPR.cfg
+action=process&source=<CAMERA_GUID>&configName=tutorials/MilestoneANPR
 ```
 
 On that page, click `Test Action` to start processing.

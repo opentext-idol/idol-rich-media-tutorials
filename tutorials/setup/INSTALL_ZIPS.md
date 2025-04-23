@@ -21,8 +21,8 @@ Download software from the [Software Licensing and Downloads](https://sld.microf
 
 1. From the list of available files, select and download the following (depending on your operating system):
 
-   - `LicenseServer_25.1.0_WINDOWS_X86_64.zip` or `LicenseServer_25.1.0_LINUX_X86_64.zip`, and
-   - `MediaServer_25.1.0_WINDOWS_X86_64.zip` or `MediaServer_25.1.0_LINUX_X86_64.zip`.
+   - `LicenseServer_25.2.0_WINDOWS_X86_64.zip` or `LicenseServer_25.2.0_LINUX_X86_64.zip`, and
+   - `MediaServer_25.2.0_WINDOWS_X86_64.zip` or `MediaServer_25.2.0_LINUX_X86_64.zip`.
 
     ![get-idol-zips](./figs/get-idol-zips.png)
 

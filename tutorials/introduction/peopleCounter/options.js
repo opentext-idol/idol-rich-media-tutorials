@@ -36,7 +36,7 @@ module.exports = {
 
 	// ingest
   /* WEBCAM */
-  source       : 'video=USB Video Device',
+  source       : 'video=Integrated Webcam',
   isVideoFile  : false,
   isDevice     : true,
 

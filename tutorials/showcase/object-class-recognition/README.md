@@ -6,7 +6,7 @@ An introduction to Knowledge Discovery Media Server's neural network based Objec
 - What paths do shoppers take around my store?
 - Which images in my archive that contain cats and not dogs?
 
-For more details on *Object Class Recognition*, see the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Operations/Analyze/ObjectLocalization.htm).
+For more details on *Object Class Recognition*, see the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Operations/Analyze/ObjectLocalization.htm).
 
 ## Demo
 

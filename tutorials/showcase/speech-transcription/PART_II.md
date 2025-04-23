@@ -36,13 +36,13 @@ Legacy speech transcription models are distributed separately per language.  To 
 
 ![get-software](../../setup/figs/get-software.png)
 
-For this tutorial we will use the British English pack.  From the list of available files, select and download `ENUK-25.1.0.zip`:
+For this tutorial we will use the British English pack.  From the list of available files, select and download `ENUK-25.2.0.zip`:
 
 ![get-lang-pack-zip](./figs/get-lang-pack-zip.png)
 
 Unzip the contents into Knowledge Discovery Media Server's static data directory, to give you, *e.g.* `staticdata/speechtotext/ENUK`, containing files like `ver-ENUK-*`.
 
-> NOTE: This language pack is targeted to high quality "broadband" audio.  An additional language pack is available for telephony.  Many other languages and dialects are supported.  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Appendixes/SpeechLanguages.htm) for details.
+> NOTE: This language pack is targeted to high quality "broadband" audio.  An additional language pack is available for telephony.  Many other languages and dialects are supported.  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Appendixes/SpeechLanguages.htm) for details.
 
 You can manually load the ENUK language pack with the action <http://127.0.0.1:14000/action=LoadSpeechLanguageResource&LanguagePack=ENUK>.
 
@@ -86,7 +86,7 @@ To ingest a video file, we will update the `Ingest` and `Analysis` sections acco
     SpeedBias = 3
     ```
 
-    > NOTE: More options are available for the *SpeechToText* analysis engine.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm) for details.
+    > NOTE: More options are available for the *SpeechToText* analysis engine.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm) for details.
 
 1. To create a single plain text file of the transcript for the video clip, we will configure an XML-type output engine with `Mode` set to `AtEnd` and make use of the included the `toText.xsl` transform as follows:
 
@@ -104,8 +104,10 @@ To ingest a video file, we will update the `Ingest` and `Analysis` sections acco
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
 ```url
-action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/aljazeera.mp4&configPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/speechToText2.cfg
+action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/aljazeera.mp4&configName=tutorials/speechToText2
 ```
+
+> NOTE: Ensure that you have configured Media Server to read files from this source directory, as described in the [introduction](../../introduction/PART_I.md#enabling-file-access).
 
 Click the `Test Action` button to start processing.
 
@@ -115,7 +117,7 @@ Navigate to `output/speechToText2` and open the transcript file to read the resu
 
 The first step in creating a custom model is to source suitable text materials.  These should contain descriptive text written in normal sentences, not just a dictionary of new terms.
 
-For this tutorial we have sourced a small set of materials for you, copying the text from a news article about similar events in Libya into the file `libya.txt`, which is included with this guide.  In practice, the more data you have (and the more representative that data is) the better. Please read the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Training/CustomLM_Introduction.htm), for further advice.
+For this tutorial we have sourced a small set of materials for you, copying the text from a news article about similar events in Libya into the file `libya.txt`, which is included with this guide.  In practice, the more data you have (and the more representative that data is) the better. Please read the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Training/CustomLM_Introduction.htm), for further advice.
 
 > NOTE: A training text file should be encoded in UTF-8, without [BOM](https://en.wikipedia.org/wiki/Byte_order_mark#UTF-8).
 
@@ -124,7 +126,7 @@ We will next instruct Knowledge Discovery Media Server to build our custom langu
 1. paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action):
 
     ```url
-    action=TrainCustomSpeechLanguageModel&identifier=LibyaTerms&languagepack=ENUK&textpath=C:\OpenText\idol-rich-media-tutorials\tutorials\showcase\speech-transcription\libya.txt
+    action=TrainCustomSpeechLanguageModel&identifier=LibyaTerms&languagepack=ENUK&textPath=C:\OpenText\idol-rich-media-tutorials\tutorials\showcase\speech-transcription\libya.txt
     ```
 
 1. click the `Test Action` button to start building
@@ -160,7 +162,7 @@ CustomLanguageModel = LibyaTerms:0.3
 Then, paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
 ```url
-action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/aljazeera.mp4&configPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/speechToText3.cfg
+action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/aljazeera.mp4&configName=tutorials/speechToText3
 ```
 
 Click the `Test Action` button to start processing.

@@ -63,7 +63,7 @@ AudioChannels=1
 
 #### GPU acceleration
 
-If you are lucky enough to have access to a supported NVIDIA graphics card, you can accelerate certain analytics (including new model speech to text), as well as video ingest and encoding.  For details on support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Advanced/GPU.htm).
+If you are lucky enough to have access to a supported NVIDIA graphics card, you can accelerate certain analytics (including new model speech to text), as well as video ingest and encoding.  For details on support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Advanced/GPU.htm).
 
 #### Language packs
 
@@ -71,7 +71,7 @@ Speech transcription language packs are distributed separately from the main Kno
 
 ![get-software](../../setup/figs/get-software.png)
 
-For this tutorial we will use the "Common" pack.  From the list of available files, select and download `MediaServerLanguagePack_25.1.0_COMMON.zip`:
+For this tutorial we will use the "Common" pack.  From the list of available files, select and download `MediaServerLanguagePack_25.2.0_COMMON.zip`:
 
 ![get-common-lang-pack-zip](./figs/get-common-lang-pack-zip.png)
 
@@ -79,7 +79,7 @@ Unzip the contents into Knowledge Discovery Media Server's `staticdata/speechtot
 
 ![speech-data-dir](./figs/speech-data-dir.png)
 
-> NOTE: This combined language pack enables transcription with the new models for all supported languages.  Additional, separate language packs are available for the "legacy" models.  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Appendixes/SpeechLanguages.htm) for the list of supported languages.
+> NOTE: This combined language pack enables transcription with the new models for all supported languages.  Additional, separate language packs are available for the "legacy" models.  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Appendixes/SpeechLanguages.htm) for the list of supported languages.
 
 ## Process configuration
 
@@ -103,7 +103,7 @@ ModelVersion = Micro
 SpeedBias = Live
 ```
 
-More options are available for the *SpeechToText* analysis engine.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm) for details.
+More options are available for the *SpeechToText* analysis engine.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm) for details.
 
 To view the results in a simple and standalone way, we will record the stream to video files and format the speech transcription output to generate subtitles for those clips.
 
@@ -155,7 +155,7 @@ OutputPath = output/speechToText1/%session.token%/clip_%segment.sequence%.srt
 XslTemplate = toSRT.xsl
 ```
 
-We use using the *Bounded* output mode to bundle together all the text segments with the relevant video clip.  Please read the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.1/MediaServer_25.1_Documentation/Help/Content/Operations/Outputs/IndexingModes_BoundedEvent.htm), for details.
+We use using the *Bounded* output mode to bundle together all the text segments with the relevant video clip.  Please read the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Operations/Outputs/IndexingModes_BoundedEvent.htm), for details.
 
 ## Process a news channel stream
 
@@ -165,10 +165,12 @@ We will process the open stream from *Al Jazeera English*:
 http://live-hls-web-aje.getaj.net/AJE/03.m3u8
 ```
 
+Media Server looks for process configuration files in its `configurations` folder.  You have already created a sub folder there called `tutorials`.  Copy over all the `speechToText*.cfg` files from this lesson, so that we can use them.
+
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
 ```url
-action=process&source=http://live-hls-web-aje.getaj.net/AJE/03.m3u8&configPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/speechToText1.cfg
+action=process&source=http://live-hls-web-aje.getaj.net/AJE/03.m3u8&configName=tutorials/speechToText1
 ```
 
 ![test-action](./figs/test-action.png)
@@ -196,7 +198,7 @@ First, let's generate some `.xml` output.  We will reprocess the same stream fro
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
 
 ```url
-action=process&source=http://live-hls-web-aje.getaj.net/AJE/03.m3u8&configPath=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/speech-transcription/speechToText1a.cfg
+action=process&source=http://live-hls-web-aje.getaj.net/AJE/03.m3u8&configName=tutorials/speechToText1a
 ```
 
 Click the `Test Action` button to start processing.  The video clips and `.xml` result files are produced every 30 seconds based on the `SegmentDuration` parameter.
@@ -209,13 +211,13 @@ Stop processing by clicking the `Stop Session` button in the GUI or with the [`s
 
 ### (Optional) Convert XML to SRT with Python
 
-> NOTE: the included script requires a [Python 3](https://www.python.org/downloads/) installation.
+> NOTE: The included script depends on having `python` installed. Please follow these [instructions](../../setup/PYTHON.md) if you do not already have it on your system.
 
 Next, we will use the included python script `xml2srt.py` to convert one of the output `.xml` files, ready for playback in VLC.  To do so, *e.g.* on Windows, run the following commands:
 
-```sh
+```cmd
 cd C:\OpenText\idol-rich-media-tutorials\tutorials\showcase\speech-transcription
-python xml2srt.py "C:\OpenText\IDOLServer-25.1.0\MediaServer\output\speechToText1a\clip_1.xml"
+python xml2srt.py "C:\OpenText\IDOLServer-25.2.0\MediaServer\output\speechToText1a\clip_1.xml"
 ```
 
 This will produce a new file `clip_1.srt` in the same directory as the original `.xml` file.  As before, you can now open the video `clip_1.mp4` in VLC player to view the time-aligned subtitles.

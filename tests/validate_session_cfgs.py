@@ -5,11 +5,10 @@ python validate_session_cfgs.py 1
 import os
 import time
 import requests
-import urllib.parse
 import xml.etree.ElementTree as ET
 
 api = 'http://localhost:14000/action='
-TIME_DELAY = 0.5
+TIME_DELAY = 0.3
 count = 0
 passed = 0
 
@@ -26,7 +25,9 @@ for dir_path, dir_names, file_names in os.walk(".."):
     count += 1
 
     time.sleep(TIME_DELAY)
-    x = requests.get(f'{api}ValidateProcessConfig&ConfigPath={urllib.parse.quote(file_path)}')
+    x = requests.post(f'{api}ValidateProcessConfig', files = [
+      ('ConfigPath', open(file_path, 'rb'))
+    ])
     print("- "*20)
     print(f'{x.status_code}: {file_path}')
     

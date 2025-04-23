@@ -7,7 +7,7 @@ pushd %~dp0
 
 set COMPONENTS=( MediaServer, LicenseServer )
 
-set VERSION=25.1.0
+set VERSION=25.2.0
 set INSTALL_BASE=C:\OpenText
 
 set INSTALL_DIR=%INSTALL_BASE%\IDOLServer-%VERSION%
