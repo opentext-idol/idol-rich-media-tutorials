@@ -57,7 +57,7 @@ python train-faces.py
 
 ### Train your own face
 
-Open the Knowledge Discovery Media Server [`gui`](http://localhost:14000/a=gui) (tested in Google Chrome) then follow these steps to train your identity:
+Open the Knowledge Discovery Media Server [`gui`](http://localhost:14000/a=gui) then follow these steps to train your identity:
 
 1. select the "Visual Training" page
 1. at the top right, note that *Face Recognition* is the selected analytic by default

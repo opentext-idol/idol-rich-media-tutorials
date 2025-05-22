@@ -32,7 +32,7 @@ If you want to start here, you must at least follow these [installation steps](.
 - [More on Alert engines](#more-on-alert-engines)
 - [Run a process configuration](#run-a-process-configuration)
 - [Build configurations in the GUI](#build-configurations-in-the-gui)
-  - [(*Optional*) GPU acceleration](#optional-gpu-acceleration)
+  - [(*Optionally*) Enable GPU acceleration](#optionally-enable-gpu-acceleration)
 - [Next steps](#next-steps)
 
 ---
@@ -174,7 +174,7 @@ Please watch this demo video from Knowledge Discovery's YouTube playlist to see 
 
 Now have a go yourself - it's easy!
 
-### (*Optional*) GPU acceleration
+### (*Optionally*) Enable GPU acceleration
 
 When building your configuration, you can configure your Detector in either CPU or GPU mode:
 

@@ -361,7 +361,7 @@ action=process&source=video%3DIntegrated%20Webcam&configName=tutorials/faceAnaly
 
 Click `Test Action` to start processing.
 
-Review the results with [`/action=GUI`](http://localhost:14000/a=gui#/monitor(tool:options)), then open your web browser (tested in Google Chrome) to <http://localhost:3000/> to watch the stream.
+Review the results with [`/action=GUI`](http://localhost:14000/a=gui#/monitor(tool:options)), then open your web browser to <http://localhost:3000/> to watch the stream.
 
 ![video-draw](./figs/video-draw.gif)
 

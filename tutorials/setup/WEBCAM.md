@@ -58,7 +58,7 @@ If you do not yet have ffmpeg installed, go to the Device Manager to see the sam
 
 ## Connect to your webcam
 
-Open the Knowledge Discovery Media Server user interface [`\a=gui`](http://localhost:14000/a=gui#/ingest) (tested in Google Chrome) then follow these steps to connect to your webcam:
+Open the Knowledge Discovery Media Server user interface [`\a=gui`](http://localhost:14000/a=gui#/ingest) then follow these steps to connect to your webcam:
 
 1. Set Ingest type to "Device".
 1. Set operating system family to "Linux" or "Windows" as appropriate.

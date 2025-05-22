@@ -225,7 +225,7 @@ Knowledge Discovery Media Server writes out a number of different log files to i
 
 #### Display ongoing analytics in *Monitor* app
 
-The Knowledge Discovery Media Server GUI's *Monitor* web app (tested in Google Chrome) is intended for the display of running analytics on your Knowledge Discovery Media Server.  This app can be useful for both testing and demonstrating Knowledge Discovery Media Server.
+The Knowledge Discovery Media Server GUI's *Monitor* web app is intended for the display of running analytics on your Knowledge Discovery Media Server.  This app can be useful for both testing and demonstrating Knowledge Discovery Media Server.
 
 The app makes use of two Knowledge Discovery Media Server calls to get the list of channels and then to get the latest record for the channel you select:
 

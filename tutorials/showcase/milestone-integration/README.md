@@ -22,7 +22,7 @@ If you want to start here, you must at least follow these [installation steps](.
 - [Configure video recording in Milestone](#configure-video-recording-in-milestone)
   - [DirectShow driver setup](#directshow-driver-setup)
   - [Video file ingest](#video-file-ingest)
-  - [(*Optional*) Webcam ingest](#optional-webcam-ingest)
+  - [(*Optionally*) Set up webcam ingest](#optionally-set-up-webcam-ingest)
 - [Test Knowledge Discovery Media Server ingest](#test-knowledge-discovery-media-server-ingest)
   - [Optional use of Milestone SDK](#optional-use-of-milestone-sdk)
 - [Configure Knowledge Discovery Media Server for processing](#configure-knowledge-discovery-media-server-for-processing)
@@ -121,7 +121,7 @@ To ingest our video file, select the first activated video input, then on the "S
 
 ![directshow-video-file](./figs/directshow-video-file.png)
 
-### (*Optional*) Webcam ingest
+### (*Optionally*) Set up webcam ingest
 
 We will not use a webcam later in this tutorial but let's try to ingest video from your webcam now for your future reference.  
 

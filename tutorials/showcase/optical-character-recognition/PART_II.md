@@ -32,14 +32,14 @@ If you have already tried the [Image Classification](../image-classification/REA
 - [OCR for tabulated data](#ocr-for-tabulated-data)
   - [Process configuration steps](#process-configuration-steps)
   - [Process a document](#process-a-document)
-- [(*Optional*) Barcode detection](#optional-barcode-detection)
+- [(*Optionally*) Add barcode detection](#optionally-add-barcode-detection)
   - [Process configuration for Barcodes](#process-configuration-for-barcodes)
   - [Process a PDF](#process-a-pdf)
-- [(*Optional*) Logo recognition](#optional-logo-recognition)
+- [(*Optionally*) Add object recognition](#optionally-add-object-recognition)
   - [Training](#training)
   - [Process configuration for logo detection](#process-configuration-for-logo-detection)
   - [Process a document for logo detection](#process-a-document-for-logo-detection)
-- [(*Optional*) Image classification](#optional-image-classification)
+- [(*Optionally*) Add image classification](#optionally-add-image-classification)
   - [Loading models](#loading-models)
   - [Process configuration for image classification](#process-configuration-for-image-classification)
   - [Process to classify a document](#process-to-classify-a-document)
@@ -163,7 +163,7 @@ Click the `Test Action` button to start processing.
 
 To view the results, go to `output/OCR` to see the two output files `TablesAndMore_tables.html` and `TablesAndMore_notTables.txt`.
 
-## (*Optional*) Barcode detection
+## (*Optionally*) Add barcode detection
 
 You may have noticed that the PDF file processed above also contains an image of a QR code.  
 
@@ -201,7 +201,7 @@ Click the `Test Action` button to start processing.
 
 To view the results, go to `output/OCR` to see the updated output text file `TablesAndMore_notTables.txt` now contains a URL on the first line.
 
-## (*Optional*) Logo recognition
+## (*Optionally*) Add object recognition
 
 You may have noticed that the PDF file processed above also contains an image of the OpenText logo.
 
@@ -255,7 +255,7 @@ Click the `Test Action` button to start processing.
 
 To view the results, go to `output/OCR` to see the new output file `TablesAndMore_analysis.xml`, which contains details of the matched logo, including bounding box and confidence score.
 
-## (*Optional*) Image classification
+## (*Optionally*) Add image classification
 
 Knowledge Discovery Media Server's *Image Classification* analysis engine ships with a number of pre-trained classifiers. You can learn more about Image Classification in the dedicated tutorial [here](../image-classification/README.md).
 

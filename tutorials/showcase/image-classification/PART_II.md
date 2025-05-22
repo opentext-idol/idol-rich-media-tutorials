@@ -16,11 +16,12 @@ The pre-trained Image Classifiers that ship with Knowledge Discovery Media Serve
   - [Build your classifier](#build-your-classifier)
 - [Running image classification](#running-image-classification)
 - [Results](#results)
-  - [Accuracy optimization](#accuracy-optimization)
-    - [Retrain with snapshots](#retrain-with-snapshots)
-    - [Compare snapshots](#compare-snapshots)
-    - [Fixing a snapshot](#fixing-a-snapshot)
-    - [Re-using validation data](#re-using-validation-data)
+- [Accuracy optimization](#accuracy-optimization)
+  - [Retrain with snapshots](#retrain-with-snapshots)
+  - [Compare snapshots](#compare-snapshots)
+  - [Fixing a snapshot](#fixing-a-snapshot)
+  - [Re-using validation data](#re-using-validation-data)
+- [(*Optionally*) Logging model loss](#optionally-logging-model-loss)
 - [Next steps](#next-steps)
 
 ---
@@ -83,7 +84,7 @@ When selecting images to exemplify a class, make sure they are:
 
 ### Add training images
 
-Open the Knowledge Discovery Media Server [`gui`](http://localhost:14000/a=gui#/train/imageClass(tool:select)) (tested in Google Chrome), then follow these steps to upload your class training images:
+Open the Knowledge Discovery Media Server [`gui`](http://localhost:14000/a=gui#/train/imageClass(tool:select)), then follow these steps to upload your class training images:
 
 1. at the top right, check that the analytic *Image Classification* is selected
 1. in the left column, click `Create` to add a new *classifier* (a collection of *classes*)
@@ -113,9 +114,9 @@ Back in the GUI, on the bottom right of the list of classes, click the "Options"
 
 > NOTE: For details on available training options, please read the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Actions/Training/SetClassifierTrainingOption.htm).
 
-Click "Confirm" to apply your change.  Now we're ready to click `Build`.
+Click "Apply" to set your change.  Now we're ready to click `Build`.
 
-> NOTE: With these configuration options on the author's laptop, this build took about 20 minutes in CPU mode or 40 seconds with GPU.
+> NOTE: With these configuration options on the author's laptop, this build took about 20 minutes in CPU mode, or 40 seconds with GPU.
 
 ## Running image classification
 
@@ -162,7 +163,7 @@ Success!  Our small classifier gives us the correct label "interview", with a hi
 
 Modify the above command to do the same for the test images `newsreader.jpg` and `weather.jpg`.  Check the resulting XML.  Where the others as successful?
 
-### Accuracy optimization
+## Accuracy optimization
 
 We can optionally configure Media Server to take "snapshots" of our new model at regular intervals during the training process.  
 
@@ -172,33 +173,32 @@ You can then select the best performing snapshot to "publish" and therefore avoi
 
 > NOTE: For full details, please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Training/ImageClass_CreateClassifier.htm).
 
-#### Retrain with snapshots
+### Retrain with snapshots
 
-Back in the GUI, on the bottom right of the list of classes, click the "Options" button to open the training options menu and reduce the training iteration count to `50`.
+Back in the GUI, on the bottom right of the list of classes, click the "Options" button to open the training options menu and make the following changes:
 
-![build-classifier-options-snapshots](./figs/build-classifier-options-snapshots.png)
+- increase the training iteration count to `200`, and
+- set the snapshot frequency to `50`.
 
-Click "Confirm" and note that your classifier reverts to an untrained state.
+    ![build-classifier-options-snapshots](./figs/build-classifier-options-snapshots.png)
+
+Click "Apply" and note that your classifier reverts to an untrained state.
 
 Click "Build" to re-run your training.
 
 When the build is complete, note that your classifier has entered a new "snapshotted" state and the "Snapshots" button is enabled.
 
-#### Compare snapshots
+### Compare snapshots
 
 Click the "Snapshots" button to open a dedicated window.  When you first do this, you will automatically trigger a task to test the last snapshot of your build:
 
 ![view-snapshots](./figs/view-snapshots.png)
 
-Once the test task is completed, you can view the calculated accuracy (recall, precision and F1) for the combined classifier as well as for each individual class.
+Once the test task is completed, you can view the calculated accuracy (recall, precision and F1) for the combined classifier, as well as for each individual class.
 
-Optionally, click the "Test" button on the other snapshots to run test tasks for them:
+Optionally, click the "Test" button on the other snapshots to run test tasks for them.
 
-![more-snapshots](./figs/more-snapshots.png)
-
-In this case, we see "perfect" accuracy for our first and last snapshots, so we have no reason to choose anything other than the last one.
-
-#### Fixing a snapshot
+### Fixing a snapshot
 
 In the current state, our model is already usable and will operate using the final build state, *i.e.* the last snapshot.
 
@@ -210,9 +210,46 @@ To "fix" or "publish" the model at your preferred snapshot, back to the snapshot
 
 The unwanted snapshots will be removed and your model will now be in the "trained" (green) state.
 
-#### Re-using validation data
+### Re-using validation data
 
 This model is not exactly the same as the first model you created, since it did not use the reserved validation data.  Having decided on your optimal snapshot (*i.e.* number of steps), you may now wish to retrain you model with a `Snapshot Frequency` of `0` to include all the available training images.
+
+## (*Optionally*) Logging model loss
+
+During longer builds, it can be reassuring to monitor the loss metric of the training model.
+
+To do so, make the following additions to the `mediaserver.cfg`:
+
+```diff
+[Logging]
+...
++ 5=CNN_LOG_STREAM
+
++ [CNN_LOG_STREAM]
++ LogEcho=false
++ LogFile=cnn.log
++ LogTypeCSVs=cnn
++ LogLevel=FULL
+```
+
+While the build process is running, monitor the new log file, *e.g.* on PowerShell on Windows:
+
+```powershell
+> cd logs
+> Get-Content cnn.log | Select-String -Pattern "Iteration [0-9]+, loss"
+
+19/05/2025 18:21:17 [366] 10-Full: Iteration 0, loss = 1.36831
+19/05/2025 18:22:42 [366] 10-Full: Iteration 100, loss = 4.68374e-06
+19/05/2025 18:24:05 [366] 10-Full: Iteration 200, loss = 3.27089e-06
+```
+
+> NOTE: the equivalent Linux command is:
+>
+> ```bash
+> less -f cnn.log | grep -P "Iteration [0-9]+, loss"
+> ```
+
+You will see how the loss metric initially falls sharply but then the rate of improvement trails off.
 
 ## Next steps
 
