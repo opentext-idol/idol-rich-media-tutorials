@@ -2,7 +2,7 @@
 
 Media Server includes an Optical Character Recognition (OCR) analysis engine, which can be configured to read specific scripts in images and video, such as Japanese characters or Arabic numerals.
 
-For a detailed introduction to Optical Character Recognition, see the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Operations/Analyze/OCR_overview.htm).
+For a detailed introduction to Optical Character Recognition, see the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Operations/Analyze/OCR_overview.htm).
 
 In this tutorial we will:
 
@@ -103,7 +103,7 @@ Engine0 = Source
 Type = image
 ```
 
-For full details on the options available for ingesting image sources, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Configuration/Ingest/Image/_Image.htm).
+For full details on the options available for ingesting image sources, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/index.html#Configuration/Ingest/Image/_Image.htm).
 
 ### Analysis
 
@@ -116,7 +116,7 @@ OCRMode = document
 Languages = en,tr
 ```
 
-We have specified parameters that affect how the analytic runs, namely the running mode and which languages to search for.  For full details on these and other available options, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Configuration/Analysis/OCR/_OCR.htm).
+We have specified parameters that affect how the analytic runs, namely the running mode and which languages to search for.  For full details on these and other available options, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/index.html#Configuration/Analysis/OCR/_OCR.htm).
 
 ### Output
 
@@ -175,7 +175,7 @@ Being able to recognize particular documents provides the following advantages:
 
 We can train Object Recognition to recognize a document by providing an "anchor image", *i.e.* a part of the document that will look the same for any instance of that document, such as a title bar or logo mark.
 
-> NOTE: See the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Training/Object_ImageGuide.htm) for advice on selecting good images for training.
+> NOTE: See the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Training/Object_ImageGuide.htm) for advice on selecting good images for training.
 
 To create one, open your favorite image editing software and crop out a section and save it as a new image file, *e.g*:
 
@@ -191,7 +191,7 @@ We can now train this image via the API or by using the Media Server [GUI](http:
 
     ![trained_template](./figs/trained_template.png)
 
-For full details on training options for Object Recognition, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Actions/Training/TrainObject.htm).
+For full details on training options for Object Recognition, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/index.html#Actions/Training/TrainObject.htm).
 
 ### Detect and extract an ID Card
 
@@ -210,7 +210,7 @@ Database = IDCardTemplates
 Geometry = SIM2
 ```
 
-Here we use the Geometry option `SIM2` to only consider 2-dimensional rotations, since we assume these ID cards are scanned.  For full details on options for Object Recognition, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Configuration/Analysis/Object/_Object.htm).
+Here we use the Geometry option `SIM2` to only consider 2-dimensional rotations, since we assume these ID cards are scanned.  For full details on options for Object Recognition, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/index.html#Configuration/Analysis/Object/_Object.htm).
 
 #### Rotate and crop
 
@@ -235,7 +235,7 @@ LuaLine = function rectangle(x) return { left = x.RegionData.left - 0.5 * x.Regi
 
 ```
 
-For full details on these and other available transformations, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Configuration/Transform/_Transform.htm).
+For full details on these and other available transformations, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/index.html#Configuration/Transform/_Transform.htm).
 
 Finally we can crop to that region and encode an image for each card.  See the included file `idCard2.cfg` for full details.
 
@@ -376,7 +376,7 @@ Next we will again add these regions to the trained Object Recognition anchor as
 >
 > NOTE: You may need to refresh the GUI to display these new metadata fields.
 
-For full details on the metadata API for Object Recognition, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Actions/Training/AddObjectMetadata.htm).
+For full details on the metadata API for Object Recognition, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/index.html#Actions/Training/AddObjectMetadata.htm).
 
 #### Use the OCR regions
 

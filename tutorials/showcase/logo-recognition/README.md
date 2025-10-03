@@ -2,7 +2,7 @@
 
 Knowledge Discovery Media Server includes an Object Recognition analysis engine, which can be trained to recognize specific 2-D and 3-D objects in images and video, such as a logo or painting.
 
-For a more detailed introduction to Object Recognition, see the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Operations/Analyze/ObjectRecognition_Introduction.htm).
+For a more detailed introduction to Object Recognition, see the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Operations/Analyze/ObjectRecognition_Introduction.htm).
 
 In this tutorial we will:
 
@@ -116,7 +116,7 @@ Type = Video
 IngestDateTime = 0
 ```
 
-For full details on the options available for ingesting video (and other) sources, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Configuration/Ingest/_Ingest.htm).
+For full details on the options available for ingesting video (and other) sources, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/index.html#Configuration/Ingest/_Ingest.htm).
 
 ### Analysis
 
@@ -136,7 +136,7 @@ Here we have specified our newly created database with the `Database` parameter.
 - an identifier (or list of identifiers), *e.g.* for one-to-one validation (or matching a sub-set)
 - a metadata key-value pair, *e.g.* if you want to match only shirt sponsors in our example, set `Metadata = group:shirt`
 
-We have also specified some parameters that affect how the analytic runs.  For full details on these and other available options, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Configuration/Analysis/Object/_Object.htm).
+We have also specified some parameters that affect how the analytic runs.  For full details on these and other available options, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/index.html#Configuration/Analysis/Object/_Object.htm).
 
 ### Event processing
 

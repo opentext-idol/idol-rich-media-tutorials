@@ -21,8 +21,8 @@ Download software from the [Software Licensing and Downloads](https://sld.microf
 
 1. From the list of available files, select and download the following (depending on your operating system):
 
-   - `LicenseServer_25.2.0_WINDOWS_X86_64.zip` or `LicenseServer_25.2.0_LINUX_X86_64.zip`, and
-   - `MediaServer_25.2.0_WINDOWS_X86_64.zip` or `MediaServer_25.2.0_LINUX_X86_64.zip`.
+   - `LicenseServer_25.3.0_WINDOWS_X86_64.zip` or `LicenseServer_25.3.0_LINUX_X86_64.zip`, and
+   - `MediaServer_25.3.0_WINDOWS_X86_64.zip` or `MediaServer_25.3.0_LINUX_X86_64.zip`.
 
     ![get-idol-zips](./figs/get-idol-zips.png)
 
@@ -41,6 +41,14 @@ Before running the appropriate script, open it and check the following:
 1. the `LICENSE_KEY` variable gives the correct name for your license `.dat` file.
 
 ### Windows
+
+You must edit a system environment variable in order to run Media Server as a Windows Service.
+
+Add the target installation directory (`C:\OpenText\IDOLServer-25.3.0\MediaServer\libs\torch`) to your System Path environment variable as follows:
+
+![torch_env](./figs/torch_env.png)
+
+> NOTE: Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Getting_Started/StartMediaServer.htm) for more details.
 
 Run `install.bat` with administrator privileges:
 

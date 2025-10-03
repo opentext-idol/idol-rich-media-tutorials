@@ -57,7 +57,7 @@ VisualChannels=1
 
 OpenText provides a set of pre-defined training packs for Knowledge Discovery Media Server, including object class recognizers. Knowledge Discovery Media Server also allows you to train your own recognizers by uploading and labelling your own images.
 
-That training can be performed through Knowledge Discovery Media Server's API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Actions/Training/_ObjectClassRecognition.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
+That training can be performed through Knowledge Discovery Media Server's API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/index.html#Actions/Training/_ObjectClassRecognition.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
 
 ### Import pre-defined recognizers
 
@@ -67,7 +67,7 @@ Pre-trained *Object Class Recognition* packages are distributed separately from 
 
     ![get-software](../../setup/figs/get-software.png)
 
-1. From the list of available files, select and download `MediaServerPretrainedModels_25.2.0_COMMON.zip`.
+1. From the list of available files, select and download `MediaServerPretrainedModels_25.3.0_COMMON.zip`.
 
     ![get-pretrained-zip](../../setup/figs/get-pretrained-zip.png)
 
@@ -114,7 +114,7 @@ Type = objectclassrecognition
 Recognizer = ObjectClassRecognizer_Gen4_CommonObjects80
 ```
 
-> NOTE: For full details on this and other available options for *Object Class Recognition*, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Configuration/Analysis/ObjectClass/_ObjectClass.htm).
+> NOTE: For full details on this and other available options for *Object Class Recognition*, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/index.html#Configuration/Analysis/ObjectClass/_ObjectClass.htm).
 
 To show the object detection results, we are going to draw color-coded boxes around each one as overlays on the source image.  This requires two engines, a *Combine*-type Utility engine and a *Draw*-type Transform engine:
 
@@ -167,7 +167,7 @@ To review the resulting detection image, go to `output/hong_kong` and find `dete
 
 ![detections](./figs/detections.png)
 
-> TIP: Take a closer look at the included `drawObjects.lua` to see how the elements of the overlays and object class key were added.  To read more about Knowledge Discovery Media Server's drawing functions, see the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Lua/Draw/_Drawing.htm).
+> TIP: Take a closer look at the included `drawObjects.lua` to see how the elements of the overlays and object class key were added.  To read more about Knowledge Discovery Media Server's drawing functions, see the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/index.html#Lua/Draw/_Drawing.htm).
 
 ## PART II - Build a custom recognizer
 

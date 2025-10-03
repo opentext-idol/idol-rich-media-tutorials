@@ -6,7 +6,7 @@ Knowledge Discovery Media Server includes an *Image Classification* analysis eng
 - Was this photo taken in a city or in the desert?
 - Does this CCTV camera show a crowded or an empty train platform?
 
-For more details on *Image Classification*, see the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Operations/Analyze/ImageClass.htm).
+For more details on *Image Classification*, see the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Operations/Analyze/ImageClass.htm).
 
 > NOTE: *Image Classification* results tell you about the contents of the whole image (or a defined region of the image) and is not to be confused with *Object Class Recognition*, which is covered separately [here](../object-class-recognition/README.md) and is used to detect and track the location of objects of a particular class, *e.g.* to draw a box around an individual person.
 

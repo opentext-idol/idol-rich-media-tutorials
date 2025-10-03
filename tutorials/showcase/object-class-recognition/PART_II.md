@@ -1,5 +1,7 @@
 # PART II - Build a custom recognizer
 
+> WARNING: Object Class Recognizer building is not available in 25.3.  For instructions to import a model built with 25.2, see the [documentation](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Getting_Started/UpgradeDatabaseTorch.htm). The following instructions can be used with for your Media Server 25.2.
+
 The pre-trained Object Class Recognizers that ship with Knowledge Discovery Media Server cover a broad range of objects; however, there may be occasions when you wish to work with additional classes of object.  
 
 In this lesson, you will use Media Server to build custom recognizers:
@@ -7,8 +9,8 @@ In this lesson, you will use Media Server to build custom recognizers:
 1. use the Knowledge Discovery Media Server GUI to upload and annotate sample images
 1. train a recognizer for a new class
 1. process test images to identify this new class
+<!-- 1. use "snapshots" to optimize your models -->
 <!-- 1. discuss sources of new training data, *e.g.* OpenImages -->
-<!-- 1. use "snapshots" to optimize your own models -->
 
 ---
 
@@ -22,6 +24,7 @@ In this lesson, you will use Media Server to build custom recognizers:
 - [Running object class recognition](#running-object-class-recognition)
 - [Results](#results)
   - [GPU for processing](#gpu-for-processing)
+- [Accuracy optimization](#accuracy-optimization)
 - [(*Optionally*) Logging model loss](#optionally-logging-model-loss)
 - [Next steps](#next-steps)
 
@@ -41,7 +44,7 @@ Open the Knowledge Discovery Media Server [`gui`](http://localhost:14000/a=gui#/
 
 1. at the top right, note that the analytic *Object Class Recognition* is selected
 1. in the left column, click `Create` to add a new *recognizer* (a collection of *classes*)
-    - rename the recognizer to `Workshop`
+    - rename the recognizer to "Workshop"
 1. in the center column, click `Create` to add a new *class*
     - give your class the name "wheel"
 1. in the right column, click `Import` to import images
@@ -101,12 +104,6 @@ Because object class recognizer training uses the regions around your annotated 
 
 ### Build your recognizer
 
-Back in the Knowledge Discovery Media Server GUI, at the bottom of the middle column, click `Build`.
-
-If you do not have GPU enabled for your Knowledge Discovery Media Server instance, you will see an warning message at this point:
-
-![build-recognizer-warning](./figs/build-recognizer-warning.png)
-
 For this tutorial, the small sample size means that you can effectively train your recognizer in a reasonable period of time with or without GPU enabled.
 
 If you do wish to train with CPU only, it is advisable to edit the default training options as follows (sacrificing some accuracy to save time):
@@ -114,13 +111,19 @@ If you do wish to train with CPU only, it is advisable to edit the default train
 1. Select the `generation1` recognizer type, and
 1. Reduce the training iteration count to `50`.
 
-![build-recognizer-options](./figs/build-recognizer-options.png)
+    ![build-recognizer-options](./figs/build-recognizer-options.png)
 
 > NOTE: For details on available recognizer types and other available training options, please read the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Operations/Analyze/ObjectClassRec_RecognizerTypes.htm).
 
+Once you are set up, at the bottom of the middle column, click `Build`.
+
+> NOTE: If you do not have GPU enabled for your Knowledge Discovery Media Server instance, you will see a warning message at this point:
+>
+> ![build-recognizer-warning](./figs/build-recognizer-warning.png)
+
 Once completed, your workshop recognizer labels will turn green, to indicate that the model is finalized.
 
-> NOTE: With these configuration options on the author's laptop, this build took about **nine minutes**.
+> NOTE: With these configuration options on the author's laptop using CPU, this build took about **nine minutes**. With the built in Nvidia T600 GPU, the same build took about 45 seconds.
 
 When training your own recognizers, it is *strongly recommended* to utilize GPU acceleration.  This will allow you to train larger sample sets with many classes, as well as to utilize the most accurate "Generation 4" recognizer type.
 
@@ -164,9 +167,65 @@ Modify the above command to do the same for the second test image `bike.jpg`:
 
 ### GPU for processing
 
-As stated above, GPU is (practically speaking) essential for training new recognizers; however, when running a process action to match objects, the benefit of GPU is much reduced. 
+As stated above, GPU is (practically speaking) essential for training new recognizers; however, when running a process action to match objects, the benefit of GPU is much reduced.
 
-This is particularly true for image processing. For video processing, running on a GPU-enabled Knowledge Discovery Media Server *can* offer a benefit by enabling higher frame rate analysis.  See the tutorial on using Object Class Recognition for [surveillance analytics](../surveillance/README.md#optional-gpu-acceleration) for more discussion.
+This is particularly true for image processing. For video processing, running on a GPU-enabled Knowledge Discovery Media Server *can* offer a benefit by enabling higher frame rate analysis.  See the tutorial on using Object Class Recognition for [surveillance analytics](../surveillance/README.md#optionally-enable-gpu-acceleration) for more discussion.
+
+## Accuracy optimization
+
+As a general rule, you can calculate a reasonable number of iterations by multiplying the number of object classes in the recognizer by 2000.
+
+<!-- We can optionally configure Media Server to take "snapshots" of our new model at regular intervals during the training process.  
+
+By setting aside some of your training images for evaluation purposes, you can then compare the accuracy (precision and recall) of your model at each snapshot.
+
+The snapshot that represents the greatest number of iterations usually performs best. If you see a reduction in performance this indicates over-fitting. -->
+
+<!-- ### (*Optionally*) Retrain with snapshots
+
+Back in the GUI, on the bottom right of the list of classes, click the "Options" button to open the training options menu and make the following changes:
+
+- increase the training iteration count to `200`,
+- set the snapshot frequency to `50`, then
+- click "Apply" and note that your recognizer reverts to an untrained state.
+
+    ![build-recognizer-options-snapshots](./figs/build-recognizer-options-snapshots.png)
+
+Click "Build" to re-run your training.
+
+When the build is complete, note that your recognizer has entered a new "snapshotted" state and the "Snapshots" button is enabled. -->
+
+<!-- ### Compare snapshots
+
+> HERE
+
+Click the "Snapshots" button to open a dedicated window.  When you first do this, you will automatically trigger a task to test the last snapshot of your build:
+
+![view-snapshots](./figs/view-snapshots.png)
+
+Once the test task is completed, you can view the calculated accuracy (recall, precision and F1) for the combined recognizer, as well as for each individual class.
+
+Optionally, click the "Test" button on the other snapshots to run test tasks for them:
+
+![more-snapshots](./figs/more-snapshots.png)
+
+In this case, we see "perfect" accuracy for our first and last snapshots, so we have no reason to choose anything other than the last one. -->
+
+<!-- ### Fixing a snapshot
+
+In the current state, our model is already usable and will operate using the final build state, *i.e.* the last snapshot.
+
+![workshop-demo](./figs/workshop-demo.png)
+
+To "fix" or "publish" the model at your preferred snapshot, back to the snapshots window, hit "Select" button on your preferred snapshot.
+
+![confirm-snapshot](./figs/confirm-snapshot.png)
+
+The unwanted snapshots will be removed and your model will now be in the "trained" (green) state. -->
+
+<!-- ### Re-using validation data
+
+This model is not exactly the same as the first model you created, since it did not use the reserved validation data.  Having decided on your optimal snapshot (*i.e.* optimal number of training steps), you may now wish to retrain you model with a `Snapshot Frequency` of `0` to include all the available training images. -->
 
 ## (*Optionally*) Logging model loss
 

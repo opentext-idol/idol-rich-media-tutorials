@@ -69,7 +69,7 @@ VisualChannels=1
 
 #### Language support
 
-Language-specific assets for OCR are distributed with the main Knowledge Discovery Media Server package, so you are already set to process text in [over 45 languages and scripts](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Appendixes/OCR_Supported_Languages.htm).
+Language-specific assets for OCR are distributed with the main Knowledge Discovery Media Server package, so you are already set to process text in [over 45 languages and scripts](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Appendixes/OCR_Supported_Languages.htm).
 
 In the next step, we will set up a process configuration to recognize Spanish characters.
 
@@ -94,7 +94,7 @@ OcrMode = document
 Languages = es
 ```
 
-> NOTE: The `Languages` property accepts a comma-separated list of language codes, which are specified in the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Appendixes/OCR_Supported_Languages.htm).
+> NOTE: The `Languages` property accepts a comma-separated list of language codes, which are specified in the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Appendixes/OCR_Supported_Languages.htm).
 
 To view the results in the simplest way, we will output lines of text by transforming the *Result* output track XML to plain text.  We'll add the following to our process configuration:
 
@@ -106,7 +106,7 @@ OutputPath = output/OCR/%source.filename.stem%.txt
 XslTemplate = toText.xsl
 ```
 
-> NOTE: For more details on the native XML output, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Operations/Analyze/OCR_output.htm).
+> NOTE: For more details on the native XML output, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Operations/Analyze/OCR_output.htm).
 
 ## Process an image
 
@@ -164,7 +164,7 @@ In the configurations used above, there are some unseen assumptions, which it is
 
 ### Orientation
 
-You may not, for example know the orientation of text in a given image.  To handle rotated files, you may set `Orientation = Any`, instead of the default value of `Upright`.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/OCR/Orientation.htm) for details.
+You may not, for example know the orientation of text in a given image.  To handle rotated files, you may set `Orientation = Any`, instead of the default value of `Upright`.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Configuration/Analysis/OCR/Orientation.htm) for details.
 
 > NOTE: There is a small processing time penalty in doing so, but orientation checking has been optimized to be much quicker than simply trying the full OCR process four times.
 
@@ -172,9 +172,9 @@ You may not, for example know the orientation of text in a given image.  To hand
 
 You may not know the character sets (languages) your input files, or whether they may contain text in multiple languages.
 
-For this scenario, Knowledge Discovery Media Server allows you to specify a list of languages.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/OCR/Languages.htm) for details.
+For this scenario, Knowledge Discovery Media Server allows you to specify a list of languages.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Configuration/Analysis/OCR/Languages.htm) for details.
 
-You are free to list as many languages as Knowledge Discovery Media Server supports.  The downside of doing so is that this slows down processing.  If you know that individual documents will contain just one language, you can also set the `DetectAlphabet` parameter, which will speed up the processing of individual pages.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/OCR/DetectAlphabet.htm) for details.
+You are free to list as many languages as Knowledge Discovery Media Server supports.  The downside of doing so is that this slows down processing.  If you know that individual documents will contain just one language, you can also set the `DetectAlphabet` parameter, which will speed up the processing of individual pages.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Configuration/Analysis/OCR/DetectAlphabet.htm) for details.
 
 > NOTE: Language support encompasses handling of multiple character sets, *e.g.* selecting the Japanese pack enables support for native Hiragana, Katakana and Kanji, as well as for romanized (ascii) transcriptions of Japanese words.
 
@@ -204,42 +204,42 @@ To view the results, go to `output/OCR` and open the PDF file `multi-lingual.txt
 
 There are various *advanced* parameters, which can be set that configure the algorithm to work better with text over various backgrounds:
 
-- [`OcrMode`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/OCR/OcrMode.htm): Set by default to `Scene`, to work best for an image containing sparse text and/or detailed a background, such as a photograph or TV footage. For scanned documents, it is recommended to set this parameter to `Document`, as we have done in the examples above.  There is also an `Auto` mode that can be used if you do not know in advance what type of content you are processing.
-- [`HollowText`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/OCR/HollowText.htm): Specifies whether to look for outlined text, which are often used in television subtitles.
-- [`Region`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/OCR/Region.htm): Process only regions of the image or video frame where text is expected to appear.
+- [`OcrMode`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Configuration/Analysis/OCR/OcrMode.htm): Set by default to `Scene`, to work best for an image containing sparse text and/or detailed a background, such as a photograph or TV footage. For scanned documents, it is recommended to set this parameter to `Document`, as we have done in the examples above.  There is also an `Auto` mode that can be used if you do not know in advance what type of content you are processing.
+- [`HollowText`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Configuration/Analysis/OCR/HollowText.htm): Specifies whether to look for outlined text, which are often used in television subtitles.
+- [`Region`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Configuration/Analysis/OCR/Region.htm): Process only regions of the image or video frame where text is expected to appear.
 
 ### Fonts
 
-By default, OCR attempts to read text without assuming any particular font; however, if you know that your documents use a particular standard, *e.g.* [OCR-B](https://en.wikipedia.org/wiki/OCR-B) as used for machine-readable passports, you can set `FontType = ocrb`.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/OCR/FontType.htm) for details.
+By default, OCR attempts to read text without assuming any particular font; however, if you know that your documents use a particular standard, *e.g.* [OCR-B](https://en.wikipedia.org/wiki/OCR-B) as used for machine-readable passports, you can set `FontType = ocrb`.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Configuration/Analysis/OCR/FontType.htm) for details.
 
 ### Character restrictions
 
 By default, OCR attempts to read all characters included for the configured language(s).  If you know that your documents use a particular sub-set, you can set make use of the following options:
 
-- [`CharacterTypes`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/OCR/CharacterTypes.htm): A comma-separated list of `lowercase`, `uppercase`, `digit`, `punctuation`, `special` and `symbol`.
-- [`DisabledCharacters`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/OCR/DisabledCharacters.htm): Characters to exclude from the character set used for recognition, *e.g.* `£€$`.
+- [`CharacterTypes`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Configuration/Analysis/OCR/CharacterTypes.htm): A comma-separated list of `lowercase`, `uppercase`, `digit`, `punctuation`, `special` and `symbol`.
+- [`DisabledCharacters`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Configuration/Analysis/OCR/DisabledCharacters.htm): Characters to exclude from the character set used for recognition, *e.g.* `£€$`.
 
 ### Confidence
 
-Each detected word (and character) has a given confidence score.  To improve the precision of your transcription output, you can filter out lower confidence words using the `WordRejectThreshold` parameter.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/OCR/WordRejectThreshold.htm) for details.
+Each detected word (and character) has a given confidence score.  To improve the precision of your transcription output, you can filter out lower confidence words using the `WordRejectThreshold` parameter.  Please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Configuration/Analysis/OCR/WordRejectThreshold.htm) for details.
 
 In addition, there are various *advanced* parameters, which can be set that may alter the confidence of your transcribed words for the better:
 
-- [`ContextCheck`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/OCR/ContextCheck.htm): Set by default to `True`, to compare detected possible words against a dictionary of known words.  This may increase the likelihood of correctly reading a word vs a similar but wrong reading and also boost the confidence when reading relevant words.
-- [`UserDictionary`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/OCR/UserDictionary.htm): Allows you to add a list of domain-specific words that may improve the results of the above context check.
-- [`ExtraEnabledCharacters`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/OCR/ExtraEnabledCharacters.htm): Allows you to add specific characters that should be in a word but are not normally included in your configured language(s).
-- [`KeepOnly`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/OCR/KeepOnly.htm): Keep only dictionary words or pure number and discard all others.
+- [`ContextCheck`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Configuration/Analysis/OCR/ContextCheck.htm): Set by default to `True`, to compare detected possible words against a dictionary of known words.  This may increase the likelihood of correctly reading a word vs a similar but wrong reading and also boost the confidence when reading relevant words.
+- [`UserDictionary`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Configuration/Analysis/OCR/UserDictionary.htm): Allows you to add a list of domain-specific words that may improve the results of the above context check.
+- [`ExtraEnabledCharacters`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Configuration/Analysis/OCR/ExtraEnabledCharacters.htm): Allows you to add specific characters that should be in a word but are not normally included in your configured language(s).
+- [`KeepOnly`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Configuration/Analysis/OCR/KeepOnly.htm): Keep only dictionary words or pure number and discard all others.
 
 ### Processing speed
 
 As hinted at above, various options that allow you to deal with unknown document content, *e.g.* `Orientation=Any`, `OcrMode=Auto` and `DetectAlphabet=True`, can have a negative impact on processing speed.  In order to compensate for that and more, Knowledge Discovery Media Server also offers options to speed up processing:
 
-- [NumParallel](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/OCR/NumParallel.htm): Enable the OCR analysis engine to use more CPU threads; allowing multiple video frames or document pages to be processed simultaneously.
+- [NumParallel](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Configuration/Analysis/OCR/NumParallel.htm): Enable the OCR analysis engine to use more CPU threads; allowing multiple video frames or document pages to be processed simultaneously.
 
   > NOTE: If the ingested image or document has only one page, setting this parameter has no effect.
 
-- [SampleInterval](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/OCR/SampleInterval.htm): Modify this parameter to instruct the OCR analysis engine to queue more or fewer video frames for analysis.
-- [MaxInputQueueLength](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/OCR/MaxInputQueueLength.htm): Set this parameter to put a limit on potential processing latency for video frames.  Since setting this parameter may result in loss of expected analysis results, consider alternative configuration changes first.
+- [SampleInterval](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Configuration/Analysis/OCR/SampleInterval.htm): Modify this parameter to instruct the OCR analysis engine to queue more or fewer video frames for analysis.
+- [MaxInputQueueLength](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Configuration/Analysis/OCR/MaxInputQueueLength.htm): Set this parameter to put a limit on potential processing latency for video frames.  Since setting this parameter may result in loss of expected analysis results, consider alternative configuration changes first.
 
 ## PART II - Extracting tables and more
 

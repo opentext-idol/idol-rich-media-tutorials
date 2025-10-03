@@ -36,7 +36,7 @@ A quick first look at Knowledge Discovery Media Server.  Watch a demonstration v
 - Administrator privileges to install software.
 - A webcam.
 
-> NOTE: Sizing Knowledge Discovery Media Server for your own production tasks depends greatly on your use case, as discussed [later in these tutorials](./showcase/face-recognition/README.md#hardware-requirements).  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Getting_Started/Install_Run/System_Requirements.htm) for more details.
+> NOTE: Sizing Knowledge Discovery Media Server for your own production tasks depends greatly on your use case, as discussed [later in these tutorials](./showcase/face-recognition/README.md#hardware-requirements).  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Getting_Started/Install_Run/System_Requirements.htm) for more details.
 
 ### Setup Knowledge Discovery Media Server
 
@@ -82,6 +82,6 @@ When Knowledge Discovery Media Server is used in OEM, communication requires the
 ### Links
 
 - Full administration guides are available for all Knowledge Discovery products [here](https://www.microfocus.com/documentation/idol/).
-- Read more tips on working with Knowledge Discovery products in [Knowledge Discovery Expert](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/IDOLServer_25.2_Documentation/Guides/html/expert/Content/IDOLExpert_Welcome.htm).
-- For details of the latest changes to Knowledge Discovery Media Server, please see the [Release Notes](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/IDOLReleaseNotes_25.2_Documentation/idol/Content/Servers/MediaServer.htm).
+- Read more tips on working with Knowledge Discovery products in [Knowledge Discovery Expert](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/IDOLServer_25.3_Documentation/Guides/html/expert/Content/IDOLExpert_Welcome.htm).
+- For details of the latest changes to Knowledge Discovery Media Server, please see the [Release Notes](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/IDOLReleaseNotes_25.3_Documentation/idol/Content/Servers/MediaServer.htm).
 - To learn more about Knowledge Discovery Media Server and other Knowledge Discovery products, visit [opentext.com/idol](https://www.opentext.com/products/knowledge-discovery).
