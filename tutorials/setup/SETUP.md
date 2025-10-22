@@ -8,8 +8,6 @@ This is a setup guide for a basic installation of Knowledge Discovery rich media
 - [Knowledge Discovery components](#knowledge-discovery-components)
   - [Generate a Knowledge Discovery license key](#generate-a-knowledge-discovery-license-key)
   - [Install Knowledge Discovery software](#install-knowledge-discovery-software)
-  - [Obtaining tutorial materials](#obtaining-tutorial-materials)
-    - [Following this guide offline](#following-this-guide-offline)
     - [Validate install](#validate-install)
   - [Further reading](#further-reading)
 
@@ -81,18 +79,6 @@ You can obtain software and licenses from the [Software Licensing and Downloads]
 ### Install Knowledge Discovery software
 
 Follow [these steps](./INSTALL_ZIPS.md) for a scripted installation of Knowledge Discovery components.
-
-### Obtaining tutorial materials
-
-Get a local copy of this tutorial to give you all the configuration files and sample media you will need.  You can either clone this repository or download the `.zip` from [GitHub](https://github.com/opentext-idol/idol-rich-media-tutorials).
-
-![github-download](./figs/github-download.png)
-
-In the following tutorials, we will assume these materials are stored under `C:\OpenText`.
-
-#### Following this guide offline
-
-You can stay on GitHub to follow the steps in this and further linked README files in your browser or, if you prefer to work with the downloaded files, see [these steps](../appendix/Markdown_reader.md) for some convenient offline reading options.
 
 #### Validate install
 

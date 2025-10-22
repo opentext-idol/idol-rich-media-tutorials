@@ -6,7 +6,10 @@ A set of guides to introduce you to Knowledge Discovery Media Server and associa
 
 - [Taster](#taster)
 - [Getting started](#getting-started)
-  - [Recommended setup requirements](#recommended-setup-requirements)
+  - [Obtaining tutorial materials](#obtaining-tutorial-materials)
+    - [Following this guide offline](#following-this-guide-offline)
+  - [Software access](#software-access)
+  - [System requirements](#system-requirements)
   - [Setup Knowledge Discovery Media Server](#setup-knowledge-discovery-media-server)
 - [Introduction](#introduction)
 - [Analytics showcase examples](#analytics-showcase-examples)
@@ -28,15 +31,43 @@ A quick first look at Knowledge Discovery Media Server.  Watch a demonstration v
 
 ## Getting started
 
-### Recommended setup requirements
+### Obtaining tutorial materials
+
+Get a local copy of this tutorial to give you all the configuration files and sample media you will need.  You can either clone this repository or download the `.zip` from [GitHub](https://github.com/opentext-idol/idol-rich-media-tutorials).
+
+![github-download](./figs/github-download.png)
+
+In the following tutorials, we will assume these materials are stored under `C:\OpenText`.
+
+#### Following this guide offline
+
+You can stay on GitHub to follow the steps in this and further linked README files in your browser or, if you prefer to work with the downloaded files, see [these steps](./appendix/Markdown_reader.md) for some convenient offline reading options.
+
+### Software access
+
+To use Knowledge Discovery software, you must have an active entitlement with the [Software Licensing and Downloads](https://sld.microfocus.com/mysoftware/index) portal.
+
+### System requirements
+
+Knowledge Discovery software can be installed on Windows, Linux, on-prem, in the cloud, and in containers.
+
+Most people trying Knowledge Discovery for the first time will have access to a Windows laptop, so these tutorials assume that is what you are using.
+
+> NOTE: For Linux users, there will be notes along the way for relevant changes.
+
+Your Windows laptop will need at least the following spare capacity:
 
 - 8 cores, 16 GB RAM and 50GB free disk space.
-- 64-bit Windows or Linux (this guide has been most recently tested on Windows 11 and Ubuntu 22.04).
-- A text editor.
-- Administrator privileges to install software.
-- A webcam.
 
-> NOTE: Sizing Knowledge Discovery Media Server for your own production tasks depends greatly on your use case, as discussed [later in these tutorials](./showcase/face-recognition/README.md#hardware-requirements).  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Getting_Started/Install_Run/System_Requirements.htm) for more details.
+> NOTE: Sizing Knowledge Discovery Media Server for your own production tasks depends greatly on your use case, as discussed [later in these tutorials](./showcase/face-recognition/README.md#hardware-requirements).  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Getting_Started/Install_Run/System_Requirements.htm) for more details and discuss your needs with your OpenText account manager.
+
+You must be running 64-bit Windows or Linux. This guide has been most recently tested on Windows 11 and Ubuntu 22.04.
+
+You will also need:
+
+- Administrator privileges to install software.
+- A text editor, for example [VS Code](https://code.visualstudio.com/download).
+- A webcam.
 
 ### Setup Knowledge Discovery Media Server
 

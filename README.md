@@ -14,16 +14,6 @@ You! If you have access to Knowledge Discovery software and want to analyze rich
 - Select from walkthroughs showcasing different analytic capabilities of Knowledge Discovery Media Server, from AN/LPR to Object Recognition and Speech Transcription.
 - See how Media Server integrates with other Knowledge Discovery products.
 
-## Obtaining tutorial materials
-
-Get a local copy of this tutorial to give you all the configuration files and sample media you will need.  You can either clone this repository or download the `.zip` from [GitHub](https://github.com/opentext-idol/idol-rich-media-tutorials).
-
-![github-download](./tutorials/setup/figs/github-download.png)
-
-Throughout the tutorial, we will assume these materials are stored under `C:\OpenText`.  File paths and other resources are currently documented for Windows, but other supported platforms (*e.g.* Linux) will work with appropriate modifications.
-
-You can stay on GitHub to follow the steps in this and further linked README files in your browser or, if you prefer to work with the downloaded files, see [these steps](./tutorials/appendix/Markdown_reader.md) for some convenient offline reading options.
-
 ## Get started
 
 The tutorials start [here](./tutorials/README.md)!
