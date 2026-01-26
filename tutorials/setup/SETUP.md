@@ -1,6 +1,6 @@
 # Create your own Knowledge Discovery rich media setup
 
-This is a setup guide for a basic installation of Knowledge Discovery rich media and associated components.
+This is a setup guide for a basic installation of Knowledge Discovery Media Server and associated components.
 
 ---
 
@@ -34,12 +34,12 @@ Knowledge Discovery components are licensed via the Knowledge Discovery License 
 You can obtain software and licenses from the [Software Licensing and Downloads](https://sld.microfocus.com/mysoftware/index) portal.
 
 1. Under the *Entitlements* tab, search for *IDOL*
-1. Select from your available environment types:
+1. Select from your available environment types, *e.g.* choose "EVALUATION".
 1. Scroll to the bottom and click `Activate` next to your *Knowledge Discovery SW license*
 
     ![get-license](./figs/get-license.png)
 
-1. On the "License Activation" screen, at the bottom, select the check box, choose your preferred version (the latest is 25.3), then fill in the quantity to activate:
+1. On the "License Activation" screen, at the bottom, select the check box, choose your preferred version (the latest is 25.4), then fill in the quantity to activate:
 
    ![eSoftware-selectLicense](./figs/eSoftware-selectLicense.png)
 
@@ -84,8 +84,8 @@ Follow [these steps](./INSTALL_ZIPS.md) for a scripted installation of Knowledge
 
 If you used the scripts without altering them, your installed software will be in:
 
-- `C:\OpenText\IDOLServer-25.3.0` (Windows)
-- `~/IDOLServer-25.3.0` (Linux)
+- `C:\OpenText\IDOLServer-25.4.0` (Windows)
+- `~/IDOLServer-25.4.0` (Linux)
 
 Each installed Knowledge Discovery component will have its own sub-directory, which includes all required executables, dependencies and configuration files.  The primary configuration file for each shares the name of the component executable, *e.g.* `mediaserver.cfg` for `mediaserver.exe`.
 
@@ -107,5 +107,5 @@ Next start up Knowledge Discovery Media Server in the same way and verify it is 
 The admin guides for all components can be accessed from these links:
 
 - [Knowledge Discovery documentation home page](https://www.microfocus.com/documentation/idol/)
-- [License Server admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/LicenseServer_25.3_Documentation/Help/Content/_FT_SideNav_Startup.htm)
-- [Media Server admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/_FT_SideNav_Startup.htm)
+- [License Server admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/LicenseServer_25.4_Documentation/Help/Content/_FT_SideNav_Startup.htm)
+- [Media Server admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/_FT_SideNav_Startup.htm)

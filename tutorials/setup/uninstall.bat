@@ -7,7 +7,7 @@ pushd %~dp0
 
 set COMPONENTS=( MediaServer, LicenseServer )
 
-set VERSION=25.3.0
+set VERSION=25.4.0
 set INSTALL_BASE=C:\OpenText
 
 set INSTALL_DIR=%INSTALL_BASE%\IDOLServer-%VERSION%
@@ -20,6 +20,11 @@ for %%i in %COMPONENTS% do (
 	net stop %%i
   timeout 5
 	sc delete %%i
+
+  if /i %%i==MediaServer (
+    echo Remove the following path from your system PATH environment variable:
+    echo %INSTALL_DIR%\MediaServer\libs\torch
+  )
 )
 
 rd /s /q %INSTALL_DIR%

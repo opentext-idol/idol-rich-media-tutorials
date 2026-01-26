@@ -7,7 +7,7 @@ pushd %~dp0
 
 set COMPONENTS=( LicenseServer, MediaServer )
 
-set VERSION=25.3.0
+set VERSION=25.4.0
 set INSTALL_BASE=C:\OpenText
 
 set SOURCE_DIR=%HOMEPATH%\Downloads
@@ -45,6 +45,11 @@ for %%i in %COMPONENTS% do (
   if /i %%i==LicenseServer (
     echo Copying license key file...
     copy /y %SOURCE_DIR%\%LICENSE_KEY% %INSTALL_DIR%\LicenseServer\licensekey.dat
+  )
+
+  if /i %%i==MediaServer (
+    echo Add the following path to your system PATH environment variable:
+    echo %INSTALL_DIR%\MediaServer\libs\torch
   )
 )
 

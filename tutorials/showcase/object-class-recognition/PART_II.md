@@ -1,6 +1,6 @@
 # PART II - Build a custom recognizer
 
-> WARNING: Object Class Recognizer building is not available in 25.3.  For instructions to import a model built with 25.2, see the [documentation](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/Content/Getting_Started/UpgradeDatabaseTorch.htm). The following instructions can be used with for your Media Server 25.2.
+> WARNING: Object Class Recognizer building is not available in 25.4.  For instructions to import a model built with 25.2, see the [documentation](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Getting_Started/UpgradeDatabaseTorch.htm). The following instructions can be used with for your Media Server 25.2.
 
 The pre-trained Object Class Recognizers that ship with Knowledge Discovery Media Server cover a broad range of objects; however, there may be occasions when you wish to work with additional classes of object.  
 
@@ -141,7 +141,7 @@ Recognizer = Workshop
 
 More options are available for the `ObjectClassRecognition` analysis engine, including setting the matching threshold and allowing multiple matches to be returned.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/ObjectClass/_ObjectClass.htm) for details.
 
-Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../setup/SETUP.md#obtaining-tutorial-materials):
+Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../README.md#obtaining-tutorial-materials):
 
 ```url
 action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/object-class-recognition/test/car.jpg&configName=tutorials/objectClassRecognition&[ObjectClassRecognition]Recognizer=Workshop

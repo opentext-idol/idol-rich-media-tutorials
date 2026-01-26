@@ -130,7 +130,7 @@ Input = FaceForward.Output
 
 > NOTE: The name of the event processing output track variant is always `Output`, *e.g.* `FaceForward.Output`.
 
-Many logical operators are available in addition to `Filter`, which include the capability to compare or combine records from multiple tracks. See the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/index.html#Configuration/ESP/ESP.htm) for more details.
+Many logical operators are available in addition to `Filter`, which include the capability to compare or combine records from multiple tracks. See the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/ESP/ESP.htm) for more details.
 
 Most of these operators provide additional flexibility through Lua scripts that allow you to create more complex logic.  Knowledge Discovery Media Server ships with a number of example scripts that can be found in the `configurations/lua` directory.  Here was have used the out-of-the-box `frontalFace.lua` script, which contains the following code
 
@@ -163,7 +163,7 @@ Click `Test Action` to start processing.
 
 ![clothing-region](./figs/clothing-region.png)
 
-Review the results with [`/action=GUI`](http://localhost:14000/a=gui#/monitor(tool:options)), then stop processing with [`stop`](http://localhost:14000/a=queueInfo&queueAction=stop&queueName=process).
+Review the processing with [`/action=GUI`](http://localhost:14000/a=gui#/monitor/processes(tool:options)), then stop processing with [`stop`](http://localhost:14000/a=queueInfo&queueAction=stop&queueName=process).
 
 ## Transformation and encoding
 
@@ -233,7 +233,7 @@ ImageInput = FaceDraw.Output
 OutputPath = output/faces2b/%record.startTime.timestamp%_overlay.png
 ```
 
-We can access parameter values from the alert record such as `startTime` using *macros* to generate the image `OutputPath`.  See the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.3/MediaServer_25.3_Documentation/Help/index.html#Configuration/Macros.htm) for details.
+We can access parameter values from the alert record such as `startTime` using *macros* to generate the image `OutputPath`.  See the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Macros.htm) for details.
 
 ### Run face image encoding
 
@@ -245,7 +245,7 @@ action=process&source=video%3DIntegrated%20Webcam&configName=tutorials/faceAnaly
 
 Click `Test Action` to start processing.
 
-Review the results with [`/action=GUI`](http://localhost:14000/a=gui#/monitor(tool:options)), then open the folder `output/faces2b` to see the encoded images. These images will be used in the face recognition module. Images will accumulate, so don't run for too long without stopping.
+Review the processing with [`/action=GUI`](http://localhost:14000/a=gui#/monitor/processes(tool:options)), then open the folder `output/faces2b` to see the encoded images. These images will be used in the face recognition module. Images will accumulate, so don't run for too long without stopping.
 
 Stop processing with [`stop`](http://localhost:14000/a=queueInfo&queueAction=stop&queueName=process).
 
@@ -328,7 +328,7 @@ action=process&source=video%3DIntegrated%20Webcam&configName=tutorials/faceAnaly
 
 Click `Test Action` to start processing.
 
-Review the results with [`/action=GUI`](http://localhost:14000/a=gui#/monitor(tool:options)), then open the folder `output/faces2c` to see the encoded videos.  Let this process run for long enough to allow a few `.mp4` files to be generated.
+Review the processing with [`/action=GUI`](http://localhost:14000/a=gui#/monitor/processes(tool:options)), then open the folder `output/faces2c` to see the encoded videos.  Let this process run for long enough to allow a few `.mp4` files to be generated.
 
 ![video-blur](./figs/video-blur.gif)
 
@@ -361,7 +361,7 @@ action=process&source=video%3DIntegrated%20Webcam&configName=tutorials/faceAnaly
 
 Click `Test Action` to start processing.
 
-Review the results with [`/action=GUI`](http://localhost:14000/a=gui#/monitor(tool:options)), then open your web browser to <http://localhost:3000/> to watch the stream.
+Review the processing with [`/action=GUI`](http://localhost:14000/a=gui#/monitor/processes(tool:options)), then open your web browser to <http://localhost:3000/> to watch the stream.
 
 ![video-draw](./figs/video-draw.gif)
 

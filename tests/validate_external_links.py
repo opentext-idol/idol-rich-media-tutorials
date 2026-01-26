@@ -41,10 +41,12 @@ for dir_path, dir_names, file_names in os.walk(".."):
         if "autonomy.com" in link: continue
         if "oauth2" in link: continue
         if ".m3u8" in link: continue
+        if "insecam.org" in link: continue
         
         count += 1
 
         try:
+          if verbose: print(f'TRY: {link}')
           x = requests.head(link)
           if verbose: print(f'{x.status_code}: {link}')
           if x.status_code == 200:

@@ -1,6 +1,6 @@
 # Install Python
 
-This is a setup guide for the popular scripting language `Python 3`, which is required for the [face recognition](../showcase/face-recognition/README.md) and [speech transcription](../showcase/speech-transcription/PART_I.md) tutorials.
+This is a setup guide for the popular scripting language `Python 3`, which is required for the [face recognition](../showcase/face-recognition/README.md) and [speech transcription](../showcase/speech-transcription/README.md) tutorials.
 
 ---
 

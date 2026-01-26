@@ -2,80 +2,241 @@
 
 Knowledge Discovery Media Server can be used to perform audio analytics, including speech transcription (often called Speech-to-Text), speaker identification and language identification.
 
-## *NEW* Model options
+In this tutorial we will:
 
-Knowledge Discovery's Speech-to-text can be run with multiple alternative models, which have their own strengths and weaknesses.
+1. configure a speech language pack and run speech transcription
+1. record video clips from a live stream
+1. use XSL transforms to re-format Knowledge Discovery Media Server output to create subtitles
 
-The "legacy" models use Convolutional Neural Networks, have the smallest hardware footprint and produce output very close to live from streaming audio.  Their accuracy level is not as high as the newer models out-of-the-box (see below) but can be significantly improved for specific use cases with custom language models (see [PART II](#part-ii---custom-language-models)).  The resulting transcript is a best attempt to map exactly what is spoken (including "ums" and "ahs").
+This guide assumes you have already familiarized yourself with Knowledge Discovery Media Server by completing the [introductory tutorial](../../README.md#introduction).
 
-The new STT models use Transformer-style Neural Networks, with a larger memory footprint and optional GPU acceleration.  Transformers have an Encoder that ingests the source audio, and one or more Decoders, which produce the output text transcript.
+If you want to start here, you must at least follow these [installation steps](../../setup/SETUP.md) before continuing.
 
-![transformer-stt](./figs/transformer-stt.png)
+---
 
-Because the audio is encoded in 30-second chunks, there is a built-in delay when processing live streams.
+- [Setup](#setup)
+  - [Third-party software](#third-party-software)
+  - [Configure speech transcription](#configure-speech-transcription)
+    - [Enabled modules](#enabled-modules)
+    - [Licensed channels](#licensed-channels)
+    - [GPU acceleration](#gpu-acceleration)
+    - [Language packs](#language-packs)
+- [Accuracy expectation and processing requirements](#accuracy-expectation-and-processing-requirements)
+- [Process configuration](#process-configuration)
+- [Process a news channel stream](#process-a-news-channel-stream)
+- [Working with "standard" XML output](#working-with-standard-xml-output)
+  - [Generate XML](#generate-xml)
+  - [(Optional) Convert XML to SRT with Python](#optional-convert-xml-to-srt-with-python)
+- [Next steps](#next-steps)
 
-The resulting transcripts are typically very clear, smooth and often without the "ums", "ahs" and repeated words of the real speech.  You could think of the output as text *inspired by* what is spoken and for that reason the transcripts are often preferred by human readers over the "legacy" model's more directly transcribed output.
+---
 
-### Accuracy impact
+## Setup
 
-The new models come in different sizes: `micro`, `small`, `medium` and `large`, with improving accuracy but increasingly large memory footprint and processing time.  As an example, for two of my own English sample videos, we see the following variation in accuracy (F1 score):
+### Third-party software
 
-Source description | Legacy / % | Micro / % | Small / % | Medium / %
---- | :---: | :---: | :---: | :---:
-Body-worn camera audio, very challenging quality | 26 | 52 | 60 | 62
-TV news, good quality audio but a very strong accent | 76 | 90 | 94 | 98
+Download and install [VLC player](http://www.videolan.org/vlc/) for video clip playback.
 
-### Processing requirements
+### Configure speech transcription
 
-The following tables show observed processing rate, CPU, RAM and GPU memory usage of the Media Server process for multiple runs over a set of sample audio files.
+Knowledge Discovery Media Server is separately licensed for visual and audio analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enabling-analytics).  To reconfigure Knowledge Discovery Media Server you must edit your `mediaserver.cfg` file.
 
-#### CPU-only
+#### Enabled modules
 
-Model | Processing rate | CPU / core-% | RAM / GB
+The `Modules` section is where we list the engines that will be available to Knowledge Discovery Media Server on startup.  Ensure that this list contains the module `speechtotext`:
+
+```ini
+[Modules]
+Enable=...,speechtotext,...
+```
+
+#### Licensed channels
+
+The `Channels` section is where we instruct Knowledge Discovery Media Server to request license seats from Knowledge Discovery License Server.  To enable speech transcription for this tutorial, you need to enable at least one channel of type *Audio*:
+
+```ini
+[Channels]
+...
+AudioChannels=1
+```
+
+> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart Knowledge Discovery Media Server.
+
+#### GPU acceleration
+
+If you are lucky enough to have access to a supported NVIDIA graphics card, you can accelerate certain analytics (including speech to text), as well as video ingest and encoding.  For details on support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Advanced/GPU.htm).
+
+#### Language packs
+
+Speech transcription language packs are distributed separately from the main Knowledge Discovery Media Server package.  To obtain a language pack, return to the [Software Licensing and Downloads](https://sld.microfocus.com/mysoftware/index) portal, then under the *Downloads* tab, select your product, product name and version from the dropdowns:
+
+![get-software](../../setup/figs/get-software.png)
+
+For this tutorial we will use the "Common" pack.  From the list of available files, select and download `MediaServerLanguagePack_25.4.0_COMMON.zip`:
+
+![get-common-lang-pack-zip](./figs/get-common-lang-pack-zip.png)
+
+Unzip the contents into Knowledge Discovery Media Server's `staticdata/speechtotext` directory, renaming the extracted folder to "Common", to give you:
+
+![speech-data-dir](./figs/speech-data-dir.png)
+
+> NOTE: This combined language pack enables transcription for all supported languages.  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Appendixes/SpeechLanguages.htm) for the complete list.
+
+## Accuracy expectation and processing requirements
+
+The speech models come in different sizes: `micro`, `small` and `medium`, as well as `large` for non-English languages. Larger models can offer improving accuracy but increasingly large memory footprint and processing time.  As an example, for two of my own English sample videos, we see the following variation in accuracy:
+
+Source accuracy (F1 score / %) | Micro | Small | Medium
 --- | :---: | :---: | :---:
-Legacy | 0.4 +/- 0.1 | 99 +/- 7 | 1.3 +/- 0.1
-Micro | 0.8 +/- 0.1 | 122 +/- 47 | 3.8 +/- 0.2
-Small | 2.2 +/- 0.2 | 107 +/- 18 | 11.3 +/- 0.4
-Medium | 6.3 +/- 0.1 | 105 +/- 14 | 26.5 +/- 0.8
-Large | 13.1 +/- 0.9 | 104 +/- 15 | 44.7 +/- 1.6
+Body-worn camera audio, very challenging quality | 52 | 60 | 62
+TV news, good quality audio but a very strong accent | 90 | 94 | 98
 
-> NOTE: Numbers are given as averages with standard deviation.  Processing rate is calculated as processing time divided by source duration.
+> NOTE: The [documentation site](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Getting_Started/SpeechToTextRequirements.htm) details the latest statistics for processing rate, CPU, RAM and GPU memory usage for each of these model options.
 
-Observe that CPU usage is similar for all models but the RAM required increases, as does the processing duration.
+## Process configuration
 
-#### With GPU-acceleration
+To ingest a video stream, we will include the following in our process configuration:
 
-Model | Processing rate | CPU / core-% | RAM / GB | GPU Memory / GB
---- | :---: | :---: | :---: | :---:
-Legacy | N/A | - | - | -
-Micro | 0.13 +/- 0.01 | 218 +/- 114 | 3.7 +/- 0.0 | 2.7 +/- 0.2
-Small | 0.18 +/- 0.02 | 150 +/- 85 | 7.0 +/- 0.2 | 7.6 +/- 0.8
-Medium | 0.32 +/- 0.02 | 114 +/- 47 | 15.0 +/- 0.4 | 17.1 +/- 1.6
-Large | 0.43 +/- 0.07 | 124 +/- 46 | 27.7 +/- 1.0 | 28.7 +/- 3.9
+```ini
+[Session]
+Engine0 = StreamIngest
 
-> NOTE: Numbers are given as averages with standard deviation.  Processing rate is calculated as processing time divided by source duration.
+[StreamIngest]
+Type = Video
+```
 
-With GPU acceleration enabled, processing duration is dramatically increased: all new models run faster or as fast as the "legacy" model does on CPU.  Also observe that CPU usage is more variable, that the RAM required is somewhat reduced, and is a similar quantity to the required GPU memory.  Given the huge footprint of the `large` model it is unlikely that it will be economical to use in production.
+> NOTE: The `Video` ingest engine is used for video and audio files as well as streams.  For full details, please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Configuration/Ingest/Libav/_Libav.htm).
 
-## PART I - Automatic Subtitles
+To run speech transcription, we will add the following settings:
 
-An introduction to speech transcription with Knowledge Discovery Media Server.
+```ini
+[SpeechToText]
+Type = SpeechToText
+LanguagePack = ENUK
+ModelVersion = Micro 
+SpeedBias = Live
+```
 
-Use Knowledge Discovery Media Server with it's new models to perform Speech-to-Text transcription on a live news broadcast stream to record video clips and generate subtitles for those clips.
+> NOTE: The parameter `SpeedBias` is set here to `Live` since we will soon be processing a live stream.  When processing files, I recommend setting `SpeedBias` to `6`.  For full details on configuring the *SpeechToText* analysis engine, please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm).
 
-Start [here](./PART_I.md).
+To view the results in a simple and standalone way, we will record the stream to video files and format the speech transcription output to generate subtitles for those clips.
 
-## PART II - Custom Language Models
+First we need to configure video encoding:
 
-Use Knowledge Discovery Media Server with it's legacy models and build a custom language model to improve speech transcription of a video discussing political affairs in Libya.
+```ini
+[VideoClips]
+Type = mpeg
+AudioProfile = mpeg4audio
+VideoProfile = mpeg4video_h264_360p
+MIMEType = video/mp4
+Segment = True
+SegmentDuration = 30s
+OutputPath = output/speechToText1/%session.token%/clip_%segment.sequence%.mp4
+UseTempFolder = True
+```
 
-Start [here](./PART_II.md).
+> NOTE: This is one suggested configuration for encoding.  For full options, please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Configuration/Encoding/MPEG/_Multiformat.htm).
 
-## PART III - Quantifying Transcript Accuracy
+Next we need to generate the subtitles.  This requires two steps:
 
-Use Knowledge Discovery Media Server to transcribe your speech as you read from a script.  Score your transcript to measure the accuracy of Speech-to-Text.
+1. segmenting the text into short chunks with the *TextSegmentation* analysis engine
+1. transforming the XML output into [SRT format](https://en.wikipedia.org/wiki/SubRip), *e.g.*
 
-Start [here](./PART_III.md).
+    ```txt
+    4
+    00:03:09,365 --> 00:03:13,034
+    It's like people only do these things because they can get paid.
+
+    5
+    00:03:12,117 --> 00:03:15,037
+    And that's just really sad.
+    ```
+
+    > [Wayne's World (1992) Quotes - IMDB](https://www.imdb.com/title/tt0105793/quotes/)
+
+To achieve all this, we need to add the following to our process configuration:
+
+```ini
+[TextSegmentation]
+Type = TextSegmentation
+Input = SpeechToText.Result
+MaximumDuration = 5s
+
+[SrtOutput]
+Type = XML
+Input = VideoClips.Proxy,TextSegmentation.Result
+Mode = Bounded
+EventTrack = VideoClips.Proxy
+OutputPath = output/speechToText1/%session.token%/clip_%segment.sequence%.srt
+XslTemplate = toSRT.xsl
+```
+
+We use using the *Bounded* output mode to bundle together all the text segments with the relevant video clip.  Please read the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Operations/Outputs/IndexingModes_BoundedEvent.htm), for details.
+
+## Process a news channel stream
+
+We will process the open stream from *Al Jazeera English*:
+
+``` url
+http://live-hls-web-aje.getaj.net/AJE/03.m3u8
+```
+
+Media Server looks for process configuration files in its `configurations` folder.  You have already created a sub folder there called `tutorials`.  Copy over all the `speechToText*.cfg` files from this lesson, so that we can use them.
+
+Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../README.md#obtaining-tutorial-materials):
+
+```url
+action=process&source=http://live-hls-web-aje.getaj.net/AJE/03.m3u8&configName=tutorials/speechToText1
+```
+
+![test-action](./figs/test-action.png)
+
+Click the `Test Action` button to start processing.  The video clip and srt file are produced every 30 seconds based on the `SegmentDuration` parameter.
+
+Review the processing with [`/action=GUI`](http://127.0.0.1:14000/a=gui#/monitor/processes(tool:options)), then go to `output/speechToText1` to see the video clips and associated subtitle files.
+
+Having ensured that the `.srt` file and the `.mp4` clip share the same filename in the above configuration, we can now simply open the clip in VLC player to view the time-aligned subtitles.
+
+![news-srt](./figs/news-srt.png)
+
+> NOTE: You will find the accuracy is typically excellent, even with the smallest `micro` model for English.  Also note that names of people and places are usually accurately transcribed.  These models predict sub-word "tokens", allowing them to "guess" at spellings of words that did not appear in their training data.
+
+Stop processing by clicking the `Stop Session` button in the GUI or with the [`stop`](http://127.0.0.1:14000/a=queueInfo&queueAction=stop&queueName=process) action.
+
+## Working with "standard" XML output
+
+In the above example, we used XSL transforms to convert records within Knowledge Discovery Media Server for output.  You can also of course output standard XML during processing and convert it as you like later.  
+
+### Generate XML
+
+First, let's generate some `.xml` output.  We will reprocess the same stream from *Al Jazeera English* with a modified config file `speechToText2.cfg`.
+
+Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../README.md#obtaining-tutorial-materials):
+
+```url
+action=process&source=http://live-hls-web-aje.getaj.net/AJE/03.m3u8&configName=tutorials/speechToText2
+```
+
+Click the `Test Action` button to start processing.  The video clips and `.xml` result files are produced every 30 seconds based on the `SegmentDuration` parameter.
+
+Review the processing with [`/action=GUI`](http://127.0.0.1:14000/a=gui#/monitor/processes(tool:options)), then go to `output/speechToText2` to see the video clips and associated subtitle files.
+
+Stop processing by clicking the `Stop Session` button in the GUI or with the [`stop`](http://127.0.0.1:14000/a=queueInfo&queueAction=stop&queueName=process) action.
+
+> NOTE: if you wish to produce both `.xml` and `.srt` at the same time, look at the commented lines at the bottom of the original `speechToText1.cfg` file.
+
+### (Optional) Convert XML to SRT with Python
+
+> NOTE: The included script depends on having `python` installed. Please follow these [instructions](../../setup/PYTHON.md) if you do not already have it on your system.
+
+Next, we will use the included python script `xml2srt.py` to convert one of the output `.xml` files, ready for playback in VLC.  To do so, *e.g.* on Windows, run the following commands:
+
+```cmd
+cd C:\OpenText\idol-rich-media-tutorials\tutorials\showcase\speech-transcription
+python xml2srt.py "C:\OpenText\IDOLServer-25.4.0\MediaServer\output\speechToText1\clip_1.xml"
+```
+
+This will produce a new file `clip_1.srt` in the same directory as the original `.xml` file.  As before, you can now open the video `clip_1.mp4` in VLC player to view the time-aligned subtitles.
 
 ## Next steps
 
