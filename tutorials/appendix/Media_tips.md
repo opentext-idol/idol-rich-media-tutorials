@@ -7,7 +7,6 @@ A collection of tips and tricks to support your future projects in image, video 
 - [Useful third-party software](#useful-third-party-software)
 - [Collecting sample media](#collecting-sample-media)
   - [Video file and streamed sources from the web](#video-file-and-streamed-sources-from-the-web)
-    - [Language variants](#language-variants)
     - [Resolution variants](#resolution-variants)
     - [Live YouTube channels](#live-youtube-channels)
   - [CCTV camera streams](#cctv-camera-streams)
@@ -63,7 +62,7 @@ There exist many free news streams on the web that you can connect to.  Often ne
 
 ![m3u8.png](./figs/m3u8.png)
 
-> NOTE: While Knowledge Discovery Media Server's Video ingest engine does support `https` on Windows, *it does not on Linux*.  Luckily, you can often change the URL protocol to `http` and it will still work, *e.g.* <https://live-hls-web-aje.getaj.net/AJE/03.m3u8> seen in the above screenshot can be safely changed to <http://live-hls-web-aje.getaj.net/AJE/03.m3u8>, as listed in the table below.
+> NOTE: While Knowledge Discovery Media Server's Video ingest engine does support `https` on Windows, *it does not on Linux*.  Luckily, you can often change the URL protocol to `http` and it will still work, *e.g.* <https://live-hls-web-aje-gcp.thehlive.com/AJE/03.m3u8> seen in the above screenshot can be safely changed to <http://live-hls-web-aje-gcp.thehlive.com/AJE/03.m3u8>, as listed in the table below.
 >
 > If your target stream does not support HTTP, you can use ffmpeg to restream the source for Media Server to ingest, as shown [below](#restream-videoaudio-from-a-live-youtube-channel).
 
@@ -71,25 +70,13 @@ The following streams were working at time of writing.
 
 Language | Broadcaster | Resolution | Link
 --- | --- | --- | ---
-Arabic | Al Jazeera | 960x540 | <http://live-hls-web-aja.getaj.net/AJA/03.m3u8>
-English | CBS News | 640x360 | <http://cbsn-us.cbsnstream.cbsnews.com/out/v1/55a8648e8f134e82a470f83d562deeca/master_11.m3u8>
-English | DW | 712x400 | <https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream02/streamPlaylist.m3u8>
-Spanish | RTVE 24h | 1024x576 | <https://rtvelivestream-clnx.rtve.es/rtvesec/24h/24h_main_576.m3u8>
+English | Al Jazeera | 960x540 | <http://live-hls-web-aje-gcp.thehlive.com/AJE/03.m3u8>
+English | DW | 640x360 | <https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream02/streamPlaylist.m3u8>
+Spanish | RTVE 24h | 1024x576 | <http://rtvelivestream.rtve.es/rtvesec/la2/la2_main_dvr_576.m3u8>
 
-These streams can be directly ingested by Knowledge Discovery Media Server using the the multi-purpose [Video](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  The easiest way to try this is with the [GUI Ingest Test page](http://localhost:14000/a=gui#/ingest):
+These streams can be directly ingested by Knowledge Discovery Media Server using the the multi-purpose [Video](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  The easiest way to try this is with the [GUI Ingest Test page](http://localhost:14000/a=gui#/ingest):
 
 ![ingest-test-stream](./figs/ingest-test-stream.png)
-
-#### Language variants
-
-For some channels, you can find alternative language streams:
-
-- Al Jazeera:
-
-    Stream | Resolution
-    --- | ---
-    <http://live-hls-web-aja.getaj.net/AJA/03.m3u8> | Arabic
-    <http://live-hls-web-aje.getaj.net/AJE/03.m3u8> | English
 
 #### Resolution variants
 
@@ -99,21 +86,11 @@ Some channels have multiple streams with different quality, which may be easy to
 
     Stream | Resolution
     --- | ---
-    <http://live-hls-web-aje.getaj.net/AJE/01.m3u8> | 1920x1080
-    <http://live-hls-web-aje.getaj.net/AJE/02.m3u8> | 1280x720
-    <http://live-hls-web-aje.getaj.net/AJE/03.m3u8> | 960x540
-    <http://live-hls-web-aje.getaj.net/AJE/04.m3u8> | 746x420
-    <http://live-hls-web-aje.getaj.net/AJE/05.m3u8> | 640x360
-
-- Deutsche Welle English:
-
-    Stream | Resolution
-    --- | ---
-    <https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream01/streamPlaylist.m3u8> | 640x360
-    <https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream02/streamPlaylist.m3u8> | 712x400
-    <https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream03/streamPlaylist.m3u8> | 1024x576
-    <https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream04/streamPlaylist.m3u8> | 1280x720
-    <https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream05/streamPlaylist.m3u8> | 1920x1080
+    <http://live-hls-web-aje-gcp.thehlive.com/AJE/01.m3u8> | 1920x1080
+    <http://live-hls-web-aje-gcp.thehlive.com/AJE/02.m3u8> | 1280x720
+    <http://live-hls-web-aje-gcp.thehlive.com/AJE/03.m3u8> | 960x540
+    <http://live-hls-web-aje-gcp.thehlive.com/AJE/04.m3u8> | 746x420
+    <http://live-hls-web-aje-gcp.thehlive.com/AJE/05.m3u8> | 640x360
 
 > TIP: There are also good third-party lists of IPTV streams on the web, *e.g.* <https://iptv-org.github.io/>.
 
@@ -127,9 +104,8 @@ Chinese | TVBS NEWS | <https://www.youtube.com/watch?v=m_dhMSvUCIc>
 French | France 24 | <https://www.youtube.com/watch?v=l8PMl7tUDIE>
 Japanese | ANN News | <https://www.youtube.com/watch?v=coYw-eVU0Ks>
 Hindi | NDTV | <https://www.youtube.com/watch?v=MN8p-Vrn6G0>
-Spanish | Milenio TV | <https://www.youtube.com/watch?v=xIfl74SFiDA>
-Turkish | CNN | <https://www.youtube.com/watch?v=Ue9SnIpwNB4>
-Ukrainian | 112 Украина | <https://www.youtube.com/watch?v=EITCN6MhNbY>
+Spanish | Milenio TV | <https://www.youtube.com/watch?v=tQ941SU5UR0>
+Turkish | CNN | <https://www.youtube.com/watch?v=6N8_r2uwLEc>
 
 These urls __*cannot*__ be directly ingested by Knowledge Discovery Media Server however, YouTube also provides HLS index `.m3u8` files, which __*can*__ be ingested as described [below](#record-videoaudio-from-a-live-youtube-channel).
 
@@ -155,12 +131,12 @@ Pelco | `rtsp://<IP>/stream1`
 
 As with the Bosch connection example above, some cameras also expose configuration parameters in the URL.Most cameras will need to be configured via an embedded web configuration UI, similar to what you have on your internet router at home.  This UI will be accessible at `http://IP:80/`, where `IP` is again the IP address (or hostname) of the camera.
 
-Knowledge Discovery Media Server can connect directly to these RTSP streams if you configure the multi-purpose [Video](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  Knowledge Discovery Media Server also includes the following additional ingest engines to support alternative stream types:
+Knowledge Discovery Media Server can connect directly to these RTSP streams if you configure the multi-purpose [Video](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  Knowledge Discovery Media Server also includes the following additional ingest engines to support alternative stream types:
 
-- [MJPEG](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Ingest/MJPEG/_MJPEG.htm): for cameras supporting motion Jpeg streaming
-- [MxPEG](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Ingest/MXPEG/_MXPEG.htm): for [Mobotix](https://www.mobotix.com/en/mxpeg) cameras
-- [Genetec](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Ingest/Genetec/_Genetec.htm): to connect to any camera already integrated into the Genetec Security Center Video Management System (VMS)
-- [Milestone](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm): to connect to any camera already integrated into the Milestone XProtect VMS
+- [MJPEG](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Ingest/MJPEG/_MJPEG.htm): for cameras supporting motion Jpeg streaming
+- [MxPEG](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Ingest/MXPEG/_MXPEG.htm): for [Mobotix](https://www.mobotix.com/en/mxpeg) cameras
+- [Genetec](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Ingest/Genetec/_Genetec.htm): to connect to any camera already integrated into the Genetec Security Center Video Management System (VMS)
+- [Milestone](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Ingest/Milestone/_Milestone.htm): to connect to any camera already integrated into the Milestone XProtect VMS
 
 The easiest way to try this is with the [GUI Ingest Test page](http://localhost:14000/a=gui#/ingest):
 
@@ -321,14 +297,14 @@ ffmpeg -i in.mp4 -vcodec copy -an out.mp4
 
 ### Video streams
 
-> TIP: When working with external streams be aware that they may sometimes drop out.  To help with this, Media Server's *Video* type ingest engine includes a configurable [StreamTimeout](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Configuration/Ingest/Libav/StreamTimeout.htm) to control how long you want to wait before giving up the process.  Additionally, the process action itself has a [Persist](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Actions/VideoAnalysis/parameters/Persist.htm) option, which instructs Media Server to retry processing a stream automatically if it does time out.
+> TIP: When working with external streams be aware that they may sometimes drop out.  To help with this, Media Server's *Video* type ingest engine includes a configurable [StreamTimeout](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Configuration/Ingest/Libav/StreamTimeout.htm) to control how long you want to wait before giving up the process.  Additionally, the process action itself has a [Persist](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Actions/VideoAnalysis/parameters/Persist.htm) option, which instructs Media Server to retry processing a stream automatically if it does time out.
 
 #### Test availability of an IP stream
 
 With ffmpeg, you also get an executable called `ffplay`. From the command line you can ingest, *e.g.* this HLS stream:
 
 ```sh
-ffplay http://live-hls-web-aje.getaj.net/AJE/03.m3u8
+ffplay http://live-hls-web-aje-gcp.thehlive.com/AJE/03.m3u8
 ```
 
 This executable uses the same underlying libraries as Knowledge Discovery Media Server. So, if you can play with this, it is highly likely you can ingest with Knowledge Discovery Media Server.
@@ -338,7 +314,7 @@ This executable uses the same underlying libraries as Knowledge Discovery Media 
 From the command line, *e.g.* to record a five minute clip:
 
 ```sh
-ffmpeg -i http://live-hls-web-aje.getaj.net/AJE/03.m3u8 -t 300 clip-5mins.mp4
+ffmpeg -i http://live-hls-web-aje-gcp.thehlive.com/AJE/03.m3u8 -t 300 clip-5mins.mp4
 ```
 
 From the command line, *e.g.* to record from a CCTV camera's RTSP stream in five minute chunks, maintaining the original video encoding:
@@ -544,7 +520,7 @@ To view this stream in `ffmpeg`, from the command line:
 ffplay udp://239.255.1.4:1234
 ```
 
-These streams can be directly ingested by Knowledge Discovery Media Server using the the multi-purpose [Video](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  The easiest way to try this is with the [GUI Ingest Test page](http://localhost:14000/a=gui#/ingest):
+These streams can be directly ingested by Knowledge Discovery Media Server using the the multi-purpose [Video](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm) type ingest engine.  The easiest way to try this is with the [GUI Ingest Test page](http://localhost:14000/a=gui#/ingest):
 
 ![ingest-test-stream-restream](./figs/ingest-test-stream-restream.png)
 

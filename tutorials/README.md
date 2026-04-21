@@ -59,7 +59,7 @@ Your Windows laptop will need at least the following spare capacity:
 
 - 8 cores, 16 GB RAM and 50GB free disk space.
 
-> NOTE: Sizing Knowledge Discovery Media Server for your own production tasks depends greatly on your use case, as discussed [later in these tutorials](./showcase/face-recognition/README.md#hardware-requirements).  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Getting_Started/Install_Run/System_Requirements.htm) for more details and discuss your needs with your OpenText account manager.
+> NOTE: Sizing Knowledge Discovery Media Server for your own production tasks depends greatly on your use case, as discussed [later in these tutorials](./showcase/face-recognition/README.md#hardware-requirements).  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Getting_Started/Install_Run/System_Requirements.htm) for more details and discuss your needs with your OpenText account manager.
 
 You must be running 64-bit Windows or Linux. This guide has been most recently tested on Windows 11 and Ubuntu 22.04.
 
@@ -113,6 +113,6 @@ When Knowledge Discovery Media Server is used in OEM, communication requires the
 ### Links
 
 - Full administration guides are available for all Knowledge Discovery products [here](https://www.microfocus.com/documentation/idol/).
-- Read more tips on working with Knowledge Discovery products in [Knowledge Discovery Expert](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/IDOLServer_25.4_Documentation/Guides/html/expert/Content/IDOLExpert_Welcome.htm).
-- For details of the latest changes to Knowledge Discovery Media Server, please see the [Release Notes](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/IDOLReleaseNotes_25.4_Documentation/idol/Content/Servers/MediaServer.htm).
+- Read more tips on working with Knowledge Discovery products in [Knowledge Discovery Expert](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/Content_26.2_Documentation/Guides/Expert/index.html).
+- For details of the latest changes to Knowledge Discovery Media Server, please see the [Release Notes](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/IDOLReleaseNotes_26.2_Documentation/idol/Content/Servers/MediaServer.htm).
 - To learn more about Knowledge Discovery Media Server and other Knowledge Discovery products, visit [opentext.com/idol](https://www.opentext.com/products/knowledge-discovery).

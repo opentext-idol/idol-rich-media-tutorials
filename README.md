@@ -2,7 +2,7 @@
 
 A set of guides to get you doing great things with Knowledge Discovery Media Server!
 
-For details of the latest changes to Knowledge Discovery Media Server in version 25.4, please see the [Release Notes](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/IDOLReleaseNotes_25.4_Documentation/idol/Content/Servers/MediaServer.htm).
+For details of the latest changes to Knowledge Discovery Media Server in version 26.2, please see the [Release Notes](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/IDOLReleaseNotes_26.2_Documentation/idol/Content/Servers/MediaServer.htm).
 
 ## Target audience
 

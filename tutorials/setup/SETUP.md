@@ -39,7 +39,7 @@ You can obtain software and licenses from the [Software Licensing and Downloads]
 
     ![get-license](./figs/get-license.png)
 
-1. On the "License Activation" screen, at the bottom, select the check box, choose your preferred version (the latest is 25.4), then fill in the quantity to activate:
+1. On the "License Activation" screen, at the bottom, select the check box, choose your preferred version (the latest is 26.2), then fill in the quantity to activate:
 
    ![eSoftware-selectLicense](./figs/eSoftware-selectLicense.png)
 
@@ -84,8 +84,8 @@ Follow [these steps](./INSTALL_ZIPS.md) for a scripted installation of Knowledge
 
 If you used the scripts without altering them, your installed software will be in:
 
-- `C:\OpenText\IDOLServer-25.4.0` (Windows)
-- `~/IDOLServer-25.4.0` (Linux)
+- `C:\OpenText\IDOLServer-26.2.0` (Windows)
+- `~/IDOLServer-26.2.0` (Linux)
 
 Each installed Knowledge Discovery component will have its own sub-directory, which includes all required executables, dependencies and configuration files.  The primary configuration file for each shares the name of the component executable, *e.g.* `mediaserver.cfg` for `mediaserver.exe`.
 
@@ -107,5 +107,5 @@ Next start up Knowledge Discovery Media Server in the same way and verify it is 
 The admin guides for all components can be accessed from these links:
 
 - [Knowledge Discovery documentation home page](https://www.microfocus.com/documentation/idol/)
-- [License Server admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/LicenseServer_25.4_Documentation/Help/Content/_FT_SideNav_Startup.htm)
-- [Media Server admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/_FT_SideNav_Startup.htm)
+- [License Server admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/LicenseServer_26.2_Documentation/Help/Content/_FT_SideNav_Startup.htm)
+- [Media Server admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/_FT_SideNav_Startup.htm)

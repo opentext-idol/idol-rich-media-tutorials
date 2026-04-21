@@ -42,7 +42,7 @@ Custom classifiers on the other hand, are most often used not to label but to pi
 
 > NOTE: This short list gives a flavor of the real-world problems have been successfully addressed with Media Server's Image Classification in recent years.
 
-Knowledge Discovery Media Server training can be performed through its web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Actions/Training/_TrainingActions.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
+Knowledge Discovery Media Server training can be performed through its web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Actions/Training/_TrainingActions.htm).  For smaller projects, demos and testing, you may find it easier to use the [`GUI`](http://localhost:14000/a=gui) web interface.
 
 ### Collect sample training images
 
@@ -84,7 +84,7 @@ When selecting images to exemplify a class, make sure they are:
 
 ### Add training images
 
-Open the Knowledge Discovery Media Server [`gui`](http://localhost:14000/a=gui#/train/imageClass(tool:select)), then follow these steps to upload your class training images:
+Open the Knowledge Discovery Media Server [`GUI`](http://localhost:14000/a=gui#/visual/imageClass(tool:select)), then follow these steps to upload your class training images:
 
 1. at the top right, check that the analytic *Image Classification* is selected
 1. in the left column, click `Create` to add a new *classifier* (a collection of *classes*)
@@ -102,7 +102,7 @@ Open the Knowledge Discovery Media Server [`gui`](http://localhost:14000/a=gui#/
 
 Image classification uses Convolutional Neural Network (CNN) classifiers. A CNN classifier usually produces more accurate results than other types of classifier, but can require a significant amount of time to train.
 
-> NOTE: For this lesson we have only a small number of images, so training with CPU can be done in a manageable time; however, in general it is *strongly recommended* to utilize GPU acceleration for training.  For details on GPU support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Advanced/GPU.htm).
+> NOTE: For this lesson we have only a small number of images, so training with CPU can be done in a manageable time; however, in general it is *strongly recommended* to utilize GPU acceleration for training.  For details on GPU support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Advanced/GPU.htm).
 
 The time required to train a classifier is proportional to the number of training iterations.  Increasing the number of iterations can result in better accuracy, but running too many iterations may result in over-fitting.
 
@@ -112,7 +112,7 @@ Back in the GUI, on the bottom right of the list of classes, click the "Options"
 
 ![build-classifier-options](./figs/build-classifier-options.png)
 
-> NOTE: For details on available training options, please read the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Actions/Training/SetClassifierTrainingOption.htm).
+> NOTE: For details on available training options, please read the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Actions/Training/SetClassifierTrainingOption.htm).
 
 Click "Apply" to set your change.  Now we're ready to click `Build`.
 
@@ -128,7 +128,7 @@ Type = ImageClassification
 Classifier = Workshop
 ```
 
-> NOTE: More options are available for the *Image Classification* analysis engine, including setting the matching threshold and allowing multiple matches to be returned.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Configuration/Analysis/ImageClass/_ImageClassification.htm) for details.
+> NOTE: More options are available for the *Image Classification* analysis engine, including setting the matching threshold and allowing multiple matches to be returned.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Configuration/Analysis/ImageClass/_ImageClassification.htm) for details.
 
 Media Server looks for process configuration files in its `configurations` folder.  You have already created a sub folder there called `tutorials`.  Copy over the `imageClassification.cfg` file from this lesson.
 
@@ -138,7 +138,7 @@ Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=adm
 action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/image-classification/test/interview.jpg&configName=tutorials/imageClassification&[ImageClassificationEngine]Classifier=Workshop
 ```
 
-> NOTE: Ensure that you have configured Media Server to read files from this source directory, as described in the [introduction](../../introduction/PART_I.md#enabling-file-access).
+> NOTE: Ensure that you have configured Media Server to read files from this source directory, as described in the [introduction](../../introduction/PART_I.md#file-access).
 
 Click `Test Action` to start processing.
 
@@ -171,7 +171,7 @@ By setting aside some of your training images for evaluation purposes, you can t
 
 You can then select the best performing snapshot to "publish" and therefore avoid over-fitting.
 
-> NOTE: For full details, please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Training/ImageClass_CreateClassifier.htm).
+> NOTE: For full details, please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Operations/Analyze/ImageClass_ImageGuide.htm).
 
 ### Retrain with snapshots
 

@@ -39,7 +39,7 @@ Download and install [VLC player](http://www.videolan.org/vlc/) for video clip p
 
 ### Configure speech transcription
 
-Knowledge Discovery Media Server is separately licensed for visual and audio analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enabling-analytics).  To reconfigure Knowledge Discovery Media Server you must edit your `mediaserver.cfg` file.
+Knowledge Discovery Media Server is separately licensed for visual and audio analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enablement-notes).  To reconfigure Knowledge Discovery Media Server you must edit your `mediaserver.cfg` file.
 
 #### Enabled modules
 
@@ -64,7 +64,7 @@ AudioChannels=1
 
 #### GPU acceleration
 
-If you are lucky enough to have access to a supported NVIDIA graphics card, you can accelerate certain analytics (including speech to text), as well as video ingest and encoding.  For details on support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Advanced/GPU.htm).
+If you are lucky enough to have access to a supported NVIDIA graphics card, you can accelerate certain analytics (including speech to text), as well as video ingest and encoding.  For details on support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Advanced/GPU.htm).
 
 #### Language packs
 
@@ -72,7 +72,7 @@ Speech transcription language packs are distributed separately from the main Kno
 
 ![get-software](../../setup/figs/get-software.png)
 
-For this tutorial we will use the "Common" pack.  From the list of available files, select and download `MediaServerLanguagePack_25.4.0_COMMON.zip`:
+For this tutorial we will use the "Common" pack.  From the list of available files, select and download `MediaServerLanguagePack_26.2.0_COMMON.zip`:
 
 ![get-common-lang-pack-zip](./figs/get-common-lang-pack-zip.png)
 
@@ -80,7 +80,7 @@ Unzip the contents into Knowledge Discovery Media Server's `staticdata/speechtot
 
 ![speech-data-dir](./figs/speech-data-dir.png)
 
-> NOTE: This combined language pack enables transcription for all supported languages.  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Appendixes/SpeechLanguages.htm) for the complete list.
+> NOTE: This combined language pack enables transcription for all supported languages.  Please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Appendixes/SpeechLanguages.htm) for the complete list.
 
 ## Accuracy expectation and processing requirements
 
@@ -91,7 +91,7 @@ Source accuracy (F1 score / %) | Micro | Small | Medium
 Body-worn camera audio, very challenging quality | 52 | 60 | 62
 TV news, good quality audio but a very strong accent | 90 | 94 | 98
 
-> NOTE: The [documentation site](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Getting_Started/SpeechToTextRequirements.htm) details the latest statistics for processing rate, CPU, RAM and GPU memory usage for each of these model options.
+> NOTE: The [documentation site](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Getting_Started/SpeechToTextRequirements.htm) details the latest statistics for processing rate, CPU, RAM and GPU memory usage for each of these model options.
 
 ## Process configuration
 
@@ -105,7 +105,7 @@ Engine0 = StreamIngest
 Type = Video
 ```
 
-> NOTE: The `Video` ingest engine is used for video and audio files as well as streams.  For full details, please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Configuration/Ingest/Libav/_Libav.htm).
+> NOTE: The `Video` ingest engine is used for video and audio files as well as streams.  For full details, please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Configuration/Ingest/Libav/_Libav.htm).
 
 To run speech transcription, we will add the following settings:
 
@@ -117,7 +117,7 @@ ModelVersion = Micro
 SpeedBias = Live
 ```
 
-> NOTE: The parameter `SpeedBias` is set here to `Live` since we will soon be processing a live stream.  When processing files, I recommend setting `SpeedBias` to `6`.  For full details on configuring the *SpeechToText* analysis engine, please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm).
+> NOTE: The parameter `SpeedBias` is set here to `Live` since we will soon be processing a live stream.  When processing files, I recommend setting `SpeedBias` to `6`.  For full details on configuring the *SpeechToText* analysis engine, please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Analysis/SpeechToText/_SpeechToText.htm).
 
 To view the results in a simple and standalone way, we will record the stream to video files and format the speech transcription output to generate subtitles for those clips.
 
@@ -135,7 +135,7 @@ OutputPath = output/speechToText1/%session.token%/clip_%segment.sequence%.mp4
 UseTempFolder = True
 ```
 
-> NOTE: This is one suggested configuration for encoding.  For full options, please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Configuration/Encoding/MPEG/_Multiformat.htm).
+> NOTE: This is one suggested configuration for encoding.  For full options, please refer to the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Configuration/Encoding/MPEG/_Multiformat.htm).
 
 Next we need to generate the subtitles.  This requires two steps:
 
@@ -171,7 +171,7 @@ OutputPath = output/speechToText1/%session.token%/clip_%segment.sequence%.srt
 XslTemplate = toSRT.xsl
 ```
 
-We use using the *Bounded* output mode to bundle together all the text segments with the relevant video clip.  Please read the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Operations/Outputs/IndexingModes_BoundedEvent.htm), for details.
+We use using the *Bounded* output mode to bundle together all the text segments with the relevant video clip.  Please read the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Operations/Outputs/IndexingModes_BoundedEvent.htm), for details.
 
 ## Process a news channel stream
 
@@ -233,7 +233,7 @@ Next, we will use the included python script `xml2srt.py` to convert one of the 
 
 ```cmd
 cd C:\OpenText\idol-rich-media-tutorials\tutorials\showcase\speech-transcription
-python xml2srt.py "C:\OpenText\IDOLServer-25.4.0\MediaServer\output\speechToText1\clip_1.xml"
+python xml2srt.py "C:\OpenText\IDOLServer-26.2.0\MediaServer\output\speechToText1\clip_1.xml"
 ```
 
 This will produce a new file `clip_1.srt` in the same directory as the original `.xml` file.  As before, you can now open the video `clip_1.mp4` in VLC player to view the time-aligned subtitles.

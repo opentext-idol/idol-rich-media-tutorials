@@ -29,7 +29,7 @@ If you want to start here, you must at least follow these [installation steps](.
 
 ### Configure Knowledge Discovery Media Server
 
-Knowledge Discovery Media Server must be licensed for visual analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enabling-analytics).  To reconfigure Knowledge Discovery Media Server you must edit your `mediaserver.cfg` file.
+Knowledge Discovery Media Server must be licensed for visual analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enablement-notes).  To reconfigure Knowledge Discovery Media Server you must edit your `mediaserver.cfg` file.
 
 #### Enabled modules
 
@@ -56,7 +56,7 @@ VisualChannels=1
 
 OpenText provides a set of pre-defined training packs for Knowledge Discovery Media Server, including image classifiers. Knowledge Discovery Media Server also allows you to train your own classifiers by uploading and labelling your own images.
 
-That training can be performed through Knowledge Discovery Media Server's web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Actions/Training/_ImageClassification.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
+That training can be performed through Knowledge Discovery Media Server's web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Actions/Training/_ImageClassification.htm).  For smaller projects, demos and testing, you may find it easier to use the [`GUI`](http://localhost:14000/a=gui) web interface.
 
 ### Import pre-defined classifiers
 
@@ -66,11 +66,11 @@ Pre-trained *Image Classification* packages are distributed separately from the 
 
     ![get-software](../../setup/figs/get-software.png)
 
-1. From the list of available files, select and download `MediaServerPretrainedModels_25.4.0_COMMON.zip`.
+1. From the list of available files, select and download `MediaServerPretrainedModels_26.2.0_COMMON.zip`.
 
     ![get-pretrained-zip](../../setup/figs/get-pretrained-zip.png)
 
-Extract the training pack `.zip` then, to load one of the classifiers, open the Knowledge Discovery Media Server GUI at [`/action=gui`](http://127.0.0.1:14000/a=gui#/train/imageClass(tool:select)) and follow these steps:
+Extract the training pack `.zip` then, to load one of the classifiers, open the Knowledge Discovery Media Server GUI at [`/action=gui`](http://127.0.0.1:14000/a=gui#/visual/imageClass(tool:select)) and follow these steps:
 
 1. in the left column, click `Import`
 1. navigate to your extracted training pack and select `ImageClassifier_Imagenet.dat`
@@ -111,7 +111,7 @@ To analyze an image file, include the following engines:
 
     ![config-classifier](./figs/config-classifier.png)
 
-    > NOTE: For full details on this and other available options for *Image Classification*, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Analysis/ImageClass/_ImageClassification.htm).
+    > NOTE: For full details on this and other available options for *Image Classification*, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Analysis/ImageClass/_ImageClassification.htm).
 
 1. Let's output the results to disk.  Add the "XML"-type output engine to do that:
 

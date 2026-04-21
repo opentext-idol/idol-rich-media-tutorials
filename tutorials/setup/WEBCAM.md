@@ -128,7 +128,7 @@ To apply these device settings in Knowledge Discovery Media Server, add the foll
 + VideoSize = 1280x720
 ```
 
-> NOTE: More options are available for the `Video`-type ingest engine.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm).
+> NOTE: More options are available for the `Video`-type ingest engine.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm).
 
 ### Connectivity problems
 

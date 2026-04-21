@@ -49,38 +49,41 @@ You can see that the output from one analysis engine is fed to another by settin
 This is only *allowed* if the data output from the upstream engine contains the information required by the downstream engine, *i.e.* contains the same data types.  To list the input and output track data types, use the [`listEngines`](http://localhost:14000/a=ListEngines) action, which returns, *e.g.* for `FaceDetect` and `Demographics`, the following information:
 
 ```xml
+...
 <engine>
   <type>FaceDetect</type>
-  <input name="Input" type="ImageData"/>
-  <output name="Data" type="CustomData,FaceData,RegionData,UUIDData" isOutput="false"/>
-  <output name="DataWithSource" type="CustomData,ImageData,FaceData,RegionData,UUIDData" isOutput="false"/>
-  <output name="Result" type="CustomData,FaceData,RegionData,UUIDData" isOutput="true"/>
-  <output name="ResultWithSource" type="CustomData,ImageData,FaceData,RegionData,UUIDData" isOutput="false"/>
-  <output name="Start" type="CustomData,FaceData,RegionData,UUIDData" isOutput="false"/>
-  <output name="End" type="CustomData,FaceData,RegionData,UUIDData" isOutput="false"/>
-  <output name="SegmentedResult" type="CustomData,FaceData,RegionData,UUIDData" isOutput="true"/>
-  <output name="SegmentedResultWithSource" type="CustomData,ImageData,FaceData,RegionData,UUIDData" isOutput="false"/>
-  <output name="Event" type="CustomData,UUIDData,TrackingEventData" isOutput="true"/>
+  <input name="Input" type="ImageData" minOccurs="1" maxOccurs="1"/>
+  <output name="Data" type="CustomData,UUIDData,ParentIDData,RegionData,FaceData" isOutput="false"/>
+  <output name="DataWithSource" type="CustomData,ImageData,UUIDData,ParentIDData,RegionData,FaceData" isOutput="false"/>
+  <output name="Result" type="CustomData,UUIDData,ParentIDData,RegionData,FaceData" isOutput="true"/>
+  <output name="ResultWithSource" type="CustomData,ImageData,UUIDData,ParentIDData,RegionData,FaceData" isOutput="false"/>
+  <output name="Start" type="CustomData,UUIDData,ParentIDData,RegionData,FaceData" isOutput="false"/>
+  <output name="End" type="CustomData,UUIDData,ParentIDData,RegionData,FaceData" isOutput="false"/>
+  <output name="SegmentedResult" type="CustomData,UUIDData,ParentIDData,RegionData,FaceData" isOutput="true"/>
+  <output name="SegmentedResultWithSource" type="CustomData,ImageData,UUIDData,ParentIDData,RegionData,FaceData" isOutput="false"/>
+  <output name="AlignedImageResult" type="CustomData,ImageData,UUIDData" isOutput="false"/>
 </engine>
+...
 <engine>
   <type>Demographics</type>
-  <input name="Input" type="ImageData,FaceData,RegionData,UUIDData"/>
-  <output name="Data" type="CustomData,FaceData,RegionData,UUIDData" isOutput="false"/>
-  <output name="DataWithSource" type="CustomData,ImageData,FaceData,RegionData,UUIDData" isOutput="false"/>
-  <output name="Result" type="CustomData,FaceData,RegionData,UUIDData" isOutput="true"/>
-  <output name="ResultWithSource" type="CustomData,ImageData,FaceData,RegionData,UUIDData" isOutput="false"/>
-  <output name="SegmentedResult" type="CustomData,FaceData,RegionData,UUIDData" isOutput="true"/>
-  <output name="SegmentedResultWithSource" type="CustomData,ImageData,FaceData,RegionData,UUIDData" isOutput="false"/>
+  <input name="Input" type="ImageData,UUIDData,RegionData,FaceData" minOccurs="1" maxOccurs="1"/>
+  <output name="Data" type="CustomData,UUIDData,RegionData,FaceData" isOutput="false"/>
+  <output name="DataWithSource" type="CustomData,ImageData,UUIDData,RegionData,FaceData" isOutput="false"/>
+  <output name="Result" type="CustomData,UUIDData,RegionData,FaceData" isOutput="true"/>
+  <output name="ResultWithSource" type="CustomData,ImageData,UUIDData,RegionData,FaceData" isOutput="false"/>
+  <output name="SegmentedResult" type="CustomData,UUIDData,RegionData,FaceData" isOutput="true"/>
+  <output name="SegmentedResultWithSource" type="CustomData,ImageData,UUIDData,RegionData,FaceData" isOutput="false"/>
 </engine>
+...
 ```
 
 You can see that `Demographics` requires `ImageData`, `FaceData`, `RegionData` and `UUIDData` as inputs.  Hence, in our process configuration we are allowed to pass the `ResultWithSource` output from face detection as input to demographics because it includes all of the required data types (as well as `CustomData`, which is a catch-all term for any analysis-specific properties).
 
 In our next test we will chain the following analytics together:
 
-- Face detection &rarr; Face demographics
-- Face detection &rarr; Face state
-- Face detection &rarr; Clothing detection &rarr; Color Analysis
+- Face detection --> Face demographics
+- Face detection --> Face state
+- Face detection --> Clothing detection --> Color Analysis
 
 ### Controlling event rates
 
@@ -130,7 +133,7 @@ Input = FaceForward.Output
 
 > NOTE: The name of the event processing output track variant is always `Output`, *e.g.* `FaceForward.Output`.
 
-Many logical operators are available in addition to `Filter`, which include the capability to compare or combine records from multiple tracks. See the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/ESP/ESP.htm) for more details.
+Many logical operators are available in addition to `Filter`, which include the capability to compare or combine records from multiple tracks. See the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/ESP/ESP.htm) for more details.
 
 Most of these operators provide additional flexibility through Lua scripts that allow you to create more complex logic.  Knowledge Discovery Media Server ships with a number of example scripts that can be found in the `configurations/lua` directory.  Here was have used the out-of-the-box `frontalFace.lua` script, which contains the following code
 
@@ -233,7 +236,7 @@ ImageInput = FaceDraw.Output
 OutputPath = output/faces2b/%record.startTime.timestamp%_overlay.png
 ```
 
-We can access parameter values from the alert record such as `startTime` using *macros* to generate the image `OutputPath`.  See the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Macros.htm) for details.
+We can access parameter values from the alert record such as `startTime` using *macros* to generate the image `OutputPath`.  See the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Macros.htm) for details.
 
 ### Run face image encoding
 
@@ -367,7 +370,7 @@ Review the processing with [`/action=GUI`](http://localhost:14000/a=gui#/monitor
 
 Stop processing with [`stop`](http://localhost:14000/a=queueInfo&queueAction=stop&queueName=process).
 
-> NOTE: This is exactly the same process that was used *under the hood* in [this guide](../setup/WEBCAM.md) when testing your webcam connectivity using the Knowledge Discovery Media Server user interface [`gui`](http://localhost:14000/a=gui#/ingest).
+> NOTE: This is exactly the same process that was used *under the hood* in [this guide](../setup/WEBCAM.md) when testing your webcam connectivity using the Knowledge Discovery Media Server user interface [`GUI`](http://localhost:14000/a=gui#/ingest).
 
 ## PART III - Face recognition
 

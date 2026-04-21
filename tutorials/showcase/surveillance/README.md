@@ -41,7 +41,7 @@ If you want to start here, you must at least follow these [installation steps](.
 
 ### Import object class recognizer
 
-Knowledge Discovery Media Server must be licensed for visual analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enabling-analytics).  To reconfigure Knowledge Discovery Media Server you must edit your `mediaserver.cfg` file.
+Knowledge Discovery Media Server must be licensed for visual analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enablement-notes).  To reconfigure Knowledge Discovery Media Server you must edit your `mediaserver.cfg` file.
 
 #### Enabled modules
 
@@ -81,18 +81,18 @@ Pre-trained *Object Class Recognition* recognizers are distributed separately fr
 
     ![get-software](../../setup/figs/get-software.png)
 
-1. From the list of available files, select and download `MediaServerPretrainedModels_25.4.0_COMMON.zip`.
+1. From the list of available files, select and download `MediaServerPretrainedModels_26.2.0_COMMON.zip`.
 
     ![get-pretrained-zip](../../setup/figs/get-pretrained-zip.png)
 
-Extract the training pack `.zip` then, to load the surveillance recognizer, open the Knowledge Discovery Media Server GUI at [`/action=gui`](http://127.0.0.1:14000/a=gui#/train/objectClassRec(tool:select)) and follow these steps:
+Extract the training pack `.zip` then, to load the surveillance recognizer, open the Knowledge Discovery Media Server GUI at [`/action=gui`](http://127.0.0.1:14000/a=gui#/visual/objectClassRec(tool:select)) and follow these steps:
 
 1. in the left column, click `Import`
 1. navigate to your extracted training pack and select `ObjectClassRecognizer_Large_Surveillance.dat`
 
     ![select-pretrained-recognizer](./figs/select-pretrained-recognizer.png)
 
-    > NOTE: For a description of the various models available, please see the [administration guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Appendixes/PreTrained_Recognizers.htm).
+    > NOTE: For a description of the various models available, please see the [administration guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Appendixes/PreTrained_Recognizers.htm).
 
 1. a notification will pop-up to tell you the model is uploading, then processing:
 
@@ -102,27 +102,27 @@ Extract the training pack `.zip` then, to load the surveillance recognizer, open
 
     ![rename-pretrained-recognizer](./figs/rename-pretrained-recognizer.png)
 
-> NOTE: You have imported six classes: "bicycle", "bus", "car", "motorcycle", "person" and "truck".  Each one contains metadata fields defining the expected real-world object dimensions.  These scales turn all detected objects into "standard candles", enabling the camera perspective to be estimated.  Read about conversion to real-world coordinates [here](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Advanced/Perspective.htm).
+> NOTE: You have imported six classes: "bicycle", "bus", "car", "motorcycle", "person" and "truck".  Each one contains metadata fields defining the expected real-world object dimensions.  These scales turn all detected objects into "standard candles", enabling the camera perspective to be estimated.  Read about conversion to real-world coordinates [here](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Advanced/Perspective.htm).
 
 ## Process configuration
 
 Knowledge Discovery Media Server configurations for Surveillance combine the base *Object Class Recognition* engine, which finds and tracks the objects, with one or more *Alert* and *Utility* engines to define scenario-based rules.  These engines include:
 
-- [Path Alert](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Analysis/AlertPath/_AlertPath.htm): Generates an alert when an object follows a specified path through the scene.
-- [Region Alert](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Analysis/AlertRegion/_AlertRegion.htm): Generates an alert when an object is present within a specified region for a specified amount of time.
-- [Stationary Alert](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Analysis/AlertStationary/_AlertStationary.htm): Generates an alert when an object is stationary for a specified amount of time.
-- [Tripwire Alert](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Analysis/AlertTripwire/_AlertTripWires.htm): Generates an alert when an object crosses a tripwire.
-- [Traffic Lights](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Analysis/TrafficLight/_TrafficLight.htm): Determines the state of traffic lights, so that you can detect vehicles failing to stop for a red light.
-- [Scene Filter](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Utilities/SceneFilter/_SceneFilter.htm): Filters out source video frames, and therefore stops analysis, when a PTZ-capable CCTV camera has been moved away from a trained scene by the operator.
-- [Lua Filter](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/ESP/Filter/_Filter.htm): Filters out records based on your custom logic defined using the Lua scripting language.  See [tips on working with Lua](../../appendix/Lua_tips.md) for more information.
+- [Path Alert](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Analysis/AlertPath/_AlertPath.htm): Generates an alert when an object follows a specified path through the scene.
+- [Region Alert](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Analysis/AlertRegion/_AlertRegion.htm): Generates an alert when an object is present within a specified region for a specified amount of time.
+- [Stationary Alert](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Analysis/AlertStationary/_AlertStationary.htm): Generates an alert when an object is stationary for a specified amount of time.
+- [Tripwire Alert](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Analysis/AlertTripwire/_AlertTripWires.htm): Generates an alert when an object crosses a tripwire.
+- [Traffic Lights](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Analysis/TrafficLight/_TrafficLight.htm): Determines the state of traffic lights, so that you can detect vehicles failing to stop for a red light.
+- [Scene Filter](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Utilities/SceneFilter/_SceneFilter.htm): Filters out source video frames, and therefore stops analysis, when a PTZ-capable CCTV camera has been moved away from a trained scene by the operator.
+- [Lua Filter](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/ESP/Filter/_Filter.htm): Filters out records based on your custom logic defined using the Lua scripting language.  See [tips on working with Lua](../../appendix/Lua_tips.md) for more information.
 
     > NOTE: The detector schedule option in the Surveillance configuration builder is implemented as a Lua filter:
     >
     > ![schedule-gui](./figs/schedule-gui.png)
 
-- [Perspective](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Utilities/Perspective/_Perspective.htm): Combines sizes and movement of people, buses, cars, *etc.* to estimate the perspective from which the camera views the scene. This allows Knowledge Discovery Media Server to convert a position in a video frame into real-world 3D coordinates.
-- [Count](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Utilities/Count/_Count.htm): Counts the number of objects that are present within the scene or a specified region of the scene.
-- [Heatmap](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Utilities/Heatmap/_Heatmap.htm): Creates an image that shows the paths of objects through the scene and identifies areas with the most activity. As objects move through the same part of the scene, their paths overlap and the heatmap turns from blue, to green, and then to red.
+- [Perspective](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Utilities/Perspective/_Perspective.htm): Combines sizes and movement of people, buses, cars, *etc.* to estimate the perspective from which the camera views the scene. This allows Knowledge Discovery Media Server to convert a position in a video frame into real-world 3D coordinates.
+- [Count](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Utilities/Count/_Count.htm): Counts the number of objects that are present within the scene or a specified region of the scene.
+- [Heatmap](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Utilities/Heatmap/_Heatmap.htm): Creates an image that shows the paths of objects through the scene and identifies areas with the most activity. As objects move through the same part of the scene, their paths overlap and the heatmap turns from blue, to green, and then to red.
 
 Configuration files combining these engines can quickly become complicated to write by hand; therefore, the Knowledge Discovery Media Server GUI has been enhanced to add a *Surveillance Configuration* page, which allows you to set up most CCTV surveillance use cases with just a few clicks.
 
@@ -156,7 +156,7 @@ Paste the following parameters into [`test-action`](http://localhost:14000/a=adm
 action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/surveillance/pets2009.mp4&configName=tutorials/Overlay_VideoTracking
 ```
 
-> NOTE: Ensure that you have configured Media Server to read files from this source directory, as described in the [introduction](../../introduction/PART_I.md#enabling-file-access).
+> NOTE: Ensure that you have configured Media Server to read files from this source directory, as described in the [introduction](../../introduction/PART_I.md#file-access).
 
 On that page, click `Test Action` to start processing.
 
@@ -180,13 +180,13 @@ When building your configuration, you can configure your Detector in either CPU 
 
 ![gpu-mode](./figs/gpu-mode.png)
 
-When you select GPU mode, the configuration wizard modifies the underlying *Object Class Recognition* analysis engine to process more video frames (*i.e.* a higher [FullAnalysisRate](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Configuration/Analysis/ObjectClass/FullAnalysisRate.htm)) at a higher resolution:
+When you select GPU mode, the configuration wizard modifies the underlying *Object Class Recognition* analysis engine to process more video frames (*i.e.* a higher [FullAnalysisRate](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Configuration/Analysis/ObjectClass/FullAnalysisRate.htm)) at a higher resolution:
 
 CPU mode | GPU mode
 --- | ---
 ![cpu-config](./figs/cpu-config.png) | ![gpu-config](./figs/gpu-config.png)
 
-> NOTE: For details on GPU support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Advanced/GPU.htm).
+> NOTE: For details on GPU support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Advanced/GPU.htm).
 
 Using GPU mode can be useful when tracking smaller objects or objects that more quickly across the field of view.
 

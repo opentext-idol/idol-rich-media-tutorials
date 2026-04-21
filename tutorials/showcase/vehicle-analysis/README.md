@@ -34,7 +34,7 @@ If you want to start here, you must at least follow these [installation steps](.
 
 ### Configure vehicle analysis
 
-Knowledge Discovery Media Server must be licensed for visual analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enabling-analytics).  To reconfigure Knowledge Discovery Media Server you must edit your `mediaserver.cfg` file.
+Knowledge Discovery Media Server must be licensed for visual analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enablement-notes).  To reconfigure Knowledge Discovery Media Server you must edit your `mediaserver.cfg` file.
 
 #### Enabled modules
 
@@ -88,7 +88,7 @@ Location = GB
 > LocationWithPriorities=FR:1.0,BE:0.1,DE:0.01
 > ```
 
-This minimal configuration quietly uses the following default options, which can be read about in detail in the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Analysis/ANPR/_NumberPlate.htm) and are shown here grouped by their functions.
+This minimal configuration quietly uses the following default options, which can be read about in detail in the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Analysis/ANPR/_NumberPlate.htm) and are shown here grouped by their functions.
 
 ```ini
 # Detection of plates
@@ -193,7 +193,7 @@ Vehicle make identification is pre-trained.  To view the current list of support
 
 ### Training vehicle models
 
-Open the training web app at [`/action=gui`](http://127.0.0.1:14000/a=gui#/train/vehicleModel(tool:select)) then follow these steps to train your identity:
+Open the training web app at [`/action=gui`](http://127.0.0.1:14000/a=gui#/visual/vehicleModel(tool:select)) then follow these steps to train your identity:
 
 1. in the left column, click `Create` to add a new *database* (a collection of identities)
     - rename the database as `vehicles`
@@ -209,11 +209,9 @@ Open the training web app at [`/action=gui`](http://127.0.0.1:14000/a=gui#/train
 
 ![vehicle-training](./figs/vehicle-training.png)
 
-> TIP: Cameras that are positioned on a gantry over the traffic are best suited for recognition because they capture images where the vehicles approach head-on.  For further recommendations about image quality, and for instructions to collect your own vehicle model training images, read the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Training/VehicleModel_Introduction.htm).
-
 ### Assessing images for training
 
-When selecting images of faces for training, we should follow the above guidance given in the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Training/VehicleModel_Introduction.htm).
+For instructions to collect your own vehicle model training images, read the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Operations/Analyze/VehicleModel_Introduction.htm).
 
 > TIP: Cameras that are positioned on a gantry over the traffic are best suited for recognition because they capture images where the vehicles approach head-on.
 
@@ -221,7 +219,7 @@ You can also instruct Knowledge Discovery Media Server to assess training images
 
 > NOTE: Ensure that you have first set the location for the number plate in a given image before running assessment.
 
-In the `gui`, click the "Open original image" button to see details of a given assessment:
+In the `GUI`, click the "Open original image" button to see details of a given assessment:
 
 ![vehicle-assessment](./figs/vehicle-assessment.png)
 
@@ -245,7 +243,7 @@ Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=adm
 action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/vehicle-analysis/vehicles.mp4&configName=examples/VehicleModel/WithColor2
 ```
 
-> NOTE: Ensure that you have configured Media Server to read files from this source directory, as described in the [introduction](../../introduction/PART_I.md#enabling-file-access).
+> NOTE: Ensure that you have configured Media Server to read files from this source directory, as described in the [introduction](../../introduction/PART_I.md#file-access).
 
 Click `Test Action` to start processing, then review the running process with [`/action=gui`](http://127.0.0.1:14000/a=gui#monitor).
 

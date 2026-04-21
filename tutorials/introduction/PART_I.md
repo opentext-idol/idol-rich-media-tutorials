@@ -2,6 +2,7 @@
 
 In this tutorial we will:
 
+1. review the key configuration options for Media Server
 1. connect to and ingest video from a webcam
 1. use the *FaceDetect* analysis engine to track people seen by the webcam
 1. display results in the Knowledge Discovery Media Server GUI's *Monitor* app
@@ -9,12 +10,11 @@ In this tutorial we will:
 ---
 
 - [Setup](#setup)
-- [Enabling analytics](#enabling-analytics)
+- [Enablement notes](#enablement-notes)
   - [Modules](#modules)
   - [Channels](#channels)
-- [Enabling file access](#enabling-file-access)
-- [Processing video](#processing-video)
-- [GPU acceleration](#gpu-acceleration)
+  - [File access](#file-access)
+  - [Processes](#processes)
 - [Process configuration](#process-configuration)
   - [Ingest](#ingest)
   - [Analysis](#analysis)
@@ -23,7 +23,7 @@ In this tutorial we will:
   - [Monitoring and debugging](#monitoring-and-debugging)
     - [Process queue](#process-queue)
     - [Log files](#log-files)
-    - [Display ongoing analytics in *Monitor* app](#display-ongoing-analytics-in-monitor-app)
+    - [Display ongoing analytics in *GUI* app](#display-ongoing-analytics-in-gui-app)
     - [Track types](#track-types)
     - [In-use track variants](#in-use-track-variants)
   - [View output](#view-output)
@@ -36,9 +36,11 @@ In this tutorial we will:
 
 If you have not already followed [this short guide](../setup/SETUP.md) to install the required software, please do so now.
 
-## Enabling analytics
+## Enablement notes
 
-A single Knowledge Discovery Media Server instance is capable of running many analytics.  Each must be enabled in the `mediaserver.cfg` and also permitted by your license key in order to be used.  The relevant sections to look at in your `mediaserver.cfg` are:
+A single Knowledge Discovery Media Server instance is capable of running many analytics.  Each must be enabled in the `mediaserver.cfg` and also permitted by your license key in order to be used.  The relevant sections to look at in your `mediaserver.cfg` are as follows.
+
+> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart Knowledge Discovery Media Server.
 
 ### Modules
 
@@ -49,12 +51,11 @@ The `Modules` section is where we list the engines that will be available to Kno
 Enable=barcode,demographics,facedetect,facestate,facerecognize,imagecomparison,numberplate,object,objectclass,objectdetection,ocr,vehiclemodel
 ```
 
-For this introductory tutorial, we will depend on the following items:
+In production, it is recommended to specify what modules are required, *e.g.* for this introductory tutorial, we will depend on the following items:
 
-- demographics
-- facedetect
-- facestate
-- facerecognize
+```ini
+Enable=demographics,facedetect,facestate
+```
 
 ### Channels
 
@@ -65,7 +66,9 @@ The `Channels` section is where we instruct Knowledge Discovery Media Server to 
 1. Visual
 1. Video Management
 
-To enable the face analytics required for this tutorial, you need to enable at least one channel of either *Surveillance* or *Visual*, *e.g.*
+By default, this section is commented out and Media Server will request available seats on demand.  
+
+In production, it is recommended to specify what channels are required, *e.g.* to enable the face analytics required for this tutorial, you need to enable at least one channel of either *Surveillance* or *Visual*, *e.g.*
 
 ```ini
 [Channels]
@@ -73,39 +76,32 @@ To enable the face analytics required for this tutorial, you need to enable at l
 VisualChannels=1
 ```
 
-> NOTE: For any changes you make in `mediaserver.cfg` to take effect you must restart Knowledge Discovery Media Server.
+> NOTE: For full details on the analytics enabled by (as well as the limitations imposed by) each license type, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Channels/Channels.htm).
 
-For full details on the analytics enabled by (as well as the limitations imposed by) each license type, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Channels/Channels.htm).
-
-## Enabling file access
+### File access
 
 Media Server can read configurations files and input media from the local file system or network shares. Media Server can only read from directories that appear in a configured list, and their sub-directories.
 
-Modify the `mediaserver.cfg` file to add to the default directory list and include the folder containing these tutorial files, `e.g.` "C:\OpenText":
+This is not necessary for the tutorial but in production, modify the `mediaserver.cfg` file to add to the default directory list and include the folder containing these tutorial files, `e.g.` "C:\OpenText":
 
 ```diff
 [Paths]
 AllowedEngineOutputDirectories=output
--AllowedInputDirectories=.
+-AllowedInputDirectories=
 +AllowedInputDirectories=.,C:\OpenText
 ```
 
-Remember to restart Media Server to apply this change.
+### Processes
 
-## Processing video
-
-Knowledge Discovery Media Server is directed to process a video, audio or image source with a *process* configuration file that defines how Knowledge Discovery Media Server should ingest, analyze, output and otherwise manipulate the content and any resulting information.  A number of example files is included in Knowledge Discovery Media Server's `configurations/examples` directory.
+Knowledge Discovery Media Server can be directed to process a video, audio or image source with a *process* configuration.  This file defines how Knowledge Discovery Media Server should ingest, analyze, output and otherwise manipulate the content and any resulting information.  A number of example configuration files is included in Knowledge Discovery Media Server's `configurations/examples` directory.
 
 Knowledge Discovery Media Server can run multiple processes concurrently if licensed to do so.  The number of concurrent processes is limited in `mediaserver.cfg` by the parameter:
 
-```ini
+```diff
 [Process]
-MaximumThreads=2
+-MaximumThreads=1
++MaximumThreads=2
 ```
-
-## GPU acceleration
-
-If you are lucky enough to have access to a supported NVIDIA graphics card, you can accelerate certain analytics (including face recognition), as well as video ingest and encoding.  For details on support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Advanced/GPU.htm).
 
 ## Process configuration
 
@@ -118,7 +114,7 @@ The format of a process configuration file is typically laid out in the followin
 - Encoding
 - Output
 
-We will introduce and use each of these sections in this tutorial.  Full details of the available configuration options can be found in the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/SessionConfiguration.htm).
+We will introduce and use each of these sections in this tutorial:
 
 ### Ingest
 
@@ -137,7 +133,7 @@ Type = Video
 Format = dshow
 ```
 
-More options are available for the `Video`-type ingest engine.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm).
+More options are available for the `Video`-type ingest engine.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Ingest/Libav/_Libav.htm).
 
 ### Analysis
 
@@ -145,13 +141,14 @@ To detect faces, we need to include the following:
 
 ```ini
 [Session]
+...
 Engine1 = FaceDetection
 
 [FaceDetection]
 Type = FaceDetect
 ```
 
-More options are available for the `FaceDetect`-type analysis engine, such as the minimum expected face size.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Analysis/Face/_Face.htm).
+More options are available for the `FaceDetect`-type analysis engine, such as the minimum expected face size.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Analysis/Face/_Face.htm).
 
 ### Output
 
@@ -159,6 +156,7 @@ To output results, we can to include the following:
 
 ```ini
 [Session]
+...
 Engine2 = OutputTrackedFaces
 
 [OutputTrackedFaces]
@@ -168,9 +166,9 @@ Input = FaceDetection.Result
 OutputPath=output/faces1/%segment.startTime.timestamp%.xml
 ```
 
-More output options are available, such as HTTP POST and database insert.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/OutputEngines/_Output.htm), for details.
+> NOTE: More output options are available, such as HTTP POST and database insert.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/OutputEngines/_Output.htm), for details.
 
-Media Server looks for process configuration files in its `configurations` folder.  Create a sub folder there called `tutorials` and copy over all the `faceAnalysis*.cfg` files from this lesson, so that we can use them.
+By default, Media Server reads process configuration files in its `configurations` folder.  Create a sub folder there called `tutorials` and copy over all the `faceAnalysis*.cfg` files from this lesson, so that we can use them.
 
 ![config-folder](./figs/config-folder.png)
 
@@ -198,7 +196,7 @@ For testing, we will launch these actions through the admin interface [`test-act
 
 1. Click `Test Action` to start processing. If your webcam has an indicator light, it should come on now.
 
-More options are available for the *Process* action.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Actions/VideoAnalysis/_MediaAnalysis.htm).
+> NOTE: More options are available for the *Process* action.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Actions/VideoAnalysis/_MediaAnalysis.htm).
 
 ### Monitoring and debugging
 
@@ -223,26 +221,25 @@ Knowledge Discovery Media Server writes out a number of different log files to i
 29/03/2022 17:31:45 [167] 70-Error: [MTAuMTQuMTU3LjIxOjE0MDAwOlBST0NFU1M6MTUyODIxNjMwMzg5OTAxMDU4OTA4ODM5] 'VideoIngest': File I/O: unable to open source
 ```
 
-#### Display ongoing analytics in *Monitor* app
+#### Display ongoing analytics in *GUI* app
 
-The Knowledge Discovery Media Server GUI's *Monitor* web app is intended for the display of running analytics on your Knowledge Discovery Media Server.  This app can be useful for both testing and demonstrating Knowledge Discovery Media Server.
+The Knowledge Discovery Media Server GUI web app includes a processing page that is intended for the display of running analytics on your Knowledge Discovery Media Server.  This app can be useful for both testing and demonstrating Knowledge Discovery Media Server.
 
-The app makes use of two Knowledge Discovery Media Server calls to get the list of channels and then to get the latest record for the channel you select:
-
-- [`action=getStatus&showTracksStatistics`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Actions/Status/GetStatus_ShowTracksStatistics.htm)
-- [`action=getLatestRecord`](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Actions/VideoAnalysis/GetLatestRecord.htm)
+> NOTE: The app makes use of two Knowledge Discovery Media Server calls to get the list of channels and then to get the latest record for the channel you select:
+>
+> - [`action=getStatus&showTracksStatistics`](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Actions/Status/GetStatus_ShowTracksStatistics.htm)
+> - [`action=getLatestRecord`](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Actions/VideoAnalysis/GetLatestRecord.htm)
 
 With the analysis running, point your browser to [`/action=GUI`](http://localhost:14000/a=gui) to open the web application.
 
-- Select the *Monitor* app.
+- Select the *Processes* app.
+- Click the `Montor Sessions` button of the running process to see more details.
 - Navigate the dropdowns to view the alerts coming through.
 - You can modify the refresh interval, in milliseconds.
 
 ![face-monitor](./figs/monitor.png)
 
 > NOTE: The `GetLatestRecord` action is not guaranteed to show every alert but only the latest one at the time of polling Knowledge Discovery Media Server.
->
-> TIP: `Default_Image` is the automatically assigned name of the track containing the incoming video.
 
 #### Track types
 
@@ -261,7 +258,7 @@ Name | Description
 **Start** | The same as the **Data** track, except it contains only the first record of each event.
 **End** | The same as the **Data** track, except it contains only the last record of each event.
 
-> NOTE: For full details on analytics output tracks, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Operations/Config_Overview_AnalysisTracks.htm?Highlight=Video%20frames).
+> NOTE: For full details on analytics output tracks, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Operations/Config_Overview_AnalysisTracks.htm?Highlight=Video%20frames).
 
 Let's observe how these tracks are created for ourselves:
 
@@ -287,67 +284,65 @@ Under your Knowledge Discovery Media Server directory, open the folder `output/f
 > NOTE: For Face Detection, the "peak" time of a tracked face is determined as the moment where that face is most clearly visible; based on a combination of pose angle and size.
 
 ```xml
+...
 <record>
   <timestamp>
-    <startTime iso8601="2018-06-05T12:58:54.482985Z">1528203534482985</startTime>
-    <duration iso8601="PT00H02M03.789000S">123789000</duration>
-    <peakTime iso8601="2018-06-05T12:59:44.489985Z">1528203584489985</peakTime>
-    <endTime iso8601="2018-06-05T13:00:58.271985Z">1528203658271985</endTime>
+    <startTime iso8601="2026-04-16T11:04:51.703970Z">1776337518703970</startTime>
+    <duration iso8601="PT00H11M50.559098S">710559098</duration>
+    <peakTime iso8601="2026-04-16T11:13:20.134207Z">1776338027134207</peakTime>
+    <endTime iso8601="2026-04-16T11:16:42.263068Z">1776338229263068</endTime>
   </timestamp>
   <trackname>FaceDetection.Result</trackname>
   <FaceResult>
-    <id>b8082afd-58f6-400f-94b7-bcf843b93e8f</id>
+    <id>88fe2eed-30c8-483e-8fe9-e8dbba391a07</id>
     <face>
       <region>
-        <left>393</left>
-        <top>121</top>
-        <width>230</width>
-        <height>230</height>
+        <left>842</left>
+        <top>292</top>
+        <width>414</width>
+        <height>414</height>
       </region>
-      <outOfPlaneAngleX>0</outOfPlaneAngleX>
-      <outOfPlaneAngleY>0</outOfPlaneAngleY>
+      <outOfPlaneAngleX>4.33</outOfPlaneAngleX>
+      <outOfPlaneAngleY>-1.01</outOfPlaneAngleY>
       <percentageInImage>100</percentageInImage>
+      <confidence>86</confidence>
       <ellipse>
         <center>
-          <x>507.696014</x>
-          <y>235.132584</y>
+          <x>1048.29126</x>
+          <y>498.263</y>
         </center>
-        <a>83.4014969</a>
-        <b>116.7621</b>
-        <angle>-3.49884057</angle>
+        <a>141.804169</a>
+        <b>198.525818</b>
+        <angle>-7.64350843</angle>
       </ellipse>
       <lefteye>
         <center>
-          <x>539.03</x>
-          <y>201</y>
+          <x>1098.61</x>
+          <y>446.76</y>
         </center>
-        <radius>11</radius>
+        <radius>22</radius>
       </lefteye>
       <righteye>
         <center>
-          <x>472.44</x>
-          <y>205.08</y>
+          <x>986.17</x>
+          <y>461.85</y>
         </center>
-        <radius>14</radius>
+        <radius>20</radius>
       </righteye>
     </face>
+    <parentID/>
   </FaceResult>
 </record>
+...
 ```
 
 ### Stop analysis
 
-To stop processing, click the `Stop Session` button on the *Monitor* app.
+To stop processing, click the `Stop Session` button on the GUI monitoring app.
 
-Behind the scenes, the app is sending a "stop" action request to Knowledge Discovery Media Server.  To do the same, paste the following into [`test-action`](http://localhost:14000/a=admin#page/console/test-action) then click `Test Action` to see the response:
+Behind the scenes, the app is sending a "stop" action request to Knowledge Discovery Media Server.  To do the same, simply click `stop`: <http://localhost:14000/a=queueInfo&queueAction=stop&queueName=process>.
 
-```url
-action=queueInfo&queueAction=stop&queueName=process
-```
-
-Or simply click [`stop`](http://localhost:14000/a=queueInfo&queueAction=stop&queueName=process).
-
-If your Knowledge Discovery Media Server is running multiple processes, you can supply a [token parameter](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Actions/General/_ACI_QueueInfo_Token.htm) to the above action.
+> NOTE: If your Knowledge Discovery Media Server is running multiple processes, you can supply a [token parameter](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Actions/General/_ACI_QueueInfo_Token.htm) to the above action.
 
 If your webcam has an indicator light, it should now switch off.
 

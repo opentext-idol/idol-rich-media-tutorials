@@ -2,7 +2,7 @@
 
 Knowledge Discovery Media Server includes an Object Recognition analysis engine, which can be trained to recognize specific 2-D and 3-D objects in images and video, such as a logo or painting.
 
-For a more detailed introduction to Object Recognition, see the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Operations/Analyze/ObjectRecognition_Introduction.htm).
+For a more detailed introduction to Object Recognition, see the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Operations/Analyze/ObjectRecognition_Introduction.htm).
 
 In this tutorial we will:
 
@@ -40,7 +40,7 @@ This guide makes use of `node.js`.  Please follow these [instructions](../../set
 
 ### Configure object recognition
 
-Knowledge Discovery Media Server must be licensed for visual analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enabling-analytics).  To reconfigure Knowledge Discovery Media Server you must edit your `mediaserver.cfg` file.
+Knowledge Discovery Media Server must be licensed for visual analytics, as described in the [introductory tutorial](../../introduction/PART_I.md#enablement-notes).  To reconfigure Knowledge Discovery Media Server you must edit your `mediaserver.cfg` file.
 
 #### Enabled modules
 
@@ -75,7 +75,7 @@ node trainObjects.js
 
 > NOTE: This script depends on having `node.js` installed.  Please follow these [instructions](../../setup/NODE_JS.md) if you do not already have it on your system.
 
-We can then view the trained Objects in the training web app [`/action=gui`](http://127.0.0.1:14000/a=gui#/train/objectRec(tool:select)).
+We can then view the trained Objects in the training web app [`/action=gui`](http://127.0.0.1:14000/a=gui#/visual/objectRec(tool:select)).
 
 ![gui](./figs/logo-training.png)
 
@@ -116,7 +116,7 @@ Type = Video
 IngestDateTime = 0
 ```
 
-For full details on the options available for ingesting video (and other) sources, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Ingest/_Ingest.htm).
+For full details on the options available for ingesting video (and other) sources, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Ingest/_Ingest.htm).
 
 ### Analysis
 
@@ -136,7 +136,7 @@ Here we have specified our newly created database with the `Database` parameter.
 - an identifier (or list of identifiers), *e.g.* for one-to-one validation (or matching a sub-set)
 - a metadata key-value pair, *e.g.* if you want to match only shirt sponsors in our example, set `Metadata = group:shirt`
 
-We have also specified some parameters that affect how the analytic runs.  For full details on these and other available options, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/index.html#Configuration/Analysis/Object/_Object.htm).
+We have also specified some parameters that affect how the analytic runs.  For full details on these and other available options, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Configuration/Analysis/Object/_Object.htm).
 
 ### Event processing
 
@@ -214,7 +214,7 @@ Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=adm
 action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/logo-recognition/bcnpsg.mp4&configName=tutorials/objectRecognition
 ```
 
-> NOTE: Ensure that you have configured Media Server to read files from this source directory, as described in the [introduction](../../introduction/PART_I.md#enabling-file-access).
+> NOTE: Ensure that you have configured Media Server to read files from this source directory, as described in the [introduction](../../introduction/PART_I.md#file-access).
 
 Click `Test Action` to start processing.
 

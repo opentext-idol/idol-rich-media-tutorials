@@ -66,7 +66,7 @@ Pre-trained *Image Classification* packages are distributed separately from the 
 
     ![get-software](../../setup/figs/get-software.png)
 
-1. From the list of available files, select and download `MediaServerPretrainedModels_25.4.0_COMMON.zip`.
+1. From the list of available files, select and download `MediaServerPretrainedModels_26.2.0_COMMON.zip`.
 
     ![get-pretrained-zip](../../setup/figs/get-pretrained-zip.png)
 
@@ -106,7 +106,7 @@ Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=adm
 action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/optical-character-recognition/docs/TextAndImage.pdf&configName=tutorials/ocr2a
 ```
 
-> NOTE: Ensure that you have configured Media Server to read files from this source directory, as described in the [introduction](../../introduction/PART_I.md#enabling-file-access).
+> NOTE: Ensure that you have configured Media Server to read files from this source directory, as described in the [introduction](../../introduction/PART_I.md#file-access).
 
 Click the `Test Action` button to start processing.
 
@@ -118,7 +118,7 @@ To view the results, go to `output/OCR` to see the text file `TextAndImage.txt`,
 
 The OCR analysis engine automatically detects tables in your images, so no special configuration is required for analysis.
 
-> NOTE: You can optionally modify the output of your table data by setting `OutputTablesByColumn=True` (default is `False`). For more details, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Configuration/Analysis/OCR/OutputTablesByColumn.htm).
+> NOTE: You can optionally modify the output of your table data by setting `OutputTablesByColumn=True` (default is `False`). For more details, please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Configuration/Analysis/OCR/OutputTablesByColumn.htm).
 
 Handling tabulated output though does require some thought.  A common approach is to separate the table text from non-table text in order to have more targeted downstream processing.
 
@@ -176,7 +176,7 @@ To process this information as well, add the *Barcode Detection* analysis engine
 Type = Barcode
 ```
 
-> NOTE: For details on the list of supported QR code and barcode types, please see the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Configuration/Analysis/Barcode/BarcodeTypes.htm).
+> NOTE: For details on the list of supported QR code and barcode types, please see the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Configuration/Analysis/Barcode/BarcodeTypes.htm).
 
 We will combine the read from the barcode with the OCR-produced text by adding a second input to the non-table text output engine:
 
@@ -209,7 +209,7 @@ Knowledge Discovery Media Server's *Object Recognition* analysis engine is often
 
 ### Training
 
-To include this capability here, we must first train Knowledge Discovery Media Server to recognize the OpenText logo.  To do this, open the Knowledge Discovery Media Server GUI at [`/action=gui`](http://127.0.0.1:14000/a=gui#/train/objectRec(tool:select)), the follow these steps:
+To include this capability here, we must first train Knowledge Discovery Media Server to recognize the OpenText logo.  To do this, open the Knowledge Discovery Media Server GUI at [`/action=gui`](http://127.0.0.1:14000/a=gui#/visual/objectRec(tool:select)), the follow these steps:
 
 1. Click the "Create" button to add a new database
 1. Change the name of the database to "Logos"
@@ -261,9 +261,9 @@ Knowledge Discovery Media Server's *Image Classification* analysis engine ships 
 
 ### Loading models
 
-To include this capability here, we must first load the pre-trained models into Knowledge Discovery Media Server.  To do this, open the Knowledge Discovery Media Server GUI at [`/action=gui`](http://127.0.0.1:14000/a=gui#/train/imageClass(tool:select)), the follow these steps:
+To include this capability here, we must first load the pre-trained models into Knowledge Discovery Media Server.  To do this, open the Knowledge Discovery Media Server GUI at [`/action=gui`](http://127.0.0.1:14000/a=gui#/visual/imageClass(tool:select)), the follow these steps:
 
-Extract the training pack `.zip` then, to load one of the classifiers, open the Knowledge Discovery Media Server GUI at [`/action=gui`](http://127.0.0.1:14000/a=gui#/train/imageClass(tool:select)) and follow these steps:
+Extract the training pack `.zip` then, to load one of the classifiers, open the Knowledge Discovery Media Server GUI at [`/action=gui`](http://127.0.0.1:14000/a=gui#/visual/imageClass(tool:select)) and follow these steps:
 
 1. in the left column, click `Import`
 1. navigate to your extracted training pack and select `ImageClassifier_Document.dat`

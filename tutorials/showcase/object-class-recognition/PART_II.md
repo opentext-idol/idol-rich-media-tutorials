@@ -1,7 +1,5 @@
 # PART II - Build a custom recognizer
 
-> WARNING: Object Class Recognizer building is not available in 25.4.  For instructions to import a model built with 25.2, see the [documentation](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.4/MediaServer_25.4_Documentation/Help/Content/Getting_Started/UpgradeDatabaseTorch.htm). The following instructions can be used with for your Media Server 25.2.
-
 The pre-trained Object Class Recognizers that ship with Knowledge Discovery Media Server cover a broad range of objects; however, there may be occasions when you wish to work with additional classes of object.  
 
 In this lesson, you will use Media Server to build custom recognizers:
@@ -24,31 +22,29 @@ In this lesson, you will use Media Server to build custom recognizers:
 - [Running object class recognition](#running-object-class-recognition)
 - [Results](#results)
   - [GPU for processing](#gpu-for-processing)
-- [Accuracy optimization](#accuracy-optimization)
-- [(*Optionally*) Logging model loss](#optionally-logging-model-loss)
 - [Next steps](#next-steps)
 
 ---
 
 ## Object class training
 
-Knowledge Discovery Media Server can be trained to recognize classes of object. As well as being able to detect classes from the out of the box training from [PART I](./PART_I.md), you can also define your own object types.
+> NOTE: This training takes a significant amount of time, so using GPU is recommended.  For details on GPU support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Advanced/GPU.htm).
+
+Knowledge Discovery Media Server training can be performed through its web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/index.html#Actions/Training/_TrainingActions.htm).  For smaller projects, demos and testing, you may find it easier to use the [`GUI`](http://localhost:14000/a=gui) web interface.
 
 We will now train a class for "wheels" using a small number of sample images in order to locate wheels in some test images.
 
-Knowledge Discovery Media Server training can be performed through its web API, detailed in the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/index.html#Actions/Training/_TrainingActions.htm).  For smaller projects, demos and testing, you may find it easier to use the [`gui`](http://localhost:14000/a=gui) web interface.
-
 ### Add your own training images
 
-Open the Knowledge Discovery Media Server [`gui`](http://localhost:14000/a=gui#/train/objectClassRec(tool:select)) then follow these steps to upload your class training images:
+Open the Knowledge Discovery Media Server [`GUI`](http://localhost:14000/a=gui#/visual/objectClassRec(tool:select)) then follow these steps to upload your class training images:
 
-1. at the top right, note that the analytic *Object Class Recognition* is selected
+1. at the top right, note that the analytic *Object Class Recognition* is already selected
 1. in the left column, click `Create` to add a new *recognizer* (a collection of *classes*)
     - rename the recognizer to "Workshop"
 1. in the center column, click `Create` to add a new *class*
     - give your class the name "wheel"
 1. in the right column, click `Import` to import images
-    - Navigate to the tutorial folder `C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/object-class-recognition/train` and select all six images
+    - Navigate to the tutorial folder `C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/object-class-recognition/train` and select all three images
 
 ![load-object-images](./figs/load-object-images.png)
 
@@ -68,19 +64,19 @@ An object class recognizer is trained to locate objects of a specified class wit
 
 Consider that your target object type, *e.g.* wheels, can appear with a lot of variation.  Your own brain can recognize different types of wheel because you have learned to recognize wheels on bikes, toy cars, trains, unicycles, *etc.*, and know what they look like from different angles, in different lighting conditions and when partially obscured.  To train AI, it is therefore sensible for us to look for a broad range of training images that is representative of the range we might expect to see in images we want to process.
 
-So, how many images again?  Media Server will give you the following error if you have too few: "training an object class recognizer requires at least nine different annotations".
+So, how many images again?  Media Server will give you the following error if you have too few: "training an object class recognizer requires at least two annotations of each class".
 
-OK.  So, what is an annotation?  As will be discussed in more detail below, the count of "annotations" refers to count of target objects, *e.g.* wheels, across all your test images.  So, if you have one single image with nine wheels on it, that would be enough to meet the minimum requirement.
+OK.  So, what is an annotation?  As will be discussed in more detail below, the count of "annotations" refers to count of target objects, *e.g.* wheels, across all your test images.
 
-From the author's experience, it could be suggested:
+How many annotations (sample objects) are needed across my images for training?  From the author's experience, it could be suggested to aim for:
 
-- 10 annotations per class for a quick test,
-- 50-100 annotations per class for a more thorough experiment, *e.g.* a proof of concept project, and
-- 500+ for a deployed system.
+- 6 examples per class for a quick test,
+- 100 examples per class for a more serious test,
+- the more the better for production, if you have them.
 
 Remember the discussion above, these additional examples must bring in new information to provide value.  It's no use adding 10 copies of the same view of an object.
 
-> INFO: For reference, the COCO dataset, used to train the "Common Object" pre-trained models used in [PART I](./PART_I.md), were trained with an average of about ten thousand annotations per class.  See the [research paper](https://arxiv.org/abs/1405.0312) for full details, where, for interest, it was estimated that image labelling took 30 thousand hours of human effort to complete.
+> INFO: For reference, the COCO dataset, used to train the "Common Object" pre-trained models used in [PART I](./PART_I.md), were trained with an average of about ten thousand annotations per class.  See the [research paper](https://arxiv.org/abs/1405.0312) for full details, where, for interest, it was estimated that image labelling took 30 thousand hours of human effort to complete!
 
 ### Annotate images for training
 
@@ -104,18 +100,24 @@ Because object class recognizer training uses the regions around your annotated 
 
 ### Build your recognizer
 
-For this tutorial, the small sample size means that you can effectively train your recognizer in a reasonable period of time with or without GPU enabled.
+How many iterations are needed for training?  From the author's experience, it could be suggested to aim for:
 
-If you do wish to train with CPU only, it is advisable to edit the default training options as follows (sacrificing some accuracy to save time):
+- 1000 iterations for a test,
+- 2000 iterations for a more thorough experiment, *e.g.* a proof of concept project, and
+- 5000+ for a deployed system.
 
-1. Select the `generation1` recognizer type, and
-1. Reduce the training iteration count to `50`.
+This training takes a significant amount of time, so for this test it is advisable to edit the default training options as follows (sacrificing some accuracy to save time):
+
+1. Select the `small` recognizer type, and
+1. Set the training iteration count to `1000`.
 
     ![build-recognizer-options](./figs/build-recognizer-options.png)
 
-> NOTE: For details on available recognizer types and other available training options, please read the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Operations/Analyze/ObjectClassRec_RecognizerTypes.htm).
+> NOTE: For details on available recognizer types and other available training options, please read the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Operations/Analyze/ObjectClassRec_RecognizerTypes.htm).
 
 Once you are set up, at the bottom of the middle column, click `Build`.
+
+With these configuration options on the author's laptop, using the built in Nvidia T600 GPU, **this build took about 2 hours**, so go and do something else and pop back later!
 
 > NOTE: If you do not have GPU enabled for your Knowledge Discovery Media Server instance, you will see a warning message at this point:
 >
@@ -123,23 +125,18 @@ Once you are set up, at the bottom of the middle column, click `Build`.
 
 Once completed, your workshop recognizer labels will turn green, to indicate that the model is finalized.
 
-> NOTE: With these configuration options on the author's laptop using CPU, this build took about **nine minutes**. With the built in Nvidia T600 GPU, the same build took about 45 seconds.
-
-When training your own recognizers, it is *strongly recommended* to utilize GPU acceleration.  This will allow you to train larger sample sets with many classes, as well as to utilize the most accurate "Generation 4" recognizer type.
-
-> NOTE: For details on GPU support and setup, please refer to the [admin guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Advanced/GPU.htm).
-
 ## Running object class recognition
 
-Once we have trained some sample images for our class(es), we are ready to run the `ObjectClassRecognition` analysis engine.  To do this, we can define the following process engine configuration:
+Once we have trained some sample images for our class(es), we are ready to run the `ObjectClassRecognition` analysis engine.  To do this, we can modify the process config file to add the new recognizer:
 
-```ini
+```diff
 [ObjectClassRecognition]
 Type = ObjectClassRecognition
-Recognizer = Workshop
+- Recognizer = Small_CommonObjects80
++ Recognizer = Workshop
 ```
 
-More options are available for the `ObjectClassRecognition` analysis engine, including setting the matching threshold and allowing multiple matches to be returned.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-25.2/MediaServer_25.2_Documentation/Help/Content/Configuration/Analysis/ObjectClass/_ObjectClass.htm) for details.
+, or alternatively add a modification to the process action: `[ObjectClassRecognition]Recognizer=Workshop`.
 
 Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=admin#page/console/test-action), which assume you have downloaded a local copy of these tutorial materials as described [here](../../README.md#obtaining-tutorial-materials):
 
@@ -147,11 +144,11 @@ Paste the following parameters into [`test-action`](http://127.0.0.1:14000/a=adm
 action=process&source=C:/OpenText/idol-rich-media-tutorials/tutorials/showcase/object-class-recognition/test/car.jpg&configName=tutorials/objectClassRecognition&[ObjectClassRecognition]Recognizer=Workshop
 ```
 
-> NOTE: Ensure that you have configured Media Server to read files from this source directory, as described in the [introduction](../../introduction/PART_I.md#enabling-file-access).
+> NOTE: Ensure that you have configured Media Server to read files from this source directory, as described in the [introduction](../../introduction/PART_I.md#file-access).
+
+> NOTE: More options are available for the `ObjectClassRecognition` analysis engine, including setting the matching threshold and allowing multiple matches to be returned.  Please read the [reference guide](https://www.microfocus.com/documentation/idol/knowledge-discovery-26.2/MediaServer_26.2_Documentation/Help/Content/Configuration/Analysis/ObjectClass/_ObjectClass.htm) for details.
 
 Click `Test Action` to start processing.
-
-> NOTE: We are using the sample process configuration from PART I but using a handy feature of the ACI API to override the `Recognizer` parameter to reference our newly built model.
 
 ## Results
 
@@ -159,11 +156,7 @@ To review the resulting detection image, go to `output/car` and find `detections
 
 ![car-wheel-detections](./figs/car-wheel-detections.png)
 
-Modify the above command to do the same for the second test image `bike.jpg`:
-
-![bike-wheel-detections](./figs/bike-wheel-detections.png)
-
-> NOTE: The bounding boxes do not *exactly* cover the detected wheels.  This is a common observation for results of a "Generation 1" recognizer.  A "Generation 4" recognizer will give significantly better bounding boxes from the same sample data.
+> NOTE: The bounding boxes do not *exactly* cover the detected wheels.  We expect this to be better (1) with more training steps and (2) using the `large` training model.
 
 ### GPU for processing
 
@@ -171,9 +164,9 @@ As stated above, GPU is (practically speaking) essential for training new recogn
 
 This is particularly true for image processing. For video processing, running on a GPU-enabled Knowledge Discovery Media Server *can* offer a benefit by enabling higher frame rate analysis.  See the tutorial on using Object Class Recognition for [surveillance analytics](../surveillance/README.md#optionally-enable-gpu-acceleration) for more discussion.
 
-## Accuracy optimization
+<!-- ## Accuracy optimization
 
-As a general rule, you can calculate a reasonable number of iterations by multiplying the number of object classes in the recognizer by 2000.
+As a general rule, you can calculate a reasonable number of iterations by multiplying the number of object classes in the recognizer by 2000. -->
 
 <!-- We can optionally configure Media Server to take "snapshots" of our new model at regular intervals during the training process.  
 
@@ -227,7 +220,7 @@ The unwanted snapshots will be removed and your model will now be in the "traine
 
 This model is not exactly the same as the first model you created, since it did not use the reserved validation data.  Having decided on your optimal snapshot (*i.e.* optimal number of training steps), you may now wish to retrain you model with a `Snapshot Frequency` of `0` to include all the available training images. -->
 
-## (*Optionally*) Logging model loss
+<!-- ## (*Optionally*) Logging model loss
 
 During longer builds, it can be reassuring to monitor the loss metric of the training model.
 
@@ -270,7 +263,7 @@ While the build process is running, monitor the new log file, *e.g.* on PowerShe
 > less -f cnn.log | grep -P "Iteration [0-9]+, loss"
 > ```
 
-You will see how the loss metric initially falls sharply but then the rate of improvement trails off.
+You will see how the loss metric initially falls sharply but then the rate of improvement trails off. -->
 
 ## Next steps
 
